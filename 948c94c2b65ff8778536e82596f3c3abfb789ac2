@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "f68be3a0_5dac9b0f",
+        "filename": "Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1003290
+      },
+      "writtenOn": "2014-08-15T19:59:50Z",
+      "side": 1,
+      "message": "ahahah I knew it ;-)\nIt is always the reverse of I expect. If I didn;t add (c) it would have to be added. BTW, it was just copy paste from another makefile.",
+      "parentUuid": "d67edf24_a070c2eb",
+      "revId": "948c94c2b65ff8778536e82596f3c3abfb789ac2",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d67edf24_c075ceda",
         "filename": "Makefile",
         "patchSetId": 2
@@ -87,6 +105,24 @@
     },
     {
       "key": {
+        "uuid": "168f97ae_7e1eb1c6",
+        "filename": "Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1003290
+      },
+      "writtenOn": "2014-08-15T19:59:50Z",
+      "side": 1,
+      "message": "isnt CPPFLAGS for C preprocesssor? CXXFLAGS for C++ compiler and CFLAGS for C compiler?",
+      "parentUuid": "f6712354_76dce12f",
+      "revId": "948c94c2b65ff8778536e82596f3c3abfb789ac2",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9681c74e_1bf027fe",
         "filename": "Makefile",
         "patchSetId": 2
@@ -98,6 +134,24 @@
       "writtenOn": "2014-08-15T03:58:29Z",
       "side": 1,
       "message": "if you want to make this a portable thing, then:\n\n install: all\n   mkdir -p $(DESTDIR)/sbin\n   install -m 755 frecon $(DESTDIR)/sbin\n\nusing 744 for an executable file is weird (rwx r-- r--).  i\u0027d understand 511 if it were set*id, but it isn\u0027t ;).",
+      "revId": "948c94c2b65ff8778536e82596f3c3abfb789ac2",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7680d379_21a24e20",
+        "filename": "Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1003290
+      },
+      "writtenOn": "2014-08-15T19:59:50Z",
+      "side": 1,
+      "message": "well, I thought it would only run as root. but everything else in sbin is 755,",
+      "parentUuid": "9681c74e_1bf027fe",
       "revId": "948c94c2b65ff8778536e82596f3c3abfb789ac2",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
       "unresolved": false
