@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d67edf24_a070c2eb",
+        "filename": "Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000768
+      },
+      "writtenOn": "2014-08-15T03:58:29Z",
+      "side": 1,
+      "message": "drop the (c)",
+      "revId": "948c94c2b65ff8778536e82596f3c3abfb789ac2",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d67edf24_c075ceda",
+        "filename": "Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000768
+      },
+      "writtenOn": "2014-08-15T03:58:29Z",
+      "side": 1,
+      "message": "use $(wildcard)",
+      "revId": "948c94c2b65ff8778536e82596f3c3abfb789ac2",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f6712354_d6f6f5ad",
+        "filename": "Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000768
+      },
+      "writtenOn": "2014-08-15T03:58:29Z",
+      "side": 1,
+      "message": "not needed -- common.mk provides this",
+      "revId": "948c94c2b65ff8778536e82596f3c3abfb789ac2",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d67edf24_608bba97",
+        "filename": "Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000768
+      },
+      "writtenOn": "2014-08-15T03:58:29Z",
+      "side": 1,
+      "message": "not sure this really needs replacing.  no one changes $(INSTALL) nowadays, and certainly not for the systems that\u0027ll be deploying this (inherently) non-portable package ... just inline `install` in the install rule.",
+      "revId": "948c94c2b65ff8778536e82596f3c3abfb789ac2",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f6712354_76dce12f",
+        "filename": "Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000768
+      },
+      "writtenOn": "2014-08-15T03:58:29Z",
+      "side": 1,
+      "message": "these probably all belong in CPPFLAGS instead",
+      "revId": "948c94c2b65ff8778536e82596f3c3abfb789ac2",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9681c74e_1bf027fe",
+        "filename": "Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000768
+      },
+      "writtenOn": "2014-08-15T03:58:29Z",
+      "side": 1,
+      "message": "if you want to make this a portable thing, then:\n\n install: all\n   mkdir -p $(DESTDIR)/sbin\n   install -m 755 frecon $(DESTDIR)/sbin\n\nusing 744 for an executable file is weird (rwx r-- r--).  i\u0027d understand 511 if it were set*id, but it isn\u0027t ;).",
+      "revId": "948c94c2b65ff8778536e82596f3c3abfb789ac2",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    }
+  ]
+}
