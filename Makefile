@@ -1,23 +1,26 @@
-APPNAME = frecon
-SOURCES = $(shell echo *.c)
-CC = armv7a-cros-linux-gnueabi-gcc --sysroot=/build/daisy
-LIB = `pkg-config --libs libdrm` -ltsm
-FLAGS = -std=c99 -D_GNU_SOURCE=1 `pkg-config --cflags libdrm`
-CFLAGS = -s -O2 -Wall -Wsign-compare -Wpointer-arith -Wcast-qual -Wcast-align
+# Copyright 2014 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
 
-all:	$(APPNAME)
+include common.mk
 
-.c.o:
-	$(CC) $(CFLAGS) $(FLAGS) -c $*.c
+#OBJS := $(patsubst %.c,%.o,$(notdir $(wildcard $(SRC)/*.c)))
 
-OBJECTS = $(SOURCES:.c=.o)
+PC_DEPS = libdrm libtsm
+PC_CFLAGS := $(shell $(PKG_CONFIG) --cflags $(PC_DEPS))
+PC_LIBS := $(shell $(PKG_CONFIG) --libs $(PC_DEPS))
 
-$(APPNAME):$(OBJECTS)
-	$(CC) $(CFLAGS) -o $(APPNAME) $(OBJECTS) $(LIB)
+CFLAGS += -std=c99 -D_GNU_SOURCE=1 -Wall -Wsign-compare -Wpointer-arith -Wcast-qual -Wcast-align
 
-depend:
-	makedepend $(SOURCES)
+CPPFLAGS += $(PC_CFLAGS)
+LDLIBS += $(PC_LIBS)
 
-clean:
-	@rm -f $(APPNAME) $(OBJECTS)
+CC_BINARY(frecon): $(C_OBJECTS)
 
+all: CC_BINARY(frecon)
+
+clean: CLEAN(frecon)
+
+install: all
+	mkdir -p $(DESTDIR)/sbin
+	install -m 755 $(OUT)/frecon $(DESTDIR)/sbin
