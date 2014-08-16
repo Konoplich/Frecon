@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "9649c74f_72ed1822",
+        "filename": "Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000768
+      },
+      "writtenOn": "2014-08-16T03:52:29Z",
+      "side": 1,
+      "message": "we\u0027re trying to kill it in new files",
+      "parentUuid": "f68be3a0_5dac9b0f",
+      "revId": "948c94c2b65ff8778536e82596f3c3abfb789ac2",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d67edf24_c075ceda",
         "filename": "Makefile",
         "patchSetId": 2
@@ -123,6 +141,24 @@
     },
     {
       "key": {
+        "uuid": "764e1358_11e68c4b",
+        "filename": "Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000768
+      },
+      "writtenOn": "2014-08-16T03:52:29Z",
+      "side": 1,
+      "message": "CPPFLAGS is used with all three",
+      "parentUuid": "168f97ae_7e1eb1c6",
+      "revId": "948c94c2b65ff8778536e82596f3c3abfb789ac2",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9681c74e_1bf027fe",
         "filename": "Makefile",
         "patchSetId": 2
@@ -152,6 +188,24 @@
       "side": 1,
       "message": "well, I thought it would only run as root. but everything else in sbin is 755,",
       "parentUuid": "9681c74e_1bf027fe",
+      "revId": "948c94c2b65ff8778536e82596f3c3abfb789ac2",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9649c74f_b2ff80ca",
+        "filename": "Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000768
+      },
+      "writtenOn": "2014-08-16T03:52:29Z",
+      "side": 1,
+      "message": "we rarely (if ever) remove exec perms for progs just because we don\u0027t expect them to run as root.  let\u0027s people do things like --help.",
+      "parentUuid": "7680d379_21a24e20",
       "revId": "948c94c2b65ff8778536e82596f3c3abfb789ac2",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
       "unresolved": false
