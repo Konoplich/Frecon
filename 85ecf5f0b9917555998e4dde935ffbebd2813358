@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "93e71994_2be0892f",
+        "filename": "Makefile",
+        "patchSetId": 4
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000768
+      },
+      "writtenOn": "2014-08-19T00:29:58Z",
+      "side": 1,
+      "message": "CPPFLAGS ?  at least the -std/-D flags should be there.",
+      "revId": "85ecf5f0b9917555998e4dde935ffbebd2813358",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    }
+  ]
+}
