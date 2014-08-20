@@ -1,0 +1,140 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d33271f0_f2696075",
+        "filename": "input.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000313
+      },
+      "writtenOn": "2014-08-20T01:39:21Z",
+      "side": 1,
+      "message": "useless blank line",
+      "revId": "fa79a15a330a928958dac48f468b34aff5e1458e",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f325b5a9_b66bce2a",
+        "filename": "input.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000313
+      },
+      "writtenOn": "2014-08-20T01:39:21Z",
+      "side": 1,
+      "message": "all these should probably be in a struct, even if that struct is a singleton. It wasn\u0027t worth it when it was just 1 fd, but now it\u0027s worth it",
+      "revId": "fa79a15a330a928958dac48f468b34aff5e1458e",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f3f77545_9c5c7c2c",
+        "filename": "input.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000313
+      },
+      "writtenOn": "2014-08-20T01:39:21Z",
+      "side": 1,
+      "message": "Here is the indent line I\u0027ve been using to ensure consistent style, including 80 col:\n\nindent -kr -i8 -ts8 -sob -l80 -ss -bs \n\nyou should run it on this file, it should help consistency",
+      "revId": "fa79a15a330a928958dac48f468b34aff5e1458e",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3344ad56_315b6332",
+        "filename": "input.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1000313
+      },
+      "writtenOn": "2014-08-20T01:39:21Z",
+      "side": 1,
+      "message": "dead whitespace",
+      "revId": "fa79a15a330a928958dac48f468b34aff5e1458e",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f325b5a9_f671561a",
+        "filename": "input.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1000313
+      },
+      "writtenOn": "2014-08-20T01:39:21Z",
+      "side": 1,
+      "message": "dead whitespace",
+      "revId": "fa79a15a330a928958dac48f468b34aff5e1458e",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "33f66d4a_4b84e850",
+        "filename": "input.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1000313
+      },
+      "writtenOn": "2014-08-20T01:39:21Z",
+      "side": 1,
+      "message": "should we throttle down the # of messages?",
+      "revId": "fa79a15a330a928958dac48f468b34aff5e1458e",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "33f66d4a_4b5bc830",
+        "filename": "input.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 1000313
+      },
+      "writtenOn": "2014-08-20T01:39:21Z",
+      "side": 1,
+      "message": "double blank line",
+      "revId": "fa79a15a330a928958dac48f468b34aff5e1458e",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "33f66d4a_2b7084a4",
+        "filename": "mini_power_manager.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000313
+      },
+      "writtenOn": "2014-08-20T01:39:21Z",
+      "side": 1,
+      "message": "license missing",
+      "revId": "fa79a15a330a928958dac48f468b34aff5e1458e",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    }
+  ]
+}
