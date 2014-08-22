@@ -16,6 +16,24 @@
       "revId": "cca3442eb3fd26c7bdb1aaa2c91b9f6476ab56f5",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "131a49b4_264ad671",
+        "filename": "input.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1003290
+      },
+      "writtenOn": "2014-08-22T04:08:09Z",
+      "side": 1,
+      "message": "Nope, dbus_bus_get() returns shared connection which I should not close because it would break other possible users of this connection. I think maybe the connection just dies when the application exits.",
+      "parentUuid": "f3685504_f806ad85",
+      "revId": "cca3442eb3fd26c7bdb1aaa2c91b9f6476ab56f5",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
     }
   ]
 }
