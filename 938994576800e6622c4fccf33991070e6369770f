@@ -1,0 +1,8 @@
+Code-Review+2: Stéphane Marchesin <marcheu@chromium.org>
+Commit-Queue+1: Dominik Behr <dbehr@chromium.org>
+Verified+1: Dominik Behr <dbehr@chromium.org>
+Submitted-by: chrome-internal-fetch <chrome-internal-fetch@google.com>
+Submitted-at: Sat, 23 Aug 2014 02:44:25 +0000
+Reviewed-on: https://chromium-review.googlesource.com/213216
+Project: chromiumos/platform/frecon
+Branch: refs/heads/master
