@@ -1,0 +1,395 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f583dec2_1f407c2c",
+        "filename": "dbus.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000313
+      },
+      "writtenOn": "2014-10-23T19:09:58Z",
+      "side": 1,
+      "message": "one global nit: please tab-indent to stay consistent with the other files",
+      "revId": "34d61e3028f5553dc8bf684308afccf18594b607",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f583dec2_9f756c72",
+        "filename": "dbus.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000313
+      },
+      "writtenOn": "2014-10-23T19:09:58Z",
+      "side": 1,
+      "message": "these two lines are a single call to calloc()",
+      "revId": "34d61e3028f5553dc8bf684308afccf18594b607",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b58de6f4_69b8fdef",
+        "filename": "dbus.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000313
+      },
+      "writtenOn": "2014-10-23T19:09:58Z",
+      "side": 1,
+      "message": "nit: remove blank linke",
+      "revId": "34d61e3028f5553dc8bf684308afccf18594b607",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f583dec2_3fc8e02e",
+        "filename": "dbus.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1000313
+      },
+      "writtenOn": "2014-10-23T19:09:58Z",
+      "side": 1,
+      "message": "blank lines",
+      "revId": "34d61e3028f5553dc8bf684308afccf18594b607",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f583dec2_5fcda43d",
+        "filename": "dbus.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1000313
+      },
+      "writtenOn": "2014-10-23T19:09:58Z",
+      "side": 1,
+      "message": "blank lines",
+      "revId": "34d61e3028f5553dc8bf684308afccf18594b607",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b58de6f4_e9abad94",
+        "filename": "dbus.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000313
+      },
+      "writtenOn": "2014-10-23T19:09:58Z",
+      "side": 1,
+      "message": "please use the name of the file for the include guard",
+      "revId": "34d61e3028f5553dc8bf684308afccf18594b607",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b58de6f4_a9b5a5f4",
+        "filename": "dbus.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000313
+      },
+      "writtenOn": "2014-10-23T19:09:58Z",
+      "side": 1,
+      "message": "nit: dead whitespace",
+      "revId": "34d61e3028f5553dc8bf684308afccf18594b607",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b58de6f4_c9b2690a",
+        "filename": "dbus_interface.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1000313
+      },
+      "writtenOn": "2014-10-23T19:09:58Z",
+      "side": 1,
+      "message": "please use the name of the file for the include guard",
+      "revId": "34d61e3028f5553dc8bf684308afccf18594b607",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b58de6f4_09929160",
+        "filename": "dbus_interface.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000313
+      },
+      "writtenOn": "2014-10-23T19:09:58Z",
+      "side": 1,
+      "message": "nit: blank line",
+      "revId": "34d61e3028f5553dc8bf684308afccf18594b607",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b58de6f4_09ee11c6",
+        "filename": "input.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000313
+      },
+      "writtenOn": "2014-10-23T19:09:58Z",
+      "side": 1,
+      "message": "why is video.h needed?",
+      "revId": "34d61e3028f5553dc8bf684308afccf18594b607",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b58de6f4_a9ea85ae",
+        "filename": "main.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000313
+      },
+      "writtenOn": "2014-10-23T19:09:58Z",
+      "side": 1,
+      "message": "dead whitespace",
+      "revId": "34d61e3028f5553dc8bf684308afccf18594b607",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f583dec2_828bcffd",
+        "filename": "term.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1000313
+      },
+      "writtenOn": "2014-10-23T19:09:58Z",
+      "side": 1,
+      "message": "do we need to unlock if video_lock failed?",
+      "revId": "34d61e3028f5553dc8bf684308afccf18594b607",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9592a210_288bcfad",
+        "filename": "term.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 1000313
+      },
+      "writtenOn": "2014-10-23T19:09:58Z",
+      "side": 1,
+      "message": "do we only want to come back with F2 or all !\u003d F1 keys?",
+      "revId": "34d61e3028f5553dc8bf684308afccf18594b607",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9592a210_e809679a",
+        "filename": "term.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 349,
+      "author": {
+        "id": 1000313
+      },
+      "writtenOn": "2014-10-23T19:09:58Z",
+      "side": 1,
+      "message": "same, please name this something more descriptive than \"ret\"",
+      "revId": "34d61e3028f5553dc8bf684308afccf18594b607",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f583dec2_82be6f8b",
+        "filename": "term.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 352,
+      "author": {
+        "id": 1000313
+      },
+      "writtenOn": "2014-10-23T19:09:58Z",
+      "side": 1,
+      "message": "calloc",
+      "revId": "34d61e3028f5553dc8bf684308afccf18594b607",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f583dec2_a2d37367",
+        "filename": "video.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 314,
+      "author": {
+        "id": 1000313
+      },
+      "writtenOn": "2014-10-23T19:09:58Z",
+      "side": 1,
+      "message": "rename ret to something more descriptive, \"video\" for example",
+      "revId": "34d61e3028f5553dc8bf684308afccf18594b607",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b58de6f4_e9facd53",
+        "filename": "video.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 316,
+      "author": {
+        "id": 1000313
+      },
+      "writtenOn": "2014-10-23T19:09:58Z",
+      "side": 1,
+      "message": "calloc",
+      "revId": "34d61e3028f5553dc8bf684308afccf18594b607",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9592a210_48b173d8",
+        "filename": "video.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 543,
+      "author": {
+        "id": 1000313
+      },
+      "writtenOn": "2014-10-23T19:09:58Z",
+      "side": 1,
+      "message": "All the splash screen stuff should go into its own file,  it doesn\u0027t have much to do with the video layer which just gives you a framebuffer.",
+      "revId": "34d61e3028f5553dc8bf684308afccf18594b607",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f583dec2_dfbe9435",
+        "filename": "video.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 655,
+      "author": {
+        "id": 1000313
+      },
+      "writtenOn": "2014-10-23T19:09:58Z",
+      "side": 1,
+      "message": "nit: dead whitespace",
+      "revId": "34d61e3028f5553dc8bf684308afccf18594b607",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b58de6f4_6970fd80",
+        "filename": "video.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 674,
+      "author": {
+        "id": 1000313
+      },
+      "writtenOn": "2014-10-23T19:09:58Z",
+      "side": 1,
+      "message": "nit: blank line",
+      "revId": "34d61e3028f5553dc8bf684308afccf18594b607",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9592a210_a8bfdfa1",
+        "filename": "video.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 678,
+      "author": {
+        "id": 1000313
+      },
+      "writtenOn": "2014-10-23T19:09:58Z",
+      "side": 1,
+      "message": "nit: dead whitespace",
+      "revId": "34d61e3028f5553dc8bf684308afccf18594b607",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b58de6f4_099cd141",
+        "filename": "video.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 828,
+      "author": {
+        "id": 1000313
+      },
+      "writtenOn": "2014-10-23T19:09:58Z",
+      "side": 1,
+      "message": "nit: blank line",
+      "revId": "34d61e3028f5553dc8bf684308afccf18594b607",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b58de6f4_a998454e",
+        "filename": "video.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 829,
+      "author": {
+        "id": 1000313
+      },
+      "writtenOn": "2014-10-23T19:09:58Z",
+      "side": 1,
+      "message": "nit: dead whitespace",
+      "revId": "34d61e3028f5553dc8bf684308afccf18594b607",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    }
+  ]
+}
