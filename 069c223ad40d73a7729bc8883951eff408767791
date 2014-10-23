@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "75244ea4_d0778442",
+        "filename": "main.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1003290
+      },
+      "writtenOn": "2014-10-23T23:35:47Z",
+      "side": 1,
+      "message": "What is going on with the tabs here?",
+      "revId": "069c223ad40d73a7729bc8883951eff408767791",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "55210a94_ed6d00a1",
+        "filename": "splash.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 1003290
+      },
+      "writtenOn": "2014-10-23T23:35:47Z",
+      "side": 1,
+      "message": "maybe put something like 50ms sleep here? otherwise this could spin really fast burning a lot of power?",
+      "revId": "069c223ad40d73a7729bc8883951eff408767791",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "55210a94_cd95a417",
+        "filename": "term.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1003290
+      },
+      "writtenOn": "2014-10-23T23:35:47Z",
+      "side": 1,
+      "message": "I think eventually we may want to run /bin/login here and maybe have a command line option to override it to something else?",
+      "revId": "069c223ad40d73a7729bc8883951eff408767791",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    }
+  ]
+}
