@@ -2,6 +2,142 @@
   "comments": [
     {
       "key": {
+        "uuid": "35a1f65e_b104223a",
+        "filename": "Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000313
+      },
+      "writtenOn": "2014-10-24T04:00:09Z",
+      "side": 1,
+      "message": "this seems like a whitespace change?",
+      "revId": "069c223ad40d73a7729bc8883951eff408767791",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "35a1f65e_1f9ba77f",
+        "filename": "dbus.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000313
+      },
+      "writtenOn": "2014-10-24T04:00:09Z",
+      "side": 1,
+      "message": "please rename \"ret\" into something more meaningful",
+      "revId": "069c223ad40d73a7729bc8883951eff408767791",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9592a210_94d31268",
+        "filename": "dbus.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000313
+      },
+      "writtenOn": "2014-10-24T04:00:09Z",
+      "side": 1,
+      "message": "memset can go away now that you\u0027re using calloc",
+      "revId": "069c223ad40d73a7729bc8883951eff408767791",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "35a1f65e_3f2ea380",
+        "filename": "dbus.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000313
+      },
+      "writtenOn": "2014-10-24T04:00:09Z",
+      "side": 1,
+      "message": "nit: // DBUS_H_",
+      "revId": "069c223ad40d73a7729bc8883951eff408767791",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9592a210_1e3abc0b",
+        "filename": "dbus_interface.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1000313
+      },
+      "writtenOn": "2014-10-24T04:00:09Z",
+      "side": 1,
+      "message": "nit: one blank line after the include guard",
+      "revId": "069c223ad40d73a7729bc8883951eff408767791",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b58de6f4_1acf2d37",
+        "filename": "dbus_interface.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000313
+      },
+      "writtenOn": "2014-10-24T04:00:09Z",
+      "side": 1,
+      "message": "nit: // DBUS_INTERFACE_H_",
+      "revId": "069c223ad40d73a7729bc8883951eff408767791",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d5717ac8_fc35a5fc",
+        "filename": "input.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 1000313
+      },
+      "writtenOn": "2014-10-24T04:00:09Z",
+      "side": 1,
+      "message": "nit: indentation broken here",
+      "revId": "069c223ad40d73a7729bc8883951eff408767791",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b58de6f4_3ab23190",
+        "filename": "main.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000313
+      },
+      "writtenOn": "2014-10-24T04:00:09Z",
+      "side": 1,
+      "message": "nit: that\u0027s a lot of tabs, can we have fewer :)",
+      "revId": "069c223ad40d73a7729bc8883951eff408767791",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "75244ea4_d0778442",
         "filename": "main.c",
         "patchSetId": 2
@@ -13,6 +149,159 @@
       "writtenOn": "2014-10-23T23:35:47Z",
       "side": 1,
       "message": "What is going on with the tabs here?",
+      "revId": "069c223ad40d73a7729bc8883951eff408767791",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "35a1f65e_df6d3f73",
+        "filename": "main.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1000313
+      },
+      "writtenOn": "2014-10-24T04:00:09Z",
+      "side": 1,
+      "message": "this series of (if c \u003d\u003d XXX) looks like a switch statement",
+      "revId": "069c223ad40d73a7729bc8883951eff408767791",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b58de6f4_fa56099d",
+        "filename": "main.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 1000313
+      },
+      "writtenOn": "2014-10-24T04:00:09Z",
+      "side": 1,
+      "message": "I would put LOG() and daemonize() in util.c as well (I know, it doesn\u0027t exist yet :)",
+      "revId": "069c223ad40d73a7729bc8883951eff408767791",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b58de6f4_fa328964",
+        "filename": "splash.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000313
+      },
+      "writtenOn": "2014-10-24T04:00:09Z",
+      "side": 1,
+      "message": "these constants can go in util.h",
+      "revId": "069c223ad40d73a7729bc8883951eff408767791",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "35a1f65e_bf4dd304",
+        "filename": "splash.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000313
+      },
+      "writtenOn": "2014-10-24T04:00:09Z",
+      "side": 1,
+      "message": "move this one to util.c",
+      "revId": "069c223ad40d73a7729bc8883951eff408767791",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "35a1f65e_bfa2b336",
+        "filename": "splash.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1000313
+      },
+      "writtenOn": "2014-10-24T04:00:09Z",
+      "side": 1,
+      "message": "we should probably calloc this instead, we don\u0027t really need a global here",
+      "revId": "069c223ad40d73a7729bc8883951eff408767791",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9592a210_f49e1e3c",
+        "filename": "splash.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1000313
+      },
+      "writtenOn": "2014-10-24T04:00:09Z",
+      "side": 1,
+      "message": "remove once you use calloc",
+      "revId": "069c223ad40d73a7729bc8883951eff408767791",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9592a210_d4bc3aaf",
+        "filename": "splash.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1000313
+      },
+      "writtenOn": "2014-10-24T04:00:09Z",
+      "side": 1,
+      "message": "nit: double blank line",
+      "revId": "069c223ad40d73a7729bc8883951eff408767791",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "35a1f65e_7f966bda",
+        "filename": "splash.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1000313
+      },
+      "writtenOn": "2014-10-24T04:00:09Z",
+      "side": 1,
+      "message": "nit: double blank line",
+      "revId": "069c223ad40d73a7729bc8883951eff408767791",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "35a1f65e_1f8ba7ad",
+        "filename": "splash.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1000313
+      },
+      "writtenOn": "2014-10-24T04:00:09Z",
+      "side": 1,
+      "message": "nit: double blank line",
       "revId": "069c223ad40d73a7729bc8883951eff408767791",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
       "unresolved": false
@@ -36,6 +325,40 @@
     },
     {
       "key": {
+        "uuid": "35a1f65e_9f7ed705",
+        "filename": "splash.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 1000313
+      },
+      "writtenOn": "2014-10-24T04:00:09Z",
+      "side": 1,
+      "message": "we probably want to yield there otherwise we\u0027ll affect boot time negatively?",
+      "revId": "069c223ad40d73a7729bc8883951eff408767791",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d5717ac8_99227b40",
+        "filename": "splash.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 336,
+      "author": {
+        "id": 1000313
+      },
+      "writtenOn": "2014-10-24T04:00:09Z",
+      "side": 1,
+      "message": "here too, lots of tabs :)",
+      "revId": "069c223ad40d73a7729bc8883951eff408767791",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "55210a94_cd95a417",
         "filename": "term.c",
         "patchSetId": 2
@@ -47,6 +370,142 @@
       "writtenOn": "2014-10-23T23:35:47Z",
       "side": 1,
       "message": "I think eventually we may want to run /bin/login here and maybe have a command line option to override it to something else?",
+      "revId": "069c223ad40d73a7729bc8883951eff408767791",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "35a1f65e_96655c40",
+        "filename": "term.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 353,
+      "author": {
+        "id": 1000313
+      },
+      "writtenOn": "2014-10-24T04:00:09Z",
+      "side": 1,
+      "message": "no need to set members to null if we\u0027re callocing",
+      "revId": "069c223ad40d73a7729bc8883951eff408767791",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d5717ac8_1c2659e2",
+        "filename": "term.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 370,
+      "author": {
+        "id": 1000313
+      },
+      "writtenOn": "2014-10-24T04:00:09Z",
+      "side": 1,
+      "message": "nit: dead whitespace",
+      "revId": "069c223ad40d73a7729bc8883951eff408767791",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "35a1f65e_964ebcb4",
+        "filename": "video.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000313
+      },
+      "writtenOn": "2014-10-24T04:00:09Z",
+      "side": 1,
+      "message": "seems unused",
+      "revId": "069c223ad40d73a7729bc8883951eff408767791",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d5717ac8_bc164d69",
+        "filename": "video.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 1000313
+      },
+      "writtenOn": "2014-10-24T04:00:09Z",
+      "side": 1,
+      "message": "I think this call will fail if we\u0027re not master. We should probably getmaster/dropmaster in video_init as well, and print explicit messages if those fail.",
+      "revId": "069c223ad40d73a7729bc8883951eff408767791",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "35a1f65e_51dd9e6f",
+        "filename": "video.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 374,
+      "author": {
+        "id": 1000313
+      },
+      "writtenOn": "2014-10-24T04:00:09Z",
+      "side": 1,
+      "message": "I don\u0027t understand the lock.count here. It is increased every time we lock, but isn\u0027t mapped in the same place, yet the lock lives with the map ptr? It seems like if we mmap() inside video_lock() (and unmap when we drop to 0 in video_unlock()) it would be more consistent.",
+      "revId": "069c223ad40d73a7729bc8883951eff408767791",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "35a1f65e_f1e14a2f",
+        "filename": "video.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1000313
+      },
+      "writtenOn": "2014-10-24T04:00:09Z",
+      "side": 1,
+      "message": "IIRC the gamma ramp size is driver-specific. So we should probably dynamically allocate the r/g/b components og famma_ramp_t and remove this.\n\nNow of course there is the problem that on disk, the gamma tables have 256 entries, and that some resampling will be needed.\n\nIn the end, maybe we should just remove the gamma table support completely, I don\u0027t foresee that we\u0027ll keep using it there, instead I would like to use it from Chrome only.",
+      "revId": "069c223ad40d73a7729bc8883951eff408767791",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d5717ac8_dc38e1f5",
+        "filename": "video.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000313
+      },
+      "writtenOn": "2014-10-24T04:00:09Z",
+      "side": 1,
+      "message": "nit: you can probably replace all the following:\n\ntypedef struct _mystruct {\n} mystruct;\n\ninto \ntypedef struct {\n} mystruct;",
+      "revId": "069c223ad40d73a7729bc8883951eff408767791",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "35a1f65e_f10aaa45",
+        "filename": "video.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000313
+      },
+      "writtenOn": "2014-10-24T04:00:09Z",
+      "side": 1,
+      "message": "nit: double ::",
       "revId": "069c223ad40d73a7729bc8883951eff408767791",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
       "unresolved": false
