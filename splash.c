@@ -22,6 +22,7 @@
 
 #define  MAX_SPLASH_IMAGES      (30)
 #define  FILENAME_LENGTH        (100)
+#define  MAX_SPLASH_WAITTIME    (5000)
 
 typedef union {
 	uint32_t  *as_pixels;
@@ -196,7 +197,7 @@ int splash_run(splash_t* splash, dbus_t** dbus)
 				frecon_dbus_path_message_func, splash);
 
 		if (db_status)
-			dbus_wait_for_messages(*dbus);
+			dbus_wait_for_messages(*dbus, MAX_SPLASH_WAITTIME);
 
 
 		/*
