@@ -48,7 +48,7 @@ typedef struct {
 	gamma_ramp_t gamma_ramp;
 } video_t;
 
-video_t* video_init(int32_t *width, int32_t *height, int32_t *pitch, int *scaling);
+video_t* video_init();
 int32_t video_getwidth(video_t* video);
 int32_t video_getheight(video_t* video);
 int32_t video_getpitch(video_t* video);

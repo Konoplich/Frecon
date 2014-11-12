@@ -17,11 +17,24 @@ typedef struct _terminal_t {
   bool active;
 } terminal_t;
 
-terminal_t *term_init(video_t *video);
+struct term {
+	struct tsm_screen *screen;
+	struct tsm_vte *vte;
+	struct shl_pty *pty;
+	int pty_bridge;
+	int pid;
+	tsm_age_t age;
+	int char_x, char_y;
+	int pitch;
+	uint32_t *dst_image;
+};
+
+terminal_t *term_init();
 void term_close(terminal_t* terminal);
 void term_redraw(terminal_t* terminal);
 void term_set_dbus(terminal_t* terminal, dbus_t* dbus);
-int term_run(terminal_t* terminal);
 void term_close(terminal_t* terminal);
+void term_key_event(terminal_t* terminal, uint32_t keysym, int32_t unicode);
+bool term_is_child_done(terminal_t* terminal);
 
 #endif
