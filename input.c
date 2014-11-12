@@ -4,6 +4,7 @@
  * found in the LICENSE file.
  */
 
+#include <ctype.h>
 #include <fcntl.h>
 #include <libtsm.h>
 #include <stdint.h>
@@ -17,11 +18,21 @@
 #include "input.h"
 #include "dbus_interface.h"
 #include "dbus.h"
+#include "keysym.h"
+#include "shl_pty.h"
 #include "util.h"
+
+#define MAX_TERMINALS    (5)
 
 struct input_dev {
 	int fd;
 	char *path;
+};
+
+struct keyboard_state {
+	int shift_state;
+	int control_state;
+	int alt_state;
 };
 
 struct {
@@ -30,15 +41,173 @@ struct {
 	int udev_fd;
 	unsigned int ndevs;
 	struct input_dev *devs;
+	struct keyboard_state kbd_state;
 	dbus_t *dbus;
+	uint32_t  current_terminal;
+	terminal_t *terminals[MAX_TERMINALS];
 } input = {
 	.udev = NULL,
 	.udev_monitor = NULL,
 	.udev_fd = -1,
 	.ndevs = 0,
 	.devs = NULL,
-	.dbus = NULL
+	.dbus = NULL,
+	.current_terminal = 0
 };
+
+static int input_special_key(struct input_key_event *ev)
+{
+	unsigned int i;
+
+	uint32_t ignore_keys[] = {
+		BTN_TOUCH, // touchpad events
+		BTN_TOOL_FINGER,
+		BTN_TOOL_DOUBLETAP,
+		BTN_TOOL_TRIPLETAP,
+		BTN_TOOL_QUADTAP,
+		BTN_TOOL_QUINTTAP,
+		BTN_LEFT, // mouse buttons
+		BTN_RIGHT,
+		BTN_MIDDLE,
+		BTN_SIDE,
+		BTN_EXTRA,
+		BTN_FORWARD,
+		BTN_BACK,
+		BTN_TASK
+	};
+
+	for (i = 0; i < ARRAY_SIZE(ignore_keys); i++)
+		if (ev->code == ignore_keys[i])
+			return 1;
+
+	switch (ev->code) {
+	case KEY_LEFTSHIFT:
+	case KEY_RIGHTSHIFT:
+		input.kbd_state.shift_state = ! !ev->value;
+		return 1;
+	case KEY_LEFTCTRL:
+	case KEY_RIGHTCTRL:
+		input.kbd_state.control_state = ! !ev->value;
+		return 1;
+	case KEY_LEFTALT:
+	case KEY_RIGHTALT:
+		input.kbd_state.alt_state = ! !ev->value;
+		return 1;
+	}
+
+	if (input.kbd_state.shift_state && ev->value) {
+		switch (ev->code) {
+		case KEY_PAGEUP:
+			tsm_screen_sb_page_up(input.terminals[input.current_terminal]->
+					term->screen, 1);
+			term_redraw(input.terminals[input.current_terminal]);
+			return 1;
+		case KEY_PAGEDOWN:
+			tsm_screen_sb_page_down(input.terminals[input.current_terminal]->
+					term->screen, 1);
+			term_redraw(input.terminals[input.current_terminal]);
+			return 1;
+		case KEY_UP:
+			tsm_screen_sb_up(input.terminals[input.current_terminal]->
+					term->screen, 1);
+			term_redraw(input.terminals[input.current_terminal]);
+			return 1;
+		case KEY_DOWN:
+			tsm_screen_sb_down(input.terminals[input.current_terminal]->
+					term->screen, 1);
+			term_redraw(input.terminals[input.current_terminal]);
+			return 1;
+		}
+	}
+
+	if (input.kbd_state.alt_state && input.kbd_state.control_state && ev->value) {
+		switch (ev->code) {
+			case KEY_F1:
+				input_ungrab();
+				input.terminals[input.current_terminal]->active = false;
+				(void)dbus_method_call0(input.dbus,
+					kLibCrosServiceName,
+					kLibCrosServicePath,
+					kLibCrosServiceInterface,
+					kTakeDisplayOwnership);
+				break;
+			case KEY_F2:
+			case KEY_F3:
+			case KEY_F4:
+			case KEY_F5:
+			case KEY_F6:
+			case KEY_F7:
+			case KEY_F8:
+			case KEY_F9:
+			case KEY_F10:
+				(void)dbus_method_call0(input.dbus,
+					kLibCrosServiceName,
+					kLibCrosServicePath,
+					kLibCrosServiceInterface,
+					kReleaseDisplayOwnership);
+				break;
+		}
+
+		if ((ev->code >= KEY_F2) && (ev->code <= KEY_F4)) {
+			input.current_terminal = ev->code - KEY_F2;;
+			if (input.terminals[input.current_terminal] == NULL) {
+				input.terminals[input.current_terminal] = term_init();
+				if (input.terminals[input.current_terminal] == NULL) {
+					LOG(ERROR, "Term init failed");
+					return 1;
+				}
+			}
+			input.terminals[input.current_terminal]->active = true;
+			input_grab();
+			video_setmode(input.terminals[input.current_terminal]->video);
+			term_redraw(input.terminals[input.current_terminal]);
+		}
+
+		return 1;
+
+	}
+
+	return 0;
+}
+
+static void input_get_keysym_and_unicode(struct input_key_event *event,
+		uint32_t *keysym, uint32_t *unicode)
+{
+	struct {
+		uint32_t code;
+		uint32_t keysym;
+	} non_ascii_keys[] = {
+		{ KEY_ESC, KEYSYM_ESC},
+		{ KEY_HOME, KEYSYM_HOME},
+		{ KEY_LEFT, KEYSYM_LEFT},
+		{ KEY_UP, KEYSYM_UP},
+		{ KEY_RIGHT, KEYSYM_RIGHT},
+		{ KEY_DOWN, KEYSYM_DOWN},
+		{ KEY_PAGEUP, KEYSYM_PAGEUP},
+		{ KEY_PAGEDOWN, KEYSYM_PAGEDOWN},
+		{ KEY_END, KEYSYM_END},
+		{ KEY_INSERT, KEYSYM_INSERT},
+		{ KEY_DELETE, KEYSYM_DELETE},
+	};
+
+	for (unsigned i = 0; i < ARRAY_SIZE(non_ascii_keys); i++) {
+		if (non_ascii_keys[i].code == event->code) {
+			*keysym = non_ascii_keys[i].keysym;
+			*unicode = -1;
+			return;
+		}
+	}
+
+	if (event->code >= ARRAY_SIZE(keysym_table) / 2) {
+		*keysym = '?';
+	} else {
+		*keysym = keysym_table[event->code * 2 + input.kbd_state.shift_state];
+		if ((input.kbd_state.control_state) && isascii(*keysym))
+			*keysym = tolower(*keysym) - 'a' + 1;
+	}
+
+	*unicode = *keysym;
+}
 
 static int input_add(const char *devname)
 {
@@ -204,9 +373,9 @@ static void report_user_activity(void)
 			&activity_type);
 
 	(void)dbus_message_new_method_call(kPowerManagerServiceName,
-					   kPowerManagerServicePath,
-					   kPowerManagerInterface,
-					   kHandleUserActivityMethod);
+						kPowerManagerServicePath,
+						kPowerManagerInterface,
+						kHandleUserActivityMethod);
 
 }
 
@@ -262,6 +431,89 @@ struct input_key_event *input_get_event(fd_set * read_set,
 	}
 
 	return NULL;
+}
+
+int input_run(bool standalone)
+{
+	fd_set read_set, exception_set;
+	int pty_fd = -1;
+
+	if (standalone) {
+		(void)dbus_method_call0(input.dbus,
+			kLibCrosServiceName,
+			kLibCrosServicePath,
+			kLibCrosServiceInterface,
+			kReleaseDisplayOwnership);
+
+		input.terminals[input.current_terminal] = term_init();
+		input.terminals[input.current_terminal]->active = true;
+		input_grab();
+		video_setmode(input.terminals[input.current_terminal]->video);
+		term_redraw(input.terminals[input.current_terminal]);
+	}
+
+	while (1) {
+		if (input.terminals[input.current_terminal] &&
+				input.terminals[input.current_terminal]->term)
+			pty_fd = input.terminals[input.current_terminal]->term->pty_bridge;
+
+		FD_ZERO(&read_set);
+		FD_ZERO(&exception_set);
+		if (pty_fd >= 0) {
+			FD_SET(pty_fd, &read_set);
+			FD_SET(pty_fd, &exception_set);
+		}
+		int maxfd = input_setfds(&read_set, &exception_set);
+
+		maxfd = MAX(maxfd, pty_fd) + 1;
+
+		select(maxfd, &read_set, NULL, &exception_set, NULL);
+
+		if (pty_fd >= 0) {
+			if (FD_ISSET(pty_fd, &exception_set)) {
+				return -1;
+			}
+		}
+
+		struct input_key_event *event;
+		event = input_get_event(&read_set, &exception_set);
+		if (event) {
+			if (!input_special_key(event) && event->value) {
+				uint32_t keysym, unicode;
+				if (input.terminals[input.current_terminal] &&
+						input.terminals[input.current_terminal]->active) {
+					input_get_keysym_and_unicode(event, &keysym, &unicode);
+					term_key_event(input.terminals[input.current_terminal],
+							keysym, unicode);
+				}
+			}
+
+			input_put_event(event);
+		}
+
+		if (pty_fd >= 0) {
+			if (FD_ISSET(pty_fd, &read_set)) {
+				shl_pty_bridge_dispatch(input.terminals[input.current_terminal]->
+						term->pty_bridge, 0);
+			}
+		}
+
+		if (input.terminals[input.current_terminal]) {
+			if (term_is_child_done(input.terminals[input.current_terminal])) {
+				term_close(input.terminals[input.current_terminal]);
+				input.terminals[input.current_terminal] = term_init();
+				if (input.terminals[input.current_terminal]) {
+					input.terminals[input.current_terminal]->active = true;
+					video_setmode(input.terminals[input.current_terminal]->video);
+					term_redraw(input.terminals[input.current_terminal]);
+				} else {
+					return -1;
+				}
+			}
+		}
+	}
+
+	return 0;
 }
 
 void input_put_event(struct input_key_event *event)
