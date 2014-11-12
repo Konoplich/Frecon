@@ -39,6 +39,7 @@ static struct option command_options[] = {
 typedef struct {
 		bool    print_resolution;
 		bool    frame_interval;
+		bool    standalone;
 } commandflags_t;
 
 int main(int argc, char* argv[])
@@ -50,9 +51,9 @@ int main(int argc, char* argv[])
 	commandflags_t flags;
 	splash_t *splash;
 	video_t  *video;
-	terminal_t *terminal;
 	dbus_t *dbus;
 
+	flags.standalone = true;
 	memset(&flags, 0, sizeof(flags));
 
 	video = video_init(&width, &height, &pitch, &scaling);
@@ -65,14 +66,6 @@ int main(int argc, char* argv[])
 	ret = input_init();
 	if (ret) {
 		LOG(ERROR, "Input init failed");
-		video_close(video);
-		return EXIT_FAILURE;
-	}
-
-	terminal = term_init(video);
-	if (ret) {
-		LOG(ERROR, "Term init failed");
-		input_close();
 		video_close(video);
 		return EXIT_FAILURE;
 	}
@@ -96,6 +89,7 @@ int main(int argc, char* argv[])
 
 			case FLAG_DAEMON:
 				daemonize();
+				flags.standalone = false;
 				break;
 
 			case FLAG_DEV_MODE:
@@ -151,12 +145,9 @@ int main(int argc, char* argv[])
 	}
 
 	input_set_dbus(dbus);
-	term_set_dbus(terminal, dbus);
-
-	ret = term_run(terminal);
+	ret = input_run(video, flags.standalone);
 
 	input_close();
-	term_close(terminal);
 	video_close(video);
 
 	return ret;
