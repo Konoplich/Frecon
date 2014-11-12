@@ -108,6 +108,7 @@ frecon_dbus_path_message_func(dbus_t* dbus, void* user_data)
 		exit(EXIT_SUCCESS);
 
 	dbus_stop_wait(dbus);
+	video_close(splash->video);
 }
 
 static void splash_clear_screen(splash_t *splash, uint32_t *video_buffer)
