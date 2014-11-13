@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7af19ba1_42f5422d",
+        "filename": "input.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000313
+      },
+      "writtenOn": "2014-11-13T02:46:14Z",
+      "side": 1,
+      "message": "I think that the chrome coding style says that we should avoid forward declarations outside of headers, and instead reorder the functions",
+      "revId": "7d0c6a1aa42d212911ff74b0d8dd1329d1cb81d0",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7af19ba1_425a62f4",
+        "filename": "input.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 306,
+      "author": {
+        "id": 1000313
+      },
+      "writtenOn": "2014-11-13T02:46:14Z",
+      "side": 1,
+      "message": "Conceptually, I don\u0027t know if input should own the terminal and do the redrawing, it feels wrong to me. But it seems like this whole function could go almost as-is in main instead, where we already own the term/video. It doesn\u0027t need to be part of this CL, but we should move towards that.",
+      "revId": "7d0c6a1aa42d212911ff74b0d8dd1329d1cb81d0",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9adacf31_1f59a3d6",
+        "filename": "term.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1000313
+      },
+      "writtenOn": "2014-11-13T02:46:14Z",
+      "side": 1,
+      "message": "video is initialized in term, but closed in splash, it should be more consistent",
+      "revId": "7d0c6a1aa42d212911ff74b0d8dd1329d1cb81d0",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    }
+  ]
+}
