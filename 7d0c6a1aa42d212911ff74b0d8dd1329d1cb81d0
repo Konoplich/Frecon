@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "9adacf31_9fe1335a",
+        "filename": "input.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1106179
+      },
+      "writtenOn": "2014-11-13T03:43:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7af19ba1_42f5422d",
+      "revId": "7d0c6a1aa42d212911ff74b0d8dd1329d1cb81d0",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7af19ba1_425a62f4",
         "filename": "input.c",
         "patchSetId": 3
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "5adcd72f_fdd7a7c9",
+        "filename": "input.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 306,
+      "author": {
+        "id": 1106179
+      },
+      "writtenOn": "2014-11-13T03:43:58Z",
+      "side": 1,
+      "message": "I understand the point.   Let\u0027s reconsider that as part of a subsequent CL",
+      "parentUuid": "7af19ba1_425a62f4",
+      "revId": "7d0c6a1aa42d212911ff74b0d8dd1329d1cb81d0",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9adacf31_1f59a3d6",
         "filename": "term.c",
         "patchSetId": 3
@@ -47,6 +83,24 @@
       "writtenOn": "2014-11-13T02:46:14Z",
       "side": 1,
       "message": "video is initialized in term, but closed in splash, it should be more consistent",
+      "revId": "7d0c6a1aa42d212911ff74b0d8dd1329d1cb81d0",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7adfdb23_5e30958b",
+        "filename": "term.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1106179
+      },
+      "writtenOn": "2014-11-13T03:43:58Z",
+      "side": 1,
+      "message": "Actually only the splash instance was closed in splash.  Turns out, the term instance was never closed, so, was a serious resource leak.  Good catch.  Fixed in latest update.",
+      "parentUuid": "9adacf31_1f59a3d6",
       "revId": "7d0c6a1aa42d212911ff74b0d8dd1329d1cb81d0",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
       "unresolved": false
