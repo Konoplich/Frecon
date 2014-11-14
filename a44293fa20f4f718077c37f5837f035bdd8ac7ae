@@ -189,6 +189,23 @@
     },
     {
       "key": {
+        "uuid": "7adfdb23_7eb54673",
+        "filename": "term.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 1003290
+      },
+      "writtenOn": "2014-11-14T04:50:02Z",
+      "side": 1,
+      "message": "Should there be some refcounting inside video layer so when one of multiple terminals is closed it wouldnt kill video object referenced by others?",
+      "revId": "a44293fa20f4f718077c37f5837f035bdd8ac7ae",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9aa80f92_8f7c95a8",
         "filename": "term.h",
         "patchSetId": 7
