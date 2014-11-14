@@ -1,0 +1,208 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9aa80f92_4f29cdb1",
+        "filename": "input.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1000313
+      },
+      "writtenOn": "2014-11-14T04:49:40Z",
+      "side": 1,
+      "message": "libtsm calls really have no place in input.c, you should probably go through the term interface",
+      "revId": "a44293fa20f4f718077c37f5837f035bdd8ac7ae",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7adfdb23_fef15674",
+        "filename": "input.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1000313
+      },
+      "writtenOn": "2014-11-14T04:49:40Z",
+      "side": 1,
+      "message": "why copy/paste ? We could do:\n\nif (ev-\u003ecode \u003e\u003d KEY_FD \u0026\u0026 ev-\u003ecode \u003c\u003d KEY_F4) {\n   input.current_terminal \u003d ev-\u003ecode - KEY_F2 \n   ...",
+      "revId": "a44293fa20f4f718077c37f5837f035bdd8ac7ae",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7adfdb23_1ed8c2fa",
+        "filename": "input.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1000313
+      },
+      "writtenOn": "2014-11-14T04:49:40Z",
+      "side": 1,
+      "message": "nit: indentation",
+      "revId": "a44293fa20f4f718077c37f5837f035bdd8ac7ae",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7adfdb23_de4ada1f",
+        "filename": "input.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1000313
+      },
+      "writtenOn": "2014-11-14T04:49:40Z",
+      "side": 1,
+      "message": "nit: indentation",
+      "revId": "a44293fa20f4f718077c37f5837f035bdd8ac7ae",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7adfdb23_5eb08a84",
+        "filename": "input.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1000313
+      },
+      "writtenOn": "2014-11-14T04:49:40Z",
+      "side": 1,
+      "message": "you should go through term to call into video_setmode. It should probably just be a part of term_init() for simplicity. If you look that pattern (term_init then video_setmode) exists 5 times in this file.",
+      "revId": "a44293fa20f4f718077c37f5837f035bdd8ac7ae",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "baa313b2_4a78d765",
+        "filename": "input.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1000313
+      },
+      "writtenOn": "2014-11-14T04:49:40Z",
+      "side": 1,
+      "message": "nit: indentation",
+      "revId": "a44293fa20f4f718077c37f5837f035bdd8ac7ae",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "baa313b2_8a871ff1",
+        "filename": "input.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1000313
+      },
+      "writtenOn": "2014-11-14T04:49:40Z",
+      "side": 1,
+      "message": "nit: indentation",
+      "revId": "a44293fa20f4f718077c37f5837f035bdd8ac7ae",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7adfdb23_be298e2a",
+        "filename": "input.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1000313
+      },
+      "writtenOn": "2014-11-14T04:49:40Z",
+      "side": 1,
+      "message": "this creates new terminals, but where are they destroyed?",
+      "revId": "a44293fa20f4f718077c37f5837f035bdd8ac7ae",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7adfdb23_fe479614",
+        "filename": "input.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1000313
+      },
+      "writtenOn": "2014-11-14T04:49:40Z",
+      "side": 1,
+      "message": "nit: indentation",
+      "revId": "a44293fa20f4f718077c37f5837f035bdd8ac7ae",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9aa80f92_4f738dd8",
+        "filename": "input.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 525,
+      "author": {
+        "id": 1000313
+      },
+      "writtenOn": "2014-11-14T04:49:40Z",
+      "side": 1,
+      "message": "same thing as with tsm, we shouldn\u0027t call shl from input.",
+      "revId": "a44293fa20f4f718077c37f5837f035bdd8ac7ae",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7adfdb23_de501a9f",
+        "filename": "main.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1000313
+      },
+      "writtenOn": "2014-11-14T04:49:40Z",
+      "side": 1,
+      "message": "nit: indent\n\nalso: where is video_close?",
+      "revId": "a44293fa20f4f718077c37f5837f035bdd8ac7ae",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9aa80f92_8f7c95a8",
+        "filename": "term.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000313
+      },
+      "writtenOn": "2014-11-14T04:49:40Z",
+      "side": 1,
+      "message": "this should all stay private to the terminal. I think once the other layers stop calling tsm and shl directly, this won\u0027t be needed",
+      "revId": "a44293fa20f4f718077c37f5837f035bdd8ac7ae",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    }
+  ]
+}
