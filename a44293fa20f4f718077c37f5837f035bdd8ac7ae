@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "baa313b2_c5dd986f",
+        "filename": "input.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1106179
+      },
+      "writtenOn": "2014-11-14T05:59:50Z",
+      "side": 1,
+      "message": "On the surface that sounds reasonable.  I\u0027d like to think through what the interface in term should be and put that in a separate CL.",
+      "parentUuid": "9aa80f92_4f29cdb1",
+      "revId": "a44293fa20f4f718077c37f5837f035bdd8ac7ae",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7adfdb23_fef15674",
         "filename": "input.c",
         "patchSetId": 7
@@ -30,6 +48,24 @@
       "writtenOn": "2014-11-14T04:49:40Z",
       "side": 1,
       "message": "why copy/paste ? We could do:\n\nif (ev-\u003ecode \u003e\u003d KEY_FD \u0026\u0026 ev-\u003ecode \u003c\u003d KEY_F4) {\n   input.current_terminal \u003d ev-\u003ecode - KEY_F2 \n   ...",
+      "revId": "a44293fa20f4f718077c37f5837f035bdd8ac7ae",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9aa80f92_efe8c1bb",
+        "filename": "input.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1106179
+      },
+      "writtenOn": "2014-11-14T05:59:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7adfdb23_fef15674",
       "revId": "a44293fa20f4f718077c37f5837f035bdd8ac7ae",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "baa313b2_0aac0ffd",
+        "filename": "input.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1106179
+      },
+      "writtenOn": "2014-11-14T05:59:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7adfdb23_1ed8c2fa",
+      "revId": "a44293fa20f4f718077c37f5837f035bdd8ac7ae",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7adfdb23_de4ada1f",
         "filename": "input.c",
         "patchSetId": 7
@@ -64,6 +118,24 @@
       "writtenOn": "2014-11-14T04:49:40Z",
       "side": 1,
       "message": "nit: indentation",
+      "revId": "a44293fa20f4f718077c37f5837f035bdd8ac7ae",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "baa313b2_0a5ecf68",
+        "filename": "input.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1106179
+      },
+      "writtenOn": "2014-11-14T05:59:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7adfdb23_de4ada1f",
       "revId": "a44293fa20f4f718077c37f5837f035bdd8ac7ae",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "9aa80f92_2fa649a4",
+        "filename": "input.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1106179
+      },
+      "writtenOn": "2014-11-14T05:59:50Z",
+      "side": 1,
+      "message": "video_setmode needs to be independent of term_init, otherwise switching to pre-existing terminals would not work.",
+      "parentUuid": "7adfdb23_5eb08a84",
+      "revId": "a44293fa20f4f718077c37f5837f035bdd8ac7ae",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "baa313b2_4a78d765",
         "filename": "input.c",
         "patchSetId": 7
@@ -98,6 +188,24 @@
       "writtenOn": "2014-11-14T04:49:40Z",
       "side": 1,
       "message": "nit: indentation",
+      "revId": "a44293fa20f4f718077c37f5837f035bdd8ac7ae",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9aa80f92_4fab8d6b",
+        "filename": "input.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1106179
+      },
+      "writtenOn": "2014-11-14T05:59:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "baa313b2_4a78d765",
       "revId": "a44293fa20f4f718077c37f5837f035bdd8ac7ae",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
       "unresolved": false
@@ -121,6 +229,24 @@
     },
     {
       "key": {
+        "uuid": "baa313b2_aa3dc304",
+        "filename": "input.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1106179
+      },
+      "writtenOn": "2014-11-14T05:59:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "baa313b2_8a871ff1",
+      "revId": "a44293fa20f4f718077c37f5837f035bdd8ac7ae",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7adfdb23_be298e2a",
         "filename": "input.c",
         "patchSetId": 7
@@ -132,6 +258,24 @@
       "writtenOn": "2014-11-14T04:49:40Z",
       "side": 1,
       "message": "this creates new terminals, but where are they destroyed?",
+      "revId": "a44293fa20f4f718077c37f5837f035bdd8ac7ae",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7adfdb23_7e1626b6",
+        "filename": "input.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1106179
+      },
+      "writtenOn": "2014-11-14T05:59:50Z",
+      "side": 1,
+      "message": "They are destroyed when is_child_done returns true",
+      "parentUuid": "7adfdb23_be298e2a",
       "revId": "a44293fa20f4f718077c37f5837f035bdd8ac7ae",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
       "unresolved": false
@@ -155,6 +299,24 @@
     },
     {
       "key": {
+        "uuid": "baa313b2_0a35ef16",
+        "filename": "input.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1106179
+      },
+      "writtenOn": "2014-11-14T05:59:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7adfdb23_fe479614",
+      "revId": "a44293fa20f4f718077c37f5837f035bdd8ac7ae",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9aa80f92_4f738dd8",
         "filename": "input.c",
         "patchSetId": 7
@@ -166,6 +328,24 @@
       "writtenOn": "2014-11-14T04:49:40Z",
       "side": 1,
       "message": "same thing as with tsm, we shouldn\u0027t call shl from input.",
+      "revId": "a44293fa20f4f718077c37f5837f035bdd8ac7ae",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "baa313b2_e5ea9c0a",
+        "filename": "input.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 525,
+      "author": {
+        "id": 1106179
+      },
+      "writtenOn": "2014-11-14T05:59:50Z",
+      "side": 1,
+      "message": "Same as previous comment about term interface",
+      "parentUuid": "9aa80f92_4f738dd8",
       "revId": "a44293fa20f4f718077c37f5837f035bdd8ac7ae",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
       "unresolved": false
@@ -189,6 +369,24 @@
     },
     {
       "key": {
+        "uuid": "7adfdb23_fe1236c3",
+        "filename": "main.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1106179
+      },
+      "writtenOn": "2014-11-14T05:59:50Z",
+      "side": 1,
+      "message": "For this particular case, it\u0027s in splash.c when it\u0027s decided that the splash screen no longer needs to be shown.",
+      "parentUuid": "7adfdb23_de501a9f",
+      "revId": "a44293fa20f4f718077c37f5837f035bdd8ac7ae",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7adfdb23_7eb54673",
         "filename": "term.c",
         "patchSetId": 7
@@ -206,6 +404,24 @@
     },
     {
       "key": {
+        "uuid": "7adfdb23_3e1c9ed6",
+        "filename": "term.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 1106179
+      },
+      "writtenOn": "2014-11-14T05:59:50Z",
+      "side": 1,
+      "message": "video objects are independent of each other.",
+      "parentUuid": "7adfdb23_7eb54673",
+      "revId": "a44293fa20f4f718077c37f5837f035bdd8ac7ae",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9aa80f92_8f7c95a8",
         "filename": "term.h",
         "patchSetId": 7
@@ -217,6 +433,24 @@
       "writtenOn": "2014-11-14T04:49:40Z",
       "side": 1,
       "message": "this should all stay private to the terminal. I think once the other layers stop calling tsm and shl directly, this won\u0027t be needed",
+      "revId": "a44293fa20f4f718077c37f5837f035bdd8ac7ae",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "baa313b2_45f9a8e0",
+        "filename": "term.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1106179
+      },
+      "writtenOn": "2014-11-14T05:59:50Z",
+      "side": 1,
+      "message": "Same as comment in input.c related to term interface",
+      "parentUuid": "9aa80f92_8f7c95a8",
       "revId": "a44293fa20f4f718077c37f5837f035bdd8ac7ae",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
       "unresolved": false
