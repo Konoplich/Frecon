@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7a027b8e_295ee931",
+        "filename": "splash.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1001380
+      },
+      "writtenOn": "2014-11-17T23:26:41Z",
+      "side": 1,
+      "message": "sizeof bool seems to be implementatino-defined.\nCan we use char, which is defined to be 1, instead? (just for fwrite)",
+      "revId": "d6a51fd78639fbd85301f3c86cd2bc9daa6a8cb8",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    }
+  ]
+}
