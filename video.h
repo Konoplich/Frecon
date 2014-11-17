@@ -46,6 +46,8 @@ typedef struct {
 	uint32_t fb_id;
 
 	gamma_ramp_t gamma_ramp;
+	bool internal_panel;
+	char edid[128];
 } video_t;
 
 video_t* video_init(int32_t *width, int32_t *height, int32_t *pitch, int *scaling);
