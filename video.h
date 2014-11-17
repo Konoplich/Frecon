@@ -10,6 +10,7 @@
 #include <xf86drm.h>
 #include <xf86drmMode.h>
 #include "dbus.h"
+#include "edid_utils.h"
 
 #define kGammaSize         (256)
 
@@ -46,6 +47,8 @@ typedef struct {
 	uint32_t fb_id;
 
 	gamma_ramp_t gamma_ramp;
+	char internal_panel;
+	char edid[EDID_SIZE];
 } video_t;
 
 video_t* video_init(int32_t *width, int32_t *height, int32_t *pitch, int *scaling);

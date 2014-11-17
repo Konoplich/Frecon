@@ -58,6 +58,7 @@ static void splash_rgb(png_struct *png, png_row_info *row_info, png_byte *data);
 splash_t* splash_init(video_t *video)
 {
 	splash_t* splash;
+	FILE *cookie_fp;
 
 	splash = (splash_t*)calloc(1, sizeof(splash_t));
 	if (splash == NULL)
@@ -65,6 +66,13 @@ splash_t* splash_init(video_t *video)
 
 	splash->num_images = 0;
 	splash->video = video;
+
+	cookie_fp = fopen("/tmp/display_info.bin", "wb");
+	if (cookie_fp) {
+		fwrite(&video->internal_panel, sizeof(char), 1, cookie_fp);
+		fwrite(video->edid, EDID_SIZE, 1, cookie_fp);
+		fclose(cookie_fp);
+	}
 
 	return splash;
 }
