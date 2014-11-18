@@ -1,0 +1,8 @@
+Code-Review+2: Dominik Behr <dbehr@chromium.org>
+Commit-Queue+1: David Sodman <dsodman@chromium.org>
+Verified+1: David Sodman <dsodman@chromium.org>
+Submitted-by: chrome-internal-fetch <chrome-internal-fetch@google.com>
+Submitted-at: Tue, 18 Nov 2014 10:38:39 +0000
+Reviewed-on: https://chromium-review.googlesource.com/229411
+Project: chromiumos/platform/frecon
+Branch: refs/heads/master
