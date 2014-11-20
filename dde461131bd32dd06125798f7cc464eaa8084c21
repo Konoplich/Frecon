@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ba5eb3fb_c1f9982b",
+        "filename": "input.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1000313
+      },
+      "writtenOn": "2014-11-20T02:35:12Z",
+      "side": 1,
+      "message": "note: you can probably merge both switch() statements.",
+      "revId": "dde461131bd32dd06125798f7cc464eaa8084c21",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    }
+  ]
+}
