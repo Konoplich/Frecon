@@ -4,20 +4,21 @@
  * found in the LICENSE file.
  */
 
+#include <getopt.h>
 #include <libtsm.h>
+#include <memory.h>
+#include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
-#include <memory.h>
-#include <getopt.h>
-#include <stdbool.h>
 
+#include "dbus.h"
 #include "input.h"
+#include "main.h"
+#include "splash.h"
 #include "term.h"
 #include "video.h"
-#include "dbus.h"
 #include "util.h"
-#include "splash.h"
 
 #define  FLAG_CLEAR                        'c'
 #define  FLAG_DAEMON                       'd'
@@ -36,18 +37,21 @@ static struct option command_options[] = {
 	{ NULL, 0, NULL, 0 }
 };
 
-typedef struct {
-		bool    print_resolution;
-		bool    frame_interval;
-		bool    standalone;
-} commandflags_t;
+commandflags_t flags;
+
+static char *default_cmd_line[] = {
+	"/sbin/agetty",
+	"-",
+	"9600",
+	"xterm",
+	NULL
+};
 
 int main(int argc, char* argv[])
 {
 	int ret;
 	int c;
 	int i;
-	commandflags_t flags;
 	splash_t *splash;
 	video_t  *video;
 	dbus_t *dbus;
@@ -66,6 +70,9 @@ int main(int argc, char* argv[])
 		LOG(ERROR, "splash init failed");
 		return EXIT_FAILURE;
 	}
+
+	for (i = 0; i < MAX_TERMINALS; i++)
+		flags.exec[i] = default_cmd_line;
 
 	for (;;) {
 		c = getopt_long(argc, argv, "", command_options, NULL);
