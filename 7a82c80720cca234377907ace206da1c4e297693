@@ -25,6 +25,24 @@
     },
     {
       "key": {
+        "uuid": "ff5e5d2a_59460ff2",
+        "filename": "input.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1003290
+      },
+      "writtenOn": "2014-11-21T20:27:13Z",
+      "side": 1,
+      "message": "Not really.",
+      "parentUuid": "9f5d6134_9037bad0",
+      "revId": "7a82c80720cca234377907ace206da1c4e297693",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bf586542_4e13e7fe",
         "filename": "main.c",
         "patchSetId": 1
@@ -42,6 +60,24 @@
         "endLine": 52,
         "endChar": 14
       },
+      "revId": "7a82c80720cca234377907ace206da1c4e297693",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bf586542_71e56ab8",
+        "filename": "main.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1003290
+      },
+      "writtenOn": "2014-11-21T20:27:13Z",
+      "side": 1,
+      "message": "Use getopt for what?\nWe are using getopt to read command line options for frecon.\nThis code is to parse a sinngle string with spaces as separators into argv style command strings for execve to use, for the shell/agetty or whatever we want to run in frecon.\nI would gladly use off-the-shelf tool for this, but I haven\u0027t found amything.",
+      "parentUuid": "bf586542_4e13e7fe",
       "revId": "7a82c80720cca234377907ace206da1c4e297693",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
       "unresolved": false
