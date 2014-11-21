@@ -81,6 +81,24 @@
       "revId": "7a82c80720cca234377907ace206da1c4e297693",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3f1e355a_a8d02304",
+        "filename": "main.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000985
+      },
+      "writtenOn": "2014-11-21T22:02:01Z",
+      "side": 1,
+      "message": "I was thinking of using getopt also over the |optarg| variable, but that doesn\u0027t really work.\n\nI\u0027m a little bit scared of this code, parsing is always tricky and especially if done in C. Is there a reason why the console was written in C?\n\nAre there cases in which we will need to call something different than the default cmdline?\n\nThere\u0027s a tokenize() implementation inside Minijail, and we also use strtok_r to split strings. Even if we still need to do some parsing, maybe we can restrict the input strings to be easily parseable?",
+      "parentUuid": "bf586542_71e56ab8",
+      "revId": "7a82c80720cca234377907ace206da1c4e297693",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
     }
   ]
 }
