@@ -99,6 +99,24 @@
       "revId": "7a82c80720cca234377907ace206da1c4e297693",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1f9ed122_7e774d77",
+        "filename": "main.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1003290
+      },
+      "writtenOn": "2014-11-22T00:16:37Z",
+      "side": 1,
+      "message": "We will need to run something else (tail -f on a log file for instance), instead of agetty during ramdisk/recovery and in some factory scenarios.\nI have considered strtok, but it could be very useful to be able to escape spaces or use quoted strings in case we will need to pass a filename with spaces or some message as argument to whatever we are running as child of frecon.\n\nThe parser is in C, because the rest of the frecon is in C, which was a choice by Stephane. C generally produces smallest executables and since frecon always runs at boot time load times are important.\n\nThe --exec command line for frecon will come from our read-only scripts in init or on ramdisk. If somebody has ability to launch frecon with arbitrary command line, exploiting frecon will  not help gain any more privileges since they already can run programs.\n\nI tried to make my parser as straightforward as possible and I have tested it outside frecon first but any additional eyebals on it are welcome.",
+      "parentUuid": "3f1e355a_a8d02304",
+      "revId": "7a82c80720cca234377907ace206da1c4e297693",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
     }
   ]
 }
