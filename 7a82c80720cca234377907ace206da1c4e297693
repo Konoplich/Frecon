@@ -135,6 +135,57 @@
       "revId": "7a82c80720cca234377907ace206da1c4e297693",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bf0a2512_b5e997be",
+        "filename": "main.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1106179
+      },
+      "writtenOn": "2014-11-24T22:11:50Z",
+      "side": 1,
+      "message": "Please provide a comment describing what the parsing is looking for",
+      "revId": "7a82c80720cca234377907ace206da1c4e297693",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "df7199c8_dc3a21ea",
+        "filename": "main.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 1106179
+      },
+      "writtenOn": "2014-11-24T22:11:50Z",
+      "side": 1,
+      "message": "optarg doesn\u0027t change per iteration?  This is running the same command on each terminal?  Maybe I\u0027m missing something?",
+      "revId": "7a82c80720cca234377907ace206da1c4e297693",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "df7199c8_9c34a9fe",
+        "filename": "main.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 1106179
+      },
+      "writtenOn": "2014-11-24T22:11:50Z",
+      "side": 1,
+      "message": "execN is intended as N\u003dterminal number?  I\u0027d rather that the terminal number be passed as a command line arguement.   If we increase MAX_TERMINALS we shouldn\u0027t have to add EXEC5, EXEC6, etc",
+      "revId": "7a82c80720cca234377907ace206da1c4e297693",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
     }
   ]
 }
