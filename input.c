@@ -154,6 +154,7 @@ static int input_special_key(struct input_key_event *ev)
 	if (input.kbd_state.alt_state && input.kbd_state.control_state && ev->value) {
 		switch (ev->code) {
 			case KEY_F1:
+				video_release(input.terminals[input.current_terminal]->video);
 				input_ungrab();
 				input.terminals[input.current_terminal]->active = false;
 				(void)dbus_method_call0(input.dbus,
