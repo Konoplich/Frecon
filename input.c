@@ -56,6 +56,7 @@ struct {
 
 static int input_special_key(struct input_key_event *ev)
 {
+	terminal_t* terminal;
 	unsigned int i;
 
 	uint32_t ignore_keys[] = {
@@ -114,8 +115,10 @@ static int input_special_key(struct input_key_event *ev)
 	if (input.kbd_state.alt_state && input.kbd_state.control_state && ev->value) {
 		switch (ev->code) {
 			case KEY_F1:
+				terminal = input.terminals[input.current_terminal];
 				input_ungrab();
-				input.terminals[input.current_terminal]->active = false;
+				if (term_is_active(terminal))
+					terminal->active = false;
 				(void)dbus_method_call0(input.dbus,
 					kLibCrosServiceName,
 					kLibCrosServicePath,
@@ -140,8 +143,7 @@ static int input_special_key(struct input_key_event *ev)
 		}
 
 		if ((ev->code >= KEY_F2) && (ev->code <= KEY_F4)) {
-			terminal_t* terminal =
-				input.terminals[input.current_terminal];
+			terminal = input.terminals[input.current_terminal];
 			if (term_is_active(terminal))
 					terminal->active = false;
 			input.current_terminal = ev->code - KEY_F2;
