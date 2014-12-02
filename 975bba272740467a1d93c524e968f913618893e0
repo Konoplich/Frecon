@@ -22,6 +22,24 @@
       "revId": "975bba272740467a1d93c524e968f913618893e0",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5fa849a2_86095056",
+        "filename": "main.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1003290
+      },
+      "writtenOn": "2014-12-02T00:49:05Z",
+      "side": 1,
+      "message": "These will be passed as they are. execve doesn\u0027t care about them so they will be passed to the application it starts which is free to do anything it wants with these parameters. Which I think is OK, because eventually we may want to pass some more compound command lines to a shell running inside frecon (using frecon --exec \"bash -c \\\"something \u0026\u0026 whatever\\\"\" for instance).\n\nAnd parsing and stripping those would complicate the parser even more.",
+      "parentUuid": "7fab4d9e_7e0251ab",
+      "revId": "975bba272740467a1d93c524e968f913618893e0",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
     }
   ]
 }
