@@ -58,6 +58,24 @@
       "revId": "975bba272740467a1d93c524e968f913618893e0",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ffc01d6a_ee0347e7",
+        "filename": "main.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1003290
+      },
+      "writtenOn": "2014-12-02T18:39:51Z",
+      "side": 1,
+      "message": "I am not sure it is relevant in frecon, and but surely, I can add comments ;-)",
+      "parentUuid": "9fa641d2_025becf7",
+      "revId": "975bba272740467a1d93c524e968f913618893e0",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
     }
   ]
 }
