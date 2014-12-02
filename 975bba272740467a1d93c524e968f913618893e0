@@ -40,6 +40,24 @@
       "revId": "975bba272740467a1d93c524e968f913618893e0",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9fa641d2_025becf7",
+        "filename": "main.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000985
+      },
+      "writtenOn": "2014-12-02T00:58:50Z",
+      "side": 1,
+      "message": "Hmmm OK. I think we\u0027re gonna rely on the fact that the cmdline strings are baked into the binary, or come from the verified partition. Can you add a comment to this effect in the code, warning people that should always be the case?",
+      "parentUuid": "5fa849a2_86095056",
+      "revId": "975bba272740467a1d93c524e968f913618893e0",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
     }
   ]
 }
