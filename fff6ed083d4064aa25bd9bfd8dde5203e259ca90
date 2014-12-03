@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9ff481d2_3522b89c",
+        "filename": "main.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1106179
+      },
+      "writtenOn": "2014-12-03T01:42:11Z",
+      "side": 1,
+      "message": "The EXECN flags should be removed now",
+      "revId": "fff6ed083d4064aa25bd9bfd8dde5203e259ca90",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9ff481d2_d5da4c29",
+        "filename": "main.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1106179
+      },
+      "writtenOn": "2014-12-03T01:42:11Z",
+      "side": 1,
+      "message": "I don\u0027t see this used outside of main.   If that is the case it shouldn\u0027t be global.   And if it needs to be global, it should be renamed to something that wouldn\u0027t be easily hidden by a lower scope variable",
+      "revId": "fff6ed083d4064aa25bd9bfd8dde5203e259ca90",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    }
+  ]
+}
