@@ -468,7 +468,9 @@ struct input_key_event *input_get_event(fd_set * read_set,
 				    malloc(sizeof (*event));
 				event->code = ev.code;
 				event->value = ev.value;
-				report_user_activity(USER_ACTIVITY_OTHER);
+				// Only report user activity on key-down and key-repeat
+				if (ev.value)
+					report_user_activity(USER_ACTIVITY_OTHER);
 				return event;
 			}
 		}
