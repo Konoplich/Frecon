@@ -468,7 +468,6 @@ struct input_key_event *input_get_event(fd_set * read_set,
 				    malloc(sizeof (*event));
 				event->code = ev.code;
 				event->value = ev.value;
-				report_user_activity(USER_ACTIVITY_OTHER);
 				return event;
 			}
 		}
@@ -518,6 +517,9 @@ int input_run(bool standalone)
 			if (!input_special_key(event) && event->value) {
 				uint32_t keysym, unicode;
 				if (term_is_active(terminal)) {
+					// Only report user activity on key-down and key-repeat
+					if (event->value)
+						report_user_activity(USER_ACTIVITY_OTHER);
 					input_get_keysym_and_unicode(
 						event, &keysym, &unicode);
 					term_key_event(terminal,
