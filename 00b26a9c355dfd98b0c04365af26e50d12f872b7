@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "df219932_ff219714",
+        "filename": "input.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 522,
+      "author": {
+        "id": 1000313
+      },
+      "writtenOn": "2014-12-04T05:13:12Z",
+      "side": 1,
+      "message": "this can be unconditional now right?",
+      "revId": "00b26a9c355dfd98b0c04365af26e50d12f872b7",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    }
+  ]
+}
