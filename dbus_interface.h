@@ -18,6 +18,8 @@ static const char kPowerManagerServiceName[] = "org.chromium.PowerManager";
 static const char kDecreaseScreenBrightnessMethod[] = "DecreaseScreenBrightness";
 static const char kIncreaseScreenBrightnessMethod[] = "IncreaseScreenBrightness";
 static const char kHandleUserActivityMethod[] = "HandleUserActivity";
+static const char kDecreaseKeyboardBrightnessMethod[] = "DecreaseKeyboardBrightness";
+static const char kIncreaseKeyboardBrightnessMethod[] = "IncreaseKeyboardBrightness";
 /* Values */
 static const int kBrightnessTransitionGradual = 1;
 static const int kBrightnessTransitionInstant = 2;

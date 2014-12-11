@@ -140,17 +140,6 @@ static int input_special_key(struct input_key_event *ev)
 		}
 	}
 
-	if (input.kbd_state.search_state && ev->value) {
-		switch (ev->code) {
-			case KEY_UP:
-				term_page_up(input.terminals[input.current_terminal]);
-				return 1;
-			case KEY_DOWN:
-				term_page_down(input.terminals[input.current_terminal]);
-				return 1;
-		}
-	}
-
 	if (input.kbd_state.alt_state && input.kbd_state.control_state && ev->value) {
 		switch (ev->code) {
 			case KEY_F1:
@@ -204,29 +193,73 @@ static int input_special_key(struct input_key_event *ev)
 		}
 
 		return 1;
-
 	}
 
-	if ((!input.kbd_state.search_state) && ev->value &&
-		(ev->code >= KEY_F1) && (ev->code <= KEY_F10)) {
+	/*
+	 * If the terminal is not active, then don't bother processing
+	 * any other special keys
+	 */
+	if (!term_is_active(input.terminals[input.current_terminal]))
+		return 0;
+
+	if (input.kbd_state.search_state && ev->value) {
+		switch (ev->code) {
+			case KEY_UP:
+				term_page_up(input.terminals[input.current_terminal]);
+				return 1;
+			case KEY_DOWN:
+				term_page_down(input.terminals[input.current_terminal]);
+				return 1;
+		}
+	}
+
+	if (ev->value) {
 		switch (ev->code) {
 			case KEY_F1:
 			case KEY_F2:
 			case KEY_F3:
 			case KEY_F4:
 			case KEY_F5:
-				break;
+				if (input.kbd_state.search_state)
+					return 0;
+				return 1;
 			case KEY_F6:
+				if (input.kbd_state.alt_state)
+					(void)dbus_method_call0(input.dbus,
+						kPowerManagerServiceName,
+						kPowerManagerServicePath,
+						kPowerManagerInterface,
+						kDecreaseKeyboardBrightnessMethod);
+				else if ((input.kbd_state.control_state) ||
+						(input.kbd_state.search_state))
+					return 0;
+				else
+					report_user_activity(USER_ACTIVITY_BRIGHTNESS_DOWN_KEY_PRESS);
+				return 1;
 			case KEY_F7:
-				report_user_activity(USER_ACTIVITY_BRIGHTNESS_DOWN_KEY_PRESS -
-						(ev->code - KEY_F6));
-				break;
+				if (input.kbd_state.alt_state)
+					(void)dbus_method_call0(input.dbus,
+						kPowerManagerServiceName,
+						kPowerManagerServicePath,
+						kPowerManagerInterface,
+						kIncreaseKeyboardBrightnessMethod);
+				else if (input.kbd_state.control_state)
+					// no action
+					;
+				else if (input.kbd_state.search_state)
+					return 0;
+				else
+					report_user_activity(USER_ACTIVITY_BRIGHTNESS_UP_KEY_PRESS);
+				return 1;
 			case KEY_F8:
 			case KEY_F9:
 			case KEY_F10:
+				if (input.kbd_state.search_state)
+					return 0;
+				return 1;
+			default:
 				break;
 		}
-		return 1;
 	}
 
 	return 0;
@@ -515,11 +548,13 @@ int input_run(bool standalone)
 		struct input_key_event *event;
 		event = input_get_event(&read_set, &exception_set);
 		if (event) {
+			if (term_is_active(terminal)) {
+				// Only report user activity when the terminal is active
+				report_user_activity(USER_ACTIVITY_OTHER);
+			}
 			if (!input_special_key(event) && event->value) {
 				uint32_t keysym, unicode;
 				if (term_is_active(terminal)) {
-					// Only report user activity when the terminal is active
-					report_user_activity(USER_ACTIVITY_OTHER);
 					input_get_keysym_and_unicode(
 						event, &keysym, &unicode);
 					term_key_event(terminal,
