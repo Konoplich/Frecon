@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "e40ed2b4_ad22e9c6",
+        "filename": "input.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 1106179
+      },
+      "writtenOn": "2014-12-11T21:50:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "44d6be40_963e12dd",
+      "revId": "8f1f17100c11d9afef519f4857cd22fb8854815f",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c4eaaeee_a54436e7",
         "filename": "input.c",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2014-12-11T20:27:50Z",
       "side": 1,
       "message": "I think we should report user activity when you press control or search. So these two if statements could be removed.",
+      "revId": "8f1f17100c11d9afef519f4857cd22fb8854815f",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c4138eda_a9f1bda7",
+        "filename": "input.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 1106179
+      },
+      "writtenOn": "2014-12-11T21:50:06Z",
+      "side": 1,
+      "message": "The place where user activity is reported in this case is in the caller.   This is because we don\u0027t want to report user activity on ctrl-f6/ctrl-f7 but not other combinations.   As it turns out, the ctrl-f6/ctrl-f7 wouldn\u0027t report user activity the way it\u0027s written, so, I made a change to the caller to make that happen.",
+      "parentUuid": "c4eaaeee_a54436e7",
       "revId": "8f1f17100c11d9afef519f4857cd22fb8854815f",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
       "unresolved": false
