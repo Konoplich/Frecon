@@ -83,6 +83,7 @@ static void report_user_activity(int activity_type)
 static int input_special_key(struct input_key_event *ev)
 {
 	unsigned int i;
+	terminal_t *terminal;
 
 	uint32_t ignore_keys[] = {
 		BTN_TOUCH, // touchpad events
@@ -154,14 +155,17 @@ static int input_special_key(struct input_key_event *ev)
 	if (input.kbd_state.alt_state && input.kbd_state.control_state && ev->value) {
 		switch (ev->code) {
 			case KEY_F1:
-				input_ungrab();
-				input.terminals[input.current_terminal]->active = false;
-				video_release(input.terminals[input.current_terminal]->video);
-				(void)dbus_method_call0(input.dbus,
-					kLibCrosServiceName,
-					kLibCrosServicePath,
-					kLibCrosServiceInterface,
-					kTakeDisplayOwnership);
+				terminal = input.terminals[input.current_terminal];
+				if (term_is_active(terminal)) {
+					input_ungrab();
+					terminal->active = false;
+					video_release(input.terminals[input.current_terminal]->video);
+					(void)dbus_method_call0(input.dbus,
+						kLibCrosServiceName,
+						kLibCrosServicePath,
+						kLibCrosServiceInterface,
+						kTakeDisplayOwnership);
+				}
 				break;
 			case KEY_F2:
 			case KEY_F3:
@@ -181,8 +185,7 @@ static int input_special_key(struct input_key_event *ev)
 		}
 
 		if ((ev->code >= KEY_F2) && (ev->code < KEY_F2 + MAX_TERMINALS)) {
-			terminal_t* terminal =
-				input.terminals[input.current_terminal];
+			terminal = input.terminals[input.current_terminal];
 			if (term_is_active(terminal))
 					terminal->active = false;
 			input.current_terminal = ev->code - KEY_F2;
