@@ -33,6 +33,24 @@
       "revId": "5dd4f9b381d0a282046526807fb5aca788e6cbaf",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "64a1020c_0eae4ba2",
+        "filename": "input.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 1106179
+      },
+      "writtenOn": "2014-12-12T23:00:42Z",
+      "side": 1,
+      "message": "hmm. Something seems wrong with Gerrit.  This is not the code I posted (well, this is not the most recent code I posted).",
+      "parentUuid": "2458eae4_c4e15ea7",
+      "revId": "5dd4f9b381d0a282046526807fb5aca788e6cbaf",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
     }
   ]
 }
