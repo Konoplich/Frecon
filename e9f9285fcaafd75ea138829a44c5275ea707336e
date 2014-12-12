@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "84699676_47832e2f",
+        "filename": "input.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1000313
+      },
+      "writtenOn": "2014-12-12T19:49:18Z",
+      "side": 1,
+      "message": "this block should be merged with the above switch statement, it is the same but not quite (the switch enumerates F2-\u003eF10 while this uses MAX_TERMINALS which is potentially different).",
+      "revId": "e9f9285fcaafd75ea138829a44c5275ea707336e",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    }
+  ]
+}
