@@ -16,6 +16,24 @@
       "revId": "e8e55f735c3d240f7d3787c675152a9dbda9f323",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c4b2ae5b_57a8e413",
+        "filename": "main.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1003290
+      },
+      "writtenOn": "2014-12-12T22:15:37Z",
+      "side": 1,
+      "message": "We need to be able to specify different command line for each terminal screen, so treating everything after --exec as the command line will not work because this will only allow for single command line.",
+      "parentUuid": "840d16be_cd2e3d7e",
+      "revId": "e8e55f735c3d240f7d3787c675152a9dbda9f323",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
     }
   ]
 }
