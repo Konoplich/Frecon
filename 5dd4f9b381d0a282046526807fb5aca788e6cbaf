@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2458eae4_a42ea22a",
+        "filename": "input.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 1000313
+      },
+      "writtenOn": "2014-12-12T20:00:56Z",
+      "side": 1,
+      "message": "For consistency, why not rewrite this with the modifiers first, for example:\n\nif (alt_state \u0026\u0026 ev-\u003evalue)\n  switch(ev-\u003ecode)\n     case F6:\n      [do keyboard backlight]\n\nif (!alt_state \u0026\u0026 ev-\u003evalue)\n  switch(ev-\u003ecode)\n     case F6:\n      [do backlight]",
+      "revId": "5dd4f9b381d0a282046526807fb5aca788e6cbaf",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2458eae4_c4e15ea7",
+        "filename": "input.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 1000313
+      },
+      "writtenOn": "2014-12-12T20:00:56Z",
+      "side": 1,
+      "message": "this isn\u0027t consistent -- the first if() has \"// no action\" and then eventually returns 0, the second return 0 directly",
+      "revId": "5dd4f9b381d0a282046526807fb5aca788e6cbaf",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    }
+  ]
+}
