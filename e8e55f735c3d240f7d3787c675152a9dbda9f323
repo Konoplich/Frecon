@@ -52,6 +52,24 @@
       "revId": "e8e55f735c3d240f7d3787c675152a9dbda9f323",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "64a1020c_2eb18704",
+        "filename": "main.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2014-12-12T22:57:46Z",
+      "side": 1,
+      "message": "maybe it should come from a config file instead of command line?",
+      "parentUuid": "04a846f3_4b896583",
+      "revId": "e8e55f735c3d240f7d3787c675152a9dbda9f323",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
     }
   ]
 }
