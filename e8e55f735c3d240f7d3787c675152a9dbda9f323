@@ -70,6 +70,24 @@
       "revId": "e8e55f735c3d240f7d3787c675152a9dbda9f323",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c4b2ae5b_05ec621b",
+        "filename": "main.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1003290
+      },
+      "writtenOn": "2014-12-12T23:12:40Z",
+      "side": 1,
+      "message": "We will need it to run two different things in console during recovery. And it already comes from \"config\" files, recovery scripts or boot scripts.\nWhy are discussing it again? It was already approved and reverted because login as root did not work.",
+      "parentUuid": "64a1020c_2eb18704",
+      "revId": "e8e55f735c3d240f7d3787c675152a9dbda9f323",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
     }
   ]
 }
