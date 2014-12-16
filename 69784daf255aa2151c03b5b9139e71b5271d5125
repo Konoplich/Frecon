@@ -22,6 +22,24 @@
       "revId": "69784daf255aa2151c03b5b9139e71b5271d5125",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "41c2301f_4df2f946",
+        "filename": "main.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000313
+      },
+      "writtenOn": "2014-12-16T20:02:36Z",
+      "side": 1,
+      "message": "I don\u0027t think the coding style says that we should prefix globals. That said, it should probably be renamed to something more meaningful, like command_flags.",
+      "parentUuid": "e1e7a492_28940fd1",
+      "revId": "69784daf255aa2151c03b5b9139e71b5271d5125",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
     }
   ]
 }
