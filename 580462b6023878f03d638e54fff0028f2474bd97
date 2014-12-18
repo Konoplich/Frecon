@@ -1,0 +1,9 @@
+Commit-Queue+1: Dominik Behr <dbehr@chromium.org>
+Trybot-Ready+1: Dominik Behr <dbehr@chromium.org>
+Verified+1: Dominik Behr <dbehr@chromium.org>
+Code-Review+2: Ilja Friedel <ihf@chromium.org>
+Submitted-by: chrome-internal-fetch <chrome-internal-fetch@google.com>
+Submitted-at: Thu, 18 Dec 2014 02:04:08 +0000
+Reviewed-on: https://chromium-review.googlesource.com/235920
+Project: chromiumos/platform/frecon
+Branch: refs/heads/master
