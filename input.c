@@ -534,6 +534,11 @@ int input_run(bool standalone)
 
 		if (term_is_valid(terminal)) {
 			if (term_is_child_done(terminal)) {
+				if (terminal->video) {
+					// necessary in case chrome is playing full screen
+					// video or graphics
+					video_setmode(terminal->video);
+				}
 				term_close(terminal);
 				input.terminals[input.current_terminal] = term_init(input.current_terminal);
 				terminal = input.terminals[input.current_terminal];
