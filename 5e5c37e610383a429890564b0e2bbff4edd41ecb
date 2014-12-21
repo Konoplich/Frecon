@@ -1,0 +1,9 @@
+Code-Review+2: Stéphane Marchesin <marcheu@chromium.org>
+Commit-Queue+1: David Sodman <dsodman@chromium.org>
+Verified+1: David Sodman <dsodman@chromium.org>
+Trybot-Ready+1: David Sodman <dsodman@chromium.org>
+Submitted-by: chrome-internal-fetch <chrome-internal-fetch@google.com>
+Submitted-at: Sun, 21 Dec 2014 00:06:52 +0000
+Reviewed-on: https://chromium-review.googlesource.com/236922
+Project: chromiumos/platform/frecon
+Branch: refs/heads/master
