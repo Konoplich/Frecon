@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014 The Chromium OS Authors. All rights reserved.
+ * Copyright 2014 The Chromium OS Authors. All rights reserved.
  * Use of this source code is governed by a BSD-style license that can be
  * found in the LICENSE file.
  */
@@ -13,8 +13,8 @@
 #include <unistd.h>
 
 #include "dbus.h"
+#include "fsocket.h"
 #include "input.h"
-#include "main.h"
 #include "splash.h"
 #include "term.h"
 #include "video.h"
@@ -26,6 +26,8 @@
 #define  FLAG_FRAME_INTERVAL               'f'
 #define  FLAG_GAMMA                        'g'
 #define  FLAG_PRINT_RESOLUTION             'p'
+#define  FLAG_PORT                         'P'
+#define  FLAG_SOCKET                       's'
 
 static struct option command_options[] = {
 	{ "clear", required_argument, NULL, FLAG_CLEAR },
@@ -34,18 +36,18 @@ static struct option command_options[] = {
 	{ "frame-interval", required_argument, NULL, FLAG_FRAME_INTERVAL },
 	{ "gamma", required_argument, NULL, FLAG_GAMMA },
 	{ "print-resolution", no_argument, NULL, FLAG_PRINT_RESOLUTION },
+	{ "port", required_argument, NULL, FLAG_PORT },
+	{ "use-sockets", no_argument, NULL, FLAG_SOCKET },
 	{ NULL, 0, NULL, 0 }
 };
 
-commandflags_t command_flags;
-
-static char *default_cmd_line[] = {
-	"/sbin/agetty",
-	"-",
-	"9600",
-	"xterm",
-	NULL
-};
+typedef struct {
+		bool    print_resolution;
+		bool    frame_interval;
+		bool    standalone;
+		bool    use_sockets;
+		bool    devmode;
+} commandflags_t;
 
 int main(int argc, char* argv[])
 {
@@ -55,6 +57,11 @@ int main(int argc, char* argv[])
 	splash_t *splash;
 	video_t  *video;
 	dbus_t *dbus;
+	frecon_socket_t *fsocket;
+	commandflags_t command_flags;
+	unsigned short tcp_port;
+
+	detect_initramfs_instance(DEFAULT_TCP_PORT);
 
 	memset(&command_flags, 0, sizeof(command_flags));
 	command_flags.standalone = true;
@@ -71,8 +78,7 @@ int main(int argc, char* argv[])
 		return EXIT_FAILURE;
 	}
 
-	for (i = 0; i < MAX_TERMINALS; i++)
-		command_flags.exec[i] = default_cmd_line;
+	tcp_port = DEFAULT_TCP_PORT;
 
 	for (;;) {
 		c = getopt_long(argc, argv, "", command_options, NULL);
@@ -91,11 +97,16 @@ int main(int argc, char* argv[])
 				break;
 
 			case FLAG_DEV_MODE:
+				command_flags.devmode = true;
 				splash_set_devmode(splash);
 				break;
 
 			case FLAG_PRINT_RESOLUTION:
 				command_flags.print_resolution = true;
+				break;
+
+			case FLAG_PORT:
+				tcp_port = strtoul(optarg, NULL, 0);
 				break;
 
 			case FLAG_FRAME_INTERVAL:
@@ -105,8 +116,20 @@ int main(int argc, char* argv[])
 				}
 				command_flags.frame_interval = true;
 				break;
+
+			case FLAG_SOCKET:
+				command_flags.use_sockets = true;
+				break;
 		}
 	}
+
+
+	/*
+	if (command_flags.devmode && command_flags.use_sockets) {
+		LOG(ERROR, "--use-sockets passed in devmode.  ignoring.");
+		command_flags.use_sockets = false;
+	}
+	*/
 
 	/*
 	 * The DBUS service launches later than the boot-splash service, and
@@ -135,11 +158,16 @@ int main(int argc, char* argv[])
 	 * we didn't supply the frame-interval parameter, then go ahead
 	 * and create it now
 	 */
-	if (dbus == NULL) {
-		dbus = dbus_init();
+	if (command_flags.use_sockets) {
+		fsocket = socket_init(tcp_port);
+		input_set_socket(fsocket);
+	} else {
+		if (dbus == NULL) {
+			dbus = dbus_init();
+		}
+		input_set_dbus(dbus);
 	}
 
-	input_set_dbus(dbus);
 	ret = input_run(command_flags.standalone);
 
 	input_close();
