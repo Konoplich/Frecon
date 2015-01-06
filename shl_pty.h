@@ -28,6 +28,7 @@ typedef void (*shl_pty_input_cb) (struct shl_pty *pty, char *u8,
 
 pid_t shl_pty_open(struct shl_pty **out, shl_pty_input_cb cb, void *data,
 		   unsigned short term_width, unsigned short term_height);
+const char* shl_pty_slavename(struct shl_pty* pty);
 void shl_pty_ref(struct shl_pty *pty);
 void shl_pty_unref(struct shl_pty *pty);
 void shl_pty_close(struct shl_pty *pty);
