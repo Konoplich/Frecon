@@ -271,17 +271,11 @@ video_t* video_init()
 	uint32_t selected_mode;
 	video_t *new_video = (video_t*)calloc(1, sizeof(video_t));
 
-	new_video->fd = -1;
-
 	new_video->fd = kms_open();
 
 	if (new_video->fd < 0) {
 		LOG(ERROR, "Unable to open a KMS module");
 		return NULL;
-	}
-
-	if (drmSetMaster(new_video->fd) != 0) {
-		LOG(ERROR, "video_init unable to get master");
 	}
 
 	new_video->drm_resources = drmModeGetResources(new_video->fd);
@@ -364,10 +358,6 @@ video_t* video_init()
 	new_video->buffer_properties.pitch = pitch;
 	new_video->buffer_properties.scaling = scaling;
 
-	if (drmDropMaster(new_video->fd) != 0) {
-		LOG(WARNING, "video_init unable to drop master");
-	}
-
 	return new_video;
 
 fail:
@@ -380,10 +370,6 @@ fail:
 	if (new_video->crtc)
 		drmModeFreeCrtc(new_video->crtc);
 
-	if (drmDropMaster(new_video->fd) != 0) {
-		LOG(WARNING, "video_init unable to drop master");
-	}
-
 	if (new_video->fd >= 0)
 		drmClose(new_video->fd);
 
@@ -395,7 +381,10 @@ int32_t video_setmode(video_t* video)
 {
 	int32_t ret;
 
-	drmSetMaster(video->fd);
+	ret = drmSetMaster(video->fd);
+	if (ret)
+		LOG(ERROR, "drmSetMaster failed: %m");
+
 	ret = drmModeSetCrtc(video->fd, video->crtc->crtc_id,
 					 video->fb_id,
 					 0, 0,  // x,y
