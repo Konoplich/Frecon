@@ -17,9 +17,9 @@
 #include "input.h"
 #include "dbus_interface.h"
 #include "dbus.h"
+#include "fsocket.h"
 #include "keysym.h"
 #include "util.h"
-#include "main.h"
 
 struct input_dev {
 	int fd;
@@ -41,6 +41,7 @@ struct {
 	struct input_dev *devs;
 	struct keyboard_state kbd_state;
 	dbus_t *dbus;
+	frecon_socket_t *socket;
 	uint32_t  current_terminal;
 	terminal_t *terminals[MAX_TERMINALS];
 } input = {
@@ -55,6 +56,9 @@ struct {
 
 static void report_user_activity(int activity_type)
 {
+	if (!input.dbus)
+		return;
+
 	dbus_method_call1(input.dbus, kPowerManagerServiceName,
 			kPowerManagerServicePath,
 			kPowerManagerInterface,
@@ -202,9 +206,10 @@ static int input_special_key(struct input_key_event *ev)
 			terminal = input.terminals[input.current_terminal];
 			if (terminal == NULL) {
 				input.terminals[input.current_terminal] =
-					term_init(input.current_terminal);
+					term_init(true);
 				terminal =
 					input.terminals[input.current_terminal];
+				term_activate(terminal);
 				if (!term_is_valid(terminal)) {
 					LOG(ERROR, "Term init failed");
 					return 1;
@@ -397,6 +402,11 @@ void input_set_dbus(dbus_t* dbus)
 	input.dbus = dbus;
 }
 
+void input_set_socket(frecon_socket_t* socket)
+{
+	input.socket = socket;
+}
+
 int input_setfds(fd_set * read_set, fd_set * exception_set)
 {
 	unsigned int u;
@@ -472,33 +482,60 @@ int input_run(bool standalone)
 {
 	fd_set read_set, exception_set;
 	terminal_t* terminal;
+	int sstat;
 
 	if (standalone) {
-		(void)dbus_method_call0(input.dbus,
-			kLibCrosServiceName,
-			kLibCrosServicePath,
-			kLibCrosServiceInterface,
-			kReleaseDisplayOwnership);
+		if (input.dbus) {
+			(void)dbus_method_call0(input.dbus,
+				kLibCrosServiceName,
+				kLibCrosServicePath,
+				kLibCrosServiceInterface,
+				kReleaseDisplayOwnership);
+		}
 
-		input.terminals[input.current_terminal] = term_init(input.current_terminal);
+		input.terminals[input.current_terminal] = term_init(true);
 		terminal = input.terminals[input.current_terminal];
+		term_activate(terminal);
 		if (term_is_valid(terminal)) {
 			input_grab();
 		}
 	}
 
 	while (1) {
+		int maxfd;
 		terminal = input.terminals[input.current_terminal];
 
 		FD_ZERO(&read_set);
 		FD_ZERO(&exception_set);
-		term_add_fd(terminal, &read_set, &exception_set);
 
-		int maxfd = input_setfds(&read_set, &exception_set);
+		if (input.dbus) {
+			dbus_add_fd(input.dbus, &read_set, &exception_set);
+			maxfd = dbus_get_fd(input.dbus) + 1;
+		} else {
+			socket_add_fd(input.socket, &read_set, &exception_set);
+			maxfd = socket_get_fd(input.socket) + 1;
+		}
 
-		maxfd = MAX(maxfd, term_fd(terminal)) + 1;
+		maxfd = MAX(maxfd, input_setfds(&read_set, &exception_set)) + 1;
 
-		select(maxfd, &read_set, NULL, &exception_set, NULL);
+		for (int i = 0; i < MAX_TERMINALS; i++) {
+			if (term_is_valid(input.terminals[i])) {
+				term_add_fd(input.terminals[i], &read_set, &exception_set);
+				maxfd = MAX(maxfd, term_fd(input.terminals[i])) + 1;
+				term_dispatch_io(input.terminals[i], &read_set);
+			}
+		}
+
+		sstat = select(maxfd, &read_set, NULL, &exception_set, NULL);
+		if (sstat == 0)
+			continue;
+
+		if (input.dbus) {
+			dbus_dispatch_io(input.dbus);
+		} else {
+			socket_dispatch_io(input.socket, &read_set, &exception_set);
+		}
+
 
 		if (term_exception(terminal, &exception_set))
 			return -1;
@@ -523,7 +560,12 @@ int input_run(bool standalone)
 			input_put_event(event);
 		}
 
-		term_dispatch_io(terminal, &read_set);
+		for (int i = 0; i < MAX_TERMINALS; i++) {
+			if (term_is_valid(input.terminals[i])) {
+				term_add_fd(input.terminals[i], &read_set, &exception_set);
+				term_dispatch_io(input.terminals[i], &read_set);
+			}
+		}
 
 		if (term_is_valid(terminal)) {
 			if (term_is_child_done(terminal)) {
@@ -535,11 +577,12 @@ int input_run(bool standalone)
 					video_setmode(terminal->video);
 				}
 				term_close(terminal);
-				input.terminals[input.current_terminal] = term_init(input.current_terminal);
+				input.terminals[input.current_terminal] = term_init(true);
 				terminal = input.terminals[input.current_terminal];
 				if (!term_is_valid(terminal)) {
 					return -1;
 				}
+				term_activate(terminal);
 			}
 		}
 	}
@@ -567,3 +610,23 @@ void input_ungrab()
 		(void)ioctl(input.devs[i].fd, EVIOCGRAB, (void*) 0);
 	}
 }
+
+terminal_t* input_create_term(int vt)
+{
+	terminal_t* terminal;
+
+	terminal = input.terminals[vt-1];
+	if (term_is_active(terminal))
+		return terminal;
+
+	if (terminal == NULL) {
+		input.terminals[vt-1] = term_init(false);
+		terminal = input.terminals[vt-1];
+		if (!term_is_valid(terminal)) {
+			LOG(ERROR, "create_term: Term init failed");
+		}
+	}
+
+	return terminal;
+}
+
