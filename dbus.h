@@ -1,11 +1,11 @@
 /*
- * Copyright (c) 2014 The Chromium OS Authors. All rights reserved.
+ * Copyright 2014 The Chromium OS Authors. All rights reserved.
  * Use of this source code is governed by a BSD-style license that can be
  * found in the LICENSE file.
  */
 
-#ifndef DBUS_H_
-#define DBUS_H_
+#ifndef FRECON_DBUS_H
+#define FRECON_DBUS_H
 
 #include <dbus/dbus.h>
 #include <stdbool.h>
@@ -14,6 +14,8 @@
 
 #define DBUS_STATUS_NOERROR     (0)
 #define DBUS_STATUS_TIMEOUT     (-1)
+
+#define DBUS_FRECON_INTERFACE   "org.chromium.frecon"
 
 typedef struct _dbus_t dbus_t;
 
@@ -34,9 +36,10 @@ bool dbus_signal_match_handler(
     const char* rule,
     dbus_message_handler_t handler,
     void *user_data);
-int dbus_wait_for_messages(dbus_t *dbus, int64_t timeout_ms);
-void dbus_stop_wait(dbus_t* dbus);
 void dbus_destroy(dbus_t* dbus);
+void dbus_add_fd(dbus_t* dbus, fd_set* read_set, fd_set* exception_set);
+int dbus_get_fd(dbus_t* dbus);
+void dbus_dispatch_io(dbus_t* dbus);
 
 
-#endif // DBUS_H_
+#endif // FRECON_DBUS_H
