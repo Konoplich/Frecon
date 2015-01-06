@@ -10,6 +10,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdarg.h>
+#include <stdint.h>
 #include <stdbool.h>
 #include <time.h>
 
@@ -30,10 +31,23 @@ inline int64_t get_monotonic_time_ms() {
 void LOG(int severity, const char* fmt, ...);
 void sync_lock(bool acquire);
 void daemonize();
+void parse_location(char* loc_str, int *x, int *y);
+void parse_filespec(char* filespec, char *filename,
+		int32_t *offset_x, int32_t *offset_y, uint32_t *duration,
+		uint32_t default_duration, int32_t default_x, int32_t default_y);
+void parse_image_option(char* optionstr, char** name, char** val);
 
 
 #define ERROR                 (1)
 #define WARNING               (2)
 #define INFO                  (4)
+
+#ifndef max
+#define max(a,b)   ((a) > (b) ? (a) : (b))
+#endif
+
+#ifndef min
+#define min(a,b)   ((a) < (b) ? (a) : (b))
+#endif
 
 #endif
