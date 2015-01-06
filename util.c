@@ -10,7 +10,11 @@
 #include <string.h>
 #include <sys/file.h>
 #include <sys/stat.h>
+#include <fcntl.h>
 #include <pwd.h>
+#include <sys/stat.h>
+#include <string.h>
+#include <arpa/inet.h>
 
 #include "util.h"
 
@@ -83,3 +87,58 @@ void LOG(int severity, const char* fmt, ...)
 	va_end(arg_list);
 	fprintf(stderr, "\n");
 }
+
+void parse_location(char* loc_str, int *x, int *y)
+{
+	int count = 0;
+	char* savedptr;
+	char* token;
+	char* str;
+	int *results[] = {x, y};
+
+	for (token = str = loc_str; token != NULL; str = NULL) {
+		if (count > 1)
+			break;
+
+		token = strtok_r(str, ",", &savedptr);
+		if (token) {
+			*(results[count++]) = strtol(token, NULL, 0);
+		}
+	}
+}
+
+void parse_filespec(char* filespec, char *filename,
+		int32_t *offset_x, int32_t *offset_y, uint32_t *duration,
+		uint32_t default_duration, int32_t default_x, int32_t default_y)
+{
+	char* saved_ptr;
+	char* token;
+
+	// defaults
+	*offset_x = default_x;
+	*offset_y = default_y;
+	*duration = default_duration;
+
+	token = filespec;
+	token = strtok_r(token, ":", &saved_ptr);
+	if (token)
+		strcpy(filename, token);
+
+	LOG(ERROR, "image file: %s", filename);
+
+	token = strtok_r(NULL, ":", &saved_ptr);
+	if (token) {
+		*duration = strtoul(token, NULL, 0);
+		token = strtok_r(NULL, ",", &saved_ptr);
+		if (token) {
+			token = strtok_r(token, ",", &saved_ptr);
+			if (token) {
+				*offset_x = strtol(token, NULL, 0);
+				token = strtok_r(token, ",", &saved_ptr);
+				if (token)
+					*offset_y = strtol(token, NULL, 0);
+			}
+		}
+	}
+}
+
