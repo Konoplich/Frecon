@@ -30,6 +30,7 @@ inline int64_t get_monotonic_time_ms() {
 void LOG(int severity, const char* fmt, ...);
 void sync_lock(bool acquire);
 void daemonize();
+void parse_location(char* loc_str, int *x, int *y);
 
 
 #define ERROR                 (1)

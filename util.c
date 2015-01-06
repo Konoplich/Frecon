@@ -10,7 +10,11 @@
 #include <string.h>
 #include <sys/file.h>
 #include <sys/stat.h>
+#include <fcntl.h>
 #include <pwd.h>
+#include <sys/stat.h>
+#include <string.h>
+#include <arpa/inet.h>
 
 #include "util.h"
 
@@ -82,4 +86,23 @@ void LOG(int severity, const char* fmt, ...)
 	vfprintf(stderr, fmt, arg_list);
 	va_end(arg_list);
 	fprintf(stderr, "\n");
+}
+
+void parse_location(char* loc_str, int *x, int *y)
+{
+	int count = 0;
+	char* savedptr;
+	char* token;
+	char* str;
+	int *results[] = {x, y};
+
+	for (token = str = loc_str; token != NULL; str = NULL) {
+		if (count > 1)
+			break;
+
+		token = strtok_r(str, ",", &savedptr);
+		if (token) {
+			*(results[count++]) = strtol(token, NULL, 0);
+		}
+	}
 }

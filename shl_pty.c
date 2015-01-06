@@ -255,6 +255,7 @@ static void ring_pop(struct ring *r, size_t len)
 struct shl_pty {
 	unsigned long ref;
 	int fd;
+	char slavename[50];
 	pid_t child;
 	char in_buf[SHL_PTY_BUFSIZE];
 	struct ring out_buf;
@@ -448,6 +449,7 @@ shl_pty_open(struct shl_pty ** out, shl_pty_input_cb cb, void *data,
 	pty->child = pid;
 	pty->cb = cb;
 	pty->data = data;
+	strcpy(pty->slavename, ptsname(fd));
 
 	/* wait for child setup */
 	d = pty_recv(comm[0]);
@@ -461,6 +463,12 @@ shl_pty_open(struct shl_pty ** out, shl_pty_input_cb cb, void *data,
 	close(comm[0]);
 	*out = pty;
 	return pid;
+}
+
+const char*
+shl_pty_slavename(struct shl_pty* pty)
+{
+	return pty->slavename;
 }
 
 void shl_pty_ref(struct shl_pty *pty)
