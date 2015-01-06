@@ -19,5 +19,6 @@ int splash_set_clear(splash_t* splash, int32_t clear_color);
 void splash_set_dbus(splash_t* splash, dbus_t* dbus);
 void splash_set_devmode(splash_t* splash);
 int splash_run(splash_t*, dbus_t **dbus);
+void splash_set_offset(splash_t* splash, int x, int y);
 
 #endif  // SPLASH_H

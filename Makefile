@@ -4,9 +4,9 @@
 
 include common.mk
 
-PC_DEPS = libdrm libtsm libudev dbus-1 libpng
+PC_DEPS = libdrm libtsm libudev dbus-1 libpng 
 PC_CFLAGS := $(shell $(PKG_CONFIG) --cflags $(PC_DEPS))
-PC_LIBS := $(shell $(PKG_CONFIG) --libs $(PC_DEPS))
+PC_LIBS := $(shell $(PKG_CONFIG) --libs $(PC_DEPS)) -ldl
 
 CPPFLAGS += -std=c99 -D_GNU_SOURCE=1
 CFLAGS += -Wall -Wsign-compare -Wpointer-arith -Wcast-qual -Wcast-align

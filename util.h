@@ -28,6 +28,8 @@ inline int64_t get_monotonic_time_ms() {
 
 void LOG(int severity, const char* fmt, ...);
 void daemonize();
+void detect_initramfs_instance(int tcp_port);
+void parse_location(char* loc_str, int *x, int *y);
 
 
 #define ERROR                 (1)

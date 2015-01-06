@@ -4,11 +4,17 @@
  * found in the LICENSE file.
  */
 
-#include "util.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
 #include <fcntl.h>
+#include <string.h>
+#include <sys/socket.h>
+#include <arpa/inet.h>
+
+#include "util.h"
+
+#include "commands.h"
 
 
 void daemonize()
@@ -55,4 +61,43 @@ void LOG(int severity, const char* fmt, ...)
 	vfprintf(stderr, fmt, arg_list);
 	va_end(arg_list);
 	fprintf(stderr, "\n");
+}
+
+void detect_initramfs_instance(int tcp_port)
+{
+	struct sockaddr_in addr;
+	int sock;
+	int status;
+
+	addr.sin_family = AF_INET;
+	addr.sin_addr.s_addr = inet_addr("127.0.0.1");
+	addr.sin_port = htons(tcp_port);
+
+	sock = socket(AF_INET, SOCK_STREAM, 0);
+	status = connect(sock, (struct sockaddr*)&addr, sizeof(struct sockaddr_in));
+
+	if (status < 0)
+		return;
+
+	status = send(sock, COMMAND_TERMINATE, strlen(COMMAND_TERMINATE), 0);
+	close(sock);
+}
+
+void parse_location(char* loc_str, int *x, int *y)
+{
+	int count = 0;
+	char* savedptr;
+	char* token;
+	char* str;
+	int *results[] = {x, y};
+
+	for (token = str = loc_str; token != NULL; str = NULL) {
+		if (count > 1)
+			break;
+
+		token = strtok_r(str, ",", &savedptr);
+		if (token) {
+			*(results[count++]) = strtol(token, NULL, 0);
+		}
+	}
 }
