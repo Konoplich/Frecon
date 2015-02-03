@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9cf1f452_40d04e52",
+        "filename": "dbus/org.chromium.frecon.conf",
+        "patchSetId": 3
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000042
+      },
+      "writtenOn": "2015-02-03T19:37:34Z",
+      "side": 1,
+      "message": "i was going to suggest that this be org.chromium.Frecon to match other services, but i see that we already have a bunch of lowercase ones too. :-(",
+      "range": {
+        "startLine": 12,
+        "startChar": 16,
+        "endLine": 12,
+        "endChar": 35
+      },
+      "revId": "0760963f0985ed3053675e5a20274288858427de",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    }
+  ]
+}
