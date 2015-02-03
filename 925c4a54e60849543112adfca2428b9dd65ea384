@@ -1,0 +1,95 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f74dab10_2f77d16b",
+        "filename": "fsocket.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1000313
+      },
+      "writtenOn": "2015-02-03T04:58:25Z",
+      "side": 1,
+      "message": "nit: dead white space",
+      "revId": "925c4a54e60849543112adfca2428b9dd65ea384",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f74dab10_8f6aa581",
+        "filename": "input.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000313
+      },
+      "writtenOn": "2015-02-03T04:58:25Z",
+      "side": 1,
+      "message": "we can probably improve the indentation with if (input.dbus) return;\n\nand then everything else unchanged",
+      "revId": "925c4a54e60849543112adfca2428b9dd65ea384",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f74dab10_0f6535ac",
+        "filename": "main.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1000313
+      },
+      "writtenOn": "2015-02-03T04:58:25Z",
+      "side": 1,
+      "message": "Could we go one step further and not even compile that code unless we make a dev/factory/recovery/test image? I\u0027m feeling uneasy with having a socket-based interface which lets you run commands as root...",
+      "revId": "925c4a54e60849543112adfca2428b9dd65ea384",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "17515fa8_70f29876",
+        "filename": "splash.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 351,
+      "author": {
+        "id": 1000313
+      },
+      "writtenOn": "2015-02-03T04:58:25Z",
+      "side": 1,
+      "message": "what is that for? it seems like we are waiting for someone to connect and run commands?",
+      "range": {
+        "startLine": 351,
+        "startChar": 15,
+        "endLine": 351,
+        "endChar": 17
+      },
+      "revId": "925c4a54e60849543112adfca2428b9dd65ea384",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "17515fa8_b00ee0db",
+        "filename": "term.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1000313
+      },
+      "writtenOn": "2015-02-03T04:58:25Z",
+      "side": 1,
+      "message": "unrelated change?",
+      "revId": "925c4a54e60849543112adfca2428b9dd65ea384",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    }
+  ]
+}
