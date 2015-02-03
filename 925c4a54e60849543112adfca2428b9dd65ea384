@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "17479f3f_6c453bd2",
+        "filename": "fsocket.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1106179
+      },
+      "writtenOn": "2015-02-03T18:43:45Z",
+      "side": 1,
+      "message": "done?  I\u0027m not sure why this shows up in v2.  It was in v1 and I fixed it and it doesn\u0027t exist in the source tree.",
+      "parentUuid": "f74dab10_2f77d16b",
+      "revId": "925c4a54e60849543112adfca2428b9dd65ea384",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f74dab10_8f6aa581",
         "filename": "input.c",
         "patchSetId": 2
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "17479f3f_6c6e1b66",
+        "filename": "input.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1106179
+      },
+      "writtenOn": "2015-02-03T18:43:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f74dab10_8f6aa581",
+      "revId": "925c4a54e60849543112adfca2428b9dd65ea384",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f74dab10_0f6535ac",
         "filename": "main.c",
         "patchSetId": 2
@@ -47,6 +83,24 @@
       "writtenOn": "2015-02-03T04:58:25Z",
       "side": 1,
       "message": "Could we go one step further and not even compile that code unless we make a dev/factory/recovery/test image? I\u0027m feeling uneasy with having a socket-based interface which lets you run commands as root...",
+      "revId": "925c4a54e60849543112adfca2428b9dd65ea384",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "17479f3f_ac54833f",
+        "filename": "main.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1106179
+      },
+      "writtenOn": "2015-02-03T18:43:45Z",
+      "side": 1,
+      "message": "From what I understand, when running factory/recovery, it\u0027s the same frecon image.  In fact, when transitioning from recovery to normal/dev mode, frecon is not even shutdown, it\u0027s launched from initramfs and keeps running.   There would have to be a mechanism to kill and restart frecon.   It may be possible to have 2 frecon binaries, one in the initramfs and another in the real filesystem.   I will have to look into how to set that up.",
+      "parentUuid": "f74dab10_0f6535ac",
       "revId": "925c4a54e60849543112adfca2428b9dd65ea384",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
       "unresolved": false
@@ -76,6 +130,30 @@
     },
     {
       "key": {
+        "uuid": "7731bbd0_276a7a83",
+        "filename": "splash.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 351,
+      "author": {
+        "id": 1106179
+      },
+      "writtenOn": "2015-02-03T18:43:45Z",
+      "side": 1,
+      "message": "This is waiting for chrome to appear above frecon.   I had before put in a wait loop waiting for a specific dbus message from session manager.  I had always been uneasy about that, and we have seen several cases where the message doesn\u0027t come and frecon shows the splash screen forever.  Since chrome already places itself above frecon on the screen (frecon release drm_master), I think the best thing is just wait long enough for chrome to show up.  I had updated a comment to suggest, but, the comment ended up a bit removed from the code, so, I have moved it now.",
+      "parentUuid": "17515fa8_70f29876",
+      "range": {
+        "startLine": 351,
+        "startChar": 15,
+        "endLine": 351,
+        "endChar": 17
+      },
+      "revId": "925c4a54e60849543112adfca2428b9dd65ea384",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "17515fa8_b00ee0db",
         "filename": "term.c",
         "patchSetId": 2
@@ -87,6 +165,24 @@
       "writtenOn": "2015-02-03T04:58:25Z",
       "side": 1,
       "message": "unrelated change?",
+      "revId": "925c4a54e60849543112adfca2428b9dd65ea384",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7731bbd0_67c63239",
+        "filename": "term.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1106179
+      },
+      "writtenOn": "2015-02-03T18:43:45Z",
+      "side": 1,
+      "message": "yes, thanks.  Forgot about that.",
+      "parentUuid": "17515fa8_b00ee0db",
       "revId": "925c4a54e60849543112adfca2428b9dd65ea384",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
       "unresolved": false
