@@ -1,0 +1,8 @@
+Commit-Queue+1: Bowgo Tsai <bowgotsai@chromium.org>
+Verified+1: Bowgo Tsai <bowgotsai@chromium.org>
+Code-Review+2: David Sodman <dsodman@chromium.org>
+Submitted-by: ChromeOS Commit Bot <chromeos-commit-bot@chromium.org>
+Submitted-at: Fri, 13 Feb 2015 17:18:33 +0000
+Reviewed-on: https://chromium-review.googlesource.com/249663
+Project: chromiumos/platform/frecon
+Branch: refs/heads/factory-auron-6772.B
