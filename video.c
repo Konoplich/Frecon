@@ -47,35 +47,36 @@ static drmModeCrtc *find_crtc_for_connector(int fd,
 							drmModeRes *resources,
 							drmModeConnector *connector)
 {
-	int i;
-	unsigned encoder_crtc_id = 0;
+	int i, j;
+	drmModeEncoder *encoder;
+	int32_t crtc;
 
-	/* Find the encoder */
-	for (i = 0; i < resources->count_encoders; i++) {
-		drmModeEncoder *encoder =
-				drmModeGetEncoder(fd, resources->encoders[i]);
+	if (connector->encoder_id)
+		encoder = drmModeGetEncoder(fd, connector->encoder_id);
+	else
+		encoder = NULL;
 
-		if (encoder) {
-			if (encoder->encoder_id == connector->encoder_id) {
-				encoder_crtc_id = encoder->crtc_id;
-				drmModeFreeEncoder(encoder);
-				break;
-			}
-			drmModeFreeEncoder(encoder);
-		}
+	if (encoder && encoder->crtc_id) {
+		crtc = encoder->crtc_id;
+		drmModeFreeEncoder(encoder);
+		return drmModeGetCrtc(fd, crtc);
 	}
 
-	if (!encoder_crtc_id)
-		return NULL;
+	crtc = -1;
+	for (i = 0; i < connector->count_encoders; i++) {
+		encoder = drmModeGetEncoder(fd, connector->encoders[i]);
 
-	/* Find the crtc */
-	for (i = 0; i < resources->count_crtcs; i++) {
-		drmModeCrtc *crtc = drmModeGetCrtc(fd, resources->crtcs[i]);
-
-		if (crtc) {
-			if (encoder_crtc_id == crtc->crtc_id)
-				return crtc;
-			drmModeFreeCrtc(crtc);
+		if (encoder) {
+			for (j = 0; j < resources->count_crtcs; j++) {
+				if (!(encoder->possible_crtcs & (1 << j)))
+					continue;
+				crtc = resources->crtcs[j];
+				break;
+			}
+			if (crtc >= 0) {
+				drmModeFreeEncoder(encoder);
+				return drmModeGetCrtc(fd, crtc);
+			}
 		}
 	}
 
@@ -108,7 +109,8 @@ static drmModeConnector *find_used_connector_by_type(int fd,
 		connector = drmModeGetConnector(fd, resources->connectors[i]);
 		if (connector) {
 			if ((connector->connector_type == type) &&
-					(connector->connection == DRM_MODE_CONNECTED))
+					(connector->connection == DRM_MODE_CONNECTED) &&
+					(connector->count_modes > 0))
 				return connector;
 
 			drmModeFreeConnector(connector);
@@ -126,7 +128,8 @@ static drmModeConnector *find_first_used_connector(int fd,
 
 		connector = drmModeGetConnector(fd, resources->connectors[i]);
 		if (connector) {
-			if (is_connector_used(fd, resources, connector))
+			if ((connector->count_modes > 0) &&
+					is_connector_used(fd, resources, connector))
 				return connector;
 
 			drmModeFreeConnector(connector);
@@ -135,9 +138,11 @@ static drmModeConnector *find_first_used_connector(int fd,
 	return NULL;
 }
 
-static drmModeConnector *find_main_monitor(int fd, drmModeRes *resources)
+static drmModeConnector *find_main_monitor(int fd, drmModeRes *resources,
+		uint32_t *mode_index)
 {
 	unsigned i = 0;
+	int modes;
 	/*
 	 * Find the LVDS/eDP/DSI connectors. Those are the main screens.
 	 */
@@ -162,6 +167,15 @@ static drmModeConnector *find_main_monitor(int fd, drmModeRes *resources)
 		main_monitor_connector =
 				find_first_used_connector(fd, resources);
 
+	*mode_index = 0;
+	for (modes = 0; modes < main_monitor_connector->count_modes; modes++) {
+		if (main_monitor_connector->modes[modes].type &
+				DRM_MODE_TYPE_PREFERRED) {
+			*mode_index = modes;
+			break;
+		}
+	}
+
 	return main_monitor_connector;
 }
 
@@ -178,23 +192,6 @@ static void disable_connector(int fd,
 						 0,     // connector_count
 						 NULL); // mode
 		drmModeFreeCrtc(crtc);
-	}
-}
-
-static void disable_non_main_connectors(int fd,
-					drmModeRes *resources,
-					drmModeConnector *main_connector)
-{
-	int i;
-
-	for (i = 0; i < resources->count_connectors; i++) {
-		drmModeConnector *connector;
-
-		connector = drmModeGetConnector(fd, resources->connectors[i]);
-		if (connector->connector_id != main_connector->connector_id)
-			disable_connector(fd, resources, connector);
-
-		drmModeFreeConnector(connector);
 	}
 }
 
@@ -255,6 +252,7 @@ video_t* video_init()
 {
 	int32_t width, height, scaling, pitch;
 	int i;
+	uint32_t selected_mode;
 	video_t *new_video = (video_t*)calloc(1, sizeof(video_t));
 
 	new_video->fd = -1;
@@ -276,7 +274,8 @@ video_t* video_init()
 		goto fail;
 	}
 
-	new_video->main_monitor_connector = find_main_monitor(new_video->fd, new_video->drm_resources);
+	new_video->main_monitor_connector = find_main_monitor(new_video->fd,
+			new_video->drm_resources, &selected_mode);
 
 	if (!new_video->main_monitor_connector) {
 		LOG(ERROR, "main_monitor_connector is nil");
@@ -307,10 +306,6 @@ video_t* video_init()
 		}
 	}
 
-	disable_non_main_connectors(new_video->fd,
-			new_video->drm_resources, new_video->main_monitor_connector);
-
-
 	new_video->crtc = find_crtc_for_connector(new_video->fd,
 			new_video->drm_resources, new_video->main_monitor_connector);
 
@@ -318,6 +313,9 @@ video_t* video_init()
 		LOG(ERROR, "unable to find a crtc");
 		goto fail;
 	}
+
+	new_video->crtc->mode =
+		new_video->main_monitor_connector->modes[selected_mode];
 
 	if (video_buffer_create(new_video, new_video->crtc,
 				new_video->main_monitor_connector, &pitch)) {
