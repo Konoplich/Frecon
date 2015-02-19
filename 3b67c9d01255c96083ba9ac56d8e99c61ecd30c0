@@ -16,6 +16,24 @@
       "revId": "3b67c9d01255c96083ba9ac56d8e99c61ecd30c0",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "88db7205_d3468647",
+        "filename": "splash.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 305,
+      "author": {
+        "id": 1106179
+      },
+      "writtenOn": "2015-02-19T21:19:06Z",
+      "side": 1,
+      "message": "It makes the transition look smoother.  Without the final clear, you will see the chrome logo look like it\u0027s in a black box as Chrome is doing it\u0027s setup, but before chrome does the first modeset",
+      "parentUuid": "a87116c9_39656f80",
+      "revId": "3b67c9d01255c96083ba9ac56d8e99c61ecd30c0",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
     }
   ]
 }
