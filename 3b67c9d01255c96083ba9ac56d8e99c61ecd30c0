@@ -88,6 +88,24 @@
       "revId": "3b67c9d01255c96083ba9ac56d8e99c61ecd30c0",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0866a236_f4835833",
+        "filename": "splash.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 305,
+      "author": {
+        "id": 1106179
+      },
+      "writtenOn": "2015-02-19T23:20:43Z",
+      "side": 1,
+      "message": "yes, it\u0027s a partial workaround for a skia bug.  I\u0027ve removed it",
+      "parentUuid": "c82f2ab4_a2d23e5a",
+      "revId": "3b67c9d01255c96083ba9ac56d8e99c61ecd30c0",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
     }
   ]
 }
