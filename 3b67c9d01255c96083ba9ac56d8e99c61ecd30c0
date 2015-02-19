@@ -70,6 +70,24 @@
       "revId": "3b67c9d01255c96083ba9ac56d8e99c61ecd30c0",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c82f2ab4_a2d23e5a",
+        "filename": "splash.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 305,
+      "author": {
+        "id": 1000313
+      },
+      "writtenOn": "2015-02-19T22:28:16Z",
+      "side": 1,
+      "message": "Well, it seems that there is a bug, so we should get to the bottom of it. This clear seems like a workaround to me; in particular it will definitely add more load on the CPU on startup.",
+      "parentUuid": "88db7205_33da72ee",
+      "revId": "3b67c9d01255c96083ba9ac56d8e99c61ecd30c0",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
     }
   ]
 }
