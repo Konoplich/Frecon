@@ -34,6 +34,24 @@
       "revId": "3b67c9d01255c96083ba9ac56d8e99c61ecd30c0",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "081ea259_570fee2d",
+        "filename": "splash.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 305,
+      "author": {
+        "id": 1000313
+      },
+      "writtenOn": "2015-02-19T21:22:37Z",
+      "side": 1,
+      "message": "Weird. Is there an alpha channel issue?",
+      "parentUuid": "88db7205_d3468647",
+      "revId": "3b67c9d01255c96083ba9ac56d8e99c61ecd30c0",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
     }
   ]
 }
