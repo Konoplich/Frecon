@@ -1,0 +1,7 @@
+Code-Review+2: David Sodman <dsodman@chromium.org>
+Verified+1: David Sodman <dsodman@chromium.org>
+Submitted-by: David Sodman <dsodman@chromium.org>
+Submitted-at: Mon, 09 Mar 2015 19:56:20 +0000
+Reviewed-on: https://chromium-review.googlesource.com/257560
+Project: chromiumos/platform/frecon
+Branch: refs/heads/release-R42-6812.B
