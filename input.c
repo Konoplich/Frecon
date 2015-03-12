@@ -186,41 +186,43 @@ static int input_special_key(struct input_key_event *ev)
 	}
 
 	if (input.kbd_state.alt_state && input.kbd_state.control_state && ev->value) {
-		if (ev->code == KEY_F1) {
-			if (term_is_active(terminal)) {
-				input_ungrab();
-				terminal->active = false;
-				video_release(input.terminals[input.current_terminal]->video);
+		if (!input.kbd_state.shift_state) {
+			if (ev->code == KEY_F1) {
+				if (term_is_active(terminal)) {
+					input_ungrab();
+					terminal->active = false;
+					video_release(input.terminals[input.current_terminal]->video);
+					(void)dbus_method_call0(input.dbus,
+						kLibCrosServiceName,
+						kLibCrosServicePath,
+						kLibCrosServiceInterface,
+						kTakeDisplayOwnership);
+				}
+			} else if ((ev->code >= KEY_F2) && (ev->code < KEY_F2 + MAX_TERMINALS)) {
 				(void)dbus_method_call0(input.dbus,
 					kLibCrosServiceName,
 					kLibCrosServicePath,
 					kLibCrosServiceInterface,
-					kTakeDisplayOwnership);
-			}
-		} else if ((ev->code >= KEY_F2) && (ev->code < KEY_F2 + MAX_TERMINALS)) {
-			(void)dbus_method_call0(input.dbus,
-				kLibCrosServiceName,
-				kLibCrosServicePath,
-				kLibCrosServiceInterface,
-				kReleaseDisplayOwnership);
-			if (term_is_active(terminal))
-					terminal->active = false;
-			input.current_terminal = ev->code - KEY_F2;
-			terminal = input.terminals[input.current_terminal];
-			if (terminal == NULL) {
-				input.terminals[input.current_terminal] =
-					term_init(input.current_terminal);
-				terminal =
-					input.terminals[input.current_terminal];
-				if (!term_is_valid(terminal)) {
-					LOG(ERROR, "Term init failed");
-					return 1;
+					kReleaseDisplayOwnership);
+				if (term_is_active(terminal))
+						terminal->active = false;
+				input.current_terminal = ev->code - KEY_F2;
+				terminal = input.terminals[input.current_terminal];
+				if (terminal == NULL) {
+					input.terminals[input.current_terminal] =
+						term_init(input.current_terminal);
+					terminal =
+						input.terminals[input.current_terminal];
+					if (!term_is_valid(terminal)) {
+						LOG(ERROR, "Term init failed");
+						return 1;
+					}
 				}
+				input.terminals[input.current_terminal]->active = true;
+				input_grab();
+				video_setmode(terminal->video);
+				term_redraw(terminal);
 			}
-			input.terminals[input.current_terminal]->active = true;
-			input_grab();
-			video_setmode(terminal->video);
-			term_redraw(terminal);
 		}
 
 		return 1;
