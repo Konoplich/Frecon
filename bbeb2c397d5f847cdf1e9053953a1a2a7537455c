@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "660f5879_4cca939d",
+        "filename": "util.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1107749
+      },
+      "writtenOn": "2015-03-16T20:40:58Z",
+      "side": 1,
+      "message": "You can drop the permissions for others. They aren\u0027t needed.",
+      "range": {
+        "startLine": 24,
+        "startChar": 38,
+        "endLine": 24,
+        "endChar": 44
+      },
+      "revId": "bbeb2c397d5f847cdf1e9053953a1a2a7537455c",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "660f5879_8ccbeb9d",
+        "filename": "util.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1107749
+      },
+      "writtenOn": "2015-03-16T20:40:58Z",
+      "side": 1,
+      "message": "Same here.",
+      "range": {
+        "startLine": 33,
+        "startChar": 13,
+        "endLine": 33,
+        "endChar": 14
+      },
+      "revId": "bbeb2c397d5f847cdf1e9053953a1a2a7537455c",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    }
+  ]
+}
