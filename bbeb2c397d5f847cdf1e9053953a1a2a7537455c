@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "86144c89_2a5c5b84",
+        "filename": "util.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1106179
+      },
+      "writtenOn": "2015-03-16T20:57:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "660f5879_4cca939d",
+      "range": {
+        "startLine": 24,
+        "startChar": 38,
+        "endLine": 24,
+        "endChar": 44
+      },
+      "revId": "bbeb2c397d5f847cdf1e9053953a1a2a7537455c",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "660f5879_8ccbeb9d",
         "filename": "util.c",
         "patchSetId": 2
@@ -36,6 +60,30 @@
       "writtenOn": "2015-03-16T20:40:58Z",
       "side": 1,
       "message": "Same here.",
+      "range": {
+        "startLine": 33,
+        "startChar": 13,
+        "endLine": 33,
+        "endChar": 14
+      },
+      "revId": "bbeb2c397d5f847cdf1e9053953a1a2a7537455c",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "660f5879_8cc12baf",
+        "filename": "util.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1106179
+      },
+      "writtenOn": "2015-03-16T20:57:39Z",
+      "side": 1,
+      "message": "As the owner is changed to chronos, shouldn\u0027t be a need to chmod at all, since user will already default to rw so removed this line",
+      "parentUuid": "660f5879_8ccbeb9d",
       "range": {
         "startLine": 33,
         "startChar": 13,
