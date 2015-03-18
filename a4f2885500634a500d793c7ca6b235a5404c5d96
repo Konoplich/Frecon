@@ -1,0 +1,7 @@
+Code-Review+2: Matthew Yuan <matthewyuan@chromium.org>
+Verified+1: Matthew Yuan <matthewyuan@chromium.org>
+Submitted-by: Matthew Yuan <matthewyuan@chromium.org>
+Submitted-at: Wed, 18 Mar 2015 03:58:27 +0000
+Reviewed-on: https://chromium-review.googlesource.com/260704
+Project: chromiumos/platform/frecon
+Branch: refs/heads/stabilize-6812.34.B
