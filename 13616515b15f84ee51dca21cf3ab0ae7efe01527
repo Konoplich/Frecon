@@ -1,0 +1,9 @@
+Code-Review+2: David Sodman <dsodman@chromium.org>
+Commit-Queue+1: Daniel Nicoara <dnicoara@chromium.org>
+Trybot-Ready+1: Daniel Nicoara <dnicoara@chromium.org>
+Verified+1: Daniel Nicoara <dnicoara@chromium.org>
+Submitted-by: Daniel Nicoara <dnicoara@chromium.org>
+Submitted-at: Fri, 20 Mar 2015 01:37:04 +0000
+Reviewed-on: https://chromium-review.googlesource.com/261320
+Project: chromiumos/platform/frecon
+Branch: refs/heads/master
