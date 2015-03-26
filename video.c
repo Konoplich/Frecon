@@ -465,7 +465,7 @@ uint32_t* video_lock(video_t *video)
 {
 	if (video->lock.count == 0) {
 		video->lock.map =
-			mmap(0, video->buffer_properties.size, PROT_READ | PROT_WRITE,
+			mmap64(0, video->buffer_properties.size, PROT_READ | PROT_WRITE,
 					MAP_SHARED, video->fd, video->lock.map_offset);
 		if (video->lock.map == MAP_FAILED) {
 			LOG(ERROR, "mmap failed");
