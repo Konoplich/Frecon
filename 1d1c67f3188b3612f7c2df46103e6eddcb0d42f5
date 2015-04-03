@@ -1,0 +1,9 @@
+Code-Review+1: David Schneider <dnschneid@chromium.org>
+Code-Review+2: Dominik Behr <dbehr@chromium.org>
+Verified+1: David Sodman <dsodman@chromium.org>
+Commit-Queue+1: David Sodman <dsodman@chromium.org>
+Submitted-by: ChromeOS Commit Bot <chromeos-commit-bot@chromium.org>
+Submitted-at: Fri, 03 Apr 2015 18:33:28 +0000
+Reviewed-on: https://chromium-review.googlesource.com/259771
+Project: chromiumos/platform/frecon
+Branch: refs/heads/master
