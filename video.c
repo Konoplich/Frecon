@@ -14,33 +14,50 @@
 #include <sys/mman.h>
 #include <unistd.h>
 #include <fcntl.h>
-
 #include "util.h"
 #include "video.h"
 #include "dbus_interface.h"
 #include "dbus.h"
 
 
-static int kms_open()
+static int kms_open(video_t *video)
 {
-	const char *module_list[] = {
-		"cirrus",
-		"exynos",
-		"i915",
-		"msm",
-		"rockchip",
-		"tegra",
-	};
-	int fd = -1;
+	int fd;
 	unsigned i;
+	char* dev_name;
+	drmModeRes *res = NULL;
+	int ret;
 
-	for (i = 0; i < ARRAY_SIZE(module_list); i++) {
-		fd = drmOpen(module_list[i], NULL);
-		if (fd >= 0)
+	for (i = 0; i < DRM_MAX_MINOR; i++) {
+		ret = asprintf(&dev_name, DRM_DEV_NAME, DRM_DIR_NAME, i);
+		if (ret < 0)
+			continue;
+
+		LOG(ERROR, "trying %s", dev_name);
+		fd = open(dev_name, O_RDWR, 0);
+		free(dev_name);
+		if (fd < 0)
+			continue;
+
+		res = drmModeGetResources(fd);
+		if (!res) {
+			LOG(ERROR, "Unable to get resources for card%d", i);
+			continue;
+		}
+
+		if (res->count_crtcs > 0 && res->count_connectors > 0)
 			break;
+
+		drmModeFreeResources(res);
+		res = NULL;
 	}
 
-	return fd;
+	if (fd >=0 && res != NULL) {
+		video->drm_resources = res;
+		return fd;
+	}
+
+	return -1;
 }
 
 static drmModeCrtc *find_crtc_for_connector(int fd,
@@ -271,9 +288,7 @@ video_t* video_init()
 	uint32_t selected_mode;
 	video_t *new_video = (video_t*)calloc(1, sizeof(video_t));
 
-	new_video->fd = -1;
-
-	new_video->fd = kms_open();
+	new_video->fd = kms_open(new_video);
 
 	if (new_video->fd < 0) {
 		LOG(ERROR, "Unable to open a KMS module");
@@ -282,12 +297,6 @@ video_t* video_init()
 
 	if (drmSetMaster(new_video->fd) != 0) {
 		LOG(ERROR, "video_init unable to get master");
-	}
-
-	new_video->drm_resources = drmModeGetResources(new_video->fd);
-	if (!new_video->drm_resources) {
-		LOG(ERROR, "Unable to get mode resources");
-		goto fail;
 	}
 
 	new_video->main_monitor_connector = find_main_monitor(new_video->fd,
@@ -475,6 +484,7 @@ uint32_t* video_lock(video_t *video)
 			return NULL;
 		}
 	}
+	LOG(ERROR, "mapped memory at %p", video->lock.map);
 	return video->lock.map;
 }
 
