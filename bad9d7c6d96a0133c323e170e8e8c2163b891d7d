@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "237f124e_a1f81efd",
+        "filename": "video.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 487,
+      "author": {
+        "id": 1001537
+      },
+      "writtenOn": "2015-04-08T20:00:17Z",
+      "side": 1,
+      "message": "Maybe remove this log? It is printing a ton of messages whenever the screen updates.",
+      "revId": "bad9d7c6d96a0133c323e170e8e8c2163b891d7d",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    }
+  ]
+}
