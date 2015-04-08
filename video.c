@@ -155,6 +155,25 @@ static drmModeConnector *find_first_used_connector(int fd,
 	return NULL;
 }
 
+static drmModeConnector *find_first_connected_connector(int fd,
+							 drmModeRes *resources)
+{
+	int i;
+	for (i = 0; i < resources->count_connectors; i++) {
+		drmModeConnector *connector;
+
+		connector = drmModeGetConnector(fd, resources->connectors[i]);
+		if (connector) {
+			if ((connector->count_modes > 0) &&
+					(connector->connection == DRM_MODE_CONNECTED))
+				return connector;
+
+			drmModeFreeConnector(connector);
+		}
+	}
+	return NULL;
+}
+
 static drmModeConnector *find_main_monitor(int fd, drmModeRes *resources,
 		uint32_t *mode_index)
 {
@@ -183,6 +202,19 @@ static drmModeConnector *find_main_monitor(int fd, drmModeRes *resources,
 	if (!main_monitor_connector)
 		main_monitor_connector =
 				find_first_used_connector(fd, resources);
+
+	/*
+	 * If we still didn't find a connector, grab the first one connected.
+	 */
+	if (!main_monitor_connector)
+		main_monitor_connector =
+				find_first_connected_connector(fd, resources);
+
+	/*
+	 * If we still didn't find a connector, give up and return.
+	 */
+	if (!main_monitor_connector)
+		return NULL;
 
 	*mode_index = 0;
 	for (modes = 0; modes < main_monitor_connector->count_modes; modes++) {
@@ -356,6 +388,8 @@ video_t* video_init()
 
 	if (!new_video->main_monitor_connector->mmWidth)
 		scaling = 1;
+	else if (width <= 1280)
+		scaling = 1;
 	else {
 		int dots_per_cm = width * 10 / new_video->main_monitor_connector->mmWidth;
 		if (dots_per_cm > 133)
@@ -484,7 +518,6 @@ uint32_t* video_lock(video_t *video)
 			return NULL;
 		}
 	}
-	LOG(ERROR, "mapped memory at %p", video->lock.map);
 	return video->lock.map;
 }
 
@@ -496,7 +529,11 @@ void video_unlock(video_t *video)
 	}
 
 	if (video->lock.count == 0) {
+		struct drm_clip_rect clip_rect = {
+			0, 0, video->buffer_properties.width, video->buffer_properties.height
+		};
 		munmap(video->lock.map, video->buffer_properties.size);
+		drmModeDirtyFB(video->fd, video->fb_id, &clip_rect, 1);
 	}
 }
 
