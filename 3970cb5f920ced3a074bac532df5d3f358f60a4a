@@ -68,6 +68,30 @@
       "revId": "3970cb5f920ced3a074bac532df5d3f358f60a4a",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d0299e86_d87a02b5",
+        "filename": "video.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 480,
+      "author": {
+        "id": 1106179
+      },
+      "writtenOn": "2015-04-13T21:12:14Z",
+      "side": 1,
+      "message": "That will attempt to free driver_version itself as well which is not valid.  I changed it a bit to have the video_t struct hold the pointer returned from drmGetVersion and then pass it to drmFreeVersion at close time which I think is more how the API was intended to use.  That is done in https://chromium-review.googlesource.com/#/c/265489/ since this change already got merged.",
+      "parentUuid": "30875ad3_c177a2ca",
+      "range": {
+        "startLine": 473,
+        "startChar": 0,
+        "endLine": 480,
+        "endChar": 35
+      },
+      "revId": "3970cb5f920ced3a074bac532df5d3f358f60a4a",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
     }
   ]
 }
