@@ -57,31 +57,16 @@ static int kms_open(video_t *video)
 		return -1;
 
 	video->drm_resources = res;
-	version = drmGetVersion(fd);
-	if (version) {
-		video->driver_version.version_major = version->version_major;
-		video->driver_version.version_minor = version->version_minor;
-		video->driver_version.version_patchlevel = version->version_patchlevel;
-		video->driver_version.name_len = version->name_len;
-		video->driver_version.date_len = version->date_len;
-		video->driver_version.desc_len = version->desc_len;
-
-		video->driver_version.name = (char*)malloc(version->name_len + 1);
-		video->driver_version.date = (char*)malloc(version->date_len + 1);
-		video->driver_version.desc = (char*)malloc(version->desc_len + 1);
-
-		strcpy(video->driver_version.name, version->name);
-		strcpy(video->driver_version.date, version->date);
-		strcpy(video->driver_version.desc, version->desc);
-		drmFreeVersion(version);
-		LOG(INFO, 
+	video->driver_version = drmGetVersion(fd);
+	if (video->driver_version)
+		LOG(INFO,
 				"Frecon using drm driver %s, version %d.%d, date(%s), desc(%s)",
-				video->driver_version.name,
-				video->driver_version.version_major,
-				video->driver_version.version_minor,
-				video->driver_version.date,
-				video->driver_version.desc);
-	}
+				video->driver_version->name,
+				video->driver_version->version_major,
+				video->driver_version->version_minor,
+				video->driver_version->date,
+				video->driver_version->desc);
+
 	return fd;
 }
 
@@ -470,14 +455,8 @@ void video_close(video_t *video)
 	destroy_dumb.handle = video->buffer_handle;
 	drmIoctl(video->fd, DRM_IOCTL_MODE_DESTROY_DUMB, &destroy_dumb);
 
-	if (video->driver_version.name)
-		free(video->driver_version.name);
-
-	if (video->driver_version.date)
-		free(video->driver_version.date);
-
-	if (video->driver_version.desc)
-		free(video->driver_version.desc);
+	drmFreeVersion(video->driver_version);
+	video->driver_version = NULL;
 
 	if (video->fd >= 0) {
 		if (video->main_monitor_connector) {
