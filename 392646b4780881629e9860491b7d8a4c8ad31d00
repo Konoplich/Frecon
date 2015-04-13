@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "b0242aae_41818248",
+        "filename": "video.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1001537
+      },
+      "writtenOn": "2015-04-13T17:44:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d0299e86_7167b2d5",
+      "range": {
+        "startLine": 158,
+        "startChar": 7,
+        "endLine": 158,
+        "endChar": 23
+      },
+      "revId": "392646b4780881629e9860491b7d8a4c8ad31d00",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d0299e86_9161feba",
         "filename": "video.c",
         "patchSetId": 1
@@ -36,6 +60,24 @@
       "writtenOn": "2015-04-13T16:23:41Z",
       "side": 1,
       "message": "Would rather not do this without any qualification.  If the bad information is because of 1 specific monitor (or due to UDL) then I\u0027d rather qualify with that then possibly check for the size.   Would also prefer to have a comment explaining why this is there.",
+      "revId": "392646b4780881629e9860491b7d8a4c8ad31d00",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d0299e86_f7415218",
+        "filename": "video.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 391,
+      "author": {
+        "id": 1001537
+      },
+      "writtenOn": "2015-04-13T17:44:26Z",
+      "side": 1,
+      "message": "Let\u0027s land that in a separate patch. It seems to require parsing EDID.",
+      "parentUuid": "d0299e86_9161feba",
       "revId": "392646b4780881629e9860491b7d8a4c8ad31d00",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
       "unresolved": false
