@@ -140,6 +140,52 @@
     },
     {
       "key": {
+        "uuid": "b0242aae_ea7a7eb4",
+        "filename": "dbus.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 1117132
+      },
+      "writtenOn": "2015-04-13T21:10:30Z",
+      "side": 1,
+      "message": "Memory leak: image_load_image_from_file allocates memory for the pixels that never gets deallocated by this function.",
+      "range": {
+        "startLine": 246,
+        "startChar": 38,
+        "endLine": 246,
+        "endChar": 43
+      },
+      "revId": "e24668b1f6faced75a589044a0347867f9420360",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9033a6f4_81a52806",
+        "filename": "image.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1117132
+      },
+      "writtenOn": "2015-04-13T21:10:30Z",
+      "side": 1,
+      "message": "Memory Leak: there is no corresponding image_destroy that frees this memory.",
+      "range": {
+        "startLine": 105,
+        "startChar": 1,
+        "endLine": 105,
+        "endChar": 22
+      },
+      "revId": "e24668b1f6faced75a589044a0347867f9420360",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d0299e86_97d32e53",
         "filename": "input.c",
         "patchSetId": 12
