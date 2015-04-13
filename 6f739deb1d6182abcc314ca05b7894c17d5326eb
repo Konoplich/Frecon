@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b0242aae_9c96b192",
+        "filename": "video.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1106179
+      },
+      "writtenOn": "2015-04-13T18:09:21Z",
+      "side": 1,
+      "message": "Is this not referenced anymore?",
+      "revId": "6f739deb1d6182abcc314ca05b7894c17d5326eb",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    }
+  ]
+}
