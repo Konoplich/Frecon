@@ -1,0 +1,165 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9033a6f4_f2f3a0e8",
+        "filename": "dbus.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1117132
+      },
+      "writtenOn": "2015-04-13T17:56:03Z",
+      "side": 1,
+      "message": "Could you use DBUS_TYPE_UINT32 to avoid checking for (vt \u003c 0) on line 55\u0027s if clause?",
+      "range": {
+        "startLine": 47,
+        "startChar": 47,
+        "endLine": 47,
+        "endChar": 62
+      },
+      "revId": "e24668b1f6faced75a589044a0347867f9420360",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9033a6f4_12c86ca4",
+        "filename": "dbus.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1117132
+      },
+      "writtenOn": "2015-04-13T17:56:03Z",
+      "side": 1,
+      "message": "Is this supposed to be \"not\" or \"no\"",
+      "range": {
+        "startLine": 51,
+        "startChar": 37,
+        "endLine": 51,
+        "endChar": 40
+      },
+      "revId": "e24668b1f6faced75a589044a0347867f9420360",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b0242aae_01a93a5c",
+        "filename": "dbus.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1117132
+      },
+      "writtenOn": "2015-04-13T17:56:03Z",
+      "side": 1,
+      "message": "Magic Number?",
+      "range": {
+        "startLine": 71,
+        "startChar": 62,
+        "endLine": 71,
+        "endChar": 66
+      },
+      "revId": "e24668b1f6faced75a589044a0347867f9420360",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d0299e86_775d6256",
+        "filename": "dbus.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1117132
+      },
+      "writtenOn": "2015-04-13T17:56:03Z",
+      "side": 1,
+      "message": "Magic Number? Same as above.",
+      "range": {
+        "startLine": 93,
+        "startChar": 62,
+        "endLine": 93,
+        "endChar": 66
+      },
+      "revId": "e24668b1f6faced75a589044a0347867f9420360",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9033a6f4_15e976ad",
+        "filename": "dbus.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1117132
+      },
+      "writtenOn": "2015-04-13T17:56:03Z",
+      "side": 1,
+      "message": "It\u0027s possible for this value to exceed int\u0027s range.",
+      "range": {
+        "startLine": 188,
+        "startChar": 25,
+        "endLine": 188,
+        "endChar": 31
+      },
+      "revId": "e24668b1f6faced75a589044a0347867f9420360",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b0242aae_dc22f9ce",
+        "filename": "dbus.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 1117132
+      },
+      "writtenOn": "2015-04-13T17:56:03Z",
+      "side": 1,
+      "message": "Perhaps log a warning that offset is getting ignored. Also, what if the x and y variables are set to whatever the offset option had? I would say use two sets of x and y variables for location and offset.",
+      "range": {
+        "startLine": 244,
+        "startChar": 2,
+        "endLine": 244,
+        "endChar": 21
+      },
+      "revId": "e24668b1f6faced75a589044a0347867f9420360",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d0299e86_97d32e53",
+        "filename": "input.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 497,
+      "author": {
+        "id": 1117132
+      },
+      "writtenOn": "2015-04-13T17:56:03Z",
+      "side": 1,
+      "message": "Is this left over debug logging? If not, please explain this error.",
+      "range": {
+        "startLine": 497,
+        "startChar": 1,
+        "endLine": 497,
+        "endChar": 25
+      },
+      "revId": "e24668b1f6faced75a589044a0347867f9420360",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    }
+  ]
+}
