@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f090620b_ff6d9f00",
+        "filename": "video.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2015-04-13T20:08:42Z",
+      "side": 1,
+      "message": "drmCopyVersion(\u0026video-\u003edriver_version, version);",
+      "range": {
+        "startLine": 62,
+        "startChar": 0,
+        "endLine": 75,
+        "endChar": 52
+      },
+      "revId": "3970cb5f920ced3a074bac532df5d3f358f60a4a",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    }
+  ]
+}
