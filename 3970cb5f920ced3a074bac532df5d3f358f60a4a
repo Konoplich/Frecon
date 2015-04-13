@@ -22,6 +22,52 @@
       "revId": "3970cb5f920ced3a074bac532df5d3f358f60a4a",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "30875ad3_6144967c",
+        "filename": "video.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 441,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2015-04-13T20:13:03Z",
+      "side": 1,
+      "message": "Cool! I never saw \"%m\" before :-).",
+      "range": {
+        "startLine": 441,
+        "startChar": 33,
+        "endLine": 441,
+        "endChar": 36
+      },
+      "revId": "3970cb5f920ced3a074bac532df5d3f358f60a4a",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "30875ad3_c177a2ca",
+        "filename": "video.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 480,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2015-04-13T20:13:03Z",
+      "side": 1,
+      "message": "drmFreeVersion(\u0026video-\u003edriver_version)",
+      "range": {
+        "startLine": 473,
+        "startChar": 0,
+        "endLine": 480,
+        "endChar": 35
+      },
+      "revId": "3970cb5f920ced3a074bac532df5d3f358f60a4a",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
     }
   ]
 }
