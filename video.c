@@ -298,12 +298,28 @@ destroy_buffer:
 	return ret;
 }
 
+static bool parse_edid_detailed_timing_descriptor(
+		char *edid, int32_t *display_width_mm, int32_t *display_height_mm) {
+	int i;
+	for (i = 0; i < 4; i++) {
+		uint8_t *desc = (uint8_t *)&edid[54 + i * 18];
+		int32_t pixel_clock = (((int32_t)desc[1]) << 8) | desc[0];
+		if (!pixel_clock)
+			continue;
+		*display_width_mm = ((int32_t)(desc[14] >> 4) << 8) + desc[12];
+		*display_height_mm = ((int32_t)(desc[14] & 0xf) << 8) + desc[13];
+		return true;
+	}
+	return false;
+}
+
 video_t* video_init()
 {
 	int32_t width, height, scaling, pitch;
 	int i;
 	uint32_t selected_mode;
 	video_t *new_video = (video_t*)calloc(1, sizeof(video_t));
+	int32_t display_width_mm, display_height_mm;
 
 	new_video->fd = kms_open(new_video);
 
@@ -371,10 +387,16 @@ video_t* video_init()
 	width = new_video->crtc->mode.hdisplay;
 	height = new_video->crtc->mode.vdisplay;
 
-	if (!new_video->main_monitor_connector->mmWidth)
+	if (!parse_edid_detailed_timing_descriptor(
+			new_video->edid, &display_width_mm, &display_height_mm)) {
+		display_width_mm = new_video->main_monitor_connector->mmWidth;
+		display_height_mm = new_video->main_monitor_connector->mmHeight;
+	}
+
+	if (!display_width_mm)
 		scaling = 1;
 	else {
-		int dots_per_cm = width * 10 / new_video->main_monitor_connector->mmWidth;
+		int dots_per_cm = width * 10 / display_width_mm;
 		if (dots_per_cm > 133)
 			scaling = 4;
 		else if (dots_per_cm > 100)
