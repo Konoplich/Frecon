@@ -298,12 +298,29 @@ destroy_buffer:
 	return ret;
 }
 
+static bool parse_edid_detailed_timing_descriptor(
+		char *edid, int32_t *hsize_mm, int32_t *vsize_mm) {
+	int i;
+	for (i = 0; i < EDID_N_DTDS; i++) {
+		uint8_t *dtd = (uint8_t *)&edid[EDID_DTD_BASE + i * DTD_SIZE];
+		int32_t pixel_clock = (((int32_t)dtd[DTD_PCLK_HI] << 8)) | dtd[DTD_PCLK_LO];
+		if (!pixel_clock)
+			continue;
+		*hsize_mm = ((int32_t)(dtd[DTD_HVSIZE_HI] >> 4) << 8) + dtd[DTD_HSIZE_LO];
+		*vsize_mm = ((int32_t)(dtd[DTD_HVSIZE_HI] & 0xf) << 8) + dtd[DTD_VSIZE_LO];
+		return true;
+	}
+	return false;
+}
+
 video_t* video_init()
 {
 	int32_t width, height, scaling, pitch;
 	int i;
 	uint32_t selected_mode;
 	video_t *new_video = (video_t*)calloc(1, sizeof(video_t));
+	bool edid_found = false;
+	int32_t hsize_mm, vsize_mm;
 
 	new_video->fd = kms_open(new_video);
 
@@ -343,6 +360,7 @@ video_t* video_init()
 					}
 					memcpy(&new_video->edid, blob_ptr->data, EDID_SIZE);
 					drmModeFreePropertyBlob(blob_ptr);
+					edid_found = true;
 				}
 			}
 		}
@@ -371,10 +389,16 @@ video_t* video_init()
 	width = new_video->crtc->mode.hdisplay;
 	height = new_video->crtc->mode.vdisplay;
 
-	if (!new_video->main_monitor_connector->mmWidth)
+	if (!edid_found || !parse_edid_detailed_timing_descriptor(
+			new_video->edid, &hsize_mm, &vsize_mm)) {
+		hsize_mm = new_video->main_monitor_connector->mmWidth;
+		vsize_mm = new_video->main_monitor_connector->mmHeight;
+	}
+
+	if (!hsize_mm)
 		scaling = 1;
 	else {
-		int dots_per_cm = width * 10 / new_video->main_monitor_connector->mmWidth;
+		int dots_per_cm = width * 10 / hsize_mm;
 		if (dots_per_cm > 133)
 			scaling = 4;
 		else if (dots_per_cm > 100)
