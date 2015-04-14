@@ -16,6 +16,24 @@
       "revId": "f389a051441c7a08b54cfa3ee25958f8d4baa435",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d0299e86_7c277032",
+        "filename": "video.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1106179
+      },
+      "writtenOn": "2015-04-14T21:20:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "30875ad3_c186c2e5",
+      "revId": "f389a051441c7a08b54cfa3ee25958f8d4baa435",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
     }
   ]
 }
