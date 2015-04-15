@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "9033a6f4_3997af91",
+        "filename": "Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000768
+      },
+      "writtenOn": "2015-04-15T23:12:53Z",
+      "side": 1,
+      "message": "-I flags go into CPPFLAGS rather than CFLAGS",
+      "revId": "cbd5b6d4ae6fd871dd9b51f5428627793fc5af36",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d080bec6_80c3d73b",
         "filename": "font.c",
         "patchSetId": 1
