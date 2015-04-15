@@ -9,12 +9,15 @@ PC_CFLAGS := $(shell $(PKG_CONFIG) --cflags $(PC_DEPS))
 PC_LIBS := $(shell $(PKG_CONFIG) --libs $(PC_DEPS))
 
 CPPFLAGS += -std=c99 -D_GNU_SOURCE=1
-CFLAGS += -Wall -Wsign-compare -Wpointer-arith -Wcast-qual -Wcast-align
+CFLAGS += -Wall -Wsign-compare -Wpointer-arith -Wcast-qual -Wcast-align -I$(OUT)
 
 CPPFLAGS += $(PC_CFLAGS)
 LDLIBS += $(PC_LIBS)
 
-CC_BINARY(frecon): $(C_OBJECTS)
+$(OUT)glyphs.h: $(SRC)/font_to_c.py $(SRC)/ter-u16n.bdf
+	python2 $(SRC)/font_to_c.py $(SRC)/ter-u16n.bdf $(OUT)glyphs.h
+
+CC_BINARY(frecon): $(C_OBJECTS) $(OUT)glyphs.h
 
 all: CC_BINARY(frecon)
 
