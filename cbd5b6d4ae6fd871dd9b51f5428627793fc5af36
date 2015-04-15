@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d080bec6_80c3d73b",
+        "filename": "font.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1001537
+      },
+      "writtenOn": "2015-04-15T22:28:57Z",
+      "side": 1,
+      "message": "nit: one space after #define",
+      "range": {
+        "startLine": 14,
+        "startChar": 7,
+        "endLine": 14,
+        "endChar": 9
+      },
+      "revId": "cbd5b6d4ae6fd871dd9b51f5428627793fc5af36",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d080bec6_200c43ef",
+        "filename": "font.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1001537
+      },
+      "writtenOn": "2015-04-15T22:28:57Z",
+      "side": 1,
+      "message": "question: you\u0027re assuming that GLYPH_BITS_PER_PIXEL is either 1 or 8, correct? This blending code will not work for GLPYH_BITS_PER_PIXEL \u003d 2 or 4.",
+      "range": {
+        "startLine": 78,
+        "startChar": 51,
+        "endLine": 78,
+        "endChar": 52
+      },
+      "revId": "cbd5b6d4ae6fd871dd9b51f5428627793fc5af36",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    }
+  ]
+}
