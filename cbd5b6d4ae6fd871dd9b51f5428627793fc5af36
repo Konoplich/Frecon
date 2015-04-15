@@ -45,6 +45,30 @@
       "revId": "cbd5b6d4ae6fd871dd9b51f5428627793fc5af36",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "907ac6a8_74f0bd61",
+        "filename": "font.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1117132
+      },
+      "writtenOn": "2015-04-15T22:33:02Z",
+      "side": 1,
+      "message": "It should work with 1, 2, 4, or 8, but it will never do blending because its only checking that any of the bits this pixel are set. In any case, I\u0027m going to strip the blending code as marcheu recommends.",
+      "parentUuid": "d080bec6_200c43ef",
+      "range": {
+        "startLine": 78,
+        "startChar": 51,
+        "endLine": 78,
+        "endChar": 52
+      },
+      "revId": "cbd5b6d4ae6fd871dd9b51f5428627793fc5af36",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
     }
   ]
 }
