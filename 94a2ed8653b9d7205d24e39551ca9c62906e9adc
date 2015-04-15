@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9033a6f4_2ff1a8e0",
+        "filename": "video.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 301,
+      "author": {
+        "id": 1106179
+      },
+      "writtenOn": "2015-04-15T00:26:48Z",
+      "side": 1,
+      "message": "Should return false if frecon never obtained the edid to begin with.",
+      "revId": "94a2ed8653b9d7205d24e39551ca9c62906e9adc",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    }
+  ]
+}
