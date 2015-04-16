@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "30d59acf_d3af5f5d",
+        "filename": "font_to_c.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1117132
+      },
+      "writtenOn": "2015-04-16T17:32:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "707552b8_36d816f3",
+      "revId": "8ba06338279ee30d06f0288650472f850be16c44",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "30d59acf_604edc4f",
         "filename": "font_to_c.py",
         "patchSetId": 4
@@ -42,6 +60,30 @@
     },
     {
       "key": {
+        "uuid": "907ac6a8_cf91f7a1",
+        "filename": "font_to_c.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1117132
+      },
+      "writtenOn": "2015-04-16T17:32:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "30d59acf_604edc4f",
+      "range": {
+        "startLine": 56,
+        "startChar": 85,
+        "endLine": 56,
+        "endChar": 86
+      },
+      "revId": "8ba06338279ee30d06f0288650472f850be16c44",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "907ac6a8_c6624413",
         "filename": "font_to_c.py",
         "patchSetId": 4
@@ -53,6 +95,30 @@
       "writtenOn": "2015-04-16T01:52:46Z",
       "side": 1,
       "message": "nit: trailing space",
+      "range": {
+        "startLine": 59,
+        "startChar": 80,
+        "endLine": 59,
+        "endChar": 81
+      },
+      "revId": "8ba06338279ee30d06f0288650472f850be16c44",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "907ac6a8_6f86a36c",
+        "filename": "font_to_c.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1117132
+      },
+      "writtenOn": "2015-04-16T17:32:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "907ac6a8_c6624413",
       "range": {
         "startLine": 59,
         "startChar": 80,
