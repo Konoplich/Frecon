@@ -1,0 +1,260 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d0299e86_79dd34e2",
+        "filename": "font_to_c.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1000768
+      },
+      "writtenOn": "2015-04-16T18:26:37Z",
+      "side": 1,
+      "message": "delete this line",
+      "revId": "3727bc228afb68c9283a5e3d198441fad81733f8",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "707552b8_bc38859c",
+        "filename": "font_to_c.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1000768
+      },
+      "writtenOn": "2015-04-16T18:26:37Z",
+      "side": 1,
+      "message": "delete the (c) and change to 2015",
+      "revId": "3727bc228afb68c9283a5e3d198441fad81733f8",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d0299e86_59da78eb",
+        "filename": "font_to_c.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000768
+      },
+      "writtenOn": "2015-04-16T18:26:37Z",
+      "side": 1,
+      "message": "blank line above this line",
+      "revId": "3727bc228afb68c9283a5e3d198441fad81733f8",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "707552b8_5cc9312b",
+        "filename": "font_to_c.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000768
+      },
+      "writtenOn": "2015-04-16T18:26:37Z",
+      "side": 1,
+      "message": "two blank lines here",
+      "revId": "3727bc228afb68c9283a5e3d198441fad81733f8",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9033a6f4_ca7c4b36",
+        "filename": "font_to_c.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000768
+      },
+      "writtenOn": "2015-04-16T18:26:37Z",
+      "side": 1,
+      "message": "we generally don\u0027t use .format.  use %s and % interpolation instead.\n\n \u0027foo %s blah\u0027 % code_point",
+      "revId": "3727bc228afb68c9283a5e3d198441fad81733f8",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9033a6f4_aa81ff98",
+        "filename": "font_to_c.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000768
+      },
+      "writtenOn": "2015-04-16T18:26:37Z",
+      "side": 1,
+      "message": "you could write out a docstring and might be easier to read ?\n\n out_file.write(\"\"\"\n#define GLYPH_WIDTH %(width)s\n#define GLYPH_HEIGHT %(height)s\n...\n \"\"\" % {\n     \u0027width\u0027: self.width,\n     \u0027height\u0027: self.height,\n     \u0027bbr\u0027: self.bytes_per_row,\n })",
+      "range": {
+        "startLine": 61,
+        "startChar": 0,
+        "endLine": 65,
+        "endChar": 28
+      },
+      "revId": "3727bc228afb68c9283a5e3d198441fad81733f8",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9033a6f4_0a5a53d6",
+        "filename": "font_to_c.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1000768
+      },
+      "writtenOn": "2015-04-16T18:26:37Z",
+      "side": 1,
+      "message": "i think you want:\n\n for i, glyphs in enumerate(sorted_glypths):\n   code_point \u003d glyphs[0]\n   ...\n     breaks.append((code_point, i))",
+      "range": {
+        "startLine": 71,
+        "startChar": 0,
+        "endLine": 72,
+        "endChar": 48
+      },
+      "revId": "3727bc228afb68c9283a5e3d198441fad81733f8",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "707552b8_1c25f961",
+        "filename": "font_to_c.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1000768
+      },
+      "writtenOn": "2015-04-16T18:26:37Z",
+      "side": 1,
+      "message": "prob want enumerate() here too",
+      "revId": "3727bc228afb68c9283a5e3d198441fad81733f8",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9033a6f4_4a5f3bc1",
+        "filename": "font_to_c.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1000768
+      },
+      "writtenOn": "2015-04-16T18:26:37Z",
+      "side": 1,
+      "message": "should be in the class\u0027s docstring below",
+      "range": {
+        "startLine": 112,
+        "startChar": 0,
+        "endLine": 115,
+        "endChar": 54
+      },
+      "revId": "3727bc228afb68c9283a5e3d198441fad81733f8",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d0299e86_191630fc",
+        "filename": "font_to_c.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1000768
+      },
+      "writtenOn": "2015-04-16T18:26:37Z",
+      "side": 1,
+      "message": "would be nice if each of these funcs had a one line docstring",
+      "revId": "3727bc228afb68c9283a5e3d198441fad81733f8",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d0299e86_590cb8ef",
+        "filename": "font_to_c.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1000768
+      },
+      "writtenOn": "2015-04-16T18:26:37Z",
+      "side": 1,
+      "message": "hanging indent should be 4 spaces",
+      "revId": "3727bc228afb68c9283a5e3d198441fad81733f8",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d0299e86_f94244ff",
+        "filename": "font_to_c.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1000768
+      },
+      "writtenOn": "2015-04-16T18:26:37Z",
+      "side": 1,
+      "message": "two blank lines",
+      "revId": "3727bc228afb68c9283a5e3d198441fad81733f8",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "707552b8_1c3c1974",
+        "filename": "font_to_c.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1000768
+      },
+      "writtenOn": "2015-04-16T18:26:37Z",
+      "side": 1,
+      "message": "two blank lines",
+      "revId": "3727bc228afb68c9283a5e3d198441fad81733f8",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "707552b8_3c41d5f8",
+        "filename": "font_to_c.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1000768
+      },
+      "writtenOn": "2015-04-16T18:26:37Z",
+      "side": 1,
+      "message": "should pass in sys.argv[1:]",
+      "revId": "3727bc228afb68c9283a5e3d198441fad81733f8",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    }
+  ]
+}
