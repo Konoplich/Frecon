@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "10dc16fc_d0419c18",
+        "filename": "font.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000313
+      },
+      "writtenOn": "2015-04-16T19:17:58Z",
+      "side": 1,
+      "message": "I would probably still include files in alphabetical order even if this one is generated",
+      "revId": "3727bc228afb68c9283a5e3d198441fad81733f8",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d0299e86_79dd34e2",
         "filename": "font_to_c.py",
         "patchSetId": 5
