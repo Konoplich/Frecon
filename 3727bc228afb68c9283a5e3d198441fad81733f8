@@ -248,6 +248,24 @@
     },
     {
       "key": {
+        "uuid": "907ac6a8_a1004705",
+        "filename": "font_to_c.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1117132
+      },
+      "writtenOn": "2015-04-16T22:54:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "707552b8_e28f38fc",
+      "revId": "3727bc228afb68c9283a5e3d198441fad81733f8",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9033a6f4_aa81ff98",
         "filename": "font_to_c.py",
         "patchSetId": 5
@@ -611,6 +629,24 @@
       "side": 1,
       "message": "correct, but rarely do main funcs want that, and when they do, they reach back out into sys.argv directly.  that\u0027s generally the better route too so that people calling main() directly don\u0027t produce confusing output.",
       "parentUuid": "907ac6a8_b572c85f",
+      "revId": "3727bc228afb68c9283a5e3d198441fad81733f8",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10dc16fc_ba25cea7",
+        "filename": "font_to_c.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1117132
+      },
+      "writtenOn": "2015-04-16T22:54:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "707552b8_42e94cac",
       "revId": "3727bc228afb68c9283a5e3d198441fad81733f8",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
       "unresolved": false
