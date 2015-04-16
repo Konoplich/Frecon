@@ -60,6 +60,30 @@
     },
     {
       "key": {
+        "uuid": "d080bec6_cbf00464",
+        "filename": "font_to_c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1117132
+      },
+      "writtenOn": "2015-04-16T23:19:17Z",
+      "side": 1,
+      "message": "It\u0027s a symlink. To quote https://www.chromium.org/chromium-os/python-style-guidelines#TOC-Main-Modules\n\"Main modules should have a symlink without an extension that point to the .py file.  All actual code should be in .py files.\"",
+      "parentUuid": "d080bec6_eb62a012",
+      "range": {
+        "startLine": 1,
+        "startChar": 10,
+        "endLine": 1,
+        "endChar": 12
+      },
+      "revId": "3727bc228afb68c9283a5e3d198441fad81733f8",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d0299e86_79dd34e2",
         "filename": "font_to_c.py",
         "patchSetId": 5
