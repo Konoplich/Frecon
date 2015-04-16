@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "d080bec6_2acdf9b4",
+        "filename": "font_to_c.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1117132
+      },
+      "writtenOn": "2015-04-16T21:13:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d0299e86_79dd34e2",
+      "revId": "3727bc228afb68c9283a5e3d198441fad81733f8",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "707552b8_bc38859c",
         "filename": "font_to_c.py",
         "patchSetId": 5
@@ -47,6 +65,24 @@
       "writtenOn": "2015-04-16T18:26:37Z",
       "side": 1,
       "message": "delete the (c) and change to 2015",
+      "revId": "3727bc228afb68c9283a5e3d198441fad81733f8",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10dc16fc_b3eae2ec",
+        "filename": "font_to_c.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1117132
+      },
+      "writtenOn": "2015-04-16T21:13:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "707552b8_bc38859c",
       "revId": "3727bc228afb68c9283a5e3d198441fad81733f8",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
       "unresolved": false
@@ -70,6 +106,24 @@
     },
     {
       "key": {
+        "uuid": "d080bec6_13b718c8",
+        "filename": "font_to_c.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1117132
+      },
+      "writtenOn": "2015-04-16T21:13:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d0299e86_59da78eb",
+      "revId": "3727bc228afb68c9283a5e3d198441fad81733f8",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "707552b8_5cc9312b",
         "filename": "font_to_c.py",
         "patchSetId": 5
@@ -81,6 +135,24 @@
       "writtenOn": "2015-04-16T18:26:37Z",
       "side": 1,
       "message": "two blank lines here",
+      "revId": "3727bc228afb68c9283a5e3d198441fad81733f8",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10dc16fc_19818f49",
+        "filename": "font_to_c.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1117132
+      },
+      "writtenOn": "2015-04-16T21:13:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "707552b8_5cc9312b",
       "revId": "3727bc228afb68c9283a5e3d198441fad81733f8",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
       "unresolved": false
@@ -104,6 +176,24 @@
     },
     {
       "key": {
+        "uuid": "d080bec6_4a55d51f",
+        "filename": "font_to_c.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1117132
+      },
+      "writtenOn": "2015-04-16T21:13:43Z",
+      "side": 1,
+      "message": "The style guide explicitly says I can use either. I will change to % interpolation if the style guide is changed to reflect that convention.",
+      "parentUuid": "9033a6f4_ca7c4b36",
+      "revId": "3727bc228afb68c9283a5e3d198441fad81733f8",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9033a6f4_aa81ff98",
         "filename": "font_to_c.py",
         "patchSetId": 5
@@ -115,6 +205,30 @@
       "writtenOn": "2015-04-16T18:26:37Z",
       "side": 1,
       "message": "you could write out a docstring and might be easier to read ?\n\n out_file.write(\"\"\"\n#define GLYPH_WIDTH %(width)s\n#define GLYPH_HEIGHT %(height)s\n...\n \"\"\" % {\n     \u0027width\u0027: self.width,\n     \u0027height\u0027: self.height,\n     \u0027bbr\u0027: self.bytes_per_row,\n })",
+      "range": {
+        "startLine": 61,
+        "startChar": 0,
+        "endLine": 65,
+        "endChar": 28
+      },
+      "revId": "3727bc228afb68c9283a5e3d198441fad81733f8",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "907ac6a8_50057f12",
+        "filename": "font_to_c.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1117132
+      },
+      "writtenOn": "2015-04-16T21:13:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9033a6f4_aa81ff98",
       "range": {
         "startLine": 61,
         "startChar": 0,
@@ -150,6 +264,30 @@
     },
     {
       "key": {
+        "uuid": "10dc16fc_44d88ef3",
+        "filename": "font_to_c.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1117132
+      },
+      "writtenOn": "2015-04-16T21:13:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9033a6f4_0a5a53d6",
+      "range": {
+        "startLine": 71,
+        "startChar": 0,
+        "endLine": 72,
+        "endChar": 48
+      },
+      "revId": "3727bc228afb68c9283a5e3d198441fad81733f8",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "707552b8_1c25f961",
         "filename": "font_to_c.py",
         "patchSetId": 5
@@ -161,6 +299,24 @@
       "writtenOn": "2015-04-16T18:26:37Z",
       "side": 1,
       "message": "prob want enumerate() here too",
+      "revId": "3727bc228afb68c9283a5e3d198441fad81733f8",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d080bec6_58484f3e",
+        "filename": "font_to_c.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1117132
+      },
+      "writtenOn": "2015-04-16T21:13:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "707552b8_1c25f961",
       "revId": "3727bc228afb68c9283a5e3d198441fad81733f8",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
       "unresolved": false
@@ -190,6 +346,30 @@
     },
     {
       "key": {
+        "uuid": "d080bec6_6d86ab6c",
+        "filename": "font_to_c.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1117132
+      },
+      "writtenOn": "2015-04-16T21:13:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9033a6f4_4a5f3bc1",
+      "range": {
+        "startLine": 112,
+        "startChar": 0,
+        "endLine": 115,
+        "endChar": 54
+      },
+      "revId": "3727bc228afb68c9283a5e3d198441fad81733f8",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d0299e86_191630fc",
         "filename": "font_to_c.py",
         "patchSetId": 5
@@ -201,6 +381,24 @@
       "writtenOn": "2015-04-16T18:26:37Z",
       "side": 1,
       "message": "would be nice if each of these funcs had a one line docstring",
+      "revId": "3727bc228afb68c9283a5e3d198441fad81733f8",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d080bec6_0dce17df",
+        "filename": "font_to_c.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1117132
+      },
+      "writtenOn": "2015-04-16T21:13:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d0299e86_191630fc",
       "revId": "3727bc228afb68c9283a5e3d198441fad81733f8",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
       "unresolved": false
@@ -224,6 +422,24 @@
     },
     {
       "key": {
+        "uuid": "10dc16fc_59d3978a",
+        "filename": "font_to_c.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1117132
+      },
+      "writtenOn": "2015-04-16T21:13:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d0299e86_590cb8ef",
+      "revId": "3727bc228afb68c9283a5e3d198441fad81733f8",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d0299e86_f94244ff",
         "filename": "font_to_c.py",
         "patchSetId": 5
@@ -235,6 +451,24 @@
       "writtenOn": "2015-04-16T18:26:37Z",
       "side": 1,
       "message": "two blank lines",
+      "revId": "3727bc228afb68c9283a5e3d198441fad81733f8",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d080bec6_6daf8be4",
+        "filename": "font_to_c.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1117132
+      },
+      "writtenOn": "2015-04-16T21:13:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d0299e86_f94244ff",
       "revId": "3727bc228afb68c9283a5e3d198441fad81733f8",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
       "unresolved": false
@@ -258,6 +492,24 @@
     },
     {
       "key": {
+        "uuid": "10dc16fc_b932c369",
+        "filename": "font_to_c.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1117132
+      },
+      "writtenOn": "2015-04-16T21:13:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "707552b8_1c3c1974",
+      "revId": "3727bc228afb68c9283a5e3d198441fad81733f8",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "707552b8_3c41d5f8",
         "filename": "font_to_c.py",
         "patchSetId": 5
@@ -269,6 +521,24 @@
       "writtenOn": "2015-04-16T18:26:37Z",
       "side": 1,
       "message": "should pass in sys.argv[1:]",
+      "revId": "3727bc228afb68c9283a5e3d198441fad81733f8",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "907ac6a8_b572c85f",
+        "filename": "font_to_c.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1117132
+      },
+      "writtenOn": "2015-04-16T21:13:43Z",
+      "side": 1,
+      "message": "Sure, but then the usage can\u0027t print argv[0]",
+      "parentUuid": "707552b8_3c41d5f8",
       "revId": "3727bc228afb68c9283a5e3d198441fad81733f8",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
       "unresolved": false
