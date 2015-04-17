@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d0299e86_921af5a2",
+        "filename": "font_to_c.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1000768
+      },
+      "writtenOn": "2015-04-17T05:34:01Z",
+      "side": 1,
+      "message": "items should be indented by 4 more spaces",
+      "revId": "0ae88a0a124a7818072b7b10413dfe8e221dfa30",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    }
+  ]
+}
