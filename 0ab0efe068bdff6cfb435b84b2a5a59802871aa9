@@ -1,0 +1,112 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "70a39280_a3fa9a3a",
+        "filename": "dbus.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 1000313
+      },
+      "writtenOn": "2015-04-17T22:06:58Z",
+      "side": 1,
+      "message": "the block from here...",
+      "revId": "0ab0efe068bdff6cfb435b84b2a5a59802871aa9",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d0c51e25_df7764ca",
+        "filename": "dbus.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 1000313
+      },
+      "writtenOn": "2015-04-17T22:06:58Z",
+      "side": 1,
+      "message": "... to here should go in image.c as its own function, since it touches video \u0026 images only. It\u0027s really a self-standing function",
+      "revId": "0ab0efe068bdff6cfb435b84b2a5a59802871aa9",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d0c51e25_5fbe14c6",
+        "filename": "image.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000313
+      },
+      "writtenOn": "2015-04-17T22:06:58Z",
+      "side": 1,
+      "message": "I don\u0027t think you should expose the struct here, and the API only uses image_t* as the abstraction. So we can move it to image.c along with layout_t. The image constructor will need to allocate, but that\u0027s a minor change.",
+      "revId": "0ab0efe068bdff6cfb435b84b2a5a59802871aa9",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d0c51e25_9fef9cb4",
+        "filename": "term.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000313
+      },
+      "writtenOn": "2015-04-17T22:06:58Z",
+      "side": 1,
+      "message": "I still think this shouldn\u0027t be a limitation in this API. term.h should provide the implementation of 1 terminal, the consumer of the API should be the one which decides how many terminals they want to instantiate.",
+      "revId": "0ab0efe068bdff6cfb435b84b2a5a59802871aa9",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "70a39280_c31476c8",
+        "filename": "util.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000313
+      },
+      "writtenOn": "2015-04-17T22:06:58Z",
+      "side": 1,
+      "message": "alphabetical order for includes",
+      "range": {
+        "startLine": 15,
+        "startChar": 18,
+        "endLine": 15,
+        "endChar": 19
+      },
+      "revId": "0ab0efe068bdff6cfb435b84b2a5a59802871aa9",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f0b782b3_6a49d792",
+        "filename": "util.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000313
+      },
+      "writtenOn": "2015-04-17T22:06:58Z",
+      "side": 1,
+      "message": "this macro already exists at line 17 of this file, can this be sorted out? Also macros should all be upper case.",
+      "revId": "0ab0efe068bdff6cfb435b84b2a5a59802871aa9",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    }
+  ]
+}
