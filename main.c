@@ -120,7 +120,11 @@ int main(int argc, char* argv[])
 	dbus = NULL;
 	if (command_flags.print_resolution) {
 		video = video_init();
-		printf("%d %d", video_getwidth(video), video_getheight(video));
+		if (video)
+			printf("%d %d", video_getwidth(video), video_getheight(video));
+		else
+			/* print out default resolution 10x7 */
+			printf("%d %d", 10, 7);
 		return EXIT_SUCCESS;
 	}
 	else if (command_flags.frame_interval) {
