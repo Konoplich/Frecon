@@ -22,9 +22,11 @@ void daemonize()
 	int fd;
 
 	pid = fork();
-	if (pid == -1)
-		return;
-	else if (pid != 0)
+	if (pid == -1) {
+		/* exit if fork a process fail */
+		LOG(ERROR, "fail to fork a process");
+		exit(EXIT_FAILURE);
+	} else if (pid != 0)
 		exit(EXIT_SUCCESS);
 
 	if (setsid() == -1)
