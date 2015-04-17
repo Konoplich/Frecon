@@ -182,24 +182,34 @@ static int splash_image_show(splash_t *splash,
 	return 0;
 }
 
+int splash_video_init(splash_t* splash)
+{
+	FILE *cookie_fp;
+
+	splash->video = video_init();
+
+	if(splash->video){
+		cookie_fp = fopen("/tmp/display_info.bin", "wb");
+		if (cookie_fp) {
+			fwrite(&splash->video->internal_panel, sizeof(char), 1, cookie_fp);
+			fwrite(splash->video->edid, EDID_SIZE, 1, cookie_fp);
+			fclose(cookie_fp);
+		}
+		return 0;
+	}
+	return -1;
+}
+
 splash_t* splash_init()
 {
 	splash_t* splash;
-	FILE *cookie_fp;
 
 	splash = (splash_t*)calloc(1, sizeof(splash_t));
 	if (splash == NULL)
 		return NULL;
 
 	splash->num_images = 0;
-	splash->video = video_init();
-
-	cookie_fp = fopen("/tmp/display_info.bin", "wb");
-	if (cookie_fp) {
-		fwrite(&splash->video->internal_panel, sizeof(char), 1, cookie_fp);
-		fwrite(splash->video->edid, EDID_SIZE, 1, cookie_fp);
-		fclose(cookie_fp);
-	}
+	splash_video_init(splash);
 
 	return splash;
 }
@@ -262,6 +272,8 @@ int splash_run(splash_t* splash, dbus_t** dbus)
 	int fd;
 	int num_written;
 
+	if(!splash->video)
+		return -1;
 	status = 0;
 
 	/*
