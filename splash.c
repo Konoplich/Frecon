@@ -194,6 +194,10 @@ splash_t* splash_init()
 	splash->num_images = 0;
 	splash->video = video_init();
 
+	if(!splash->video){
+		free(splash);
+		return NULL;
+	}
 	cookie_fp = fopen("/tmp/display_info.bin", "wb");
 	if (cookie_fp) {
 		fwrite(&splash->video->internal_panel, sizeof(char), 1, cookie_fp);
@@ -262,6 +266,8 @@ int splash_run(splash_t* splash, dbus_t** dbus)
 	int fd;
 	int num_written;
 
+	if(!splash->video)
+		return -1;
 	status = 0;
 
 	/*
