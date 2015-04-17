@@ -59,11 +59,13 @@ splash_t* splash_init()
 	splash->default_duration = 25;
 	splash->loop_duration = 25;
 
-	cookie_fp = fopen("/tmp/display_info.bin", "wb");
-	if (cookie_fp) {
-		fwrite(&splash->video->internal_panel, sizeof(char), 1, cookie_fp);
-		fwrite(splash->video->edid, EDID_SIZE, 1, cookie_fp);
-		fclose(cookie_fp);
+	if (splash->video) {
+		cookie_fp = fopen("/tmp/display_info.bin", "wb");
+		if (cookie_fp) {
+			fwrite(&splash->video->internal_panel, sizeof(char), 1, cookie_fp);
+			fwrite(splash->video->edid, EDID_SIZE, 1, cookie_fp);
+			fclose(cookie_fp);
+		}
 	}
 
 	return splash;
@@ -148,105 +150,106 @@ int splash_run(splash_t* splash, dbus_t** dbus)
 	/*
 	 * First draw the actual splash screen
 	 */
-	video_buffer = video_lock(splash->video);
-	if (video_buffer != NULL) {
-		splash_clear_screen(splash, video_buffer);
-		last_show_ms = -1;
-		for (i = 0; i < splash->num_images; i++) {
-			image = splash->image_frames[i].image;
-			status = image_load_image_from_file(image);
-			if (status != 0) {
-				LOG(WARNING, "image_load_image_from_file failed: %d", status);
-				break;
-			}
-
-			now_ms = get_monotonic_time_ms();
-			if (last_show_ms > 0) {
-				if (splash->loop_start >= 0 && i >= splash->loop_start)
-					duration = splash->loop_duration;
-				else
-					duration = splash->image_frames[i].duration;
-				sleep_ms = duration - (now_ms - last_show_ms);
-				if (sleep_ms > 0) {
-					sleep_spec.tv_sec = sleep_ms / MS_PER_SEC;
-					sleep_spec.tv_nsec = (sleep_ms % MS_PER_SEC) * NS_PER_MS;
-					nanosleep(&sleep_spec, NULL);
+	if (splash->video) {
+		video_buffer = video_lock(splash->video);
+		if (video_buffer != NULL) {
+			splash_clear_screen(splash, video_buffer);
+			last_show_ms = -1;
+			for (i = 0; i < splash->num_images; i++) {
+				image = splash->image_frames[i].image;
+				status = image_load_image_from_file(image);
+				if (status != 0) {
+					LOG(WARNING, "image_load_image_from_file failed: %d", status);
+					break;
 				}
+
+				now_ms = get_monotonic_time_ms();
+				if (last_show_ms > 0) {
+					if (splash->loop_start >= 0 && i >= splash->loop_start)
+						duration = splash->loop_duration;
+					else
+						duration = splash->image_frames[i].duration;
+					sleep_ms = duration - (now_ms - last_show_ms);
+					if (sleep_ms > 0) {
+						sleep_spec.tv_sec = sleep_ms / MS_PER_SEC;
+						sleep_spec.tv_nsec = (sleep_ms % MS_PER_SEC) * NS_PER_MS;
+						nanosleep(&sleep_spec, NULL);
+					}
+				}
+
+				now_ms = get_monotonic_time_ms();
+
+				if (i >= splash->loop_start) {
+					image_set_offset(image,
+							splash->loop_offset_x,
+							splash->loop_offset_y);
+				}
+
+				status = image_show(image, splash->video);
+				if (status != 0) {
+					LOG(WARNING, "image_show failed: %d", status);
+					break;
+				}
+				last_show_ms = now_ms;
+
+				if ((splash->loop_start >= 0) &&
+						(splash->loop_start < splash->num_images)) {
+					if (i == splash->num_images - 1)
+						i = splash->loop_start - 1;
+				}
+
+				image_release(image);
 			}
+			video_unlock(splash->video);
 
-			now_ms = get_monotonic_time_ms();
-
-			if (i >= splash->loop_start) {
-				image_set_offset(image,
-						splash->loop_offset_x,
-						splash->loop_offset_y);
+			for (i = 0; i < splash->num_images; i++) {
+				image_destroy(splash->image_frames[i].image);
 			}
-
-			status = image_show(image, splash->video);
-			if (status != 0) {
-				LOG(WARNING, "image_show failed: %d", status);
-				break;
-			}
-			last_show_ms = now_ms;
-
-			if ((splash->loop_start >= 0) &&
-					(splash->loop_start < splash->num_images)) {
-				if (i == splash->num_images - 1)
-					i = splash->loop_start - 1;
-			}
-
-			image_release(image);
 		}
-		video_unlock(splash->video);
-
-		for (i = 0; i < splash->num_images; i++) {
-			image_destroy(splash->image_frames[i].image);
-		}
-
-		/*
-		 * Now Chrome can take over
-		 */
 		video_release(splash->video);
-		sync_lock(false);
-		video_unlock(splash->video);
+	}
 
-		if (dbus != NULL) {
-			do {
-				*dbus = dbus_init();
-				usleep(DBUS_WAIT_DELAY);
-			} while (*dbus == NULL);
-			splash_set_dbus(splash, *dbus);
-		}
+	/*
+	 * Now Chrome can take over
+	 */
+	sync_lock(false);
 
-		if (splash->devmode) {
+	if (dbus != NULL) {
+		do {
+			*dbus = dbus_init();
+			usleep(DBUS_WAIT_DELAY);
+		} while (*dbus == NULL);
+		splash_set_dbus(splash, *dbus);
+	}
+
+	if (splash->devmode) {
+		/*
+		 * Now set drm_master_relax so that we can transfer drm_master between
+		 * chrome and frecon
+		 */
+		fd = open("/sys/kernel/debug/dri/drm_master_relax", O_WRONLY);
+		if (fd != -1) {
+			num_written = write(fd, "Y", 1);
+			close(fd);
+
 			/*
-			 * Now set drm_master_relax so that we can transfer drm_master between
-			 * chrome and frecon
+			 * If we can't set drm_master relax, then transitions between chrome
+			 * and frecon won't work.  No point in having frecon hold any resources
 			 */
-			fd = open("/sys/kernel/debug/dri/drm_master_relax", O_WRONLY);
-			if (fd != -1) {
-				num_written = write(fd, "Y", 1);
-				close(fd);
-
-				/*
-				 * If we can't set drm_master relax, then transitions between chrome
-				 * and frecon won't work.  No point in having frecon hold any resources
-				 */
-				if (num_written != 1) {
-					LOG(ERROR, "Unable to set drm_master_relax");
-					splash->devmode = false;
-				}
-			} else {
-				LOG(ERROR, "unable to open drm_master_relax");
+			if (num_written != 1) {
+				LOG(ERROR, "Unable to set drm_master_relax");
+				splash->devmode = false;
 			}
 		} else {
-			/*
-			 * Below, we will wait for Chrome to appear above the splash
-			 * image.  If we are not in dev mode, wait and then exit
-			 */
-			sleep(MAX_SPLASH_WAITTIME);
-			exit(EXIT_SUCCESS);
+			LOG(ERROR, "unable to open drm_master_relax");
 		}
+	} else {
+		/*
+		 * Below, we will wait for Chrome to appear above the splash
+		 * image.  If we are not in dev mode, wait and then exit
+		 */
+		sleep(MAX_SPLASH_WAITTIME);
+		exit(EXIT_SUCCESS);
 	}
 
 	if (splash->dbus) {
