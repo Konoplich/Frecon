@@ -57,18 +57,14 @@ splash_t* splash_init()
 		return NULL;
 
 	splash->video = video_init();
-	if (!splash->video) {
-		free(splash);
-		return NULL;
-	}
-
 	splash->terminal = input_create_splash_term(splash->video);
 	splash->loop_start = -1;
 	splash->default_duration = 25;
 	splash->loop_duration = 25;
 
 	// Hide the cursor on the splash screen
-	term_hide_cursor(splash->terminal);
+	if(splash->terminal!=NULL)
+		term_hide_cursor(splash->terminal);
 
 	return splash;
 }
@@ -136,75 +132,81 @@ int splash_run(splash_t* splash, dbus_t** dbus)
 	image_t* image;
 	uint32_t duration;
 
+	status = 0;
+
 	/*
 	 * First draw the actual splash screen
 	 */
-	splash_clear_screen(splash);
-	term_activate(splash->terminal);
-	last_show_ms = -1;
-	for (i = 0; i < splash->num_images; i++) {
-		image = splash->image_frames[i].image;
-		status = image_load_image_from_file(image);
-		if (status != 0) {
-			LOG(WARNING, "image_load_image_from_file failed: %d", status);
-			break;
-		}
-
-		now_ms = get_monotonic_time_ms();
-		if (last_show_ms > 0) {
-			if (splash->loop_start >= 0 && i >= splash->loop_start)
-				duration = splash->loop_duration;
-			else
-				duration = splash->image_frames[i].duration;
-			sleep_ms = duration - (now_ms - last_show_ms);
-			if (sleep_ms > 0) {
-				sleep_spec.tv_sec = sleep_ms / MS_PER_SEC;
-				sleep_spec.tv_nsec = (sleep_ms % MS_PER_SEC) * NS_PER_MS;
-				nanosleep(&sleep_spec, NULL);
+	if(splash->terminal){
+		splash_clear_screen(splash);
+		term_activate(splash->terminal);
+		last_show_ms = -1;
+		for (i = 0; i < splash->num_images; i++) {
+			image = splash->image_frames[i].image;
+			status = image_load_image_from_file(image);
+			if (status != 0) {
+				LOG(WARNING, "image_load_image_from_file failed: %d", status);
+				break;
 			}
+
+			now_ms = get_monotonic_time_ms();
+			if (last_show_ms > 0) {
+				if (splash->loop_start >= 0 && i >= splash->loop_start)
+					duration = splash->loop_duration;
+				else
+					duration = splash->image_frames[i].duration;
+				sleep_ms = duration - (now_ms - last_show_ms);
+				if (sleep_ms > 0) {
+					sleep_spec.tv_sec = sleep_ms / MS_PER_SEC;
+					sleep_spec.tv_nsec = (sleep_ms % MS_PER_SEC) * NS_PER_MS;
+					nanosleep(&sleep_spec, NULL);
+				}
+			}
+
+			now_ms = get_monotonic_time_ms();
+
+			if (i >= splash->loop_start) {
+				image_set_offset(image,
+						splash->loop_offset_x,
+						splash->loop_offset_y);
+			}
+
+			status = term_show_image(splash->terminal, image);
+			if (status != 0) {
+				LOG(WARNING, "term_show_image failed: %d", status);
+				break;
+			}
+			status = input_process(splash->terminal, 1);
+			if (status != 0) {
+				LOG(WARNING, "input_process failed: %d", status);
+				break;
+			}
+			last_show_ms = now_ms;
+
+			if ((splash->loop_start >= 0) &&
+					(splash->loop_start < splash->num_images)) {
+				if (i == splash->num_images - 1)
+					i = splash->loop_start - 1;
+			}
+
+			image_release(image);
 		}
 
-		now_ms = get_monotonic_time_ms();
-
-		if (i >= splash->loop_start) {
-			image_set_offset(image,
-					splash->loop_offset_x,
-					splash->loop_offset_y);
+		for (i = 0; i < splash->num_images; i++) {
+			image_destroy(splash->image_frames[i].image);
 		}
 
-		status = term_show_image(splash->terminal, image);
-		if (status != 0) {
-			LOG(WARNING, "term_show_image failed: %d", status);
-			break;
-		}
-		status = input_process(splash->terminal, 1);
-		if (status != 0) {
-			LOG(WARNING, "input_process failed: %d", status);
-			break;
-		}
-		last_show_ms = now_ms;
-
-		if ((splash->loop_start >= 0) &&
-				(splash->loop_start < splash->num_images)) {
-			if (i == splash->num_images - 1)
-				i = splash->loop_start - 1;
-		}
-
-		image_release(image);
+		input_set_current(NULL);
+		input_ungrab();
 	}
 
-	for (i = 0; i < splash->num_images; i++) {
-		image_destroy(splash->image_frames[i].image);
+	if (splash->video) {
+		/*
+		 * Now Chrome can take over
+		 */
+		video_release(splash->video);
+		video_unlock(splash->video);
 	}
-
-	input_set_current(NULL);
-	input_ungrab();
-
-	/*
-	 * Now Chrome can take over
-	 */
-	video_release(splash->video);
-	video_unlock(splash->video);
 
 	if (dbus != NULL) {
 		do {
@@ -316,5 +318,6 @@ void splash_set_loop_offset(splash_t* splash, int32_t x, int32_t y)
 
 void splash_present_term_file(splash_t* splash)
 {
-	fprintf(stdout, "%s\n", term_get_ptsname(splash->terminal));
+	if(splash->terminal)
+		fprintf(stdout, "%s\n", term_get_ptsname(splash->terminal));
 }

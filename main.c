@@ -151,10 +151,11 @@ int main(int argc, char* argv[])
 	dbus = NULL;
 	if (command_flags.print_resolution) {
 		video = video_init();
-		if (!video)
-			return EXIT_FAILURE;
-
-		printf("%d %d", video_getwidth(video), video_getheight(video));
+		if (video)
+			printf("%d %d", video_getwidth(video), video_getheight(video));
+		else
+			/* print out default resolution 1024x768 */
+			printf("%d %d", 1024, 768);
 		return EXIT_SUCCESS;
 	}
 	else if (command_flags.standalone == false) {
