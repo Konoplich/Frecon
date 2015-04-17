@@ -120,7 +120,10 @@ int main(int argc, char* argv[])
 	dbus = NULL;
 	if (command_flags.print_resolution) {
 		video = video_init();
-		printf("%d %d", video_getwidth(video), video_getheight(video));
+		if (video)
+			printf("%d %d", video_getwidth(video), video_getheight(video));
+		else
+			printf("Failed to retrieve resolution");
 		return EXIT_SUCCESS;
 	}
 	else if (command_flags.frame_interval) {
