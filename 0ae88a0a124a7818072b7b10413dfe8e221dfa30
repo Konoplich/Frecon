@@ -16,6 +16,24 @@
       "revId": "0ae88a0a124a7818072b7b10413dfe8e221dfa30",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d080bec6_bf770202",
+        "filename": "font_to_c.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1117132
+      },
+      "writtenOn": "2015-04-17T16:28:07Z",
+      "side": 1,
+      "message": "Sure, but cros lint will only accept it the way it is now.",
+      "parentUuid": "d0299e86_921af5a2",
+      "revId": "0ae88a0a124a7818072b7b10413dfe8e221dfa30",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
     }
   ]
 }
