@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "70a39280_4caf5396",
+        "filename": "font_to_c.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1001537
+      },
+      "writtenOn": "2015-04-17T23:33:48Z",
+      "side": 1,
+      "message": "nit: since breaks[] is sorted, I wonder if it is better to rewrite the above code as:\n\nout_file.write(\u0027  if (cp \u003c %s) {\\n\u0027 %\n               (this_break_code_point + this_break_range))\nout_file.write(\u0027    if (cp \u003e\u003d %s)\\n\u0027 %\n               (this_break_code_point))\nout_file.write(\u0027      return cp - %s;\\n\u0027 %\n               (this_break_point - this_break_glpyh_index))\nout_file.write(\u0027    else\\n\u0027)\nout_file.write(\u0027      return -1;\\n\u0027)\nout_file.write(\u0027  }\\n\u0027)\n\nthis allows code points not present in the font to return -1 earlier.",
+      "range": {
+        "startLine": 99,
+        "startChar": 70,
+        "endLine": 99,
+        "endChar": 72
+      },
+      "revId": "d59aad41e40139055c0d94f355619c6b04d66cca",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    }
+  ]
+}
