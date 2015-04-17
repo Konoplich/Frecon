@@ -194,11 +194,13 @@ splash_t* splash_init()
 	splash->num_images = 0;
 	splash->video = video_init();
 
-	cookie_fp = fopen("/tmp/display_info.bin", "wb");
-	if (cookie_fp) {
-		fwrite(&splash->video->internal_panel, sizeof(char), 1, cookie_fp);
-		fwrite(splash->video->edid, EDID_SIZE, 1, cookie_fp);
-		fclose(cookie_fp);
+	if (splash->video) {
+		cookie_fp = fopen("/tmp/display_info.bin", "wb");
+		if (cookie_fp) {
+			fwrite(&splash->video->internal_panel, sizeof(char), 1, cookie_fp);
+			fwrite(splash->video->edid, EDID_SIZE, 1, cookie_fp);
+			fclose(cookie_fp);
+		}
 	}
 
 	return splash;
@@ -267,89 +269,91 @@ int splash_run(splash_t* splash, dbus_t** dbus)
 	/*
 	 * First draw the actual splash screen
 	 */
-	video_buffer = video_lock(splash->video);
-	if (video_buffer != NULL) {
-		splash_clear_screen(splash, video_buffer);
-		last_show_ms = -1;
-		for (i = 0; i < splash->num_images; i++) {
-			status = splash_load_image_from_file(splash, &splash->images[i]);
-			if (status != 0) {
-				LOG(WARNING, "splash_load_image_from_file failed: %d\n", status);
-				break;
-			}
-
-			now_ms = get_monotonic_time_ms();
-			if (last_show_ms > 0) {
-				sleep_ms = splash->frame_interval - (now_ms - last_show_ms);
-				if (sleep_ms > 0) {
-					sleep_spec.tv_sec = sleep_ms / MS_PER_SEC;
-					sleep_spec.tv_nsec = (sleep_ms % MS_PER_SEC) * NS_PER_MS;
-					nanosleep(&sleep_spec, NULL);
+	if (splash->video) {
+		video_buffer = video_lock(splash->video);
+		if (video_buffer != NULL) {
+			splash_clear_screen(splash, video_buffer);
+			last_show_ms = -1;
+			for (i = 0; i < splash->num_images; i++) {
+				status = splash_load_image_from_file(splash, &splash->images[i]);
+				if (status != 0) {
+					LOG(WARNING, "splash_load_image_from_file failed: %d\n", status);
+					break;
 				}
-			}
 
-			now_ms = get_monotonic_time_ms();
+				now_ms = get_monotonic_time_ms();
+				if (last_show_ms > 0) {
+					sleep_ms = splash->frame_interval - (now_ms - last_show_ms);
+					if (sleep_ms > 0) {
+						sleep_spec.tv_sec = sleep_ms / MS_PER_SEC;
+						sleep_spec.tv_nsec = (sleep_ms % MS_PER_SEC) * NS_PER_MS;
+						nanosleep(&sleep_spec, NULL);
+					}
+				}
 
-			status = splash_image_show(splash, &splash->images[i], video_buffer);
-			if (status != 0) {
-				LOG(WARNING, "splash_image_show failed: %d", status);
-				break;
+				now_ms = get_monotonic_time_ms();
+
+				status = splash_image_show(splash, &splash->images[i], video_buffer);
+				if (status != 0) {
+					LOG(WARNING, "splash_image_show failed: %d", status);
+					break;
+				}
+				last_show_ms = now_ms;
 			}
-			last_show_ms = now_ms;
+			video_unlock(splash->video);
 		}
-		video_unlock(splash->video);
-
-		/*
-		 * Now Chrome can take over
-		 */
 		video_release(splash->video);
-		sync_lock(false);
-
-
-		do {
-			*dbus = dbus_init();
-			usleep(50000);
-		} while (*dbus == NULL);
-
-		splash_set_dbus(splash, *dbus);
-
-		if (splash->devmode) {
-			/*
-			 * Now set drm_master_relax so that we can transfer drm_master between
-			 * chrome and frecon
-			 */
-			fd = open("/sys/kernel/debug/dri/drm_master_relax", O_WRONLY);
-			if (fd != -1) {
-				num_written = write(fd, "Y", 1);
-				close(fd);
-
-				/*
-				 * If we can't set drm_master relax, then transitions between chrome
-				 * and frecon won't work.  No point in having frecon hold any resources
-				 */
-				if (num_written != 1) {
-					LOG(ERROR, "Unable to set drm_master_relax");
-					splash->devmode = false;
-				}
-			} else {
-				LOG(ERROR, "unable to open drm_master_relax");
-			}
-		} else {
-			/*
-			 * Below, we will wait for Chrome to appear above the splash
-			 * image.  If we are not in dev mode, wait and then exit
-			 */
-			sleep(MAX_SPLASH_WAITTIME);
-			exit(EXIT_SUCCESS);
-		}
 	}
 
+	/*
+	 * Now Chrome can take over
+	 */
+	sync_lock(false);
 
-	(void)dbus_method_call0(splash->dbus,
-		kLibCrosServiceName,
-		kLibCrosServicePath,
-		kLibCrosServiceInterface,
-		kTakeDisplayOwnership);
+
+	do {
+		*dbus = dbus_init();
+		usleep(50000);
+	} while (*dbus == NULL);
+
+	splash_set_dbus(splash, *dbus);
+
+	if (splash->devmode) {
+		/*
+		 * Now set drm_master_relax so that we can transfer drm_master between
+		 * chrome and frecon
+		 */
+		fd = open("/sys/kernel/debug/dri/drm_master_relax", O_WRONLY);
+		if (fd != -1) {
+			num_written = write(fd, "Y", 1);
+			close(fd);
+
+			/*
+			 * If we can't set drm_master relax, then transitions between chrome
+			 * and frecon won't work.  No point in having frecon hold any resources
+			 */
+			if (num_written != 1) {
+				LOG(ERROR, "Unable to set drm_master_relax");
+				splash->devmode = false;
+			}
+		} else {
+			LOG(ERROR, "unable to open drm_master_relax");
+		}
+	} else {
+		/*
+		 * Below, we will wait for Chrome to appear above the splash
+		 * image.  If we are not in dev mode, wait and then exit
+		 */
+		sleep(MAX_SPLASH_WAITTIME);
+		exit(EXIT_SUCCESS);
+	}
+
+	if (splash->dbus)
+		(void)dbus_method_call0(splash->dbus,
+			kLibCrosServiceName,
+			kLibCrosServicePath,
+			kLibCrosServiceInterface,
+			kTakeDisplayOwnership);
 
 	/*
 	 * Finally, wait until chrome has drawn on top of the splash.  In dev mode,
