@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "f055c239_da8001fb",
+        "filename": "dbus.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 1106179
+      },
+      "writtenOn": "2015-04-18T01:54:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "70a39280_a3fa9a3a",
+      "revId": "0ab0efe068bdff6cfb435b84b2a5a59802871aa9",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d0c51e25_df7764ca",
         "filename": "dbus.c",
         "patchSetId": 13
@@ -30,6 +48,24 @@
       "writtenOn": "2015-04-17T22:06:58Z",
       "side": 1,
       "message": "... to here should go in image.c as its own function, since it touches video \u0026 images only. It\u0027s really a self-standing function",
+      "revId": "0ab0efe068bdff6cfb435b84b2a5a59802871aa9",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f055c239_fa834504",
+        "filename": "dbus.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 1106179
+      },
+      "writtenOn": "2015-04-18T01:54:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d0c51e25_df7764ca",
       "revId": "0ab0efe068bdff6cfb435b84b2a5a59802871aa9",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "d06c3e17_594d274d",
+        "filename": "image.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1106179
+      },
+      "writtenOn": "2015-04-18T01:54:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d0c51e25_5fbe14c6",
+      "revId": "0ab0efe068bdff6cfb435b84b2a5a59802871aa9",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d0c51e25_9fef9cb4",
         "filename": "term.h",
         "patchSetId": 13
@@ -64,6 +118,24 @@
       "writtenOn": "2015-04-17T22:06:58Z",
       "side": 1,
       "message": "I still think this shouldn\u0027t be a limitation in this API. term.h should provide the implementation of 1 terminal, the consumer of the API should be the one which decides how many terminals they want to instantiate.",
+      "revId": "0ab0efe068bdff6cfb435b84b2a5a59802871aa9",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d06c3e17_b9355b88",
+        "filename": "term.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1106179
+      },
+      "writtenOn": "2015-04-18T01:54:11Z",
+      "side": 1,
+      "message": "I don\u0027t disagree, but, I think this should be done as part of https://code.google.com/p/chromium/issues/detail?id\u003d434433.   I put a temp solution in place to move the define away from term.h and into the current client.",
+      "parentUuid": "d0c51e25_9fef9cb4",
       "revId": "0ab0efe068bdff6cfb435b84b2a5a59802871aa9",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
       "unresolved": false
@@ -93,6 +165,30 @@
     },
     {
       "key": {
+        "uuid": "d06c3e17_b9dc3be8",
+        "filename": "util.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1106179
+      },
+      "writtenOn": "2015-04-18T01:54:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "70a39280_c31476c8",
+      "range": {
+        "startLine": 15,
+        "startChar": 18,
+        "endLine": 15,
+        "endChar": 19
+      },
+      "revId": "0ab0efe068bdff6cfb435b84b2a5a59802871aa9",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f0b782b3_6a49d792",
         "filename": "util.h",
         "patchSetId": 13
@@ -104,6 +200,24 @@
       "writtenOn": "2015-04-17T22:06:58Z",
       "side": 1,
       "message": "this macro already exists at line 17 of this file, can this be sorted out? Also macros should all be upper case.",
+      "revId": "0ab0efe068bdff6cfb435b84b2a5a59802871aa9",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "305cba63_197c4be5",
+        "filename": "util.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1106179
+      },
+      "writtenOn": "2015-04-18T01:54:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f0b782b3_6a49d792",
       "revId": "0ab0efe068bdff6cfb435b84b2a5a59802871aa9",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
       "unresolved": false
