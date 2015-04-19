@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d0435e7f_e1bd60a5",
+        "filename": "main.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1106179
+      },
+      "writtenOn": "2015-04-19T15:26:02Z",
+      "side": 1,
+      "message": "Should not exit silently if video_init fails.  Maybe print out a default 10x7 resolution in this case.",
+      "revId": "e8c061540ad2927249739b2ce4fb1c9915adaed8",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f03ce2f3_02b32cc9",
+        "filename": "splash.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 1106179
+      },
+      "writtenOn": "2015-04-19T15:26:02Z",
+      "side": 1,
+      "message": "In the scenario you described, exiting early from splash_run is correct, but, it will cause the frecon process to exit.  We don\u0027t want that.   Frecon should still run but needs to not create a terminal and when the hotkey is pressed should try and initialize video again (presuming by that time a monitor has been connected)",
+      "revId": "e8c061540ad2927249739b2ce4fb1c9915adaed8",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    }
+  ]
+}

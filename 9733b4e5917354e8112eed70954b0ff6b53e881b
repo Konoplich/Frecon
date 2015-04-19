@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f03ce2f3_c2a8245b",
+        "filename": "main.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1106179
+      },
+      "writtenOn": "2015-04-19T15:26:02Z",
+      "side": 0,
+      "message": "Why is this being removed?",
+      "revId": "9733b4e5917354e8112eed70954b0ff6b53e881b",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    }
+  ]
+}
