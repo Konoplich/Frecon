@@ -52,6 +52,24 @@
       "revId": "0ae88a0a124a7818072b7b10413dfe8e221dfa30",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f055c239_c0648f95",
+        "filename": "font_to_c.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1117132
+      },
+      "writtenOn": "2015-04-20T18:32:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d0aefe64_a92cb942",
+      "revId": "0ae88a0a124a7818072b7b10413dfe8e221dfa30",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
     }
   ]
 }
