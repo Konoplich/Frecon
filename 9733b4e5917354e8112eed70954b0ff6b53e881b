@@ -16,6 +16,24 @@
       "revId": "9733b4e5917354e8112eed70954b0ff6b53e881b",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d0435e7f_81a0dc1a",
+        "filename": "main.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1119450
+      },
+      "writtenOn": "2015-04-20T14:21:08Z",
+      "side": 0,
+      "message": "remove \"else\" because i think it is not necessary due to previous \"if\" always return result. I rollback this change in next patch.",
+      "parentUuid": "f03ce2f3_c2a8245b",
+      "revId": "9733b4e5917354e8112eed70954b0ff6b53e881b",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
     }
   ]
 }

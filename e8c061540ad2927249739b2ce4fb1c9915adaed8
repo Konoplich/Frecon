@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "f03ce2f3_c2678497",
+        "filename": "main.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1119450
+      },
+      "writtenOn": "2015-04-20T14:21:08Z",
+      "side": 1,
+      "message": "i think print out error message would be better. What do you think?",
+      "parentUuid": "d0435e7f_e1bd60a5",
+      "revId": "e8c061540ad2927249739b2ce4fb1c9915adaed8",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f03ce2f3_02b32cc9",
         "filename": "splash.c",
         "patchSetId": 4
@@ -30,6 +48,24 @@
       "writtenOn": "2015-04-19T15:26:02Z",
       "side": 1,
       "message": "In the scenario you described, exiting early from splash_run is correct, but, it will cause the frecon process to exit.  We don\u0027t want that.   Frecon should still run but needs to not create a terminal and when the hotkey is pressed should try and initialize video again (presuming by that time a monitor has been connected)",
+      "revId": "e8c061540ad2927249739b2ce4fb1c9915adaed8",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d0435e7f_61a5d028",
+        "filename": "splash.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 1119450
+      },
+      "writtenOn": "2015-04-20T14:21:08Z",
+      "side": 1,
+      "message": "Done, remove this checking and rearrange the following code",
+      "parentUuid": "f03ce2f3_02b32cc9",
       "revId": "e8c061540ad2927249739b2ce4fb1c9915adaed8",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
       "unresolved": false
