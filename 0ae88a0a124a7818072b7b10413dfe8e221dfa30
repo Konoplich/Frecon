@@ -34,6 +34,24 @@
       "revId": "0ae88a0a124a7818072b7b10413dfe8e221dfa30",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d0aefe64_a92cb942",
+        "filename": "font_to_c.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1000768
+      },
+      "writtenOn": "2015-04-20T04:53:08Z",
+      "side": 1,
+      "message": "interesting.  guess it\u0027s due to the docstring ending the way it does.  you could split them to avoid the issue:\n\n settings \u003d {\n     ...\n }\n out_file.write(... % settings)",
+      "parentUuid": "d080bec6_bf770202",
+      "revId": "0ae88a0a124a7818072b7b10413dfe8e221dfa30",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
     }
   ]
 }
