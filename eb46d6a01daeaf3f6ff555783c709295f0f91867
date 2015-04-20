@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "d01a7eb3_8f38fd4e",
+        "filename": "image.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1106179
+      },
+      "writtenOn": "2015-04-20T21:40:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "302afabf_ec6423cc",
+      "range": {
+        "startLine": 34,
+        "startChar": 1,
+        "endLine": 34,
+        "endChar": 20
+      },
+      "revId": "eb46d6a01daeaf3f6ff555783c709295f0f91867",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f02302ea_ea6407cc",
         "filename": "main.c",
         "patchSetId": 14
@@ -36,6 +60,30 @@
       "writtenOn": "2015-04-20T21:03:20Z",
       "side": 1,
       "message": "This block is indented one tab too little. Please take another look on gerrit to see what I mean.",
+      "range": {
+        "startLine": 111,
+        "startChar": 2,
+        "endLine": 113,
+        "endChar": 9
+      },
+      "revId": "eb46d6a01daeaf3f6ff555783c709295f0f91867",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d01a7eb3_2f01098c",
+        "filename": "main.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1106179
+      },
+      "writtenOn": "2015-04-20T21:40:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f02302ea_ea6407cc",
       "range": {
         "startLine": 111,
         "startChar": 2,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "302afabf_2f18ed75",
+        "filename": "main.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1106179
+      },
+      "writtenOn": "2015-04-20T21:40:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d01a7eb3_492a8533",
+      "range": {
+        "startLine": 120,
+        "startChar": 0,
+        "endLine": 122,
+        "endChar": 11
+      },
+      "revId": "eb46d6a01daeaf3f6ff555783c709295f0f91867",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d01a7eb3_a935f987",
         "filename": "splash.c",
         "patchSetId": 14
@@ -82,6 +154,30 @@
       "writtenOn": "2015-04-20T21:03:20Z",
       "side": 1,
       "message": "These accessors need NULL checks.",
+      "range": {
+        "startLine": 260,
+        "startChar": 0,
+        "endLine": 274,
+        "endChar": 1
+      },
+      "revId": "eb46d6a01daeaf3f6ff555783c709295f0f91867",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f02302ea_d0d452e5",
+        "filename": "splash.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 1106179
+      },
+      "writtenOn": "2015-04-20T21:40:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d01a7eb3_a935f987",
       "range": {
         "startLine": 260,
         "startChar": 0,
