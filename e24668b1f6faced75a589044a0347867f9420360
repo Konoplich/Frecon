@@ -990,6 +990,30 @@
     },
     {
       "key": {
+        "uuid": "302afabf_cc2cbf44",
+        "filename": "splash.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1117132
+      },
+      "writtenOn": "2015-04-20T21:03:26Z",
+      "side": 1,
+      "message": "Could you please clarify the purpose of this? My impression of the splash loop was display the chrome logo until it was detected that chrome had started and was drawing.",
+      "parentUuid": "d080bec6_3ad8dd17",
+      "range": {
+        "startLine": 186,
+        "startChar": 5,
+        "endLine": 186,
+        "endChar": 27
+      },
+      "revId": "e24668b1f6faced75a589044a0347867f9420360",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b0242aae_7e776f51",
         "filename": "splash.c",
         "patchSetId": 12
