@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "f02302ea_044987bd",
+        "filename": "main.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1106179
+      },
+      "writtenOn": "2015-04-21T16:52:32Z",
+      "side": 1,
+      "message": "The code that invokes it looks like:\n    WIDTH\u003d$($RESOLUTION_CMD --print-resolution | cut -d \u0027 \u0027 -f 1)\n\nIt doesn\u0027t really handle the case in which an error message is printed.  It should get some default value which it will use to invoke frecon a second time to execute splash_run.  Now, splash_run won\u0027t run in this case due to these changes, so, as long as the script doesn\u0027t get tripped up by unexpected output is all that really matters.",
+      "parentUuid": "f03ce2f3_c2678497",
+      "revId": "e8c061540ad2927249739b2ce4fb1c9915adaed8",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f03ce2f3_02b32cc9",
         "filename": "splash.c",
         "patchSetId": 4
