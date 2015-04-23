@@ -1,0 +1,9 @@
+Commit-Queue+1: Haixia Shi <hshi@chromium.org>
+Trybot-Ready+1: Haixia Shi <hshi@chromium.org>
+Verified+1: Haixia Shi <hshi@chromium.org>
+Code-Review+2: Zach Reizner <zachr@chromium.org>
+Submitted-by: Haixia Shi <hshi@chromium.org>
+Submitted-at: Thu, 23 Apr 2015 01:21:26 +0000
+Reviewed-on: https://chromium-review.googlesource.com/266895
+Project: chromiumos/platform/frecon
+Branch: refs/heads/master
