@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "10a416b9_f7b5e02d",
+        "filename": "splash.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1117132
+      },
+      "writtenOn": "2015-04-23T19:17:08Z",
+      "side": 1,
+      "message": "What about destroying splash-\u003evideo?",
+      "revId": "55eb1b7f9159509b85c3aaacaaca1964893b8192",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    }
+  ]
+}
