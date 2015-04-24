@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f07f82e4_b06a9917",
+        "filename": "splash.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1000239
+      },
+      "writtenOn": "2015-04-24T06:02:39Z",
+      "side": 1,
+      "message": "I think here\u0027s the problem. This should be offset_x and offset_y, not loop_offset_{x,y}.",
+      "range": {
+        "startLine": 102,
+        "startChar": 11,
+        "endLine": 102,
+        "endChar": 24
+      },
+      "revId": "4080dd49c6e5ce63186ce1aa051316b2a46373e8",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    }
+  ]
+}
