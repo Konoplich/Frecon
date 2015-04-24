@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "107df6ec_b738d24e",
+        "filename": "image.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 1000239
+      },
+      "writtenOn": "2015-04-24T06:10:21Z",
+      "side": 1,
+      "message": "Should offsets being calculated inside or outside the / 2?\n\nI think it would make more sense if that\u0027s out side, since we\u0027re moving (offset) by actual pixels?",
+      "range": {
+        "startLine": 171,
+        "startChar": 51,
+        "endLine": 171,
+        "endChar": 70
+      },
+      "revId": "4080dd49c6e5ce63186ce1aa051316b2a46373e8",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f07f82e4_b06a9917",
         "filename": "splash.c",
         "patchSetId": 19
