@@ -22,6 +22,30 @@
       "revId": "b4f25b41433130862cd7f56fd95d5aa40b56b51f",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b0d42a38_f3de6d57",
+        "filename": "font.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1001537
+      },
+      "writtenOn": "2015-04-28T17:44:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b0d42a38_7d336c70",
+      "range": {
+        "startLine": 38,
+        "startChar": 0,
+        "endLine": 43,
+        "endChar": 62
+      },
+      "revId": "b4f25b41433130862cd7f56fd95d5aa40b56b51f",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
     }
   ]
 }
