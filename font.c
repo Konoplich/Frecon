@@ -38,33 +38,52 @@ static uint8_t scale_pixel(uint32_t neighbors, int sx, int sy, int scaling)
 	/*
 	 * Scale a pixel by a factor of |scaling|, based on the colors of the
 	 *   center pixel and the eight neighbor pixels on a 3x3 grid:
-	 * If the center pixel is 1, always return 1;
+	 * If the center pixel is 1:
+	 *   Return 0 if a side pixel and a corner pixel are both 1, and these
+	 *     two pixels are disconnected from each other, and (sx, sy) falls
+	 *     on the corner of the center pixel furthest away from them, and
+	 *     all other pixels on the side of that corner are 0;
+	 *   Otherwise, return 1.
 	 * If the center pixel is 0:
-	 *   Return 0 if all four side pixels (up, down, left, right) are 1;
+	 *   Return 0 if all four side pixels are 1;
 	 *   Otherwise, return 1 if two adjacent side pixels are 1, and
 	 *     (sx, sy) falls inside the isosceles right triangle adjoining
 	 *     these two neighbor pixels and with legs of length |scaling - 1|,
 	 *     and either the corner pixel next to both side pixels is 0, or
 	 *     the other two corner pixels next to these side pixels are both 0.
 	 */
-	return ((neighbors & 0x10) ||
-		((neighbors & 0xaa) != 0xaa &&
-		((sx < sy &&
-			(neighbors & 0x22) == 0x22 &&
-			((neighbors & 0x4) == 0x0 ||
-			(neighbors & 0x105) == 0x4)) ||
-		(sy < sx &&
-			(neighbors & 0x88) == 0x88 &&
-			((neighbors & 0x40) == 0x0 ||
-			(neighbors & 0x141) == 0x40)) ||
-		(sx + sy > scaling - 1 &&
-			(neighbors & 0x0a) == 0x0a &&
-			((neighbors & 0x1) == 0x0 ||
-			(neighbors & 0x45) == 0x1)) ||
-		(sx + sy < scaling - 1 &&
-			(neighbors & 0xa0) == 0xa0 &&
-			((neighbors & 0x100) == 0x0 ||
-			(neighbors & 0x144) == 0x100)))));
+	if (neighbors & 0x10) {
+		return !((sx == 0 && sy == 0 &&
+				((neighbors & 0x1f6) == 0x52 ||
+				(neighbors & 0x1fc) == 0x1c)) ||
+			(sx == scaling - 1 && sy == 0 &&
+				((neighbors & 0x1f9) == 0x31 ||
+				(neighbors & 0x1db) == 0x112)) ||
+			(sx == 0 && sy == scaling - 1 &&
+				((neighbors & 0x1b7) == 0x91 ||
+				(neighbors & 0x13f) == 0x118)) ||
+			(sx == scaling - 1 && sy == scaling - 1 &&
+				((neighbors & 0xdf) == 0x94 ||
+				(neighbors & 0x7f) == 0x70)));
+	} else {
+		return ((neighbors & 0xaa) != 0xaa &&
+			((sx < sy &&
+				(neighbors & 0x22) == 0x22 &&
+				((neighbors & 0x4) == 0x0 ||
+				(neighbors & 0x105) == 0x4)) ||
+			(sy < sx &&
+				(neighbors & 0x88) == 0x88 &&
+				((neighbors & 0x40) == 0x0 ||
+				(neighbors & 0x141) == 0x40)) ||
+			(sx + sy > scaling - 1 &&
+				(neighbors & 0x0a) == 0x0a &&
+				((neighbors & 0x1) == 0x0 ||
+				(neighbors & 0x45) == 0x1)) ||
+			(sx + sy < scaling - 1 &&
+				(neighbors & 0xa0) == 0xa0 &&
+				((neighbors & 0x100) == 0x0 ||
+				(neighbors & 0x144) == 0x100))));
+	}
 }
 
 static void scale_glyph(uint8_t *dst, const uint8_t *src, int scaling)
