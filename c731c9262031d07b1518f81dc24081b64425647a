@@ -1,0 +1,9 @@
+Commit-Queue+1: Haixia Shi <hshi@chromium.org>
+Trybot-Ready+1: Haixia Shi <hshi@chromium.org>
+Verified+1: Haixia Shi <hshi@chromium.org>
+Code-Review+2: Zach Reizner <zachr@chromium.org>
+Submitted-by: ChromeOS Commit Bot <chromeos-commit-bot@chromium.org>
+Submitted-at: Fri, 01 May 2015 02:35:07 +0000
+Reviewed-on: https://chromium-review.googlesource.com/268651
+Project: chromiumos/platform/frecon
+Branch: refs/heads/master
