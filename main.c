@@ -47,7 +47,6 @@ static struct option command_options[] = {
 typedef struct {
 	bool    print_resolution;
 	bool    standalone;
-	bool    devmode;
 } commandflags_t;
 
 static
@@ -113,7 +112,6 @@ int main(int argc, char* argv[])
 				break;
 
 			case FLAG_DEV_MODE:
-				command_flags.devmode = true;
 				splash_set_devmode(splash);
 				break;
 
