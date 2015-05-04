@@ -47,7 +47,6 @@ static struct option command_options[] = {
 typedef struct {
 	bool    print_resolution;
 	bool    standalone;
-	bool    devmode;
 } commandflags_t;
 
 static
@@ -104,7 +103,6 @@ int main(int argc, char* argv[])
 				break;
 
 			case FLAG_DAEMON:
-				daemonize();
 				command_flags.standalone = false;
 				break;
 
@@ -113,7 +111,6 @@ int main(int argc, char* argv[])
 				break;
 
 			case FLAG_DEV_MODE:
-				command_flags.devmode = true;
 				splash_set_devmode(splash);
 				break;
 
@@ -158,13 +155,18 @@ int main(int argc, char* argv[])
 		printf("%d %d", video_getwidth(video), video_getheight(video));
 		return EXIT_SUCCESS;
 	}
-	else if (splash_num_images(splash) > 0) {
+	else if (command_flags.standalone == false) {
+		splash_present_term_file(splash);
+		daemonize();
+	}
+	if (splash_num_images(splash) > 0) {
 		ret = splash_run(splash, &dbus);
 		if (ret) {
 				LOG(ERROR, "splash_run failed: %d", ret);
 				return EXIT_FAILURE;
 		}
 	}
+	splash_destroy(splash);
 
 	/*
 	 * If splash_run didn't create the dbus object (for example, if
