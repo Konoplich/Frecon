@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "9047263e_cc246f68",
+        "filename": "splash.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 1119450
+      },
+      "writtenOn": "2015-05-04T03:49:01Z",
+      "side": 1,
+      "message": "In function splash_set_dbus(), it only save the null pointer to splash-\u003edbus without read/write to it, and each read/write on splash-\u003edbus will check whether it is NULL or not. So that, i don\u0027t think it is necessary to change this.",
+      "parentUuid": "b038aab1_0d367192",
+      "revId": "1288ebdbeab38c04cbb2d515e599a417142bf29b",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9047263e_2c0173bf",
         "filename": "util.c",
         "patchSetId": 12
