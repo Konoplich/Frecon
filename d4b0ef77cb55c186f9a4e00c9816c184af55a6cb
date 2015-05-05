@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d03d1ea0_142cbc93",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000239
+      },
+      "writtenOn": "2015-05-05T04:49:07Z",
+      "side": 1,
+      "message": "powerwash",
+      "range": {
+        "startLine": 10,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 8
+      },
+      "revId": "d4b0ef77cb55c186f9a4e00c9816c184af55a6cb",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9047263e_af71d55e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000239
+      },
+      "writtenOn": "2015-05-05T04:49:07Z",
+      "side": 1,
+      "message": "Correct me if I\u0027m wrong, but I only see that in LOG(INFO), which only available in stderr?\n\nAnyway for now I can do this:\n $(frecon --daemon 2\u003e\u00261 |\n   sed -n \u0027s\"^frecon: /dev/pts\"/dev/pts\"p\u0027)",
+      "range": {
+        "startLine": 12,
+        "startChar": 49,
+        "endLine": 12,
+        "endChar": 55
+      },
+      "revId": "d4b0ef77cb55c186f9a4e00c9816c184af55a6cb",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9047263e_0f810998",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000239
+      },
+      "writtenOn": "2015-05-05T04:49:07Z",
+      "side": 1,
+      "message": "A side effect is now I always see a black rectangle on left-top of screen even if I haven\u0027t printed anything yet.\n\nPreviously in VT this is prevented by setting cursor:\n # Hides cursor and prevents console from blanking after long inactivity.\n  setterm -cursor off -blank 0 -powersave off -powerdown 0 \u003e\"$STDOUT\" || true\n\nNot sure if we can do something in frecon?",
+      "range": {
+        "startLine": 13,
+        "startChar": 28,
+        "endLine": 13,
+        "endChar": 36
+      },
+      "revId": "d4b0ef77cb55c186f9a4e00c9816c184af55a6cb",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    }
+  ]
+}
