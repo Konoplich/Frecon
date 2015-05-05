@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "d026fe9b_f0248d67",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1106179
+      },
+      "writtenOn": "2015-05-05T06:02:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d03d1ea0_142cbc93",
+      "range": {
+        "startLine": 10,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 8
+      },
+      "revId": "d4b0ef77cb55c186f9a4e00c9816c184af55a6cb",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9047263e_af71d55e",
         "filename": "/COMMIT_MSG",
         "patchSetId": 1
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "d026fe9b_102a0933",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1106179
+      },
+      "writtenOn": "2015-05-05T06:02:13Z",
+      "side": 1,
+      "message": "You are right.  I overlooked that.   I fixed the code.",
+      "parentUuid": "9047263e_af71d55e",
+      "range": {
+        "startLine": 12,
+        "startChar": 49,
+        "endLine": 12,
+        "endChar": 55
+      },
+      "revId": "d4b0ef77cb55c186f9a4e00c9816c184af55a6cb",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9047263e_0f810998",
         "filename": "/COMMIT_MSG",
         "patchSetId": 1
@@ -59,6 +107,30 @@
       "writtenOn": "2015-05-05T04:49:07Z",
       "side": 1,
       "message": "A side effect is now I always see a black rectangle on left-top of screen even if I haven\u0027t printed anything yet.\n\nPreviously in VT this is prevented by setting cursor:\n # Hides cursor and prevents console from blanking after long inactivity.\n  setterm -cursor off -blank 0 -powersave off -powerdown 0 \u003e\"$STDOUT\" || true\n\nNot sure if we can do something in frecon?",
+      "range": {
+        "startLine": 13,
+        "startChar": 28,
+        "endLine": 13,
+        "endChar": 36
+      },
+      "revId": "d4b0ef77cb55c186f9a4e00c9816c184af55a6cb",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "102df676_28dde0e2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1106179
+      },
+      "writtenOn": "2015-05-05T06:02:13Z",
+      "side": 1,
+      "message": "In theory, you should be able to issue the following escape sequence: [\\033?25l to hide the cursor (note the last digit is lowercase L)\n\nCan you try that?  I am not in the office and can\u0027t test it until tomorrow morning.",
+      "parentUuid": "9047263e_0f810998",
       "range": {
         "startLine": 13,
         "startChar": 28,
