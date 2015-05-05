@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "102df676_7eeeae04",
+        "filename": "splash.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 1106179
+      },
+      "writtenOn": "2015-05-05T16:54:13Z",
+      "side": 1,
+      "message": "This is really a fatal error.   There is a condition in which dbus is not available, but, as it stands, when that is the case, the loop starting at line 161 will be an infinite loop (until reboot) and so should never get here.  If we get here, this means that dbus should be available and if not, there will be no option to switch between frecon and ui.  That in itself is probably ok if in verified mode, but, still indicates a serious system problem.   At a minimum, I would check to see if it\u0027s devmode, and if so, bring up a terminal with a message about dbus being problematic.  For verified mode, what you have is ok, but, make it ERROR level.",
+      "revId": "68ef0eb8fdfbd712ec135b89a707afb9e5452398",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    }
+  ]
+}
