@@ -34,6 +34,24 @@
       "revId": "68ef0eb8fdfbd712ec135b89a707afb9e5452398",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ed42494b_4ff52d99",
+        "filename": "splash.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 1119450
+      },
+      "writtenOn": "2015-05-06T01:55:41Z",
+      "side": 1,
+      "message": "Sorry, i rollback this change because it is not the main reason cause VMTest fail. Combined with CL:268952, VMTest should pass",
+      "parentUuid": "ed42494b_cf559d23",
+      "revId": "68ef0eb8fdfbd712ec135b89a707afb9e5452398",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
     }
   ]
 }
