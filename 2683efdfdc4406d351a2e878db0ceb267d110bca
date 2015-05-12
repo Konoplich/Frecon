@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ada93160_852682b2",
+        "filename": "splash.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1000239
+      },
+      "writtenOn": "2015-05-12T02:47:58Z",
+      "side": 1,
+      "message": "I still don\u0027t see this even when --daemon is not assigned. Maybe we should still rollback to use log APIs?",
+      "range": {
+        "startLine": 141,
+        "startChar": 1,
+        "endLine": 141,
+        "endChar": 8
+      },
+      "revId": "2683efdfdc4406d351a2e878db0ceb267d110bca",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    }
+  ]
+}
