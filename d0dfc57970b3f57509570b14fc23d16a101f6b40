@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4d599572_8ee5abd5",
+        "filename": "term.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1001537
+      },
+      "writtenOn": "2015-05-12T21:47:02Z",
+      "side": 1,
+      "message": "nit: the text may not be easily visible if background is black or nearly black. We should probably check the brightness of background color and switch to use white text on top of dark background.",
+      "range": {
+        "startLine": 82,
+        "startChar": 35,
+        "endLine": 82,
+        "endChar": 36
+      },
+      "revId": "d0dfc57970b3f57509570b14fc23d16a101f6b40",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    }
+  ]
+}
