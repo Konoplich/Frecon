@@ -22,6 +22,30 @@
       "revId": "2683efdfdc4406d351a2e878db0ceb267d110bca",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8d4d4db1_ff521b38",
+        "filename": "splash.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1106179
+      },
+      "writtenOn": "2015-05-12T15:15:40Z",
+      "side": 1,
+      "message": "Are you sure you are passing images to display?   This is only printed out when frecon thinks it needs to present a splash screen.   If you run frecon with no images, it will just start a default terminal and splash_run won\u0027t be called.",
+      "parentUuid": "ada93160_852682b2",
+      "range": {
+        "startLine": 141,
+        "startChar": 1,
+        "endLine": 141,
+        "endChar": 8
+      },
+      "revId": "2683efdfdc4406d351a2e878db0ceb267d110bca",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
     }
   ]
 }
