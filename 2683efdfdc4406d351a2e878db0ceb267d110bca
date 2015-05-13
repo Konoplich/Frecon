@@ -46,6 +46,30 @@
       "revId": "2683efdfdc4406d351a2e878db0ceb267d110bca",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0d215de2_48f0bf5f",
+        "filename": "splash.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1000239
+      },
+      "writtenOn": "2015-05-13T03:11:42Z",
+      "side": 1,
+      "message": "Ok, now I see the problem...\n\nIt\u0027s only visible if images are provided, AND if not running in daemon mode.\n\nOne problem here is, if I want to pass the pts to other programs, I need a way to know \"it\u0027s ready\" and \"get the output\". In other words,\n\n  pts\u003d$(frecon $IMAGES \u0026) # non-daemon, won\u0027t get any output\n  pts\u003d$(frecon $IMAGES --daemon) # should work in concept, if the pts can be printed before the parent exits.\n\nSo I think we need some output that\u0027s even available in daemon mode?",
+      "parentUuid": "8d4d4db1_ff521b38",
+      "range": {
+        "startLine": 141,
+        "startChar": 1,
+        "endLine": 141,
+        "endChar": 8
+      },
+      "revId": "2683efdfdc4406d351a2e878db0ceb267d110bca",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
     }
   ]
 }
