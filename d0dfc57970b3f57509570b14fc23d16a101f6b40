@@ -2,6 +2,46 @@
   "comments": [
     {
       "key": {
+        "uuid": "cd1ae5b3_3a294908",
+        "filename": "input.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1117132
+      },
+      "writtenOn": "2015-05-13T17:46:54Z",
+      "side": 1,
+      "message": "It seems misleading to have a maximum number of terminals and then add one more to that number.",
+      "range": {
+        "startLine": 26,
+        "startChar": 27,
+        "endLine": 26,
+        "endChar": 40
+      },
+      "revId": "d0dfc57970b3f57509570b14fc23d16a101f6b40",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cd1ae5b3_35c83a27",
+        "filename": "input.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 689,
+      "author": {
+        "id": 1117132
+      },
+      "writtenOn": "2015-05-13T17:46:54Z",
+      "side": 1,
+      "message": "term_close",
+      "revId": "d0dfc57970b3f57509570b14fc23d16a101f6b40",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4d599572_8ee5abd5",
         "filename": "term.c",
         "patchSetId": 5
