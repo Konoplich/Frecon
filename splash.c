@@ -48,7 +48,6 @@ struct _splash_t {
 splash_t* splash_init()
 {
 	splash_t* splash;
-	FILE *cookie_fp;
 
 	splash = (splash_t*)calloc(1, sizeof(splash_t));
 	if (splash == NULL)
@@ -58,13 +57,6 @@ splash_t* splash_init()
 	splash->loop_start = -1;
 	splash->default_duration = 25;
 	splash->loop_duration = 25;
-
-	cookie_fp = fopen("/tmp/display_info.bin", "wb");
-	if (cookie_fp) {
-		fwrite(&splash->video->internal_panel, sizeof(char), 1, cookie_fp);
-		fwrite(splash->video->edid, EDID_SIZE, 1, cookie_fp);
-		fclose(cookie_fp);
-	}
 
 	return splash;
 }
