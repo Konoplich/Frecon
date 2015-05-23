@@ -199,6 +199,7 @@ int splash_run(splash_t* splash, dbus_t** dbus)
 	 */
 	video_release(splash->video);
 	video_unlock(splash->video);
+	input_ungrab();
 
 	if (dbus != NULL) {
 		do {
