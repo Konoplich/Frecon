@@ -1,0 +1,9 @@
+Trybot-Ready+1: Yuly Novikov <ynovikov@chromium.org>
+Code-Review+2: Stéphane Marchesin <marcheu@chromium.org>
+Commit-Queue+1: Yuly Novikov <ynovikov@chromium.org>
+Verified+1: Yuly Novikov <ynovikov@chromium.org>
+Submitted-by: ChromeOS Commit Bot <chromeos-commit-bot@chromium.org>
+Submitted-at: Sat, 23 May 2015 06:45:08 +0000
+Reviewed-on: https://chromium-review.googlesource.com/273022
+Project: chromiumos/platform/frecon
+Branch: refs/heads/master
