@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6d11f908_3c27f5e2",
+        "filename": "main.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1106179
+      },
+      "writtenOn": "2015-05-26T01:03:28Z",
+      "side": 1,
+      "message": "We should not exit like this if video_init fails in the print_resolution path",
+      "revId": "945871ec75b797c9c61e8ba4d65a580e0fee242f",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    }
+  ]
+}
