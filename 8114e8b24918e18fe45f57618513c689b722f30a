@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b9d41838_9a34dee6",
+        "filename": "splash.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1001921
+      },
+      "writtenOn": "2015-06-09T19:25:11Z",
+      "side": 0,
+      "message": "IMO, it\u0027s better to exit early here, than to wrap the rest of the code with \"if (splash-\u003eterminal)\" and \"if (splash-\u003evideo)\".\nIf you see that you have \"splash-\u003eterminal \u003d\u003d NULL\" for a reason other than \"splash-\u003evideo \u003d\u003d NULL\", than also add early exit for \"if (!splash-\u003eterminal)\" here.\nI don\u0027t see a reason to continue in these cases, but that\u0027s only my opinion, dsodman@ should know this code better.",
+      "range": {
+        "startLine": 60,
+        "startChar": 1,
+        "endLine": 60,
+        "endChar": 20
+      },
+      "revId": "8114e8b24918e18fe45f57618513c689b722f30a",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    }
+  ]
+}

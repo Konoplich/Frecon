@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b9d41838_3af96a7c",
+        "filename": "splash.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1001921
+      },
+      "writtenOn": "2015-06-09T19:25:11Z",
+      "side": 1,
+      "message": "nit: add spaces after if and around !\u003d,or even replace with \"if (!splash-\u003eterminal)\"",
+      "revId": "50149badb73da3d56a2dfb8b52dc35d64ef36cb0",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b9d41838_9ab97eb9",
+        "filename": "splash.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1001921
+      },
+      "writtenOn": "2015-06-09T19:25:11Z",
+      "side": 1,
+      "message": "nit: add spaces after if and before {",
+      "range": {
+        "startLine": 140,
+        "startChar": 1,
+        "endLine": 140,
+        "endChar": 22
+      },
+      "revId": "50149badb73da3d56a2dfb8b52dc35d64ef36cb0",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b9d41838_da44a61b",
+        "filename": "splash.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 321,
+      "author": {
+        "id": 1001921
+      },
+      "writtenOn": "2015-06-09T19:25:11Z",
+      "side": 1,
+      "message": "nit: space after if",
+      "range": {
+        "startLine": 321,
+        "startChar": 1,
+        "endLine": 321,
+        "endChar": 21
+      },
+      "revId": "50149badb73da3d56a2dfb8b52dc35d64ef36cb0",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    }
+  ]
+}
