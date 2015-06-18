@@ -26,6 +26,7 @@
 #define NUM_SPLASH_TERMINAL   (1)
 #define MAX_TERMINALS         (MAX_STD_TERMINALS + NUM_SPLASH_TERMINAL)
 #define SPLASH_TERMINAL       (MAX_TERMINALS - 1)
+#define MAX_OVERRIDE_FILE_NAME_LEN 32
 
 struct input_dev {
 	int fd;
@@ -50,6 +51,12 @@ struct keyboard_state {
  *  dbus - where to send dbus events.
  *  current_terminal - the currently selected terminal.
  *  terminals - list of all termingals that have been created.
+ *  term_override_start - upstart event to send instead of activating a given
+ *    terminal.  This overrides the terminal behavior and instead relies on
+ *    upstart to start a service that will use the display.
+ * term_override_end - upstart event to send when switching away from a given
+ *    terminal.
+ * overrides_read - flag is true if overrides have been checked.
  */
 struct {
 	struct udev *udev;
@@ -61,6 +68,9 @@ struct {
 	dbus_t *dbus;
 	uint32_t  current_terminal;
 	terminal_t *terminals[MAX_TERMINALS];
+	char *term_override_start[MAX_TERMINALS];
+	char *term_override_end[MAX_TERMINALS];
+	bool overrides_read;
 } input = {
 	.udev = NULL,
 	.udev_monitor = NULL,
@@ -107,6 +117,43 @@ static void report_user_activity(int activity_type)
 	}
 }
 
+static void check_overrides()
+{
+	int i;
+	char filename[MAX_OVERRIDE_FILE_NAME_LEN];
+	FILE *conf_file;
+	size_t nread;
+	size_t ret;
+
+	for (i = 0; i < MAX_STD_TERMINALS; i++) {
+		snprintf(filename, MAX_OVERRIDE_FILE_NAME_LEN,
+			 "/usr/local/share/frecon/%d", i);
+		conf_file = fopen(filename, "r");
+		if (!conf_file)
+			continue;
+
+		ret = getline(&input.term_override_start[i], &nread, conf_file);
+		if (ret == 0)
+			goto done_with_conf_file;
+		if (input.term_override_start[i][ret - 1] == '\n')
+			input.term_override_start[i][ret - 1] = 0;
+
+		ret = getline(&input.term_override_end[i], &nread, conf_file);
+		if (ret == 0) {
+			free(input.term_override_start[i]);
+			input.term_override_start[i] = NULL;
+			goto done_with_conf_file;
+		}
+		if (input.term_override_end[i][ret - 1] == '\n')
+			input.term_override_end[i][ret - 1] = 0;
+
+done_with_conf_file:
+		fclose(conf_file);
+	}
+
+	input.overrides_read = true;
+}
+
 static int input_special_key(struct input_key_event *ev)
 {
 	unsigned int i;
@@ -128,6 +175,9 @@ static int input_special_key(struct input_key_event *ev)
 		BTN_BACK,
 		BTN_TASK
 	};
+
+	if (!input.overrides_read)
+		check_overrides();
 
 	terminal = input.terminals[input.current_terminal];
 
@@ -227,6 +277,16 @@ static int input_special_key(struct input_key_event *ev)
 							kLibCrosServiceInterface,
 							kTakeDisplayOwnership);
 				}
+			} else if (input.term_override_end[input.current_terminal] &&
+				   input.dbus != NULL) {
+				(void)dbus_method_emit_upstart_event(
+					input.dbus,
+					input.term_override_end[input.current_terminal]);
+				(void)dbus_method_call0(input.dbus,
+							kLibCrosServiceName,
+							kLibCrosServicePath,
+							kLibCrosServiceInterface,
+							kTakeDisplayOwnership);
 			}
 		} else if ((ev->code >= KEY_F2) && (ev->code < KEY_F2 + MAX_STD_TERMINALS)) {
 			if (input.dbus != NULL)
@@ -238,6 +298,15 @@ static int input_special_key(struct input_key_event *ev)
 			if (term_is_active(terminal))
 				term_deactivate(terminal);
 			input.current_terminal = ev->code - KEY_F2;
+
+			if (input.term_override_start[input.current_terminal] &&
+			    input.dbus != NULL) {
+				(void)dbus_method_emit_upstart_event(
+					input.dbus,
+					input.term_override_start[input.current_terminal]);
+				return 1;
+			}
+
 			terminal = input.terminals[input.current_terminal];
 			if (terminal == NULL) {
 				input.terminals[input.current_terminal] =
