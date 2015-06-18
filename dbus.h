@@ -21,6 +21,7 @@ typedef struct _dbus_t dbus_t;
 typedef void (*dbus_message_handler_t)(dbus_t*, void*);
 
 dbus_t* dbus_init();
+bool dbus_method_emit_upstart_event(dbus_t* dbus, const char *event_name);
 bool dbus_method_call0(dbus_t* dbus, const char* service_name,
     const char* service_path, const char* service_interface,
     const char* method);
