@@ -328,6 +328,42 @@ dbus_t* dbus_init()
 	return new_dbus;
 }
 
+bool dbus_method_emit_upstart_event(dbus_t* dbus, const char *event_name)
+{
+	DBusMessage *msg;
+	DBusMessageIter itr, sub;
+	const char *empty_arg = "HOME=/home/chronos";
+	dbus_bool_t dbus_false = 0;
+
+	msg = dbus_message_new_method_call("com.ubuntu.Upstart",
+			"/com/ubuntu/Upstart", "com.ubuntu.Upstart0_6",
+			"EmitEvent");
+
+	if (!msg) {
+		LOG(ERROR, "failed to create upstart event");
+		return false;
+	}
+
+	dbus_message_iter_init_append(msg, &itr);
+
+	dbus_message_iter_append_basic(&itr, DBUS_TYPE_STRING, &event_name);
+	dbus_message_iter_open_container(&itr, DBUS_TYPE_ARRAY, "s", &sub);
+	dbus_message_iter_append_basic(&sub, DBUS_TYPE_STRING, &empty_arg);
+	dbus_message_iter_close_container(&itr, &sub);
+	dbus_message_iter_append_basic(&itr, DBUS_TYPE_BOOLEAN, &dbus_false);
+
+	if (!dbus_connection_send_with_reply_and_block(dbus->conn,
+				msg, DBUS_DEFAULT_DELAY, NULL)) {
+		dbus_message_unref(msg);
+		LOG(ERROR, "failed to send upstart event");
+		return false;
+	}
+
+	dbus_connection_flush(dbus->conn);
+	dbus_message_unref(msg);
+
+	return true;
+}
 
 bool dbus_method_call0(dbus_t* dbus, const char* service_name,
 		const char* service_path, const char* service_interface,
