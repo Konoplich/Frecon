@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7e9c462a_d6a0b3b0",
+        "filename": "input.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 1000047
+      },
+      "writtenOn": "2015-06-20T00:08:00Z",
+      "side": 1,
+      "message": "Bikeshed: this is the second time this call is open coded, third if you include kReleaseDisplayOwnership. Might make sense to make it a helper and call that for all cases. Either way is fine with me.",
+      "revId": "2afc0a3d9b0c5add8461c7bc9272c2bfd8275bd4",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    }
+  ]
+}
