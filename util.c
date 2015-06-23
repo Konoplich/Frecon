@@ -13,6 +13,8 @@
 #include <sys/file.h>
 #include <sys/stat.h>
 #include <unistd.h>
+#include <dirent.h>
+#include <signal.h>
 
 #include "util.h"
 
@@ -137,3 +139,81 @@ void parse_image_option(char* optionstr, char** name, char** val)
 	}
 }
 
+static bool all_numeric(const char* s)
+{
+	while (*s) {
+		if (*s < '0' || *s > '9')
+			return false;
+		s++;
+	}
+
+	return true;
+}
+
+// enough characters for a frecon cmdline
+#define CMDLINE_LENGTH           (20)
+
+void kill_running_frecon()
+{
+	pid_t my_pid;
+	pid_t current_pid;
+	DIR *dp;
+	struct dirent *ep;
+	char* fname = NULL;
+	int result;
+	char* buf = NULL;
+	int fd = 1;
+	int n = -1;
+
+
+	my_pid = getpid();
+	dp = opendir("/proc");
+	if (dp != NULL) {
+		while ((ep = readdir(dp)) != NULL) {
+			if (all_numeric(ep->d_name)) {
+				current_pid = strtol(ep->d_name, NULL, 0);
+				if (my_pid == current_pid)
+					continue;
+
+				result = asprintf(&fname, "/proc/%s/%s", ep->d_name, "cmdline");
+				if (result == -1) {
+					goto fail;
+				}
+
+				buf = (char*)malloc(CMDLINE_LENGTH + 1);
+				if (!buf) {
+					goto fail;
+				}
+
+				fd = open(fname, O_RDONLY);
+				if (fd == -1)
+					goto fail;
+
+				n = read(fd, buf, CMDLINE_LENGTH);
+				if (n < 0)
+					goto fail;
+				buf[n] = '\0';
+				if (strstr(buf, "frecon") != NULL) {
+					kill(current_pid, SIGKILL);
+				}
+				close(fd);
+				fd = -1;
+				free(buf);
+				buf = NULL;
+				free(fname);
+				fname = NULL;
+			}
+		}
+		closedir(dp);
+	}
+
+	return;
+
+fail:
+	if (buf != NULL)
+		free(buf);
+	if (fname != NULL)
+		free(fname);
+	if (fd >= 0)
+		close(fd);
+}

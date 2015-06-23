@@ -102,6 +102,7 @@ int main(int argc, char* argv[])
 				break;
 
 			case FLAG_DAEMON:
+				kill_running_frecon();
 				command_flags.standalone = false;
 				break;
 

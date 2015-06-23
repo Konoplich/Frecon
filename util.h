@@ -37,6 +37,7 @@ void parse_filespec(char* filespec, char *filename,
 		int32_t *offset_x, int32_t *offset_y, uint32_t *duration,
 		uint32_t default_duration, int32_t default_x, int32_t default_y);
 void parse_image_option(char* optionstr, char** name, char** val);
+void kill_running_frecon();
 
 
 #define ERROR                 (1)
