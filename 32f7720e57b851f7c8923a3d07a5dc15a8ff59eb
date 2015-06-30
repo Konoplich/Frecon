@@ -1,0 +1,8 @@
+Verified+1: Michael Spang <spang@chromium.org>
+Code-Review+2: David Sodman <dsodman@chromium.org>
+Commit-Queue+1: Michael Spang <spang@chromium.org>
+Submitted-by: ChromeOS Commit Bot <chromeos-commit-bot@chromium.org>
+Submitted-at: Tue, 30 Jun 2015 20:32:07 +0000
+Reviewed-on: https://chromium-review.googlesource.com/282348
+Project: chromiumos/platform/frecon
+Branch: refs/heads/master
