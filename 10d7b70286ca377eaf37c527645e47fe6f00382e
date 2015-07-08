@@ -1,0 +1,8 @@
+Code-Review+2: Haixia Shi <hshi@chromium.org>
+Verified+1: Stéphane Marchesin <marcheu@chromium.org>
+Commit-Queue+1: Stéphane Marchesin <marcheu@chromium.org>
+Submitted-by: ChromeOS Commit Bot <chromeos-commit-bot@chromium.org>
+Submitted-at: Wed, 08 Jul 2015 12:32:31 +0000
+Reviewed-on: https://chromium-review.googlesource.com/282651
+Project: chromiumos/platform/frecon
+Branch: refs/heads/master
