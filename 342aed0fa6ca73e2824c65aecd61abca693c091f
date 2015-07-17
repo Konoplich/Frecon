@@ -1,0 +1,8 @@
+Code-Review+2: Olof Johansson <olofj@chromium.org>
+Verified+1: Dylan Reid <dgreid@chromium.org>
+Commit-Queue+1: Dylan Reid <dgreid@chromium.org>
+Submitted-by: ChromeOS Commit Bot <chromeos-commit-bot@chromium.org>
+Submitted-at: Fri, 17 Jul 2015 01:46:00 +0000
+Reviewed-on: https://chromium-review.googlesource.com/280538
+Project: chromiumos/platform/frecon
+Branch: refs/heads/master
