@@ -596,8 +596,8 @@ int input_process(terminal_t* splash_term, uint32_t usec)
 			if (!term_is_valid(new_terminal)) {
 				return -1;
 			}
-			term_activate(new_terminal);
 			term_close(terminal);
+			term_activate(new_terminal);
 		}
 	}
 
