@@ -1,0 +1,8 @@
+Verified+1: Sean Chiang <sean_fs_chiang@wistron.com>
+Code-Review+2: Haixia Shi <hshi@chromium.org>
+Commit-Queue+1: David Sodman <dsodman@chromium.org>
+Submitted-by: ChromeOS Commit Bot <chromeos-commit-bot@chromium.org>
+Submitted-at: Wed, 29 Jul 2015 21:18:23 +0000
+Reviewed-on: https://chromium-review.googlesource.com/288532
+Project: chromiumos/platform/frecon
+Branch: refs/heads/master
