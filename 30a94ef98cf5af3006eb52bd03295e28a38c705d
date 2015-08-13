@@ -16,6 +16,24 @@
       "revId": "30a94ef98cf5af3006eb52bd03295e28a38c705d",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e480adc6_56f83489",
+        "filename": "term.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 1119450
+      },
+      "writtenOn": "2015-08-13T01:07:36Z",
+      "side": 0,
+      "message": "I didn\u0027t insert this line. Just removing it from the code base.",
+      "parentUuid": "e4298d86_b70f4aea",
+      "revId": "30a94ef98cf5af3006eb52bd03295e28a38c705d",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
     }
   ]
 }
