@@ -312,6 +312,16 @@ static int input_add(const char *devname)
 	if (fd < 0)
 		goto errorret;
 
+	ret = ioctl(fd, EVIOCGRAB, (void *) 1);
+	if (!ret) {
+		ioctl(fd, EVIOCGRAB, (void *) 0);
+	} else {
+		LOG(ERROR, "Evdev device %s grabbed by another process",
+			devname);
+		ret = -EBUSY;
+		goto closefd;
+	}
+
 	struct input_dev *newdevs =
 	    realloc(input.devs, (input.ndevs + 1) * sizeof (struct input_dev));
 	if (!newdevs) {
