@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "848ff2ac_f8bc9114",
+        "filename": "input.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 1000221
+      },
+      "writtenOn": "2015-09-15T01:45:26Z",
+      "side": 1,
+      "message": "\"Skipping duplicate input device %s.\"",
+      "range": {
+        "startLine": 315,
+        "startChar": 17,
+        "endLine": 315,
+        "endChar": 50
+      },
+      "revId": "a9d3a985ee3533ad02e038012f44ac097114867c",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    }
+  ]
+}
