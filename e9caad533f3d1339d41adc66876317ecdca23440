@@ -1,0 +1,9 @@
+Code-Review+2: Haixia Shi <hshi@chromium.org>
+Commit-Queue+1: Haixia Shi <hshi@chromium.org>
+Trybot-Ready+1: Haixia Shi <hshi@chromium.org>
+Verified+1: Haixia Shi <hshi@chromium.org>
+Submitted-by: ChromeOS bot <3su6n15k.default@developer.gserviceaccount.com>
+Submitted-at: Thu, 17 Sep 2015 17:07:05 +0000
+Reviewed-on: https://chromium-review.googlesource.com/300322
+Project: chromiumos/platform/frecon
+Branch: refs/heads/release-R45-7262.B
