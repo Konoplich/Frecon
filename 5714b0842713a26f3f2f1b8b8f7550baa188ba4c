@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c9a3c3b1_ba298e1f",
+        "filename": "input.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 1001537
+      },
+      "writtenOn": "2015-09-22T21:45:14Z",
+      "side": 1,
+      "message": "While you\u0027re at it, you might as well add the following:\n\nSEARCH + DOT \u003d INSERT\nSEARCH + BACKSPACE \u003d DELETE",
+      "revId": "5714b0842713a26f3f2f1b8b8f7550baa188ba4c",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    }
+  ]
+}
