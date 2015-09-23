@@ -20,9 +20,10 @@
 #include "term.h"
 #include "util.h"
 
-#define  MAX_SPLASH_IMAGES      (30)
-#define  MAX_SPLASH_WAITTIME    (8)
-#define  DBUS_WAIT_DELAY        (50000)
+#define  MAX_SPLASH_IMAGES              (30)
+#define  MAX_SPLASH_WAITTIME            (20)
+#define  MAX_SPLASH_WAITTIME_DEVMODE    (8)
+#define  DBUS_WAIT_DELAY                (50000)
 
 typedef struct {
 	image_t    *image;
@@ -255,7 +256,7 @@ int splash_run(splash_t* splash, dbus_t** dbus)
 	 * Finally, wait until chrome has drawn on top of the splash.  In dev mode,
 	 * wait a few seconds for chrome to show up.
 	 */
-	sleep(MAX_SPLASH_WAITTIME);
+	sleep(MAX_SPLASH_WAITTIME_DEVMODE);
 	return status;
 }
 
