@@ -1,0 +1,7 @@
+Code-Review+2: Douglas Anderson <dianders@chromium.org>
+Verified+1: Douglas Anderson <dianders@chromium.org>
+Submitted-by: Douglas Anderson <dianders@chromium.org>
+Submitted-at: Thu, 08 Oct 2015 20:58:49 +0000
+Reviewed-on: https://chromium-review.googlesource.com/304339
+Project: chromiumos/platform/frecon
+Branch: refs/heads/release-R47-7520.B
