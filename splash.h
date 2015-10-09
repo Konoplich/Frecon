@@ -25,5 +25,6 @@ void splash_set_loop_start(splash_t* splash, int32_t start_location);
 void splash_set_loop_duration(splash_t* splash, uint32_t duration);
 void splash_set_loop_offset(splash_t* splash, int32_t x, int32_t y);
 void splash_present_term_file(splash_t* splash);
+int splash_is_hires(splash_t* splash);
 
 #endif  // SPLASH_H
