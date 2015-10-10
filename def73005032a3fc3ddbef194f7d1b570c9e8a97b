@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "eaf16251_cfbfe937",
+        "filename": "main.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000221
+      },
+      "writtenOn": "2015-10-10T01:17:03Z",
+      "side": 1,
+      "message": "Can you change the option to image-highres to be consistent with the remaining naming schemes?",
+      "range": {
+        "startLine": 42,
+        "startChar": 4,
+        "endLine": 42,
+        "endChar": 11
+      },
+      "revId": "def73005032a3fc3ddbef194f7d1b570c9e8a97b",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eaba42ed_c16cd83b",
+        "filename": "splash.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000221
+      },
+      "writtenOn": "2015-10-10T01:17:03Z",
+      "side": 1,
+      "message": "Do you mind sorting the declarations in this file?\n\nint splash_add_image(splash_t*, char* filespec);\nint splash_destroy(splash_t*);\nint splash_is_hires(splash_t* splash);\nint splash_num_images(splash_t* splash);\nvoid splash_present_term_file(splash_t* splash);\nint splash_run(splash_t*, dbus_t **dbus);\nint splash_set_clear(splash_t* splash, uint32_t clear_color);\nvoid splash_set_dbus(splash_t* splash, dbus_t* dbus);\nvoid splash_set_default_duration(splash_t* splash, uint32_t duration);\nvoid splash_set_devmode(splash_t* splash);\nvoid splash_set_loop_duration(splash_t* splash, uint32_t duration);\nvoid splash_set_loop_offset(splash_t* splash, int32_t x, int32_t y);\nvoid splash_set_loop_start(splash_t* splash, int32_t start_location);\nvoid splash_set_offset(splash_t* splash, int32_t x, int32_t y);",
+      "range": {
+        "startLine": 28,
+        "startChar": 1,
+        "endLine": 28,
+        "endChar": 38
+      },
+      "revId": "def73005032a3fc3ddbef194f7d1b570c9e8a97b",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    }
+  ]
+}
