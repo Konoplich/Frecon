@@ -1,0 +1,8 @@
+Code-Review+2: Ilja Friedel <ihf@chromium.org>
+Commit-Queue+1: Bernie Thompson <bhthompson@chromium.org>
+Verified+1: Bernie Thompson <bhthompson@chromium.org>
+Submitted-by: ChromeOS bot <3su6n15k.default@developer.gserviceaccount.com>
+Submitted-at: Fri, 30 Oct 2015 18:16:34 +0000
+Reviewed-on: https://chromium-review.googlesource.com/309986
+Project: chromiumos/platform/frecon
+Branch: refs/heads/factory-strago-7458.B
