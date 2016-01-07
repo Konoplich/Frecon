@@ -15,7 +15,6 @@
 static int font_scaling = 1;
 static int glyph_size = GLYPH_BYTES_PER_ROW * GLYPH_HEIGHT;
 static uint8_t* prescaled_glyphs = NULL;
-static int font_ref = 0;
 
 static uint8_t get_bit(const uint8_t* buffer, int bit_offset)
 {
@@ -151,23 +150,17 @@ static void prescale_font(int scaling)
 
 void font_init(int scaling)
 {
-	if (font_ref == 0) {
-		font_scaling = scaling;
-		if (scaling > 1) {
-			prescale_font(scaling);
-		}
+	font_scaling = scaling;
+	if (scaling > 1) {
+		prescale_font(scaling);
 	}
-	font_ref++;
 }
 
 void font_free()
 {
-	font_ref--;
-	if (font_ref == 0) {
-		if (prescaled_glyphs) {
-			free(prescaled_glyphs);
-			prescaled_glyphs = NULL;
-		}
+	if (prescaled_glyphs) {
+		free(prescaled_glyphs);
+		prescaled_glyphs = NULL;
 	}
 }
 
