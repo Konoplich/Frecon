@@ -6,6 +6,7 @@
 
 #include <drm_fourcc.h>
 #include <fcntl.h>
+#include <libudev.h>
 #include <stdbool.h>
 #include <stddef.h>
 #include <stdio.h>
@@ -17,8 +18,13 @@
 
 #include "dbus.h"
 #include "dbus_interface.h"
+#include "term.h"
 #include "util.h"
 #include "video.h"
+
+static int udev_monitor_fd;
+static struct udev_monitor *mon;
+int udev_refcount = 0;
 
 static drmModeConnector* find_first_connected_connector(int fd,
 							drmModeRes* resources)
@@ -36,6 +42,55 @@ static drmModeConnector* find_first_connected_connector(int fd,
 		}
 	}
 	return NULL;
+}
+
+static int udev_monitor_init()
+{
+	static struct udev* u;
+
+	printf("[%s:%d]\n",__func__,__LINE__);
+	if (udev_refcount > 0) {
+		udev_refcount++;
+		return 0;
+	}
+
+	u = udev_new();
+	if (!u)
+		return -1;
+
+	mon = udev_monitor_new_from_netlink(u, "udev");
+	if (!mon) {
+		udev_unref(u);
+		return -1;
+	}
+
+	if (udev_monitor_filter_add_match_subsystem_devtype(mon, "drm", "drm_minor") < 0 ||
+	    udev_monitor_enable_receiving(mon) < 0) {
+		udev_monitor_unref(mon);
+		udev_unref(u);
+		return -1;
+	}
+
+	udev_monitor_fd = udev_monitor_get_fd(mon);
+	udev_refcount = 1;
+
+	return 0;
+}
+
+static void udev_monitor_close()
+{
+	struct udev* u;
+
+	printf("[%s:%d]\n",__func__,__LINE__);
+	udev_refcount--;
+	if (udev_refcount)
+		return;
+
+	u = udev_monitor_get_udev(mon);
+	close(udev_monitor_fd);
+	udev_monitor_unref(mon);
+	udev_unref(u);
+	mon = NULL;
 }
 
 static int kms_open(video_t* video)
@@ -372,6 +427,10 @@ video_t* video_init()
 		goto fail;
 	}
 
+	if (udev_monitor_init()) {
+		goto fail;
+	}
+
 	new_video->main_monitor_connector = find_main_monitor(new_video->fd,
 			new_video->drm_resources, &selected_mode);
 
@@ -570,6 +629,8 @@ void video_close(video_t* video)
 	if (!video)
 		return;
 
+	udev_monitor_close();
+
 	video_delref(video);
 	if (video->ref > 0)
 		return;
@@ -724,4 +785,29 @@ void video_addref(video_t* video)
 void video_delref(video_t* video)
 {
 	video->ref--;
+}
+
+int video_add_fds(fd_set* read_set, fd_set* exception_set)
+{
+	FD_SET(udev_monitor_fd, read_set);
+	FD_SET(udev_monitor_fd, exception_set);
+
+	return udev_monitor_fd;
+}
+
+void video_dispatch_io()
+{
+	const char* hotplug;
+	struct udev_device* dev;
+
+	dev = udev_monitor_receive_device(mon);
+	if (!dev)
+		return;
+
+	hotplug = udev_device_get_property_value(dev, "HOTPLUG");
+
+	if (hotplug && atoi(hotplug) == 1)
+		printf("HOTPLUG EVENT\n");
+
+	udev_device_unref(dev);
 }

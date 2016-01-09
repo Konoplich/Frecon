@@ -575,6 +575,8 @@ int input_process(terminal_t* splash_term, uint32_t usec)
 		}
 	}
 
+	maxfd = MAX(maxfd, video_add_fds(&read_set, &exception_set)) + 1;
+
 	if (usec) {
 		ptm = &tm;
 		tm.tv_sec = 0;
@@ -588,6 +590,8 @@ int input_process(terminal_t* splash_term, uint32_t usec)
 
 	if (input.dbus)
 		dbus_dispatch_io(input.dbus);
+
+	video_dispatch_io();
 
 	if (term_exception(terminal, &exception_set))
 		return -1;

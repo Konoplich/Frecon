@@ -67,5 +67,7 @@ uint32_t* video_lock(video_t* video);
 void video_unlock(video_t* video);
 void video_addref(video_t* video);
 void video_delref(video_t* video);
+int video_add_fds(fd_set* read_set, fd_set* exception_set);
+void video_dispatch_io();
 
 #endif
