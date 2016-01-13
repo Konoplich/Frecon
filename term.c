@@ -317,7 +317,13 @@ void term_activate(terminal_t* terminal)
 {
 	input_set_current(terminal);
 	terminal->active = true;
-	video_setmode(terminal->video);
+	if (video_setmode(terminal->video)) {
+		LOG(ERROR, "Setmode failed. Create new video for term.");
+		video_close(terminal->video);
+		terminal->video = video_init();
+		video_setmode(terminal->video);
+		tsm_screen_sb_reset(terminal->term->screen);
+	}
 	term_redraw(terminal);
 }
 
