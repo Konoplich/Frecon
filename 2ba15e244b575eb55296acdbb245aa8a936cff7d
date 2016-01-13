@@ -16,6 +16,24 @@
       "revId": "2ba15e244b575eb55296acdbb245aa8a936cff7d",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "27673e34_3e9f6679",
+        "filename": "term.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 563,
+      "author": {
+        "id": 1003290
+      },
+      "writtenOn": "2016-01-13T21:34:16Z",
+      "side": 1,
+      "message": "Probably, although it would make code that calls it more complex. I think eventually we may pull it into term_activate().",
+      "parentUuid": "e759a674_5794c36c",
+      "revId": "2ba15e244b575eb55296acdbb245aa8a936cff7d",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
     }
   ]
 }
