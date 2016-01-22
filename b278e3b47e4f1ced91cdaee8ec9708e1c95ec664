@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "14cb4a3e_31bfc8ca",
+        "filename": "dev.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1003290
+      },
+      "writtenOn": "2016-01-22T23:25:15Z",
+      "side": 1,
+      "message": "right",
+      "parentUuid": "b4b51eae_0e6e2f98",
+      "range": {
+        "startLine": 2,
+        "startChar": 17,
+        "endLine": 2,
+        "endChar": 21
+      },
+      "revId": "b278e3b47e4f1ced91cdaee8ec9708e1c95ec664",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "14cb4a3e_2e61a7b4",
         "filename": "dev.c",
         "patchSetId": 1
@@ -36,6 +60,30 @@
       "writtenOn": "2016-01-22T22:12:56Z",
       "side": 1,
       "message": "I know you\u0027re just copying code from the other file but the above is not really matching the coding style. Perhaps do this instead:\n\n...\n} else if (!strcmp(\"remove\",\n                   udev_device_get_action(dev))) {\n...",
+      "range": {
+        "startLine": 96,
+        "startChar": 9,
+        "endLine": 98,
+        "endChar": 4
+      },
+      "revId": "b278e3b47e4f1ced91cdaee8ec9708e1c95ec664",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "54c14218_b39d002a",
+        "filename": "dev.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1003290
+      },
+      "writtenOn": "2016-01-22T23:25:15Z",
+      "side": 1,
+      "message": "I am going to rework all of this in the next change when I will add monitor hotplug. So I will leave it alone for now.",
+      "parentUuid": "14cb4a3e_2e61a7b4",
       "range": {
         "startLine": 96,
         "startChar": 9,
