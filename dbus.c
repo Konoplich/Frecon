@@ -271,6 +271,37 @@ static void toggle_watch(DBusWatch* w, void* data)
 {
 }
 
+static DBusHandlerResult handle_lid(DBusMessage* message)
+{
+	DBusError error;
+	dbus_bool_t stat;
+	char *data;
+	int size;
+	
+
+	dbus_error_init(&error);
+	stat = dbus_message_get_args(message, &error,
+			DBUS_TYPE_ARRAY, DBUS_TYPE_BYTE, &data, &size,
+			DBUS_TYPE_INVALID);
+	if (!stat) {
+		LOG(ERROR, "Failed to parse dbus input event signal");
+	}
+	LOG(INFO, "DDD input event type %u,%u,%u,%u\n", (unsigned int)data[0], (unsigned int)data[1], (unsigned int)data[2], (unsigned int)data[3]);
+	return DBUS_HANDLER_RESULT_HANDLED;
+}
+
+static DBusHandlerResult frecon_dbus_message_filter(DBusConnection* connection,
+						    DBusMessage* message,
+						    void* user_data)
+{
+	if (dbus_message_is_signal(message,
+				kPowerManagerInterface, kInputEventSignal)) {
+		return handle_lid(message);
+	}
+
+	return DBUS_HANDLER_RESULT_NOT_YET_HANDLED;
+}
+
 bool dbus_is_initialized(void)
 {
 	return !!dbus;
@@ -313,6 +344,13 @@ bool dbus_init()
 
 	if (!stat) {
 		LOG(ERROR, "failed to register object path");
+	}
+
+	dbus_bus_add_match(new_dbus->conn, kPowerManagerSignalRule, &err);
+
+	stat = dbus_connection_add_filter(new_dbus->conn, frecon_dbus_message_filter, NULL, NULL);
+	if (!stat) {
+		LOG(ERROR, "failed to add message filter");
 	}
 
 	stat = dbus_connection_set_watch_functions(new_dbus->conn,
