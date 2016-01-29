@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9462dabe_205c10ce",
+        "filename": "video.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 389,
+      "author": {
+        "id": 1000313
+      },
+      "writtenOn": "2016-01-29T23:15:30Z",
+      "side": 1,
+      "message": "this function can be static",
+      "revId": "e50f1ecdb4dbedf6ace0a5961efe3eada15532f2",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    }
+  ]
+}
