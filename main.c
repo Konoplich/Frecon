@@ -52,6 +52,7 @@ static struct option command_options[] = {
 };
 
 typedef struct {
+	bool    devmode;
 	bool    standalone;
 } commandflags_t;
 
@@ -69,7 +70,7 @@ static void parse_offset(char* param, int32_t* x, int32_t* y)
 		*y = strtol(token, NULL, 0);
 }
 
-int main_process_events(uint32_t usec)
+int main_process_events(uint32_t usec, bool allow_console_switch)
 {
 	terminal_t* terminal;
 	terminal_t* new_terminal;
@@ -112,7 +113,7 @@ int main_process_events(uint32_t usec)
 		return -1;
 
 	dev_dispatch_io(&read_set, &exception_set);
-	input_dispatch_io(&read_set, &exception_set);
+	input_dispatch_io(&read_set, &exception_set, allow_console_switch);
 
 	for (int i = 0; i < MAX_TERMINALS; i++) {
 		if (term_is_valid(term_get_terminal(i))) {
@@ -145,7 +146,7 @@ int main_process_events(uint32_t usec)
 	return 0;
 }
 
-int main_loop(bool standalone)
+int main_loop(bool standalone, bool allow_console_switch)
 {
 	terminal_t* terminal;
 	int status;
@@ -158,7 +159,7 @@ int main_loop(bool standalone)
 	}
 
 	while (1) {
-		status = main_process_events(0);
+		status = main_process_events(0, allow_console_switch);
 		if (status != 0) {
 			LOG(ERROR, "input process returned %d", status);
 			break;
@@ -239,6 +240,7 @@ int main(int argc, char* argv[])
 
 			case FLAG_DEV_MODE:
 				splash_set_devmode(splash);
+				command_flags.devmode = true;
 				break;
 
 			case FLAG_IMAGE:
@@ -287,7 +289,7 @@ int main(int argc, char* argv[])
 		daemonize();
 	}
 	if (splash_num_images(splash) > 0) {
-		ret = splash_run(splash);
+		ret = splash_run(splash, command_flags.standalone || command_flags.devmode);
 		if (ret) {
 			LOG(ERROR, "splash_run failed: %d", ret);
 			return EXIT_FAILURE;
@@ -304,7 +306,7 @@ int main(int argc, char* argv[])
 		dbus_init();
 	}
 
-	ret = main_loop(command_flags.standalone);
+	ret = main_loop(command_flags.standalone, command_flags.standalone || command_flags.devmode);
 
 	input_close();
 	dev_close();

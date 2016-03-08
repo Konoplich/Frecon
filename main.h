@@ -7,6 +7,6 @@
 #ifndef MAIN_H
 #define MAIN_H
 
-int main_process_events(uint32_t usec);
+int main_process_events(uint32_t usec, bool allow_console_switch);
 
 #endif

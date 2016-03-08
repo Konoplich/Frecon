@@ -121,7 +121,7 @@ static void splash_clear_screen(splash_t* splash)
 	term_set_background(splash->terminal, splash->clear);
 }
 
-int splash_run(splash_t* splash)
+int splash_run(splash_t* splash, bool allow_console_switch)
 {
 	int i;
 	int status;
@@ -175,7 +175,7 @@ int splash_run(splash_t* splash)
 			LOG(WARNING, "term_show_image failed: %d", status);
 			break;
 		}
-		status = main_process_events(1);
+		status = main_process_events(1, allow_console_switch);
 		if (status != 0) {
 			LOG(WARNING, "input_process failed: %d", status);
 			break;

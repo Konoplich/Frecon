@@ -53,7 +53,7 @@ struct {
 	.devs = NULL,
 };
 
-static int input_special_key(struct input_key_event* ev)
+static int input_special_key(struct input_key_event* ev, bool allow_console_switch)
 {
 	terminal_t* terminal;
 
@@ -146,7 +146,7 @@ static int input_special_key(struct input_key_event* ev)
 		}
 	}
 
-	if (input.kbd_state.alt_state && input.kbd_state.control_state && ev->value) {
+	if (allow_console_switch && input.kbd_state.alt_state && input.kbd_state.control_state && ev->value) {
 		/*
 		 * Special case for key sequence that is used by external program.   Just
 		 * explicitly ignore here and do nothing.
@@ -413,14 +413,14 @@ void input_put_event(struct input_key_event* event)
 	free(event);
 }
 
-void input_dispatch_io(fd_set* read_set, fd_set* exception_set)
+void input_dispatch_io(fd_set* read_set, fd_set* exception_set, bool allow_console_switch)
 {
 	terminal_t* terminal;
 	struct input_key_event* event;
 
 	event = input_get_event(read_set, exception_set);
 	if (event) {
-		if (!input_special_key(event) && event->value) {
+		if (!input_special_key(event, allow_console_switch) && event->value) {
 			uint32_t keysym, unicode;
 			// current_terminal can possibly change during
 			// execution of input_special_key
