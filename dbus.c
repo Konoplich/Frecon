@@ -9,6 +9,8 @@
 #include "dbus.h"
 #include "dbus_interface.h"
 #include "image.h"
+#include "main.h"
+#include "splash.h"
 #include "term.h"
 #include "util.h"
 
@@ -20,6 +22,9 @@
 #define DBUS_DEFAULT_DELAY             3000
 
 typedef struct _dbus_t dbus_t;
+
+splash_t* splash_to_destroy = NULL;
+bool chrome_is_already_up = false;
 
 struct _dbus_t {
 	DBusConnection* conn;
@@ -271,6 +276,32 @@ static void toggle_watch(DBusWatch* w, void* data)
 {
 }
 
+static DBusHandlerResult handle_login_prompt_visible(DBusMessage* message)
+{
+	if (command_flags.daemon && !command_flags.enable_vts) {
+		exit(EXIT_SUCCESS);
+	} else
+	if (splash_to_destroy) {
+		splash_destroy(splash_to_destroy);
+		splash_to_destroy = NULL;
+	} else
+		chrome_is_already_up = true;
+
+	return DBUS_HANDLER_RESULT_HANDLED;
+}
+
+static DBusHandlerResult frecon_dbus_message_filter(DBusConnection* connection,
+						    DBusMessage* message,
+						    void* user_data)
+{
+	if (dbus_message_is_signal(message,
+				kSessionManagerInterface, kLoginPromptVisibleSignal)) {
+		return handle_login_prompt_visible(message);
+	}
+
+	return DBUS_HANDLER_RESULT_NOT_YET_HANDLED;
+}
+
 bool dbus_is_initialized(void)
 {
 	return !!dbus;
@@ -313,6 +344,13 @@ bool dbus_init()
 
 	if (!stat) {
 		LOG(ERROR, "failed to register object path");
+	}
+
+	dbus_bus_add_match(new_dbus->conn, kLoginPromptVisiibleRule, &err);
+
+	stat = dbus_connection_add_filter(new_dbus->conn, frecon_dbus_message_filter, NULL, NULL);
+	if (!stat) {
+		LOG(ERROR, "failed to add message filter");
 	}
 
 	stat = dbus_connection_set_watch_functions(new_dbus->conn,
@@ -470,6 +508,9 @@ void dbus_report_user_activity(int activity_type)
 	}
 }
 
+/*
+ * tell Chrome to take ownership of the display (DRM master)
+ */
 void dbus_take_display_ownership(void)
 {
 	if (!dbus)
@@ -480,6 +521,9 @@ void dbus_take_display_ownership(void)
 				kTakeDisplayOwnership);
 }
 
+/*
+ * ask Chrome to give up display ownership (DRM master)
+ */
 void dbus_release_display_ownership(void)
 {
 	if (!dbus)
@@ -490,3 +534,13 @@ void dbus_release_display_ownership(void)
 				kReleaseDisplayOwnership);
 }
 
+void dbus_set_splash_to_destroy(splash_t* s)
+{
+	if (chrome_is_already_up) {
+		if (command_flags.daemon && !command_flags.enable_vts)
+			exit(EXIT_SUCCESS);
+		else
+			splash_destroy(s);
+	} else
+		splash_to_destroy = s;
+}

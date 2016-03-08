@@ -13,6 +13,8 @@
 #include <memory.h>
 #include <stdio.h>
 
+#include "splash.h"
+
 #define DBUS_STATUS_NOERROR     (0)
 #define DBUS_STATUS_TIMEOUT     (-1)
 
@@ -24,6 +26,6 @@ void dbus_report_user_activity(int activity_type);
 void dbus_take_display_ownership(void);
 void dbus_release_display_ownership(void);
 bool dbus_is_initialized(void);
-
+void dbus_set_splash_to_destroy(splash_t*);
 
 #endif // FRECON_DBUS_H

@@ -146,7 +146,8 @@ static int input_special_key(struct input_key_event* ev)
 		}
 	}
 
-	if (input.kbd_state.alt_state && input.kbd_state.control_state && ev->value) {
+	if (command_flags.enable_vts &&
+	    input.kbd_state.alt_state && input.kbd_state.control_state && ev->value) {
 		/*
 		 * Special case for key sequence that is used by external program.   Just
 		 * explicitly ignore here and do nothing.
@@ -165,6 +166,7 @@ static int input_special_key(struct input_key_event* ev)
 			}
 		} else if ((ev->code >= KEY_F2) && (ev->code < KEY_F2 + MAX_STD_TERMINALS)) {
 			dbus_release_display_ownership();
+			sleep(1);
 			if (term_is_active(terminal))
 				term_deactivate(terminal);
 			term_set_current(ev->code - KEY_F2);
