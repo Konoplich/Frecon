@@ -18,6 +18,7 @@
 #include "dbus.h"
 #include "dbus_interface.h"
 #include "input.h"
+#include "main.h"
 #include "keysym.h"
 #include "util.h"
 
@@ -146,7 +147,8 @@ static int input_special_key(struct input_key_event* ev)
 		}
 	}
 
-	if (input.kbd_state.alt_state && input.kbd_state.control_state && ev->value) {
+	if (command_flags.enable_vts &&
+	    input.kbd_state.alt_state && input.kbd_state.control_state && ev->value) {
 		/*
 		 * Special case for key sequence that is used by external program.   Just
 		 * explicitly ignore here and do nothing.
