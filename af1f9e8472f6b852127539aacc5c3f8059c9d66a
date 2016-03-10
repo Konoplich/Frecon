@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "179d11d4_2d8fcd5a",
+        "filename": "dbus.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 298,
+      "author": {
+        "id": 1000313
+      },
+      "writtenOn": "2016-03-10T22:35:48Z",
+      "side": 1,
+      "message": "nit: no braces",
+      "revId": "af1f9e8472f6b852127539aacc5c3f8059c9d66a",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    }
+  ]
+}
