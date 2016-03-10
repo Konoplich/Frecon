@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9712e1d6_a8f52ea4",
+        "filename": "input.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000313
+      },
+      "writtenOn": "2016-03-10T04:17:56Z",
+      "side": 1,
+      "message": "nit: alphabetize includes",
+      "revId": "7880a1d4799d101bf61af64f21bdce1d3fe39569",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9712e1d6_88db8a33",
+        "filename": "main.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000313
+      },
+      "writtenOn": "2016-03-10T04:17:56Z",
+      "side": 1,
+      "message": "nit: usually the time unit is used in the name, i.e.\n\nDBUS_WAIT_DELAY_US",
+      "revId": "7880a1d4799d101bf61af64f21bdce1d3fe39569",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    }
+  ]
+}
