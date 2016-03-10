@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "179d11d4_0dabf1e9",
+        "filename": "main.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 316,
+      "author": {
+        "id": 1000985
+      },
+      "writtenOn": "2016-03-10T22:15:08Z",
+      "side": 1,
+      "message": "Nit: Consistent D-Bus spelling?",
+      "range": {
+        "startLine": 316,
+        "startChar": 8,
+        "endLine": 316,
+        "endChar": 12
+      },
+      "revId": "29eb46c7b623348b022e17e1f06f3b32a54de877",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "179d11d4_6da8b5eb",
+        "filename": "main.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 317,
+      "author": {
+        "id": 1000985
+      },
+      "writtenOn": "2016-03-10T22:15:08Z",
+      "side": 1,
+      "message": "Here",
+      "range": {
+        "startLine": 317,
+        "startChar": 40,
+        "endLine": 317,
+        "endChar": 44
+      },
+      "revId": "29eb46c7b623348b022e17e1f06f3b32a54de877",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "179d11d4_4da5f90f",
+        "filename": "main.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 319,
+      "author": {
+        "id": 1000985
+      },
+      "writtenOn": "2016-03-10T22:15:08Z",
+      "side": 1,
+      "message": "And here.",
+      "range": {
+        "startLine": 319,
+        "startChar": 19,
+        "endLine": 319,
+        "endChar": 23
+      },
+      "revId": "29eb46c7b623348b022e17e1f06f3b32a54de877",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    }
+  ]
+}
