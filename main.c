@@ -134,7 +134,7 @@ int main_process_events(uint32_t usec)
 				term_set_terminal(SPLASH_TERMINAL, NULL);
 				return -1;
 			}
-			term_set_current_terminal(term_init(true, term_getvideo(terminal)));
+			term_set_current_terminal(term_init(true));
 			new_terminal = term_get_current_terminal();
 			if (!term_is_valid(new_terminal)) {
 				return -1;
@@ -209,13 +209,13 @@ int main(int argc, char* argv[])
 		if (c == -1) {
 			break;
 		} else if (c == FLAG_PRINT_RESOLUTION) {
-			video_t *video = video_init();
-			if (!video)
+			drm_t *drm = drm_scan();
+			if (!drm)
 				return EXIT_FAILURE;
 
-			printf("%d %d", video_getwidth(video),
-			       video_getheight(video));
-			video_close(video);
+			printf("%d %d", drm_gethres(drm),
+			       drm_getvres(drm));
+			drm_delref(drm);
 			return EXIT_SUCCESS;
 		}
 	}
@@ -235,6 +235,7 @@ int main(int argc, char* argv[])
 		return EXIT_FAILURE;
 	}
 
+	drm = drm_scan();
 	splash = splash_init();
 	if (splash == NULL) {
 		LOG(ERROR, "splash init failed");
@@ -328,13 +329,14 @@ int main(int argc, char* argv[])
 	if (command_flags.daemon) {
 		if (command_flags.enable_vts)
 			set_drm_master_relax();
+		drm_drop_master();
 		dbus_take_display_ownership();
 	} else {
 		/* create and switch to first term in interactve mode */
 		terminal_t* terminal;
 		set_drm_master_relax();
 		dbus_release_display_ownership();
-		term_set_current_terminal(term_init(true, NULL));
+		term_set_current_terminal(term_init(true));
 		terminal = term_get_current_terminal();
 		term_activate(terminal);
 	}
@@ -344,6 +346,10 @@ int main(int argc, char* argv[])
 	input_close();
 	dev_close();
 	dbus_destroy();
+	if (drm) {
+		drm_delref(drm);
+		drm = NULL;
+	}
 
 	return ret;
 }

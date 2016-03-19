@@ -16,7 +16,7 @@
 #define SPLASH_TERMINAL       (MAX_TERMINALS - 1)
 
 typedef struct _terminal_t terminal_t;
-terminal_t* term_init(bool interactive, video_t* video);
+terminal_t* term_init(bool interactive);
 void term_close(terminal_t* terminal);
 void term_close(terminal_t* terminal);
 void term_key_event(terminal_t* terminal, uint32_t keysym, int32_t unicode);
@@ -43,7 +43,7 @@ video_t* term_getvideo(terminal_t* terminal);
 terminal_t* term_get_terminal(int num);
 void term_set_terminal(int num, terminal_t* terminal);
 terminal_t* term_create_term(int vt);
-terminal_t* term_create_splash_term(video_t* video);
+terminal_t* term_create_splash_term();
 void term_destroy_splash_term();
 unsigned int term_get_max_terminals();
 void term_set_current(uint32_t t);

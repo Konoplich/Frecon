@@ -221,7 +221,7 @@ static int term_resize(terminal_t* term)
 	return 0;
 }
 
-terminal_t* term_init(bool interactive, video_t* video)
+terminal_t* term_init(bool interactive)
 {
 	const int scrollback_size = 200;
 	int status;
@@ -233,12 +233,7 @@ terminal_t* term_init(bool interactive, video_t* video)
 
 	new_terminal->background_valid = false;
 
-	if (video) {
-		new_terminal->video = video;
-		video_addref(video);
-	}
-	else
-		new_terminal->video = video_init();
+	new_terminal->video = video_init();
 
 	if (!new_terminal->video) {
 		term_close(new_terminal);
@@ -300,6 +295,7 @@ terminal_t* term_init(bool interactive, video_t* video)
 	new_terminal->term->pid = shl_pty_get_child(new_terminal->term->pty);
 
 	status = term_resize(new_terminal);
+
 	if (status < 0) {
 		shl_pty_close(new_terminal->term->pty);
 		term_close(new_terminal);
@@ -326,7 +322,7 @@ void term_deactivate(terminal_t* terminal)
 		return;
 
 	terminal->active = false;
-	video_release(terminal->video);
+	drm_drop_master();
 }
 
 void term_close(terminal_t* term)
@@ -497,7 +493,7 @@ terminal_t* term_create_term(int vt)
 		return terminal;
 
 	if (terminal == NULL) {
-		term_set_terminal(vt - 1, term_init(false, NULL));
+		term_set_terminal(vt - 1, term_init(false));
 		terminal = term_get_terminal(vt - 1);
 		if (!term_is_valid(terminal)) {
 			LOG(ERROR, "create_term: Term init failed");
@@ -507,9 +503,9 @@ terminal_t* term_create_term(int vt)
 	return terminal;
 }
 
-terminal_t* term_create_splash_term(video_t* video)
+terminal_t* term_create_splash_term()
 {
-	terminal_t* splash_terminal = term_init(false, video);
+	terminal_t* splash_terminal = term_init(false);
 	term_set_terminal(SPLASH_TERMINAL, splash_terminal);
 
 	// Hide the cursor on the splash screen
@@ -572,20 +568,24 @@ void term_monitor_hotplug(void)
 {
 	unsigned int t;
 
+	if (!drm_rescan()) {
+		return;
+	}
+
 	for (t = 0; t < MAX_TERMINALS; t++) {
-		bool resize_needed = false;
 		if (!terminals[t])
 			continue;
 		if (!terminals[t]->video)
 			continue;
-		if (video_init_connector(terminals[t]->video) == 1)
-			resize_needed = true;
-		if (resize_needed) {
-			term_resize(terminals[t]);
-			if (current_terminal == t && terminals[t]->active)
-				video_setmode(terminals[t]->video);
-			terminals[t]->term->age = 0;
-			term_redraw(terminals[t]);
-		}
+		video_buffer_destroy(terminals[t]->video);
+	}
+
+	for (t = 0; t < MAX_TERMINALS; t++) {
+		video_buffer_init(terminals[t]->video);
+		term_resize(terminals[t]);
+		if (current_terminal == t && terminals[t]->active)
+			video_setmode(terminals[t]->video);
+		terminals[t]->term->age = 0;
+		term_redraw(terminals[t]);
 	}
 }
