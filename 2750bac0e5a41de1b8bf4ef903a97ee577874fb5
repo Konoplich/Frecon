@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1c161690_e9823129",
+        "filename": "drm.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000313
+      },
+      "writtenOn": "2016-03-24T01:32:07Z",
+      "side": 1,
+      "message": "so this can be static now?",
+      "revId": "2750bac0e5a41de1b8bf4ef903a97ee577874fb5",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    }
+  ]
+}
