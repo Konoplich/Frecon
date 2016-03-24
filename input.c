@@ -33,10 +33,13 @@ struct input_dev {
 };
 
 struct keyboard_state {
-	int shift_state;
-	int control_state;
-	int alt_state;
-	int search_state;
+	bool left_shift_state;
+	bool right_shift_state;
+	bool left_control_state;
+	bool right_control_state;
+	bool left_alt_state;
+	bool right_alt_state;
+	bool search_state;
 };
 
 /*
@@ -83,16 +86,22 @@ static int input_special_key(struct input_key_event* ev)
 
 	switch (ev->code) {
 	case KEY_LEFTSHIFT:
+		input.kbd_state.left_shift_state = ! !ev->value;
+		return 1;
 	case KEY_RIGHTSHIFT:
-		input.kbd_state.shift_state = ! !ev->value;
+		input.kbd_state.right_shift_state = ! !ev->value;
 		return 1;
 	case KEY_LEFTCTRL:
+		input.kbd_state.left_control_state = ! !ev->value;
+		return 1;
 	case KEY_RIGHTCTRL:
-		input.kbd_state.control_state = ! !ev->value;
+		input.kbd_state.right_control_state = ! !ev->value;
 		return 1;
 	case KEY_LEFTALT:
+		input.kbd_state.left_alt_state = ! !ev->value;
+		return 1;
 	case KEY_RIGHTALT:
-		input.kbd_state.alt_state = ! !ev->value;
+		input.kbd_state.right_alt_state = ! !ev->value;
 		return 1;
 	case KEY_LEFTMETA: // search key
 		input.kbd_state.search_state = ! !ev->value;
@@ -100,7 +109,7 @@ static int input_special_key(struct input_key_event* ev)
 	}
 
 	if (term_is_active(terminal)) {
-		if (input.kbd_state.shift_state && ev->value) {
+		if ((input.kbd_state.left_shift_state || input.kbd_state.right_shift_state) && ev->value) {
 			switch (ev->code) {
 			case KEY_PAGEUP:
 				term_page_up(terminal);
@@ -123,9 +132,10 @@ static int input_special_key(struct input_key_event* ev)
 			}
 		}
 
-		if (!(input.kbd_state.search_state || input.kbd_state.alt_state ||
-					input.kbd_state.control_state) &&
-				ev->value && (ev->code >= KEY_F1) && (ev->code <= KEY_F10)) {
+		if (!(input.kbd_state.search_state ||
+		     (input.kbd_state.left_alt_state || input.kbd_state.right_alt_state) ||
+		     (input.kbd_state.left_control_state || input.kbd_state.right_control_state)) &&
+		    ev->value && (ev->code >= KEY_F1) && (ev->code <= KEY_F10)) {
 			switch (ev->code) {
 				case KEY_F1:
 				case KEY_F2:
@@ -148,12 +158,14 @@ static int input_special_key(struct input_key_event* ev)
 	}
 
 	if (command_flags.enable_vts &&
-	    input.kbd_state.alt_state && input.kbd_state.control_state && ev->value) {
+	    (input.kbd_state.left_alt_state || input.kbd_state.right_alt_state) &&
+	    (input.kbd_state.left_control_state || input.kbd_state.right_control_state) &&
+	    ev->value) {
 		/*
 		 * Special case for key sequence that is used by external program.   Just
 		 * explicitly ignore here and do nothing.
 		 */
-		if (input.kbd_state.shift_state)
+		if (input.kbd_state.left_shift_state || input.kbd_state.right_shift_state)
 			return 1;
 
 		if (ev->code == KEY_F1) {
@@ -252,8 +264,8 @@ static void input_get_keysym_and_unicode(struct input_key_event* event,
 	if (event->code >= ARRAY_SIZE(keysym_table) / 2) {
 		*keysym = '?';
 	} else {
-		*keysym = keysym_table[event->code * 2 + input.kbd_state.shift_state];
-		if ((input.kbd_state.control_state) && isascii(*keysym))
+		*keysym = keysym_table[event->code * 2 + (input.kbd_state.left_shift_state || input.kbd_state.right_shift_state)];
+		if ((input.kbd_state.left_control_state || input.kbd_state.right_control_state) && isascii(*keysym))
 			*keysym = tolower(*keysym) - 'a' + 1;
 	}
 
