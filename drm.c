@@ -262,6 +262,10 @@ static void drm_fini(drm_t* drm)
 
 static bool drm_equal(drm_t* l, drm_t* r)
 {
+	if (!l && !r)
+		return true;
+	if ((!l && r) || (l && !r))
+		return false;
 	if (!l->crtc && r->crtc)
 		return false;
 	if (l->crtc && !r->crtc)
