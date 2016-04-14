@@ -307,6 +307,11 @@ static int drm_score(drm_t* drm)
 	return score;
 }
 
+/*
+ * Scan and find best DRM object to display frecon on.
+ * This object should be created with DRM master, and we will keep master till
+ * first mode set or explicit drop master.
+ */
 drm_t* drm_scan(void)
 {
 	unsigned i;
@@ -381,7 +386,6 @@ drm_t* drm_scan(void)
 			    version->desc);
 			drmFreeVersion(version);
 		}
-		drmDropMaster(best_drm->fd);
 	}
 
 	return best_drm;
@@ -404,7 +408,7 @@ void drm_close(void)
 	}
 }
 
-void drm_delref(drm_t *drm)
+void drm_delref(drm_t* drm)
 {
 	if (!drm)
 		return;
@@ -430,13 +434,22 @@ drm_t* drm_addref(void)
 	return NULL;
 }
 
+void drm_dropmaster(drm_t* drm)
+{
+	if (drm) {
+		drmDropMaster(drm->fd);
+	}
+}
+
 /*
- * returns true if connector/crtc/driver have changed and framebuffer object have to be re-create
+ * returns true if connector/crtc/driver have changed and framebuffer object have to be re-created
  */
 bool drm_rescan(void)
 {
 	drm_t* ndrm;
 
+	/* In case we had master, drop master so the newly created object could have it */
+	drm_dropmaster(drm);
 	ndrm = drm_scan();
 	if (ndrm) {
 		if (drm_equal(ndrm, drm)) {
