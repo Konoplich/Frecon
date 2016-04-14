@@ -591,3 +591,18 @@ void term_monitor_hotplug(void)
 		term_redraw(terminals[t]);
 	}
 }
+
+void term_redrm(terminal_t *terminal)
+{
+	fb_buffer_destroy(terminal->fb);
+	fb_buffer_init(terminal->fb);
+	term_resize(terminal);
+	terminal->term->age = 0;
+	term_redraw(terminal);
+}
+
+void term_clear(terminal_t *terminal)
+{
+	tsm_screen_erase_screen(terminal->term->screen, false);
+	term_redraw(terminal);
+}

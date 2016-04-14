@@ -192,9 +192,11 @@ bool set_drm_master_relax(void)
 static void main_on_login_prompt_visible(void* ptr)
 {
 	if (command_flags.daemon && !command_flags.enable_vts) {
+		LOG(INFO, "Chrome started, our work is done, exiting.");
 		exit(EXIT_SUCCESS);
 	} else
 	if (ptr) {
+		LOG(INFO, "Chrome started, splash screen is not needed anymore.");
 		splash_destroy((splash_t*)ptr);
 	}
 }
@@ -205,8 +207,21 @@ int main(int argc, char* argv[])
 	int c;
 	int32_t x, y;
 	splash_t* splash;
+	drm_t* drm;
+
+	/* Find out if we are going to be a daemon */
+	optind = 1;
+	for (;;) {
+		c = getopt_long(argc, argv, "", command_options, NULL);
+		if (c == -1) {
+			break;
+		} else if (c == FLAG_DAEMON) {
+			command_flags.daemon = true;
+		}
+	}
 
 	/* Handle resolution special before splash init */
+	optind = 1;
 	for (;;) {
 		c = getopt_long(argc, argv, "", command_options, NULL);
 		if (c == -1) {
@@ -223,8 +238,16 @@ int main(int argc, char* argv[])
 		}
 	}
 
-	/* Reset option parsing */
-	optind = 1;
+	splash = splash_init();
+	if (splash == NULL) {
+		LOG(ERROR, "splash init failed");
+		return EXIT_FAILURE;
+	}
+
+	if (command_flags.daemon) {
+		splash_present_term_file(splash);
+		daemonize();
+	}
 
 	ret = input_init();
 	if (ret) {
@@ -238,13 +261,11 @@ int main(int argc, char* argv[])
 		return EXIT_FAILURE;
 	}
 
-	drm_set(drm_scan());
-	splash = splash_init();
-	if (splash == NULL) {
-		LOG(ERROR, "splash init failed");
-		return EXIT_FAILURE;
-	}
+	drm_set(drm = drm_scan());
+	/* update DRM object in splash term and set video mode */
+	splash_redrm(splash);
 
+	optind = 1;
 	for (;;) {
 		c = getopt_long(argc, argv, "", command_options, NULL);
 
@@ -254,10 +275,6 @@ int main(int argc, char* argv[])
 		switch (c) {
 			case FLAG_CLEAR:
 				splash_set_clear(splash, strtoul(optarg, NULL, 0));
-				break;
-
-			case FLAG_DAEMON:
-				command_flags.daemon = true;
 				break;
 
 			case FLAG_FRAME_INTERVAL:
@@ -309,11 +326,6 @@ int main(int argc, char* argv[])
 	for (int i = optind; i < argc; i++)
 		splash_add_image(splash, argv[i]);
 
-	if (command_flags.daemon) {
-		splash_present_term_file(splash);
-		daemonize();
-	}
-
 	if (splash_num_images(splash) > 0) {
 		ret = splash_run(splash);
 		if (ret) {
@@ -343,6 +355,8 @@ int main(int argc, char* argv[])
 	if (command_flags.daemon) {
 		if (command_flags.enable_vts)
 			set_drm_master_relax();
+		/* drop master in case we had it */
+		drm_dropmaster(drm);
 		dbus_take_display_ownership();
 	} else {
 		/* create and switch to first term in interactve mode */

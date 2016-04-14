@@ -52,5 +52,7 @@ terminal_t *term_get_current_terminal(void);
 void term_set_current_terminal(terminal_t *terminal);
 void term_set_current_to(terminal_t* terminal);
 void term_monitor_hotplug(void);
+void term_redrm(terminal_t* terminal);
+void term_clear(terminal_t *terminal);
 
 #endif
