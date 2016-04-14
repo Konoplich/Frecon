@@ -132,7 +132,7 @@ int main_process_events(uint32_t usec)
 				/*
 				 * Note: reference is not lost because it is still referenced
 				 * by the splash_t structure which will ultimately destroy
-				 * it, once it's safe to do so
+				 * it, once it's safe to do so.
 				 */
 				term_set_terminal(SPLASH_TERMINAL, NULL);
 				return -1;
@@ -172,7 +172,7 @@ bool set_drm_master_relax(void)
 
 	/*
 	 * Setting drm_master_relax flag in kernel allows us to transfer DRM master
-	 * between Chrome and frecon
+	 * between Chrome and frecon.
 	 */
 	fd = open("/sys/kernel/debug/dri/drm_master_relax", O_WRONLY);
 	if (fd != -1) {
@@ -192,9 +192,11 @@ bool set_drm_master_relax(void)
 static void main_on_login_prompt_visible(void* ptr)
 {
 	if (command_flags.daemon && !command_flags.enable_vts) {
+		LOG(INFO, "Chrome started, our work is done, exiting.");
 		exit(EXIT_SUCCESS);
 	} else
 	if (ptr) {
+		LOG(INFO, "Chrome started, splash screen is not needed anymore.");
 		splash_destroy((splash_t*)ptr);
 	}
 }
@@ -205,8 +207,21 @@ int main(int argc, char* argv[])
 	int c;
 	int32_t x, y;
 	splash_t* splash;
+	drm_t* drm;
 
-	/* Handle resolution special before splash init */
+	/* Find out if we are going to be a daemon .*/
+	optind = 1;
+	for (;;) {
+		c = getopt_long(argc, argv, "", command_options, NULL);
+		if (c == -1) {
+			break;
+		} else if (c == FLAG_DAEMON) {
+			command_flags.daemon = true;
+		}
+	}
+
+	/* Handle resolution special before splash init. */
+	optind = 1;
 	for (;;) {
 		c = getopt_long(argc, argv, "", command_options, NULL);
 		if (c == -1) {
@@ -223,8 +238,16 @@ int main(int argc, char* argv[])
 		}
 	}
 
-	/* Reset option parsing */
-	optind = 1;
+	splash = splash_init();
+	if (splash == NULL) {
+		LOG(ERROR, "splash init failed");
+		return EXIT_FAILURE;
+	}
+
+	if (command_flags.daemon) {
+		splash_present_term_file(splash);
+		daemonize();
+	}
 
 	ret = input_init();
 	if (ret) {
@@ -238,13 +261,11 @@ int main(int argc, char* argv[])
 		return EXIT_FAILURE;
 	}
 
-	drm_set(drm_scan());
-	splash = splash_init();
-	if (splash == NULL) {
-		LOG(ERROR, "splash init failed");
-		return EXIT_FAILURE;
-	}
+	drm_set(drm = drm_scan());
+	/* update DRM object in splash term and set video mode */
+	splash_redrm(splash);
 
+	optind = 1;
 	for (;;) {
 		c = getopt_long(argc, argv, "", command_options, NULL);
 
@@ -254,10 +275,6 @@ int main(int argc, char* argv[])
 		switch (c) {
 			case FLAG_CLEAR:
 				splash_set_clear(splash, strtoul(optarg, NULL, 0));
-				break;
-
-			case FLAG_DAEMON:
-				command_flags.daemon = true;
 				break;
 
 			case FLAG_FRAME_INTERVAL:
@@ -309,11 +326,6 @@ int main(int argc, char* argv[])
 	for (int i = optind; i < argc; i++)
 		splash_add_image(splash, argv[i]);
 
-	if (command_flags.daemon) {
-		splash_present_term_file(splash);
-		daemonize();
-	}
-
 	if (splash_num_images(splash) > 0) {
 		ret = splash_run(splash);
 		if (ret) {
@@ -329,13 +341,13 @@ int main(int argc, char* argv[])
 	 * The DBUS service launches later than the boot-splash service, and
 	 * as a result, when splash_run starts DBUS is not yet up, but, by
 	 * the time splash_run completes, it is running.
-	 * We really need DBUS now, so we can interact with Chrome
+	 * We really need DBUS now, so we can interact with Chrome.
 	 */
 	dbus_init_wait();
 
 	/*
 	 * Ask DBUS to call us back so we can destroy splash (or quit) when login
-	 * prompt is visible;
+	 * prompt is visible.
 	 */
 	dbus_set_login_prompt_visible_callback(main_on_login_prompt_visible,
 					       (void*)splash);
@@ -343,9 +355,11 @@ int main(int argc, char* argv[])
 	if (command_flags.daemon) {
 		if (command_flags.enable_vts)
 			set_drm_master_relax();
+		/* Drop master in case we had it. */
+		drm_dropmaster(drm);
 		dbus_take_display_ownership();
 	} else {
-		/* create and switch to first term in interactve mode */
+		/* Create and switch to first term in interactve mode. */
 		terminal_t* terminal;
 		set_drm_master_relax();
 		dbus_release_display_ownership();
