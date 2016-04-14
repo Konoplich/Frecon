@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2b22b28a_68219b90",
+        "filename": "term.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1001537
+      },
+      "writtenOn": "2016-04-14T23:36:42Z",
+      "side": 1,
+      "message": "nit: what\u0027s up with the placement of \"*\"s here? either they all go with the type specifier, or the variable name",
+      "revId": "6d923daaa432b84222ba8c8ceeea48d0543941a4",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    }
+  ]
+}
