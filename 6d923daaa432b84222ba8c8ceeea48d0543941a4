@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "2b22b28a_4bf939d8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000221
+      },
+      "writtenOn": "2016-04-15T03:26:46Z",
+      "side": 1,
+      "message": "Remove.",
+      "range": {
+        "startLine": 15,
+        "startChar": 61,
+        "endLine": 15,
+        "endChar": 62
+      },
+      "revId": "6d923daaa432b84222ba8c8ceeea48d0543941a4",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2b22b28a_6b4435f5",
         "filename": "main.c",
         "patchSetId": 1
