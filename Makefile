@@ -15,7 +15,7 @@ PC_CFLAGS := $(shell $(PKG_CONFIG) --cflags $(PC_DEPS))
 PC_LIBS := $(shell $(PKG_CONFIG) --libs $(PC_DEPS))
 
 CPPFLAGS += -std=c99 -D_GNU_SOURCE=1
-CFLAGS += -Wall -Wsign-compare -Wpointer-arith -Wcast-qual -Wcast-align
+CFLAGS += -Wall -Wsign-compare -Wpointer-arith -Wcast-qual
 
 CPPFLAGS += $(PC_CFLAGS) -I$(OUT)
 LDLIBS += $(PC_LIBS)
