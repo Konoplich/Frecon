@@ -42,5 +42,6 @@ int32_t fb_getwidth(fb_t* fb);
 int32_t fb_getheight(fb_t* fb);
 int32_t fb_getpitch(fb_t* fb);
 int32_t fb_getscaling(fb_t* fb);
+int32_t fb_getimagescale(fb_t* fb);
 
 #endif

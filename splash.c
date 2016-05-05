@@ -265,7 +265,7 @@ void splash_present_term_file(splash_t* splash)
 int splash_is_hires(splash_t* splash)
 {
 	if (splash && splash->terminal && term_getfb(splash->terminal))
-		return fb_getwidth(term_getfb(splash->terminal)) > 1920;
+		return fb_getimagescale(term_getfb(splash->terminal)) > 1;
 	return 0;
 }
 

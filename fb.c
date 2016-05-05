@@ -282,3 +282,10 @@ int32_t fb_getscaling(fb_t* fb)
 	return fb->buffer_properties.scaling;
 }
 
+int32_t fb_getimagescale(fb_t* fb)
+{
+	if (fb->buffer_properties.width > 1920)
+		return 2;
+	else
+		return 1;
+}
