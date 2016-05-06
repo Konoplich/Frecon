@@ -46,6 +46,30 @@
       "revId": "c7c6df757ed102655558f307aeb5b9784872fa6f",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ad1ddbf8_e1a2555c",
+        "filename": "image.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 295,
+      "author": {
+        "id": 1000221
+      },
+      "writtenOn": "2016-05-06T05:18:19Z",
+      "side": 1,
+      "message": "One issue that bothers me is that command line input is basically handled three levels down. (This is why you have the if(scale\u003d\u003d0) here.) But yes, 100 would be fine.",
+      "parentUuid": "ad1ddbf8_096455a8",
+      "range": {
+        "startLine": 294,
+        "startChar": 0,
+        "endLine": 295,
+        "endChar": 23
+      },
+      "revId": "c7c6df757ed102655558f307aeb5b9784872fa6f",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
     }
   ]
 }
