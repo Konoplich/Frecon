@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ad1ddbf8_a4cd4b6e",
+        "filename": "fb.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 1001537
+      },
+      "writtenOn": "2016-05-06T06:35:14Z",
+      "side": 1,
+      "message": "in CL:342773 you already have a function to check the fb width against a hard-coded number (1920). I wonder if the code can be reused, or maybe the splash_is_hires can call this function",
+      "revId": "f01060a4a67e4075c01b0f37d17c49ab7075f8b4",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    }
+  ]
+}
