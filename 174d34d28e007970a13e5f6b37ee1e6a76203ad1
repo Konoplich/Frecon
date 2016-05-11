@@ -22,6 +22,29 @@
       "revId": "174d34d28e007970a13e5f6b37ee1e6a76203ad1",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f25894e7_bf130054",
+        "filename": "splash.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 1000187
+      },
+      "writtenOn": "2016-05-11T16:45:35Z",
+      "side": 1,
+      "message": "This is the other place that #defined constant would be handy.",
+      "range": {
+        "startLine": 268,
+        "startChar": 53,
+        "endLine": 268,
+        "endChar": 57
+      },
+      "revId": "174d34d28e007970a13e5f6b37ee1e6a76203ad1",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
     }
   ]
 }
