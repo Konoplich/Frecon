@@ -16,6 +16,70 @@
       "revId": "f01060a4a67e4075c01b0f37d17c49ab7075f8b4",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f25894e7_df6fdcec",
+        "filename": "fb.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 1000187
+      },
+      "writtenOn": "2016-05-11T16:43:20Z",
+      "side": 1,
+      "message": "Or at least use a constant shared between all the code:\n\n#define DOUBLE_SCALE_ABOVE_WIDTH 1920\n\nor something similar.",
+      "parentUuid": "ad1ddbf8_a4cd4b6e",
+      "revId": "f01060a4a67e4075c01b0f37d17c49ab7075f8b4",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f25894e7_bf41c057",
+        "filename": "term.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 1000187
+      },
+      "writtenOn": "2016-05-11T16:43:20Z",
+      "side": 1,
+      "message": "Extra tab?",
+      "range": {
+        "startLine": 209,
+        "startChar": 0,
+        "endLine": 209,
+        "endChar": 1
+      },
+      "revId": "f01060a4a67e4075c01b0f37d17c49ab7075f8b4",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f25894e7_bf3c60d1",
+        "filename": "term.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 343,
+      "author": {
+        "id": 1000187
+      },
+      "writtenOn": "2016-05-11T16:43:20Z",
+      "side": 1,
+      "message": "Extra tab",
+      "range": {
+        "startLine": 343,
+        "startChar": 0,
+        "endLine": 343,
+        "endChar": 1
+      },
+      "revId": "f01060a4a67e4075c01b0f37d17c49ab7075f8b4",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
     }
   ]
 }
