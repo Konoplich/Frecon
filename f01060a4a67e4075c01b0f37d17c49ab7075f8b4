@@ -80,6 +80,23 @@
       "revId": "f01060a4a67e4075c01b0f37d17c49ab7075f8b4",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "323eac9c_a4764bf1",
+        "filename": "term.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 347,
+      "author": {
+        "id": 1000313
+      },
+      "writtenOn": "2016-05-12T23:06:55Z",
+      "side": 1,
+      "message": "nit: else and if on the same line",
+      "revId": "f01060a4a67e4075c01b0f37d17c49ab7075f8b4",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
     }
   ]
 }
