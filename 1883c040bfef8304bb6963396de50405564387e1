@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ad1ddbf8_09677517",
+        "filename": "Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000313
+      },
+      "writtenOn": "2016-05-12T22:51:15Z",
+      "side": 0,
+      "message": "hmm, why? That\u0027s usually a bad sign :)",
+      "revId": "1883c040bfef8304bb6963396de50405564387e1",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    }
+  ]
+}
