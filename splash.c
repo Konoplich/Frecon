@@ -56,6 +56,12 @@ splash_t* splash_init()
 		return NULL;
 
 	splash->terminal = term_create_splash_term();
+
+	if (!splash->terminal) {
+		free(splash);
+		return NULL;
+	}
+
 	splash->loop_start = -1;
 	splash->loop_count = -1;
 	splash->default_duration = 25;
