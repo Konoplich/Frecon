@@ -238,6 +238,9 @@ int main(int argc, char* argv[])
 		}
 	}
 
+	/* Scan and assign global drm object before using it. */
+	drm_set(drm = drm_scan());
+
 	splash = splash_init();
 	if (splash == NULL) {
 		LOG(ERROR, "Splash init failed.");
@@ -261,7 +264,6 @@ int main(int argc, char* argv[])
 		return EXIT_FAILURE;
 	}
 
-	drm_set(drm = drm_scan());
 	/* Update DRM object in splash term and set video mode. */
 	splash_redrm(splash);
 
