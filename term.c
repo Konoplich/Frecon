@@ -510,6 +510,10 @@ terminal_t* term_create_term(int vt)
 terminal_t* term_create_splash_term()
 {
 	terminal_t* splash_terminal = term_init(false);
+
+	if (!splash_terminal)
+		return NULL;
+
 	term_set_terminal(SPLASH_TERMINAL, splash_terminal);
 
 	// Hide the cursor on the splash screen

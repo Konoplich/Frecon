@@ -206,7 +206,12 @@ fb_t* fb_init(void)
 	if (!fb)
 		return NULL;
 
-	fb_buffer_init(fb);
+	int r = fb_buffer_init(fb);
+
+	if (r < 0) {
+		free(fb);
+		return NULL;
+	}
 
 	return fb;
 }
