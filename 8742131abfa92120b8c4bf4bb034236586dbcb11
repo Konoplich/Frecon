@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "323eac9c_4c621732",
+        "filename": "splash.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 1000313
+      },
+      "writtenOn": "2016-05-17T03:49:55Z",
+      "side": 1,
+      "message": "I think this should be done better than a threshold. We should use the dpi + resolution.",
+      "revId": "8742131abfa92120b8c4bf4bb034236586dbcb11",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    }
+  ]
+}
