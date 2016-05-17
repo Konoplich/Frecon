@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "323eac9c_e1402c29",
+        "filename": "term.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 1000313
+      },
+      "writtenOn": "2016-05-17T02:57:53Z",
+      "side": 1,
+      "message": "nit: use c99-style for loops which helps reduce the scope of variables, especially ones with names like \"x\" and \"y\" where there is a risk of accidental reuse.",
+      "revId": "4d82642eda3d01cb58dec5db50a410569afd4754",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "323eac9c_c6dfc675",
+        "filename": "term.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 463,
+      "author": {
+        "id": 1000313
+      },
+      "writtenOn": "2016-05-17T02:57:53Z",
+      "side": 1,
+      "message": "nit: no braces",
+      "revId": "4d82642eda3d01cb58dec5db50a410569afd4754",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    }
+  ]
+}
