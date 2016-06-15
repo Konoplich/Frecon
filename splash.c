@@ -125,6 +125,7 @@ int splash_run(splash_t* splash)
 {
 	int i;
 	int status = 0;
+	int ec_li = 0, ec_ts = 0, ec_ip = 0;
 	int64_t last_show_ms;
 	int64_t now_ms;
 	int64_t sleep_ms;
@@ -146,10 +147,10 @@ int splash_run(splash_t* splash)
 	for (i = (c > 0) ? loop_start : 0; i < splash->num_images; i++) {
 		image = splash->image_frames[i].image;
 		status = image_load_image_from_file(image);
-		if (status != 0) {
+		if (status != 0 && ec_li < MAX_SPLASH_IMAGES) {
 			LOG(WARNING, "image_load_image_from_file %s failed: %d:%s.",
 				image_get_filename(image), status, strerror(status));
-			break;
+			ec_li++;
 		}
 
 		now_ms = get_monotonic_time_ms();
@@ -167,6 +168,9 @@ int splash_run(splash_t* splash)
 		}
 
 		now_ms = get_monotonic_time_ms();
+		if (status != 0) {
+			goto img_error;
+		}
 
 		if (i >= splash->loop_start) {
 			image_set_offset(image,
@@ -175,21 +179,26 @@ int splash_run(splash_t* splash)
 		}
 
 		status = term_show_image(splash->terminal, image);
-		if (status != 0) {
+		if (status != 0 && ec_ts < MAX_SPLASH_IMAGES) {
 			LOG(WARNING, "term_show_image failed: %d:%s.", status, strerror(status));
-			break;
+			ec_ts++;
+			goto img_error;
 		}
 		status = main_process_events(1);
-		if (status != 0) {
+		if (status != 0 && ec_ip < MAX_SPLASH_IMAGES) {
 			LOG(WARNING, "input_process failed: %d:%s.", status, strerror(status));
-			break;
+			ec_ip++;
 		}
+img_error:
 		last_show_ms = now_ms;
 
 		image_release(image);
 		/* see if we can initialize DBUS */
 		if (!dbus_is_initialized())
 			dbus_init();
+		if (status != 0) {
+			break;
+		}
 	}
 
 	for (i = 0; i < splash->num_images; i++) {
