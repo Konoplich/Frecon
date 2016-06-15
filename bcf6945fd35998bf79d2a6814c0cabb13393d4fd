@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b4f8d1fb_ca66fbaa",
+        "filename": "splash.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1000221
+      },
+      "writtenOn": "2016-06-15T22:20:06Z",
+      "side": 1,
+      "message": "Either have better names or have a short comment on the use.",
+      "range": {
+        "startLine": 128,
+        "startChar": 1,
+        "endLine": 128,
+        "endChar": 37
+      },
+      "revId": "bcf6945fd35998bf79d2a6814c0cabb13393d4fd",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b4f8d1fb_6a724764",
+        "filename": "splash.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 1000221
+      },
+      "writtenOn": "2016-06-15T22:20:06Z",
+      "side": 1,
+      "message": "Leave a comment that the status check needs to be after the sleep to throttle the loop.",
+      "range": {
+        "startLine": 171,
+        "startChar": 2,
+        "endLine": 171,
+        "endChar": 20
+      },
+      "revId": "bcf6945fd35998bf79d2a6814c0cabb13393d4fd",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    }
+  ]
+}
