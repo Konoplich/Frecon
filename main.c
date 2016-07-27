@@ -195,6 +195,7 @@ bool set_drm_master_relax(void)
 	return true;
 }
 
+#if DBUS
 static void main_on_login_prompt_visible(void* ptr)
 {
 	if (command_flags.daemon && !command_flags.enable_vts) {
@@ -206,6 +207,7 @@ static void main_on_login_prompt_visible(void* ptr)
 		splash_destroy((splash_t*)ptr);
 	}
 }
+#endif
 
 int main(int argc, char* argv[])
 {
