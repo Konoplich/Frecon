@@ -241,7 +241,9 @@ uint32_t* fb_lock(fb_t* fb)
 			return NULL;
 		}
 	}
-	fb->lock.count++;
+
+	if (fb->lock.map)
+		fb->lock.count++;
 
 	return fb->lock.map;
 }
