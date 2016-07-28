@@ -84,6 +84,7 @@ void fb_buffer_destroy(fb_t* fb)
 	drmIoctl(fb->drm->fd, DRM_IOCTL_MODE_DESTROY_DUMB, &destroy_dumb);
 	fb->buffer_handle = 0;
 	fb->lock.map = NULL;
+	fb->lock.count = 0;
 	drm_delref(fb->drm);
 	fb->drm = NULL;
 }
@@ -154,11 +155,16 @@ int fb_buffer_init(fb_t* fb)
 	int32_t hsize_mm, vsize_mm;
 	int r;
 
-	/* some reasonable defaults */
-	fb->buffer_properties.width = 640;
-	fb->buffer_properties.height = 480;
-	fb->buffer_properties.pitch = 640 * 4;
-	fb->buffer_properties.scaling = 1;
+	/* reuse the buffer_properties if it was set before */
+	if (!fb->buffer_properties.width || !fb->buffer_properties.height ||
+		!fb->buffer_properties.pitch || !fb->buffer_properties.scaling) {
+		/* some reasonable defaults */
+		fb->buffer_properties.width = 640;
+		fb->buffer_properties.height = 480;
+		fb->buffer_properties.pitch = 640 * 4;
+		fb->buffer_properties.scaling = 1;
+		LOG(INFO, "Set buffer_properties to default values");
+	}
 
 	fb->drm = drm_addref();
 
@@ -241,7 +247,9 @@ uint32_t* fb_lock(fb_t* fb)
 			return NULL;
 		}
 	}
-	fb->lock.count++;
+
+	if (fb->lock.map)
+		fb->lock.count++;
 
 	return fb->lock.map;
 }
