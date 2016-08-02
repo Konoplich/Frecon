@@ -35,12 +35,19 @@ repeats forever) Looping has to be enabled using --loop-start
 	Specify default time (in miliseconds) between frames of loop animation.
 --loop-offset=x,y
 	Specify default offset to centered image in loop.
+--max-vts=N
+	Specify number of enabled VTs. The default is 4, the maximum is 12.
 --no-login
 	When additional terminals are enabled do not display login prompt on
 them. Can be used by scripts to display debugging information and logs on
 additional terminals.
 --offset=x,y
 	Specify absolute location of the splash image on screen.
+--pre-create-vts
+	Normally VTs are create on demand the the user switches to a VT.
+In some cases it may be necessary to pre-create them at startup, for instance
+to write a log or debug output for them while they are not active so it can be
+examined later. This option allows for that.
 --print-resolution
 	Print detected screen resolution and exit. Deprecated.
 --scale=N
