@@ -5,9 +5,12 @@
  */
 
 #include <ctype.h>
+#include <fcntl.h>
 #include <libtsm.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <sys/select.h>
+#include <sys/stat.h>
 #include <sys/types.h>
 #include <sys/wait.h>
 
@@ -21,7 +24,10 @@
 #include "term.h"
 #include "util.h"
 
-static terminal_t* terminals[MAX_TERMINALS];
+#define FRECON_VT_PATH FRECON_RUN_DIR "/vt%u"
+
+unsigned int term_max_terminals = 4;
+static terminal_t* terminals[TERM_MAX_TERMINALS];
 static uint32_t current_terminal = 0;
 
 struct term {
@@ -37,11 +43,12 @@ struct term {
 };
 
 struct _terminal_t {
+	unsigned vt;
+	bool active;
 	uint32_t background;
 	bool background_valid;
 	fb_t* fb;
 	struct term* term;
-	bool active;
 	char** exec;
 };
 
@@ -410,16 +417,39 @@ static int term_resize(terminal_t* term)
 	return 0;
 }
 
-terminal_t* term_init(bool interactive)
+void term_set_max_terminals(unsigned new_max)
+{
+	if (new_max < 1)
+		term_max_terminals = 1;
+	else if (new_max > TERM_MAX_TERMINALS)
+		term_max_terminals = TERM_MAX_TERMINALS;
+	else
+		term_max_terminals = new_max;
+}
+
+static bool term_is_interactive(unsigned int vt)
+{
+	if (command_flags.no_login)
+		return false;
+
+	if (vt == TERM_SPLASH_TERMINAL)
+		return command_flags.enable_vt1;
+
+	return true;
+}
+
+terminal_t* term_init(unsigned vt, int pts_fd)
 {
 	const int scrollback_size = 200;
 	int status;
 	terminal_t* new_terminal;
+	bool interactive = term_is_interactive(vt);
 
 	new_terminal = (terminal_t*)calloc(1, sizeof(*new_terminal));
 	if (!new_terminal)
 		return NULL;
 
+	new_terminal->vt = vt;
 	new_terminal->background_valid = false;
 
 	new_terminal->fb = fb_init();
@@ -435,7 +465,7 @@ terminal_t* term_init(bool interactive)
 		return NULL;
 	}
 
-	if (interactive && !command_flags.no_login)
+	if (interactive)
 		new_terminal->exec = interactive_cmd_line;
 	else
 		new_terminal->exec = noninteractive_cmd_line;
@@ -467,7 +497,7 @@ terminal_t* term_init(bool interactive)
 	}
 
 	status = shl_pty_open(&new_terminal->term->pty,
-			term_read_cb, new_terminal, 1, 1);
+			term_read_cb, new_terminal, 1, 1, pts_fd);
 
 	if (status < 0) {
 		term_close(new_terminal);
@@ -477,9 +507,19 @@ terminal_t* term_init(bool interactive)
 		exit(1);
 	}
 
+	status = mkdir(FRECON_RUN_DIR, S_IRWXU);
+	if (status == 0 || (status < 0 && errno == EEXIST)) {
+		char path[32];
+		char pn[256];
+
+		sprintf(path, FRECON_VT_PATH, vt);
+		strncpy(pn, ptsname(shl_pty_get_fd(new_terminal->term->pty)), sizeof(pn) - 1);
+		pn[sizeof(pn) - 1] = '\0';
+		write_string_to_file(path, pn);
+	}
+
 	status = shl_pty_bridge_add(new_terminal->term->pty_bridge, new_terminal->term->pty);
 	if (status) {
-		shl_pty_close(new_terminal->term->pty);
 		term_close(new_terminal);
 		return NULL;
 	}
@@ -489,13 +529,9 @@ terminal_t* term_init(bool interactive)
 	status = term_resize(new_terminal);
 
 	if (status < 0) {
-		shl_pty_close(new_terminal->term->pty);
 		term_close(new_terminal);
 		return NULL;
 	}
-
-	if (interactive)
-		new_terminal->active = true;
 
 	return new_terminal;
 }
@@ -518,8 +554,12 @@ void term_deactivate(terminal_t* terminal)
 
 void term_close(terminal_t* term)
 {
+	char path[32];
 	if (!term)
 		return;
+
+	sprintf(path, FRECON_VT_PATH, term->vt);
+	unlink(path);
 
 	if (term->fb) {
 		fb_close(term->fb);
@@ -527,6 +567,15 @@ void term_close(terminal_t* term)
 	}
 
 	if (term->term) {
+		if (term->term->pty) {
+			if (term->term->pty_bridge >= 0) {
+				shl_pty_bridge_remove(term->term->pty_bridge, term->term->pty);
+				shl_pty_bridge_free(term->term->pty_bridge);
+				term->term->pty_bridge = -1;
+			}
+			shl_pty_close(term->term->pty);
+			term->term->pty = NULL;
+		}
 		free(term->term);
 		term->term = NULL;
 	}
@@ -675,30 +724,38 @@ void term_set_terminal(int num, terminal_t* terminal)
 	terminals[num] = terminal;
 }
 
-terminal_t* term_create_splash_term()
+int term_create_splash_term(int pts_fd)
 {
-	terminal_t* splash_terminal = term_init(command_flags.enable_vt1);
-	term_set_terminal(SPLASH_TERMINAL, splash_terminal);
+	terminal_t* terminal = term_init(TERM_SPLASH_TERMINAL, pts_fd);
+	
+	if (!terminal) {
+		LOG(ERROR, "Could not create splash term.");
+		return -1;
+	}
+	term_set_terminal(TERM_SPLASH_TERMINAL, terminal);
 
 	// Hide the cursor on the splash screen
-	term_hide_cursor(splash_terminal);
-
-	return splash_terminal;
+	term_hide_cursor(terminal);
+	return 0;
 }
 
-void term_destroy_splash_term()
+void term_destroy_splash_term(void)
 {
-	term_set_terminal(SPLASH_TERMINAL, NULL);
-}
-
-unsigned int term_get_max_terminals()
-{
-	return MAX_STD_TERMINALS;
+	terminal_t *terminal;
+	if (command_flags.enable_vt1) {
+		return;
+	}
+	terminal = term_get_terminal(TERM_SPLASH_TERMINAL);
+	term_set_terminal(TERM_SPLASH_TERMINAL, NULL);
+	term_close(terminal);
 }
 
 void term_set_current(uint32_t t)
 {
-	if (t >= MAX_TERMINALS)
+	if (t >= TERM_MAX_TERMINALS)
+		LOG(ERROR, "set_current: larger than array size");
+	else
+	if (t >= term_max_terminals)
 		LOG(ERROR, "set_current: larger than max");
 	else
 		current_terminal = t;
@@ -727,13 +784,64 @@ void term_set_current_to(terminal_t* terminal)
 		return;
 	}
 
-	for (int i = 0; i < MAX_TERMINALS; i++) {
+	for (unsigned i = 0; i < term_max_terminals; i++) {
 		if (terminal == terminals[i]) {
 			current_terminal = i;
 			return;
 		}
 	}
 	LOG(ERROR, "set_current_to: terminal not in array");
+}
+
+int term_switch_to(unsigned int vt)
+{
+	terminal_t *terminal;
+	if (vt == term_get_current()) {
+		terminal = term_get_current_terminal();
+		if (!term_is_active(terminal)) {
+			term_activate(terminal);
+			LOG(INFO, "DDD Activated already current %p on VT%u", terminal, vt);
+		}
+		return vt;
+	}
+
+	if (vt >= term_max_terminals)
+		return -EINVAL;
+
+	terminal = term_get_current_terminal();
+	if (term_is_active(terminal))
+		term_deactivate(terminal);
+
+	if (vt == TERM_SPLASH_TERMINAL
+	    && !term_get_terminal(TERM_SPLASH_TERMINAL)
+	    && !command_flags.enable_vt1) {
+		term_set_current(vt);
+		/* Splash term is already gone, returning to Chrome. */
+		LOG(INFO, "DDD Splash is gone, returning to Chrome.");
+		term_background();
+		return vt;
+	}
+
+	term_foreground();
+
+	term_set_current(vt);
+	terminal = term_get_current_terminal();
+	if (!terminal) {
+		/* No terminal where we are switching to, create new one. */
+		term_set_current_terminal(term_init(vt, -1));
+		terminal = term_get_current_terminal();
+		term_activate(terminal);
+		LOG(INFO, "DDD Created new terminal %p on VT%u", terminal, vt);
+		if (!term_is_valid(terminal)) {
+			LOG(ERROR, "Term init failed");
+			return -1;
+		}
+	} else {
+		term_activate(terminal);
+		LOG(INFO, "Activated existing terminal %p on VT%u", terminal, vt);
+	}
+
+	return vt;
 }
 
 void term_monitor_hotplug(void)
@@ -748,7 +856,7 @@ void term_monitor_hotplug(void)
 	if (!drm_rescan())
 		return;
 
-	for (t = 0; t < MAX_TERMINALS; t++) {
+	for (t = 0; t < term_max_terminals; t++) {
 		if (!terminals[t])
 			continue;
 		if (!terminals[t]->fb)
@@ -757,7 +865,7 @@ void term_monitor_hotplug(void)
 		font_free();
 	}
 
-	for (t = 0; t < MAX_TERMINALS; t++) {
+	for (t = 0; t < term_max_terminals; t++) {
 		if (!terminals[t])
 			continue;
 		if (!terminals[t]->fb)
