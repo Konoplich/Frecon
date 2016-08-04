@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "744bc246_328b901e",
+        "filename": "Makefile",
+        "patchSetId": 5
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1002133
+      },
+      "writtenOn": "2016-08-04T21:42:54Z",
+      "side": 1,
+      "message": "nit: feels weird to hardcode a connection between DBUS\u003d0 and the binary name. Either you should remove the DBUS flag and call it \u0027make LITE\u003d1\u0027, or you should keep it so that the make flags can enable/disable individual parts and leave the decision of the binary name to the ebuild (e.g. \u0027make DBUS\u003d0 TARGET\u003dfrecon-lite\u0027).",
+      "range": {
+        "startLine": 10,
+        "startChar": 9,
+        "endLine": 10,
+        "endChar": 20
+      },
+      "revId": "5d8068d34ca3e060aa4b3ffb50c17e85b5c0767a",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    }
+  ]
+}
