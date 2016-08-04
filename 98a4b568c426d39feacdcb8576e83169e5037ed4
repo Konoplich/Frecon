@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "744bc246_5263b4b6",
+        "filename": "main.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 291,
+      "author": {
+        "id": 1150560
+      },
+      "writtenOn": "2016-08-04T21:28:41Z",
+      "side": 1,
+      "message": "I want recovery to use it so VTs 2 and 3 exist for recovery to spew debug and log messages to. If you dont pre-create them and let the user switch to them, there will be nothing logged in these VTs from before user switched. So, say something goes wrong with recovery and we press ctrl-alt-f2 to see the log and all we see is black screen because VT was just created when we switched.",
+      "parentUuid": "54887e72_574684ad",
+      "revId": "98a4b568c426d39feacdcb8576e83169e5037ed4",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "54887e72_da0cd942",
         "filename": "main.c",
         "patchSetId": 1
@@ -47,6 +65,24 @@
       "writtenOn": "2016-08-04T04:21:04Z",
       "side": 1,
       "message": "as we discussed in person, I\u0027m not sure if this does what we need",
+      "revId": "98a4b568c426d39feacdcb8576e83169e5037ed4",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "744bc246_d265e4b6",
+        "filename": "main.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 458,
+      "author": {
+        "id": 1150560
+      },
+      "writtenOn": "2016-08-04T21:28:41Z",
+      "side": 1,
+      "message": "Well, it does delete the file when frecon exits normally.\nThis is not the trick I wanted to use.",
+      "parentUuid": "54887e72_da0cd942",
       "revId": "98a4b568c426d39feacdcb8576e83169e5037ed4",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
       "unresolved": false
@@ -70,6 +106,24 @@
     },
     {
       "key": {
+        "uuid": "744bc246_32d3905b",
+        "filename": "term.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1150560
+      },
+      "writtenOn": "2016-08-04T21:28:41Z",
+      "side": 1,
+      "message": "one (upper case) is constant for array size, the other is for how many terminals are enabled. term_max_terminals has to be \u003c\u003d TERM_MAX_TERMINALS.",
+      "parentUuid": "54887e72_fa119d55",
+      "revId": "98a4b568c426d39feacdcb8576e83169e5037ed4",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "54887e72_9a16514b",
         "filename": "term.c",
         "patchSetId": 1
@@ -81,6 +135,24 @@
       "writtenOn": "2016-08-04T04:21:04Z",
       "side": 1,
       "message": "PATH_MAX?",
+      "revId": "98a4b568c426d39feacdcb8576e83169e5037ed4",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "744bc246_7277d867",
+        "filename": "term.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 557,
+      "author": {
+        "id": 1150560
+      },
+      "writtenOn": "2016-08-04T21:28:41Z",
+      "side": 1,
+      "message": "According to POSIX it may be unbound.",
+      "parentUuid": "54887e72_9a16514b",
       "revId": "98a4b568c426d39feacdcb8576e83169e5037ed4",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
       "unresolved": false
