@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f9816bc9_39900b97",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1000107
+      },
+      "writtenOn": "2016-08-05T17:46:47Z",
+      "side": 1,
+      "message": "What was the problem?  Warning about defining something that was unused?",
+      "revId": "518e59da8c33bbde3932c4805eb9a6131a33595c",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f9816bc9_d9a47703",
+        "filename": "main.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 372,
+      "author": {
+        "id": 1000107
+      },
+      "writtenOn": "2016-08-05T17:46:47Z",
+      "side": 1,
+      "message": "Aren\u0027t you still referring to it here?",
+      "revId": "518e59da8c33bbde3932c4805eb9a6131a33595c",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    }
+  ]
+}
