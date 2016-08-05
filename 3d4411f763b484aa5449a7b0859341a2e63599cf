@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "744bc246_61b2a0e2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1150560
+      },
+      "writtenOn": "2016-08-05T03:39:56Z",
+      "side": 1,
+      "message": "I think it should be the other way, and the ebuild change should depend on this one.",
+      "range": {
+        "startLine": 15,
+        "startChar": 13,
+        "endLine": 15,
+        "endChar": 19
+      },
+      "revId": "3d4411f763b484aa5449a7b0859341a2e63599cf",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    }
+  ]
+}
