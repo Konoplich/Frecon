@@ -22,6 +22,23 @@
       "revId": "3d4411f763b484aa5449a7b0859341a2e63599cf",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "744bc246_8166a453",
+        "filename": "Makefile",
+        "patchSetId": 6
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1002133
+      },
+      "writtenOn": "2016-08-05T04:41:00Z",
+      "side": 1,
+      "message": "nit: just do TARGET ?\u003d frecon, like DBUS above",
+      "revId": "3d4411f763b484aa5449a7b0859341a2e63599cf",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
     }
   ]
 }
