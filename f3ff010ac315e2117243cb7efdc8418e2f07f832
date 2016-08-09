@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "39a143ab_f658982c",
+        "filename": "term.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 518,
+      "author": {
+        "id": 1002133
+      },
+      "writtenOn": "2016-08-09T21:33:00Z",
+      "side": 1,
+      "message": "Why not symlink(pn, path)? Same effort for you and makes it a bit easier for other programs to do what they want (open() your PTSes).",
+      "revId": "f3ff010ac315e2117243cb7efdc8418e2f07f832",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    }
+  ]
+}
