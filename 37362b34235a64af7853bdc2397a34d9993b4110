@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b99613c7_9ccd4566",
+        "filename": "term.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 512,
+      "author": {
+        "id": 1002133
+      },
+      "writtenOn": "2016-08-10T21:12:30Z",
+      "side": 1,
+      "message": "Uhh... you still need the sprintf to initialize this to /var/run/..., right? Right now you\u0027re symlinking the pts to an uninitialized string as a filename.",
+      "revId": "37362b34235a64af7853bdc2397a34d9993b4110",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    }
+  ]
+}
