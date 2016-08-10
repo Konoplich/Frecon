@@ -474,7 +474,7 @@ int32_t drm_setmode(drm_t* drm, uint32_t fb_id)
 
 	if (ret) {
 		LOG(ERROR, "Unable to set crtc: %m");
-		drm_dropmaster(drm);
+		drmDropMaster(drm->fd);
 		return ret;
 	}
 
@@ -486,7 +486,7 @@ int32_t drm_setmode(drm_t* drm, uint32_t fb_id)
 
 	drm_disable_non_primary_planes(drm);
 	drm_disable_non_main_crtcs(drm);
-	drm_dropmaster(drm);
+	drmDropMaster(drm->fd);
 	return ret;
 }
 
