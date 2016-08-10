@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b99613c7_1c7bf587",
+        "filename": "term.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 513,
+      "author": {
+        "id": 1002133
+      },
+      "writtenOn": "2016-08-10T21:52:09Z",
+      "side": 1,
+      "message": "nit: reuse FRECON_VT_PATH so that it\u0027s the same as...",
+      "range": {
+        "startLine": 513,
+        "startChar": 31,
+        "endLine": 513,
+        "endChar": 53
+      },
+      "revId": "bec0d96f83f6fcbd3d55d04a7bce284617660575",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b99613c7_fcb6493f",
+        "filename": "term.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 561,
+      "author": {
+        "id": 1002133
+      },
+      "writtenOn": "2016-08-10T21:52:09Z",
+      "side": 1,
+      "message": "...here.",
+      "range": {
+        "startLine": 561,
+        "startChar": 15,
+        "endLine": 561,
+        "endChar": 29
+      },
+      "revId": "bec0d96f83f6fcbd3d55d04a7bce284617660575",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    }
+  ]
+}
