@@ -7,6 +7,7 @@
 #include <errno.h>
 #include <fcntl.h>
 #include <getopt.h>
+#include <grp.h>
 #include <libtsm.h>
 #include <memory.h>
 #include <stdbool.h>
@@ -235,6 +236,23 @@ static void legacy_print_resolution(int argc, char* argv[])
 	}
 }
 
+/* Query group info for tty group so NSS libraries are preloaded and grantpt 
+ * would not fail and kill frecon. */
+void fix_group(void)
+{
+	char *grtmpbuf;
+	struct group grbuf;
+	size_t grbuflen = sysconf (_SC_GETGR_R_SIZE_MAX);
+	struct group *p;
+
+	/* If sysconf doesn't return anything, try a reasonable value. */
+	if (grbuflen == (size_t) -1L)
+		grbuflen = 1024;
+
+	grtmpbuf = (char *)alloca(grbuflen);
+	getgrnam_r ("tty", &grbuf, grtmpbuf, grbuflen, &p);
+}
+
 int main(int argc, char* argv[])
 {
 	int ret;
@@ -247,6 +265,8 @@ int main(int argc, char* argv[])
 	legacy_print_resolution(argc, argv);
 
 	fix_stdio();
+	fix_group();
+
 	pts_fd =  posix_openpt(O_RDWR | O_NOCTTY | O_CLOEXEC | O_NONBLOCK);
 
 	optind = 1;
