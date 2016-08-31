@@ -1,4 +1,4 @@
-frecon: the Freon Console
+# frecon: the Freon Console
 
 This is a terminal emulator that replaces the kernel Virtual Terminal (VT)
 console.  It uses the Kernel Mode Setting (KMS) support in the kernel.  It
@@ -17,9 +17,10 @@ terminal emulator -- we use the same library that kmscon does:
 [libtsm](https://www.freedesktop.org/wiki/Software/libtsm/).  That's the
 much more trickier part too.
 
-For even more details, check out the design doc in this repo.
+For even more details, check out the [design doc](./DESIGN-DOC.md) in this
+repo.
 
-Command line options:
+## Command line options:
 
 --clear=color
 	Specify clear color for splash screen terminal. The color is 32 bit
@@ -82,7 +83,7 @@ to use instead running frecon first with --print-resolution option and making
 this decision in a script that invokes frecon.
 Free form image file name in the command line are added unconditionally.
 
-Imaging escape codes:
+## Imaging escape codes:
 	Frecon implements rudimentary functionality to display images and draw
 single color boxes on the terminal screen using OSC (Operating System Command)
 based terminal escape codes.
@@ -104,7 +105,7 @@ Examples are
 echo -ne "\033]image:file=/usr/share/chromeos-assets/images_100_percent/boot_splash_frame18.png\033\\" > /dev/pts/1
 echo -ne "\033]box:color=0xFFFFFFFF;size=100,100\033\\" > /dev/pts/1
 
-Files:
+## Files:
 Frecon creates following files and links in /var/run/frecon directory:
 
 - /var/run/frecon/pid which contains pid for frecon daemon process (only when
@@ -113,5 +114,3 @@ Frecon creates following files and links in /var/run/frecon directory:
 - for every VT it creates, a link from /var/run/frecon/vt%u to /dev/pts/X where
 %u is terminal number from 0 to num-vts - 1 so the user can determine which
 VT uses which pts since pts number assignment is not deterministic.
-
-
