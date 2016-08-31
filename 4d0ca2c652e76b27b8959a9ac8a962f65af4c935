@@ -16,6 +16,24 @@
       "revId": "4d0ca2c652e76b27b8959a9ac8a962f65af4c935",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3155e139_fac22523",
+        "filename": "main.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000768
+      },
+      "writtenOn": "2016-08-31T22:36:43Z",
+      "side": 1,
+      "message": "i\u0027m not sure alphabetizing the command_options array makes sense.  it\u0027ll force related flags (which are currently grouped) to no longer be near each other.\n\nfor example, the --loop-* and --enable-* flags.\n\nif we really want to go that route, i don\u0027t think it\u0027s necessarily relevant to this CL.  better to keep the issues separate imo.",
+      "parentUuid": "b1af11ac_3ba29749",
+      "revId": "4d0ca2c652e76b27b8959a9ac8a962f65af4c935",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
     }
   ]
 }
