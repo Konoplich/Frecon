@@ -4,6 +4,7 @@
  * found in the LICENSE file.
  */
 
+#include <assert.h>
 #include <errno.h>
 #include <fcntl.h>
 #include <getopt.h>
@@ -25,6 +26,7 @@
 #include "term.h"
 #include "util.h"
 
+#define  FLAG_HELP                         'h'
 #define  FLAG_CLEAR                        'c'
 #define  FLAG_DAEMON                       'd'
 #define  FLAG_ENABLE_GFX                   'G'
@@ -46,7 +48,8 @@
 #define  FLAG_SCALE                        'S'
 #define  FLAG_SPLASH_ONLY                  's'
 
-static struct option command_options[] = {
+static const struct option command_options[] = {
+	{ "help", no_argument, NULL, FLAG_HELP },
 	{ "clear", required_argument, NULL, FLAG_CLEAR },
 	{ "daemon", no_argument, NULL, FLAG_DAEMON },
 	{ "dev-mode", no_argument, NULL, FLAG_ENABLE_VTS },
@@ -70,6 +73,61 @@ static struct option command_options[] = {
 	{ "splash-only", no_argument, NULL, FLAG_SPLASH_ONLY },
 	{ NULL, 0, NULL, 0 }
 };
+static const char * const command_help[] = {
+	"This help screen!",
+	"Splash screen clear color.",
+	"Daemonize frecon.",
+	"Force dev mode behavior (same as --enable-vts).",
+	"Enable image and box drawing OSC escape codes.",
+	"Enable switching to VT1 and keep a terminal on it.",
+	"Enable additional terminals beyond VT1.",
+	"Default time (in msecs) between splash animation frames.",
+	"The gamma table to apply. (unimplemented)",
+	"Image (low res) to use for splash animation.",
+	"Image (hi res) to use for splash animation.",
+	"Number of times to loop splash animations (0 = forever).",
+	"First frame to start the splash animation loop (and enable looping).",
+	"Pause time (in msecs) between splash animation frames.",
+	"Offset (as x,y) for centering looped image.",
+	"Number of enabled VTs. The default is 4, the maximum is 12.",
+	"Do not display login prompt on additional VTs.",
+	"Absolute location of the splash image on screen (as x,y).",
+	"(Deprecated) Print detected screen resolution and exit.",
+	"Create all VTs immediately instead of on-demand.",
+	"Default scale for splash screen images.",
+	"Exit immediately after finishing splash animation.",
+};
+
+static void usage(int status)
+{
+	FILE *out = status ? stderr : stdout;
+
+	static_assert(ARRAY_SIZE(command_help) == ARRAY_SIZE(command_options) - 1,
+		"The help & option arrays need resyncing");
+
+	fprintf(out,
+		"Frecon: The Freon based console daemon.\n"
+		"\n"
+		"Usage: frecon [options] [splash images]\n"
+		"\n"
+		"Options:\n"
+	);
+
+	/* Output all the options & help text, and auto-align them. */
+	int len;
+	for (int i = 0; command_options[i].name; ++i) {
+		len = fprintf(out, "  -%c, --%s ",
+			command_options[i].val, command_options[i].name);
+		if (command_options[i].has_arg == required_argument)
+			len += fprintf(out, "<arg> ");
+		fprintf(out, "%*s %s\n", (30 - len), "", command_help[i]);
+	}
+
+	fprintf(out, "\nFor more detailed documentation, visit:\n"
+		"https://chromium.googlesource.com/chromiumos/platform/frecon/+/master\n");
+
+	exit(status);
+}
 
 commandflags_t command_flags = { 0 };
 
@@ -218,6 +276,7 @@ static void legacy_print_resolution(int argc, char* argv[])
 	int c;
 
 	optind = 1;
+	opterr = 0;
 	for (;;) {
 		c = getopt_long(argc, argv, "", command_options, NULL);
 		if (c == -1) {
@@ -250,6 +309,7 @@ int main(int argc, char* argv[])
 	pts_fd =  posix_openpt(O_RDWR | O_NOCTTY | O_CLOEXEC | O_NONBLOCK);
 
 	optind = 1;
+	opterr = 1;
 	for (;;) {
 		c = getopt_long(argc, argv, "", command_options, NULL);
 
@@ -287,6 +347,14 @@ int main(int argc, char* argv[])
 
 			case FLAG_SPLASH_ONLY:
 				command_flags.splash_only = true;
+				break;
+
+			case FLAG_HELP:
+				usage(0);
+				break;
+
+			case '?':
+				usage(1);
 				break;
 		}
 	}
