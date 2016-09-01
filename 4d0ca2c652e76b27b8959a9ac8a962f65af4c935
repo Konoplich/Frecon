@@ -52,6 +52,24 @@
       "revId": "4d0ca2c652e76b27b8959a9ac8a962f65af4c935",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3155e139_1a4d59c2",
+        "filename": "main.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000768
+      },
+      "writtenOn": "2016-09-01T00:38:42Z",
+      "side": 1,
+      "message": "when you said \"those\", i thought you meant you wanted to resort the whole thing by the short option.  if you want me to just move \"help\" to the right place based on the define names and the long option, then i can do that.  it\u0027s a little weird sticking an option like --help right in the middle rather than the start or end, but i won\u0027t sweat it.",
+      "parentUuid": "31f241e7_728176a9",
+      "revId": "4d0ca2c652e76b27b8959a9ac8a962f65af4c935",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
     }
   ]
 }
