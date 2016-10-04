@@ -356,27 +356,6 @@ int main(int argc, char* argv[])
 		}
 	}
 
-	if (command_flags.daemon) {
-		int status;
-		unsigned vt;
-		fprintf(stdout, "%s\n", ptsname(pts_fd));
-		daemonize();
-		status = mkdir(FRECON_RUN_DIR, S_IRWXU);
-		if (status == 0 || (status < 0 && errno == EEXIST)) {
-			char pids[32];
-
-			sprintf(pids, "%u", getpid());
-			write_string_to_file(FRECON_PID_FILE, pids);
-		}
-
-		/* Remove all stale VT links. */
-		for (vt = 0; vt < TERM_MAX_TERMINALS; vt++) {
-			char path[32];
-			snprintf(path, sizeof(path), FRECON_VT_PATH, vt);
-			unlink(path);
-		}
-	}
-
 	ret = input_init();
 	if (ret) {
 		LOG(ERROR, "Input init failed.");
@@ -391,10 +370,29 @@ int main(int argc, char* argv[])
 
 	drm_set(drm = drm_scan());
 
+	/* Create VTs before daemonizing */
+	if (command_flags.pre_create_vts && command_flags.enable_vts)
+		for (unsigned vt = 1; vt < term_num_terminals; vt++)
+			term_set_terminal(vt, term_init(vt, -1));
+
+	/* Create splash terminal before daemonizing */
 	splash = splash_init(pts_fd);
 	if (splash == NULL) {
 		LOG(ERROR, "Splash init failed.");
 		return EXIT_FAILURE;
+	}
+
+	if (command_flags.daemon) {
+		int status;
+		fprintf(stdout, "%s\n", ptsname(pts_fd));
+		daemonize();
+		status = mkdir(FRECON_RUN_DIR, S_IRWXU);
+		if (status == 0 || (status < 0 && errno == EEXIST)) {
+			char pids[32];
+
+			sprintf(pids, "%u", getpid());
+			write_string_to_file(FRECON_PID_FILE, pids);
+		}
 	}
 
 	/* These flags can be only processed after splash object has been created. */
@@ -490,16 +488,6 @@ int main(int argc, char* argv[])
 	 * in case they changed during suspend.
 	 */
 	dbus_set_suspend_done_callback(term_suspend_done, NULL);
-
-	if (command_flags.pre_create_vts && command_flags.enable_vts) {
-		for (unsigned vt = command_flags.enable_vt1 ? TERM_SPLASH_TERMINAL : 1; vt < term_num_terminals; vt++) {
-			terminal_t *terminal = term_get_terminal(vt);
-			if (!terminal) {
-				terminal = term_init(vt, -1);
-				term_set_terminal(vt, terminal);
-			}
-		}
-	}
 
 	if (command_flags.daemon) {
 		if (command_flags.enable_vts)
