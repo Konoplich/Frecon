@@ -21,6 +21,7 @@ typedef struct {
 	bool    enable_gfx;
 	bool    no_login;
 	bool    pre_create_vts;
+	bool    wait_child;
 } commandflags_t;
 
 extern commandflags_t command_flags;

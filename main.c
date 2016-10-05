@@ -46,6 +46,7 @@
 #define  FLAG_PRINT_RESOLUTION             'p'
 #define  FLAG_SCALE                        'S'
 #define  FLAG_SPLASH_ONLY                  's'
+#define  FLAG_WAIT_CHILD                   'w'
 
 static const struct option command_options[] = {
 	{ "clear", required_argument, NULL, FLAG_CLEAR },
@@ -69,6 +70,7 @@ static const struct option command_options[] = {
 	{ "pre-create-vts", no_argument, NULL, FLAG_PRE_CREATE_VTS },
 	{ "scale", required_argument, NULL, FLAG_SCALE },
 	{ "splash-only", no_argument, NULL, FLAG_SPLASH_ONLY },
+	{ "wait-child", no_argument, NULL, FLAG_WAIT_CHILD },
 	{ NULL, 0, NULL, 0 }
 };
 static const char * const command_help[] = {
@@ -93,6 +95,7 @@ static const char * const command_help[] = {
 	"Create all VTs immediately instead of on-demand.",
 	"Default scale for splash screen images.",
 	"Exit immediately after finishing splash animation.",
+	"Make daemon parent wait till child fully initializes.",
 };
 
 static void usage(int status)
@@ -296,6 +299,7 @@ int main(int argc, char* argv[])
 	int ret;
 	int c;
 	int pts_fd;
+	unsigned vt;
 	int32_t x, y;
 	splash_t* splash;
 	drm_t* drm;
@@ -346,6 +350,10 @@ int main(int argc, char* argv[])
 				command_flags.splash_only = true;
 				break;
 
+			case FLAG_WAIT_CHILD:
+				command_flags.wait_child = true;
+				break;
+
 			case FLAG_HELP:
 				usage(0);
 				break;
@@ -356,24 +364,26 @@ int main(int argc, char* argv[])
 		}
 	}
 
+	/* Remove all stale VT links. */
+	for (vt = 0; vt < TERM_MAX_TERMINALS; vt++) {
+		char path[32];
+		snprintf(path, sizeof(path), FRECON_VT_PATH, vt);
+		unlink(path);
+	}
+	/* And PID file. */
+	unlink(FRECON_PID_FILE);
+
 	if (command_flags.daemon) {
 		int status;
-		unsigned vt;
+
 		fprintf(stdout, "%s\n", ptsname(pts_fd));
-		daemonize();
+		daemonize(command_flags.wait_child);
 		status = mkdir(FRECON_RUN_DIR, S_IRWXU);
 		if (status == 0 || (status < 0 && errno == EEXIST)) {
 			char pids[32];
 
 			sprintf(pids, "%u", getpid());
 			write_string_to_file(FRECON_PID_FILE, pids);
-		}
-
-		/* Remove all stale VT links. */
-		for (vt = 0; vt < TERM_MAX_TERMINALS; vt++) {
-			char path[32];
-			snprintf(path, sizeof(path), FRECON_VT_PATH, vt);
-			unlink(path);
 		}
 	}
 
@@ -508,6 +518,8 @@ int main(int argc, char* argv[])
 			term_switch_to(TERM_SPLASH_TERMINAL);
 		else
 			term_background();
+		if (command_flags.wait_child)
+			daemon_exit_code(EXIT_SUCCESS);
 	} else {
 		/* Create and switch to first term in interactve mode. */
 		set_drm_master_relax(); /* TODO(dbehr) Remove when Chrome is fixed to actually release master. */

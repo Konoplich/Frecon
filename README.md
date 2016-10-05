@@ -82,6 +82,11 @@ to use instead running frecon first with `--print-resolution` option and making
 this decision in a script that invokes frecon.
 Free form image file name in the command line are added unconditionally.
 
+* `--wait-child`
+	Wait for daemon child to fully initialize before exiting daemon parent
+process. This allows to propagate error codes from daemon child and guarantees
+pid file and terminal links are created in /var/run/frecon.
+
 ## Imaging escape codes
 
 Frecon implements rudimentary functionality to display images and draw
