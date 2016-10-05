@@ -46,6 +46,7 @@
 #define  FLAG_PRINT_RESOLUTION             'p'
 #define  FLAG_SCALE                        'S'
 #define  FLAG_SPLASH_ONLY                  's'
+#define  FLAG_WAIT_CHILD                   'w'
 
 static const struct option command_options[] = {
 	{ "clear", required_argument, NULL, FLAG_CLEAR },
@@ -296,6 +297,7 @@ int main(int argc, char* argv[])
 	int ret;
 	int c;
 	int pts_fd;
+	unsigned vt;
 	int32_t x, y;
 	splash_t* splash;
 	drm_t* drm;
@@ -356,24 +358,26 @@ int main(int argc, char* argv[])
 		}
 	}
 
+	/* Remove all stale VT links. */
+	for (vt = 0; vt < TERM_MAX_TERMINALS; vt++) {
+		char path[32];
+		snprintf(path, sizeof(path), FRECON_VT_PATH, vt);
+		unlink(path);
+	}
+	/* And PID file. */
+	unlink(FRECON_PID_FILE);
+
 	if (command_flags.daemon) {
 		int status;
-		unsigned vt;
+
 		fprintf(stdout, "%s\n", ptsname(pts_fd));
-		daemonize();
+		daemonize(command_flags.pre_create_vts);
 		status = mkdir(FRECON_RUN_DIR, S_IRWXU);
 		if (status == 0 || (status < 0 && errno == EEXIST)) {
 			char pids[32];
 
 			sprintf(pids, "%u", getpid());
 			write_string_to_file(FRECON_PID_FILE, pids);
-		}
-
-		/* Remove all stale VT links. */
-		for (vt = 0; vt < TERM_MAX_TERMINALS; vt++) {
-			char path[32];
-			snprintf(path, sizeof(path), FRECON_VT_PATH, vt);
-			unlink(path);
 		}
 	}
 
@@ -508,6 +512,8 @@ int main(int argc, char* argv[])
 			term_switch_to(TERM_SPLASH_TERMINAL);
 		else
 			term_background();
+		if (command_flags.pre_create_vts)
+			daemon_exit_code(EXIT_SUCCESS);
 	} else {
 		/* Create and switch to first term in interactve mode. */
 		set_drm_master_relax(); /* TODO(dbehr) Remove when Chrome is fixed to actually release master. */
