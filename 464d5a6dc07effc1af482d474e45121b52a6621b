@@ -39,6 +39,24 @@
       "revId": "464d5a6dc07effc1af482d474e45121b52a6621b",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9f993c96_656be0ad",
+        "filename": "util.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1150560
+      },
+      "writtenOn": "2016-10-07T00:42:38Z",
+      "side": 1,
+      "message": "\u003c 0 is an error condition and it is processed inside this if statement\n0 is not an error condition. and since we are blocking here, I think it should not be possible.\n1 is what we expect\nmore than 1 is not possible because we only write one byte from other side.",
+      "parentUuid": "dfcc9455_4c719f34",
+      "revId": "464d5a6dc07effc1af482d474e45121b52a6621b",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
     }
   ]
 }
