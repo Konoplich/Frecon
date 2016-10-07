@@ -191,6 +191,24 @@
       "revId": "464d5a6dc07effc1af482d474e45121b52a6621b",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9f35bc64_6b6e31bf",
+        "filename": "util.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1150560
+      },
+      "writtenOn": "2016-10-07T23:00:05Z",
+      "side": 1,
+      "message": "But how can I get return code 0 here?",
+      "parentUuid": "df949452_0c8b57d6",
+      "revId": "464d5a6dc07effc1af482d474e45121b52a6621b",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
     }
   ]
 }
