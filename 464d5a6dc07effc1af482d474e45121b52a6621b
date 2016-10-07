@@ -2,6 +2,52 @@
   "comments": [
     {
       "key": {
+        "uuid": "1f6e2c0e_769590eb",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2016-10-07T01:58:10Z",
+      "side": 1,
+      "message": "I believe the slow part we want to avoid blocking on is the animation itself, not creating the VTs.  If we (pre-)create the VTs before kicking the animation we can block unconditionally and get rid of the flag. \n\nIMHO frecon already has way too many flags which makes the behavior very hard to reason about.",
+      "range": {
+        "startLine": 15,
+        "startChar": 30,
+        "endLine": 15,
+        "endChar": 44
+      },
+      "revId": "464d5a6dc07effc1af482d474e45121b52a6621b",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1f6e2c0e_569a141d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2016-10-07T01:58:10Z",
+      "side": 1,
+      "message": "Please be sure to test Recovery as well, since after all this change is to fix broken recovery flow.",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 65
+      },
+      "revId": "464d5a6dc07effc1af482d474e45121b52a6621b",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1fc70c2e_4e719334",
         "filename": "README.md",
         "patchSetId": 1
@@ -18,6 +64,52 @@
         "startChar": 21,
         "endLine": 87,
         "endChar": 45
+      },
+      "revId": "464d5a6dc07effc1af482d474e45121b52a6621b",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1f6e2c0e_368b18d7",
+        "filename": "main.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 374,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2016-10-07T01:58:10Z",
+      "side": 1,
+      "message": "Why is this necessary?\n\nIf there is a stale VT link in place where frecon wants to create a VT it will get automatically clean it up.\n\nIf frecon does not want to reuse the VT, then there is no reason to clean it up when invoking frecon.",
+      "range": {
+        "startLine": 367,
+        "startChar": 0,
+        "endLine": 374,
+        "endChar": 25
+      },
+      "revId": "464d5a6dc07effc1af482d474e45121b52a6621b",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1f6e2c0e_16909cfb",
+        "filename": "main.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 512,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2016-10-07T01:58:10Z",
+      "side": 1,
+      "message": "I think if you move this and the wait_child before running the splash animation, you can just do the wait unconditionally and get rid of the flag.",
+      "range": {
+        "startLine": 504,
+        "startChar": 0,
+        "endLine": 512,
+        "endChar": 2
       },
       "revId": "464d5a6dc07effc1af482d474e45121b52a6621b",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
