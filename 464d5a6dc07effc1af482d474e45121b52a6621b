@@ -94,6 +94,30 @@
     },
     {
       "key": {
+        "uuid": "9f35bc64_4b332df8",
+        "filename": "main.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 374,
+      "author": {
+        "id": 1150560
+      },
+      "writtenOn": "2016-10-07T22:58:57Z",
+      "side": 1,
+      "message": "Frecon will not clean up stale VT links. So if you kill frecon and it as 4 consoles and then start it again and it has 1 console, you will have 3 dangling links. This fixes it.\nAlso, we want to delete pid file. For instance you kill daemonized frecon that created pid file, and then start one without --daemon flag and the pid file will still be there and be very misleading.",
+      "parentUuid": "1f6e2c0e_368b18d7",
+      "range": {
+        "startLine": 367,
+        "startChar": 0,
+        "endLine": 374,
+        "endChar": 25
+      },
+      "revId": "464d5a6dc07effc1af482d474e45121b52a6621b",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1f6e2c0e_16909cfb",
         "filename": "main.c",
         "patchSetId": 1
