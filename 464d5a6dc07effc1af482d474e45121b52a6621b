@@ -209,6 +209,24 @@
       "revId": "464d5a6dc07effc1af482d474e45121b52a6621b",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1f32ac87_b6fa6857",
+        "filename": "util.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1000768
+      },
+      "writtenOn": "2016-10-07T23:04:07Z",
+      "side": 1,
+      "message": "i can\u0027t think of a scenario off the top of my head, but that doesn\u0027t change my position.  the generated code is the same size and speed, and including 0 in the check is defensive.",
+      "parentUuid": "9f35bc64_6b6e31bf",
+      "revId": "464d5a6dc07effc1af482d474e45121b52a6621b",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
     }
   ]
 }
