@@ -82,6 +82,12 @@ static DBusHandlerResult handle_login_prompt_visible(DBusMessage* message)
 		login_prompt_visible_callback_userptr = NULL;
 	}
 	chrome_is_already_up = true;
+	/* We should be already in background and given up master.
+	 * But just in case. Or if Crouton sends us fake signal because
+	 * it needs frecon to drop master and stop processing input.
+	 */
+	LOG(INFO, "Received LoginPromptVisible");
+	term_background();
 
 	return DBUS_HANDLER_RESULT_HANDLED;
 }
