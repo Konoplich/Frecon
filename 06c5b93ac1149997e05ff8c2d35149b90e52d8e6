@@ -34,6 +34,24 @@
       "revId": "06c5b93ac1149997e05ff8c2d35149b90e52d8e6",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c63772d9_7277b8f7",
+        "filename": "main.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 521,
+      "author": {
+        "id": 1150560
+      },
+      "writtenOn": "2016-10-27T23:24:25Z",
+      "side": 0,
+      "message": "No, we can\u0027t do DRM master switching without drm_master_relax thing because kernel requires application to be able to do that. Frecon runs as root but Chrome runs as chronos. So we need this to override these permisions in kernel (when drm_master_relax is on dropping master just requires having it which is kind of logical, and acquiring master requires to be authenticated DRM client).",
+      "parentUuid": "618870a5_287eaa59",
+      "revId": "06c5b93ac1149997e05ff8c2d35149b90e52d8e6",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
     }
   ]
 }
