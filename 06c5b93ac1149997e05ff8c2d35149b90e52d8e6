@@ -16,6 +16,24 @@
       "revId": "06c5b93ac1149997e05ff8c2d35149b90e52d8e6",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "618870a5_287eaa59",
+        "filename": "main.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 521,
+      "author": {
+        "id": 1107749
+      },
+      "writtenOn": "2016-10-27T15:04:04Z",
+      "side": 0,
+      "message": "My memory is a bit rusty on this (Dominik please correct me if I\u0027m wrong), but I remember that dropping DRM master wasn\u0027t enough for a different process to acquire it, hence this was needed.",
+      "parentUuid": "618870a5_08c9e60b",
+      "revId": "06c5b93ac1149997e05ff8c2d35149b90e52d8e6",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
     }
   ]
 }
