@@ -900,32 +900,32 @@ void term_clear(terminal_t* terminal)
 
 void term_background(void)
 {
+	int retry = 5;
 	if (in_background)
 		return;
 	in_background = true;
 	drm_dropmaster(NULL);
-	dbus_take_display_ownership();
+	while (!dbus_take_display_ownership() && retry--) {
+		LOG(ERROR, "Chrome failed to take display ownership.");
+		usleep(500*1000);
+	}
 }
 
 void term_foreground(void)
 {
 	int ret;
+	unsigned retry = 5;
+
 	if (!in_background)
 		return;
 	in_background = false;
-	if (!dbus_release_display_ownership()) {
-		LOG(ERROR, "Chrome did not release master. Frecon will try to steal it.");
-		set_drm_master_relax();
+
+	while (!dbus_release_display_ownership() && retry--) {
+		LOG(ERROR, "Chrome did not release master. %s", retry ? "Try again." : "Frecon will steal master.");
+		usleep(500*1000);
 	}
 
 	ret = drm_setmaster(NULL);
-	if (ret < 0) {
-		/*
-		 * In case there is high system load give Chrome some time
-		 * and try again. */
-		usleep(500 * 1000);
-		ret = drm_setmaster(NULL);
-	}
 	if (ret < 0)
 		LOG(ERROR, "Could not set master when switching to foreground %m.");
 
