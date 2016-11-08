@@ -391,7 +391,10 @@ static int term_resize(terminal_t* term)
 	uint32_t char_width, char_height;
 	int status;
 
-	font_init(fb_getscaling(term->fb));
+	if (!font_get_scaling())
+		font_set_scaling(fb_getscaling(term->fb));
+
+	font_init();
 	font_get_size(&char_width, &char_height);
 
 	term->term->char_x = fb_getwidth(term->fb) / char_width;
@@ -785,6 +788,8 @@ void term_set_current_terminal(terminal_t* terminal)
 void term_set_current_to(terminal_t* terminal)
 {
 	if (!terminal) {
+		if (terminals[current_terminal])
+			term_close(terminals[current_terminal]);
 		terminals[current_terminal] = NULL;
 		current_terminal = 0;
 		return;
@@ -868,6 +873,9 @@ void term_monitor_hotplug(void)
 		font_free();
 	}
 
+	/* Reset font scaling. We will recalculate it in term_resize(). */
+	font_set_scaling(0);
+
 	for (t = 0; t < term_num_terminals; t++) {
 		if (!terminals[t])
 			continue;
@@ -896,6 +904,32 @@ void term_clear(terminal_t* terminal)
 {
 	tsm_screen_erase_screen(terminal->term->screen, false);
 	term_redraw(terminal);
+}
+
+void term_zoom(bool zoom_in)
+{
+	int font_scaling = font_get_scaling();
+	if (zoom_in && font_scaling < 4)
+		font_scaling++;
+	else if (!zoom_in && font_scaling > 1)
+		font_scaling--;
+	else
+		return;
+
+	unsigned int t;
+	for (t = 0; t < term_num_terminals; t++) {
+		if (terminals[t])
+			font_free();
+	}
+	font_set_scaling(font_scaling);
+	for (t = 0; t < term_num_terminals; t++) {
+		terminal_t* term = terminals[t];
+		if (term) {
+			term_resize(term);
+			term->term->age = 0;
+			term_redraw(term);
+		}
+	}
 }
 
 void term_background(void)
