@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4bad4bb0_9e9d1df1",
+        "filename": "term.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 793,
+      "author": {
+        "id": 1117132
+      },
+      "writtenOn": "2016-11-09T01:09:59Z",
+      "side": 1,
+      "message": "Unrelated patch?",
+      "range": {
+        "startLine": 792,
+        "startChar": 25,
+        "endLine": 793,
+        "endChar": 19
+      },
+      "revId": "c6ffa84033954d3e7859647ddd995b8070b11e45",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    }
+  ]
+}
