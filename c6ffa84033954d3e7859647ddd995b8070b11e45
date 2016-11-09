@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6b676fa0_67eaf2c5",
+        "filename": "term.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1001537
+      },
+      "writtenOn": "2016-11-09T19:54:20Z",
+      "side": 1,
+      "message": "it\u0027s more than just setting the value; font.c actually does a one-time pre-scaling step to cache all the scaled glyphs, so we need to go through the font_init(font_scaling) to initialize the new glyphs if scaling changes",
+      "parentUuid": "6b676fa0_67e43228",
+      "revId": "c6ffa84033954d3e7859647ddd995b8070b11e45",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4bad4bb0_9e9d1df1",
         "filename": "term.c",
         "patchSetId": 1
@@ -78,6 +96,30 @@
       "side": 1,
       "message": "OK, so this change here is good. We defintely need to close term here so we don\u0027t leak terms.\n\nBut I think we should not set current term to NULL in splash run. we don\u0027t want splash term to die at the end of splash run. it needs to persist so the splash graphics is still there when all the boot-message/devmode/wipe/recovery stuff runs.",
       "parentUuid": "ebafdfaa_9b41aba8",
+      "range": {
+        "startLine": 792,
+        "startChar": 25,
+        "endLine": 793,
+        "endChar": 19
+      },
+      "revId": "c6ffa84033954d3e7859647ddd995b8070b11e45",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6b676fa0_27e4faf4",
+        "filename": "term.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 793,
+      "author": {
+        "id": 1001537
+      },
+      "writtenOn": "2016-11-09T19:54:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6b676fa0_07853656",
       "range": {
         "startLine": 792,
         "startChar": 25,
