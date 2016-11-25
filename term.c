@@ -5,11 +5,15 @@
  */
 
 #include <ctype.h>
+#include <fcntl.h>
 #include <libtsm.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <sys/select.h>
+#include <sys/stat.h>
 #include <sys/types.h>
 #include <sys/wait.h>
+#include <unistd.h>
 
 #include "dbus.h"
 #include "fb.h"
@@ -21,7 +25,8 @@
 #include "term.h"
 #include "util.h"
 
-static terminal_t* terminals[MAX_TERMINALS];
+unsigned int term_num_terminals = 4;
+static terminal_t* terminals[TERM_MAX_TERMINALS];
 static uint32_t current_terminal = 0;
 
 struct term {
@@ -37,11 +42,12 @@ struct term {
 };
 
 struct _terminal_t {
+	unsigned vt;
+	bool active;
 	uint32_t background;
 	bool background_valid;
 	fb_t* fb;
 	struct term* term;
-	bool active;
 	char** exec;
 };
 
@@ -54,12 +60,6 @@ static char* interactive_cmd_line[] = {
 	NULL
 };
 
-
-static char* noninteractive_cmd_line[] = {
-	"/bin/cat",
-	NULL
-};
-
 static bool in_background = false;
 static bool hotplug_occured = false;
 
@@ -68,8 +68,13 @@ static void __attribute__ ((noreturn)) term_run_child(terminal_t* terminal)
 {
 	/* XXX figure out how to fix "top" for xterm-256color */
 	setenv("TERM", "xterm", 1);
-	execve(terminal->exec[0], terminal->exec, environ);
-	exit(1);
+	if (terminal->exec) {
+		execve(terminal->exec[0], terminal->exec, environ);
+		exit(1);
+	} else {
+		while (1)
+			sleep(1000000);
+	}
 }
 
 static int term_draw_cell(struct tsm_screen* screen, uint32_t id,
@@ -381,12 +386,15 @@ static void log_tsm(void* data, const char* file, int line, const char* fn,
 	fprintf(stderr, "\n");
 }
 
-static int term_resize(terminal_t* term)
+static int term_resize(terminal_t* term, int scaling)
 {
 	uint32_t char_width, char_height;
 	int status;
 
-	font_init(fb_getscaling(term->fb));
+	if (!scaling)
+		scaling = fb_getscaling(term->fb);
+
+	font_init(scaling);
 	font_get_size(&char_width, &char_height);
 
 	term->term->char_x = fb_getwidth(term->fb) / char_width;
@@ -410,21 +418,45 @@ static int term_resize(terminal_t* term)
 	return 0;
 }
 
-terminal_t* term_init(bool interactive)
+void term_set_num_terminals(unsigned new_num)
+{
+	if (new_num < 1)
+		term_num_terminals = 1;
+	else if (new_num > TERM_MAX_TERMINALS)
+		term_num_terminals = TERM_MAX_TERMINALS;
+	else
+		term_num_terminals = new_num;
+}
+
+static bool term_is_interactive(unsigned int vt)
+{
+	if (command_flags.no_login)
+		return false;
+
+	if (vt == TERM_SPLASH_TERMINAL)
+		return command_flags.enable_vt1;
+
+	return true;
+}
+
+terminal_t* term_init(unsigned vt, int pts_fd)
 {
 	const int scrollback_size = 200;
 	int status;
 	terminal_t* new_terminal;
+	bool interactive = term_is_interactive(vt);
 
 	new_terminal = (terminal_t*)calloc(1, sizeof(*new_terminal));
 	if (!new_terminal)
 		return NULL;
 
+	new_terminal->vt = vt;
 	new_terminal->background_valid = false;
 
 	new_terminal->fb = fb_init();
 
 	if (!new_terminal->fb) {
+		LOG(ERROR, "Failed to create fb on VT%u.", vt);
 		term_close(new_terminal);
 		return NULL;
 	}
@@ -435,14 +467,15 @@ terminal_t* term_init(bool interactive)
 		return NULL;
 	}
 
-	if (interactive && !command_flags.no_login)
+	if (interactive)
 		new_terminal->exec = interactive_cmd_line;
 	else
-		new_terminal->exec = noninteractive_cmd_line;
+		new_terminal->exec = NULL;
 
 	status = tsm_screen_new(&new_terminal->term->screen,
 			log_tsm, new_terminal->term);
 	if (status < 0) {
+		LOG(ERROR, "Failed to create new screen on VT%u.", vt);
 		term_close(new_terminal);
 		return NULL;
 	}
@@ -453,6 +486,7 @@ terminal_t* term_init(bool interactive)
 			term_write_cb, new_terminal->term, log_tsm, new_terminal->term);
 
 	if (status < 0) {
+		LOG(ERROR, "Failed to create new VT%u.", vt);
 		term_close(new_terminal);
 		return NULL;
 	}
@@ -462,14 +496,16 @@ terminal_t* term_init(bool interactive)
 
 	new_terminal->term->pty_bridge = shl_pty_bridge_new();
 	if (new_terminal->term->pty_bridge < 0) {
+		LOG(ERROR, "Failed to create pty bridge on VT%u.", vt);
 		term_close(new_terminal);
 		return NULL;
 	}
 
 	status = shl_pty_open(&new_terminal->term->pty,
-			term_read_cb, new_terminal, 1, 1);
+			term_read_cb, new_terminal, 1, 1, pts_fd);
 
 	if (status < 0) {
+		LOG(ERROR, "Failed to open pty on VT%u.", vt);
 		term_close(new_terminal);
 		return NULL;
 	} else if (status == 0) {
@@ -477,25 +513,34 @@ terminal_t* term_init(bool interactive)
 		exit(1);
 	}
 
+	status = mkdir(FRECON_RUN_DIR, S_IRWXU);
+	if (status == 0 || (status < 0 && errno == EEXIST)) {
+		char path[32];
+		snprintf(path, sizeof(path), FRECON_VT_PATH, vt);
+		unlink(path); /* In case it already exists. Ignore return codes. */
+		if (symlink(ptsname(shl_pty_get_fd(new_terminal->term->pty)), path) < 0)
+			LOG(ERROR, "Failed to symlink pts name %s to %s, %d:%s",
+			    path,
+			    ptsname(shl_pty_get_fd(new_terminal->term->pty)),
+			    errno, strerror(errno));
+	}
+
 	status = shl_pty_bridge_add(new_terminal->term->pty_bridge, new_terminal->term->pty);
 	if (status) {
-		shl_pty_close(new_terminal->term->pty);
+		LOG(ERROR, "Failed to add pty bridge on VT%u.", vt);
 		term_close(new_terminal);
 		return NULL;
 	}
 
 	new_terminal->term->pid = shl_pty_get_child(new_terminal->term->pty);
 
-	status = term_resize(new_terminal);
+	status = term_resize(new_terminal, 0);
 
 	if (status < 0) {
-		shl_pty_close(new_terminal->term->pty);
+		LOG(ERROR, "Failed to resize VT%u.", vt);
 		term_close(new_terminal);
 		return NULL;
 	}
-
-	if (interactive)
-		new_terminal->active = true;
 
 	return new_terminal;
 }
@@ -518,8 +563,12 @@ void term_deactivate(terminal_t* terminal)
 
 void term_close(terminal_t* term)
 {
+	char path[32];
 	if (!term)
 		return;
+
+	snprintf(path, sizeof(path), FRECON_VT_PATH, term->vt);
+	unlink(path);
 
 	if (term->fb) {
 		fb_close(term->fb);
@@ -527,6 +576,15 @@ void term_close(terminal_t* term)
 	}
 
 	if (term->term) {
+		if (term->term->pty) {
+			if (term->term->pty_bridge >= 0) {
+				shl_pty_bridge_remove(term->term->pty_bridge, term->term->pty);
+				shl_pty_bridge_free(term->term->pty_bridge);
+				term->term->pty_bridge = -1;
+			}
+			shl_pty_close(term->term->pty);
+			term->term->pty = NULL;
+		}
 		free(term->term);
 		term->term = NULL;
 	}
@@ -675,50 +733,39 @@ void term_set_terminal(int num, terminal_t* terminal)
 	terminals[num] = terminal;
 }
 
-terminal_t* term_create_term(int vt)
+int term_create_splash_term(int pts_fd)
 {
-	terminal_t* terminal;
-
-	terminal = term_get_terminal(vt - 1);
-	if (term_is_active(terminal))
-		return terminal;
-
-	if (terminal == NULL) {
-		term_set_terminal(vt - 1, term_init(false));
-		terminal = term_get_terminal(vt - 1);
-		if (!term_is_valid(terminal)) {
-			LOG(ERROR, "create_term: Term init failed");
-		}
+	terminal_t* terminal = term_init(TERM_SPLASH_TERMINAL, pts_fd);
+	
+	if (!terminal) {
+		LOG(ERROR, "Could not create splash term.");
+		return -1;
 	}
-
-	return terminal;
-}
-
-terminal_t* term_create_splash_term()
-{
-	terminal_t* splash_terminal = term_init(false);
-	term_set_terminal(SPLASH_TERMINAL, splash_terminal);
+	term_set_terminal(TERM_SPLASH_TERMINAL, terminal);
 
 	// Hide the cursor on the splash screen
-	term_hide_cursor(splash_terminal);
-
-	return splash_terminal;
+	term_hide_cursor(terminal);
+	return 0;
 }
 
-void term_destroy_splash_term()
+void term_destroy_splash_term(void)
 {
-	term_set_terminal(SPLASH_TERMINAL, NULL);
-}
-
-unsigned int term_get_max_terminals()
-{
-	return MAX_STD_TERMINALS;
+	terminal_t *terminal;
+	if (command_flags.enable_vt1) {
+		return;
+	}
+	terminal = term_get_terminal(TERM_SPLASH_TERMINAL);
+	term_set_terminal(TERM_SPLASH_TERMINAL, NULL);
+	term_close(terminal);
 }
 
 void term_set_current(uint32_t t)
 {
-	if (t >= MAX_TERMINALS)
-		LOG(ERROR, "set_current: larger than max");
+	if (t >= TERM_MAX_TERMINALS)
+		LOG(ERROR, "set_current: larger than array size");
+	else
+	if (t >= term_num_terminals)
+		LOG(ERROR, "set_current: larger than num terminals");
 	else
 		current_terminal = t;
 }
@@ -741,18 +788,68 @@ void term_set_current_terminal(terminal_t* terminal)
 void term_set_current_to(terminal_t* terminal)
 {
 	if (!terminal) {
+		if (terminals[current_terminal])
+			term_close(terminals[current_terminal]);
 		terminals[current_terminal] = NULL;
 		current_terminal = 0;
 		return;
 	}
 
-	for (int i = 0; i < MAX_TERMINALS; i++) {
+	for (unsigned i = 0; i < term_num_terminals; i++) {
 		if (terminal == terminals[i]) {
 			current_terminal = i;
 			return;
 		}
 	}
 	LOG(ERROR, "set_current_to: terminal not in array");
+}
+
+int term_switch_to(unsigned int vt)
+{
+	terminal_t *terminal;
+	if (vt == term_get_current()) {
+		terminal = term_get_current_terminal();
+		if (term_is_valid(terminal)) {
+			if (!term_is_active(terminal))
+				term_activate(terminal);
+			return vt;
+		}
+	}
+
+	if (vt >= term_num_terminals)
+		return -EINVAL;
+
+	terminal = term_get_current_terminal();
+	if (term_is_active(terminal))
+		term_deactivate(terminal);
+
+	if (vt == TERM_SPLASH_TERMINAL
+	    && !term_get_terminal(TERM_SPLASH_TERMINAL)
+	    && !command_flags.enable_vt1) {
+		term_set_current(vt);
+		/* Splash term is already gone, returning to Chrome. */
+		term_background();
+		return vt;
+	}
+
+	term_foreground();
+
+	term_set_current(vt);
+	terminal = term_get_current_terminal();
+	if (!terminal) {
+		/* No terminal where we are switching to, create new one. */
+		term_set_current_terminal(term_init(vt, -1));
+		terminal = term_get_current_terminal();
+		if (!term_is_valid(terminal)) {
+			LOG(ERROR, "Term init failed VT%u.", vt);
+			return -1;
+		}
+		term_activate(terminal);
+	} else {
+		term_activate(terminal);
+	}
+
+	return vt;
 }
 
 void term_monitor_hotplug(void)
@@ -767,7 +864,7 @@ void term_monitor_hotplug(void)
 	if (!drm_rescan())
 		return;
 
-	for (t = 0; t < MAX_TERMINALS; t++) {
+	for (t = 0; t < term_num_terminals; t++) {
 		if (!terminals[t])
 			continue;
 		if (!terminals[t]->fb)
@@ -776,13 +873,13 @@ void term_monitor_hotplug(void)
 		font_free();
 	}
 
-	for (t = 0; t < MAX_TERMINALS; t++) {
+	for (t = 0; t < term_num_terminals; t++) {
 		if (!terminals[t])
 			continue;
 		if (!terminals[t]->fb)
 			continue;
 		fb_buffer_init(terminals[t]->fb);
-		term_resize(terminals[t]);
+		term_resize(terminals[t], 0);
 		if (current_terminal == t && terminals[t]->active)
 			fb_setmode(terminals[t]->fb);
 		terminals[t]->term->age = 0;
@@ -795,7 +892,7 @@ void term_redrm(terminal_t* terminal)
 	fb_buffer_destroy(terminal->fb);
 	font_free();
 	fb_buffer_init(terminal->fb);
-	term_resize(terminal);
+	term_resize(terminal, 0);
 	terminal->term->age = 0;
 	term_redraw(terminal);
 }
@@ -806,34 +903,61 @@ void term_clear(terminal_t* terminal)
 	term_redraw(terminal);
 }
 
+void term_zoom(bool zoom_in)
+{
+	int scaling = font_get_scaling();
+	if (zoom_in && scaling < 4)
+		scaling++;
+	else if (!zoom_in && scaling > 1)
+		scaling--;
+	else
+		return;
+
+	unsigned int t;
+	for (t = 0; t < term_num_terminals; t++) {
+		if (terminals[t])
+			font_free();
+	}
+	for (t = 0; t < term_num_terminals; t++) {
+		terminal_t* term = terminals[t];
+		if (term) {
+			term_resize(term, scaling);
+			term->term->age = 0;
+			term_redraw(term);
+		}
+	}
+}
+
 void term_background(void)
 {
+	int retry = 5;
 	if (in_background)
 		return;
 	in_background = true;
 	drm_dropmaster(NULL);
-	dbus_take_display_ownership();
+	while (!dbus_take_display_ownership() && retry--) {
+		LOG(ERROR, "Chrome failed to take display ownership. %s",
+		    retry ? "Trying again." : "Giving up, Chrome is probably dead.");
+		usleep(500 * 1000);
+	}
 }
 
 void term_foreground(void)
 {
 	int ret;
+	unsigned retry = 5;
+
 	if (!in_background)
 		return;
 	in_background = false;
-	if (!dbus_release_display_ownership()) {
-		LOG(ERROR, "Chrome did not release master. Frecon will try to steal it.");
-		set_drm_master_relax();
+
+	while (!dbus_release_display_ownership() && retry--) {
+		LOG(ERROR, "Chrome did not release master. %s",
+		    retry ? "Trying again." : "Frecon will steal master.");
+		usleep(500 * 1000);
 	}
 
 	ret = drm_setmaster(NULL);
-	if (ret < 0) {
-		/*
-		 * In case there is high system load give Chrome some time
-		 * and try again. */
-		usleep(500 * 1000);
-		ret = drm_setmaster(NULL);
-	}
 	if (ret < 0)
 		LOG(ERROR, "Could not set master when switching to foreground %m.");
 
