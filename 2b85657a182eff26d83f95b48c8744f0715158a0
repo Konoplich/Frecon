@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cdddd35f_e0246877",
+        "filename": "main.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 483,
+      "author": {
+        "id": 1001537
+      },
+      "writtenOn": "2016-12-04T04:04:35Z",
+      "side": 1,
+      "message": "nit: no longer need \"{\" and \"}\"",
+      "range": {
+        "startLine": 483,
+        "startChar": 32,
+        "endLine": 483,
+        "endChar": 33
+      },
+      "revId": "2b85657a182eff26d83f95b48c8744f0715158a0",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cdddd35f_c0296c4d",
+        "filename": "main.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 495,
+      "author": {
+        "id": 1001537
+      },
+      "writtenOn": "2016-12-04T04:04:35Z",
+      "side": 1,
+      "message": "remove \")\"",
+      "range": {
+        "startLine": 495,
+        "startChar": 43,
+        "endLine": 495,
+        "endChar": 44
+      },
+      "revId": "2b85657a182eff26d83f95b48c8744f0715158a0",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    }
+  ]
+}
