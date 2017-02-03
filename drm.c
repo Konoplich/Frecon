@@ -32,11 +32,30 @@ static void drm_disable_crtc(drm_t* drm, drmModeCrtc* crtc)
 	}
 }
 
+static int32_t crtc_planes_num(drm_t* drm, int32_t crtc_index)
+{
+	drmModePlanePtr plane;
+	int32_t planes_num = 0;
+	drmModePlaneResPtr plane_resources = drmModeGetPlaneResources(drm->fd);
+	for (uint32_t p = 0; p < plane_resources->count_planes; p++) {
+		plane = drmModeGetPlane(drm->fd, plane_resources->planes[p]);
+
+		if (plane->possible_crtcs & (1 << crtc_index))
+			planes_num++;
+
+		drmModeFreePlane(plane);
+	}
+	drmModeFreePlaneResources(plane_resources);
+	return planes_num;
+}
+
 static drmModeCrtc* find_crtc_for_connector(drm_t* drm, drmModeConnector* connector)
 {
 	int i, j;
 	drmModeEncoder* encoder;
 	int32_t crtc_id;
+	int32_t crtc_planes;
+	int32_t max_crtc_planes;
 
 	if (connector->encoder_id)
 		encoder = drmModeGetEncoder(drm->fd, connector->encoder_id);
@@ -50,6 +69,7 @@ static drmModeCrtc* find_crtc_for_connector(drm_t* drm, drmModeConnector* connec
 	}
 
 	crtc_id = -1;
+	max_crtc_planes = -1;
 	for (i = 0; i < connector->count_encoders; i++) {
 		encoder = drmModeGetEncoder(drm->fd, connector->encoders[i]);
 
@@ -57,11 +77,15 @@ static drmModeCrtc* find_crtc_for_connector(drm_t* drm, drmModeConnector* connec
 			for (j = 0; j < drm->resources->count_crtcs; j++) {
 				if (!(encoder->possible_crtcs & (1 << j)))
 					continue;
-				crtc_id = drm->resources->crtcs[j];
-				break;
+
+				crtc_planes = crtc_planes_num(drm, j);
+				if (max_crtc_planes < crtc_planes) {
+				    crtc_id = drm->resources->crtcs[j];
+				    max_crtc_planes = crtc_planes;
+				}
 			}
+			drmModeFreeEncoder(encoder);
 			if (crtc_id >= 0) {
-				drmModeFreeEncoder(encoder);
 				return drmModeGetCrtc(drm->fd, crtc_id);
 			}
 		}
@@ -521,7 +545,7 @@ int32_t drm_setmode(drm_t* drm, uint32_t fb_id)
 			     fb_id,
 			     0, 0,  // x,y
 			     &drm->main_monitor_connector->connector_id,
-			     1,  // connector_count
+			     1,	 // connector_count
 			     &drm->crtc->mode); // mode
 
 	if (ret) {
