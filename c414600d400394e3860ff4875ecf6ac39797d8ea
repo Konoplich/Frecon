@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6b2f1c2b_3f7344da",
+        "filename": "drm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1000313
+      },
+      "writtenOn": "2017-02-03T01:30:57Z",
+      "side": 1,
+      "message": "nit: no braces for 1-line blocks",
+      "revId": "c414600d400394e3860ff4875ecf6ac39797d8ea",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    }
+  ]
+}
