@@ -33,6 +33,24 @@
       "revId": "4ffdc23ac78fa885ad51cdce2e0659c41e2b4c98",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "27b2ace9_f2988199",
+        "filename": "drm.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1161469
+      },
+      "writtenOn": "2017-02-06T21:14:45Z",
+      "side": 1,
+      "message": "The code is valid; crtc_id is initialized to -1 and assigned a crtc id if one is found. Perhaps clearer if written as crtc_id !\u003d -1, though.",
+      "parentUuid": "b0ad8b55_cc7dcd13",
+      "revId": "4ffdc23ac78fa885ad51cdce2e0659c41e2b4c98",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": true
     }
   ]
 }
