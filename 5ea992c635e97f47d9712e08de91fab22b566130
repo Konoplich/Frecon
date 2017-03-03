@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "00840a45_11ddf331",
+        "filename": "term.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 336,
+      "author": {
+        "id": 1181184
+      },
+      "writtenOn": "2017-03-03T07:08:00Z",
+      "side": 1,
+      "message": "nit: coding style: \"||\" at the end of the line i.e.\nif (strcmp(params, \"1\") \u003d\u003d 0 ||\n    strcasecmp(params, \"on\") \u003d\u003d 0 ||\n    strcasecmp(params, \"true\") \u003d\u003d 0)",
+      "range": {
+        "startLine": 334,
+        "startChar": 0,
+        "endLine": 336,
+        "endChar": 40
+      },
+      "revId": "5ea992c635e97f47d9712e08de91fab22b566130",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7023a5d5_e47d2078",
+        "filename": "term.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 339,
+      "author": {
+        "id": 1181184
+      },
+      "writtenOn": "2017-03-03T07:08:00Z",
+      "side": 1,
+      "message": "\"else if\" on the same line",
+      "range": {
+        "startLine": 338,
+        "startChar": 1,
+        "endLine": 339,
+        "endChar": 3
+      },
+      "revId": "5ea992c635e97f47d9712e08de91fab22b566130",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "803c7b52_37c47dbf",
+        "filename": "term.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 341,
+      "author": {
+        "id": 1181184
+      },
+      "writtenOn": "2017-03-03T07:08:00Z",
+      "side": 1,
+      "message": "ditto: \"||\" at the end of the line",
+      "range": {
+        "startLine": 340,
+        "startChar": 5,
+        "endLine": 341,
+        "endChar": 41
+      },
+      "revId": "5ea992c635e97f47d9712e08de91fab22b566130",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    }
+  ]
+}
