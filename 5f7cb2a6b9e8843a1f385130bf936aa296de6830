@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "eaa183a8_dac5a90d",
+        "filename": "splash.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1000768
+      },
+      "writtenOn": "2017-09-16T18:56:36Z",
+      "side": 1,
+      "message": "could do with a one line comment explaining that we delay activating the terminal until the first frame has completed",
+      "revId": "5f7cb2a6b9e8843a1f385130bf936aa296de6830",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": true
+    }
+  ]
+}

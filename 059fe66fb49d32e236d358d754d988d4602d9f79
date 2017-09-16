@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a7ceb696_dbaa912c",
+        "filename": "splash.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1000768
+      },
+      "writtenOn": "2017-09-16T18:56:36Z",
+      "side": 0,
+      "message": "in any of these error paths, it\u0027s possible to exit this func w/out calling term_activate.  should there be another fallback check at the end of the func ?",
+      "revId": "059fe66fb49d32e236d358d754d988d4602d9f79",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": true
+    }
+  ]
+}
