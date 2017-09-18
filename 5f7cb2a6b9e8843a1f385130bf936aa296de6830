@@ -16,6 +16,24 @@
       "revId": "5f7cb2a6b9e8843a1f385130bf936aa296de6830",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c1d8c695_f9b89a78",
+        "filename": "splash.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1150560
+      },
+      "writtenOn": "2017-09-18T19:20:11Z",
+      "side": 1,
+      "message": "sure.",
+      "parentUuid": "eaa183a8_dac5a90d",
+      "revId": "5f7cb2a6b9e8843a1f385130bf936aa296de6830",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": true
     }
   ]
 }

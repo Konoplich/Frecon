@@ -16,6 +16,24 @@
       "revId": "059fe66fb49d32e236d358d754d988d4602d9f79",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e45f422d_13c35316",
+        "filename": "splash.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1150560
+      },
+      "writtenOn": "2017-09-18T19:20:11Z",
+      "side": 0,
+      "message": "This should not be an issue. If we exit before setting video mode frecon right now will quit entirely. Subsequent Chrome startup will set video mode when it is ready.\nAfter analyzing the failure paths, I think we should actually fix the error check after splash_run() to only exit if console is not enabled. I will do that in a separate change because this is unrelated.",
+      "parentUuid": "a7ceb696_dbaa912c",
+      "revId": "059fe66fb49d32e236d358d754d988d4602d9f79",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": true
     }
   ]
 }
