@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "97c6fd1b_a57f299e",
+        "filename": "main.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 482,
+      "author": {
+        "id": 1000768
+      },
+      "writtenOn": "2017-09-18T19:48:43Z",
+      "side": 0,
+      "message": "haven\u0027t checked any of the error paths, but assuming this works even in case of failure (no double freeing and such)",
+      "revId": "76332b82f84a603e45f1df41081b45c8c413ffcd",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": true
+    }
+  ]
+}
