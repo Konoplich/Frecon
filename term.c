@@ -744,6 +744,14 @@ void term_write_message(terminal_t* terminal, char* message)
 	}
 }
 
+__attribute__ ((unused))
+void term_set_cursor_position(terminal_t *terminal, int row, int col)
+{
+	char tcmd[32];
+	snprintf(tcmd, 32, "\033[%i;%iH", row, col);
+	term_write_message(terminal, tcmd);
+}
+
 static void term_hide_cursor(terminal_t* terminal)
 {
 	term_write_message(terminal, "\033[?25l");
