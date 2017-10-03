@@ -722,6 +722,12 @@ const char* term_get_ptsname(terminal_t* terminal)
 	return ptsname(shl_pty_get_fd(terminal->term->pty));
 }
 
+__attribute__ ((unused))
+void term_get_dimensions(terminal_t* terminal, int *width, int *height) {
+	*width = terminal->term->char_x;
+	*height = terminal->term->char_y;
+}
+
 void term_set_background(terminal_t* terminal, uint32_t bg)
 {
 	terminal->background = bg;

@@ -64,4 +64,5 @@ void term_foreground(void);
 void term_suspend_done(void*);
 void term_input_enable(terminal_t* terminal, bool input_enable);
 void term_set_cursor_position(terminal_t *terminal, int row, int col);
+void term_get_dimensions(terminal_t* terminal, int *width, int *height);
 #endif
