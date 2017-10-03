@@ -46,6 +46,7 @@
 #define  FLAG_PRINT_RESOLUTION             'p'
 #define  FLAG_SCALE                        'S'
 #define  FLAG_SPLASH_ONLY                  's'
+#define  FLAG_INFO                         'V'
 #define  FLAG_WAIT_CHILD                   'w'
 
 static const struct option command_options[] = {
@@ -71,6 +72,7 @@ static const struct option command_options[] = {
 	{ "pre-create-vts", no_argument, NULL, FLAG_PRE_CREATE_VTS },
 	{ "scale", required_argument, NULL, FLAG_SCALE },
 	{ "splash-only", no_argument, NULL, FLAG_SPLASH_ONLY },
+	{ "info", required_argument, NULL, FLAG_INFO },
 	{ NULL, 0, NULL, 0 }
 };
 static const char * const command_help[] = {
@@ -96,6 +98,8 @@ static const char * const command_help[] = {
 	"Create all VTs immediately instead of on-demand.",
 	"Default scale for splash screen images.",
 	"Exit immediately after finishing splash animation.",
+	"Run command listed and display output on tty0 with boot splash.  Updates "
+		"no faster than once per second.",
 };
 
 static void usage(int status)
@@ -464,6 +468,14 @@ int main(int argc, char* argv[])
 
 			case FLAG_SCALE:
 				splash_set_scale(splash, strtoul(optarg, NULL, 0));
+				break;
+
+			case FLAG_INFO:
+				// -10 for "exec 2>&1;"
+				if (strlen(optarg) < MAX_CMD_LEN - 10)
+					splash_set_info_cmd(splash, optarg);
+				else
+					LOG(ERROR, "info command too long, not executing");
 				break;
 		}
 	}

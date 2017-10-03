@@ -45,6 +45,7 @@ struct _splash_t {
 	int32_t loop_offset_x;
 	int32_t loop_offset_y;
 	uint32_t scale;
+	char info_cmd[MAX_CMD_LEN];
 };
 
 
@@ -62,6 +63,7 @@ splash_t* splash_init(int pts_fd)
 	splash->default_duration = 25;
 	splash->loop_duration = 25;
 	splash->scale = 1;
+	splash->info_cmd[0]='\0';
 
 	return splash;
 }
@@ -111,6 +113,95 @@ int splash_add_image(splash_t* splash, char* filespec)
 	return 0;
 }
 
+void splash_show_cmd(terminal_t *terminal, char *command)
+{
+	FILE *cmd;
+	int w, h, i;
+	term_get_dimensions(terminal, &w, &h);
+
+	static int *row_lengths;
+	if (!row_lengths)
+		row_lengths = calloc(h, sizeof(int));
+
+	int *new_lengths = calloc(h, sizeof(int));
+	/*
+	 * row_text length is the number of columns of displayable text plus two
+	 * per row, to have room for the newline character and null termination.
+	 */
+	char *row_text = calloc((w + 2), sizeof(char));
+
+	/*
+	 * Start at the top left.
+	 */
+	int row = 0;
+	term_set_cursor_position(terminal, 0, 0);
+
+	cmd = popen(command, "r");
+	if (cmd == NULL) {
+		LOG(ERROR, "Failure executing command: %s\n", command);
+		snprintf(row_text, w+1, "Failure executing command: %s\n", command);
+		term_write_message(terminal, row_text);
+	} else {
+		while (fgets(row_text, w+1, cmd)) {
+			new_lengths[row] = strlen(row_text);
+			/*
+			 * Add additional space characters for rows that ended up being
+			 * shorter than the previous iterations' row was, to cover the
+			 * remaining characters.
+			 */
+			if (new_lengths[row] < row_lengths[row]) {
+				for (i = new_lengths[row] - 1; i < row_lengths[row]; i++) {
+					row_text[i] = ' ';
+				}
+				row_text[i] = '\n';
+			}
+			/*
+			 * In the case where we read 'w' characters from the command, we
+			 * need to make sure that the text is terminated with a newline.
+			 *
+			 * In the case that the output was exactly w displayable characters
+			 * and the w+1th character was a \n already, we're just overwriting
+			 * the newline with a newline.  If the case that we read w chars
+			 * and the source line was longer than w before a newline, we'll be
+			 * overwriting a null terminator, which is why row_text is allocated
+			 * as w+2 in length.
+			 */
+			if (new_lengths[row] == w)
+				row_text[w] = '\n';
+
+			term_write_message(terminal, row_text);
+			/*
+			 * Clear the buffer for next lap.
+			 */
+			memset(row_text, 0, w+2);
+			row++;
+			/*
+			 * Ignore the last line on the screen, as printing to it triggers
+			 * a framebuffer scroll.
+			 */
+			if (row == (h - 1))
+				break;
+		}
+		/*
+		 * Clear any rows that are below the last line, but were written to
+		 * during the previous execution.  Ignore the bottom line on the screen
+		 * as printing to it causes scrolling.
+		 */
+		for (; row < h - 1; row++) {
+			if(row_lengths[row]) {
+				memset(row_text, ' ', row_lengths[row]);
+			}
+			row_text[row_lengths[row]] = '\n';
+			term_write_message(terminal, row_text);
+			memset(row_text, 0, w+2);
+		}
+		pclose(cmd);
+	}
+	free(row_text);
+	free(row_lengths);
+	row_lengths = new_lengths;
+}
+
 int splash_run(splash_t* splash)
 {
 	int i;
@@ -122,6 +213,7 @@ int splash_run(splash_t* splash)
 	 */
 	int ec_li = 0, ec_ts = 0, ec_ip = 0;
 	int64_t last_show_ms;
+	int64_t last_info_ms;
 	int64_t now_ms;
 	int64_t sleep_ms;
 	struct timespec sleep_spec;
@@ -142,6 +234,7 @@ int splash_run(splash_t* splash)
 	term_set_current_to(terminal);
 
 	last_show_ms = -1;
+	last_info_ms = -1;
 	loop_count = (splash->loop_start >= 0 && splash->loop_start < splash->num_images) ? splash->loop_count : 1;
 	loop_start = (splash->loop_start >= 0 && splash->loop_start < splash->num_images) ? splash->loop_start : 0;
 
@@ -182,13 +275,18 @@ int splash_run(splash_t* splash)
 					splash->loop_offset_x,
 					splash->loop_offset_y);
 		}
-
 		status = term_show_image(terminal, image);
 		if (status != 0 && ec_ts < MAX_SPLASH_IMAGES) {
 			LOG(WARNING, "term_show_image failed: %d:%s.", status, strerror(status));
 			ec_ts++;
 			goto img_error;
 		}
+
+		if (splash->info_cmd[0] != '\0' && now_ms > last_info_ms + 1000) {
+			last_info_ms = now_ms;
+			splash_show_cmd(terminal, splash->info_cmd);
+		}
+
 
 		if (!active) {
 			/*
@@ -277,6 +375,12 @@ void splash_set_scale(splash_t* splash, uint32_t scale)
 		scale = MAX_SCALE_FACTOR;
 	if (splash)
 		splash->scale = scale;
+}
+
+void splash_set_info_cmd(splash_t* splash, char *cmd)
+{
+	strncpy(splash->info_cmd, "exec 2>&1;", 10);
+	strncpy(splash->info_cmd + 10, cmd, MAX_CMD_LEN - 10);
 }
 
 int splash_is_hires(splash_t* splash)

@@ -9,6 +9,7 @@
 
 #define FRECON_RUN_DIR "/run/frecon"
 #define FRECON_PID_FILE FRECON_RUN_DIR "/pid"
+#define MAX_CMD_LEN (256)
 
 int main_process_events(uint32_t usec);
 bool set_drm_master_relax(void);
