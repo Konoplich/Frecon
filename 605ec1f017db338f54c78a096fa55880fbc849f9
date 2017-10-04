@@ -85,6 +85,30 @@
       "revId": "605ec1f017db338f54c78a096fa55880fbc849f9",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1ee4516c_7dd9d169",
+        "filename": "splash.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1150560
+      },
+      "writtenOn": "2017-10-04T07:18:13Z",
+      "side": 1,
+      "message": "yes. not my style but Stephane decreed it so ;-)",
+      "parentUuid": "a5ae6525_3eb9ceb6",
+      "range": {
+        "startLine": 26,
+        "startChar": 47,
+        "endLine": 26,
+        "endChar": 49
+      },
+      "revId": "605ec1f017db338f54c78a096fa55880fbc849f9",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
     }
   ]
 }
