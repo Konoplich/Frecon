@@ -25,7 +25,7 @@
 #include "term.h"
 #include "util.h"
 
-unsigned int term_num_terminals = 4;
+unsigned int term_num_terminals = 2;
 static terminal_t* terminals[TERM_MAX_TERMINALS];
 static uint32_t current_terminal = 0;
 
