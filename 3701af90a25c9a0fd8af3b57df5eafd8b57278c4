@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "08998655_3ca36951",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1123405
+      },
+      "writtenOn": "2018-08-09T02:25:22Z",
+      "side": 1,
+      "message": "Do you know why this is happening?\nIs this a regression?",
+      "range": {
+        "startLine": 10,
+        "startChar": 27,
+        "endLine": 10,
+        "endChar": 79
+      },
+      "revId": "3701af90a25c9a0fd8af3b57df5eafd8b57278c4",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": true
+    }
+  ]
+}
