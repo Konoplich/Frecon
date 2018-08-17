@@ -1,0 +1,234 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e10d0b88_4f02617a",
+        "filename": "drm.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1149774
+      },
+      "writtenOn": "2018-08-17T16:38:40Z",
+      "side": 1,
+      "message": "True is returned for the \"not connected\" (here) and \"connected\" cas (line 70).  I\u0027m confused.",
+      "range": {
+        "startLine": 55,
+        "startChar": 0,
+        "endLine": 56,
+        "endChar": 0
+      },
+      "revId": "42cfb67787081a03bdb5907543873596386c0e92",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8088caf6_c7541c57",
+        "filename": "drm.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1149774
+      },
+      "writtenOn": "2018-08-17T16:38:40Z",
+      "side": 1,
+      "message": "Don\u0027t we need a drmModeFreeConnector(connector) here somewhere?  Maybe goto statements would help.",
+      "range": {
+        "startLine": 60,
+        "startChar": 0,
+        "endLine": 62,
+        "endChar": 15
+      },
+      "revId": "42cfb67787081a03bdb5907543873596386c0e92",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b307e2c6_c990d776",
+        "filename": "drm.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1149774
+      },
+      "writtenOn": "2018-08-17T16:38:40Z",
+      "side": 1,
+      "message": "If we find a connector-encoder-crtc combination, we return. \n\nShouldn\u0027t we look through all the valid connnector-encoder-crtc combinations such that we maximize the number of planes in a CRTC?",
+      "range": {
+        "startLine": 103,
+        "startChar": 0,
+        "endLine": 109,
+        "endChar": 0
+      },
+      "revId": "42cfb67787081a03bdb5907543873596386c0e92",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f96fd1d7_cc708108",
+        "filename": "drm.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 1149774
+      },
+      "writtenOn": "2018-08-17T16:38:40Z",
+      "side": 1,
+      "message": "nit: You can just set this as the default above the loop where you check for the preferred mode.",
+      "range": {
+        "startLine": 259,
+        "startChar": 0,
+        "endLine": 259,
+        "endChar": 60
+      },
+      "revId": "42cfb67787081a03bdb5907543873596386c0e92",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "51c275c7_3c828497",
+        "filename": "drm.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 272,
+      "author": {
+        "id": 1149774
+      },
+      "writtenOn": "2018-08-17T16:38:40Z",
+      "side": 1,
+      "message": "nit: You can simplify these lines by checking for the return value:\n\n// comment here\nif (!get_connector_path(drm, drm-\u003econsole_connector_id, NULL, \u0026console_crtc_id));\n    if (!find_crtc_for_connector(drm, drm-\u003econsole_connector_id, \u0026console_crtc_id))\n       return false;\n\nreturn true;",
+      "range": {
+        "startLine": 264,
+        "startChar": 0,
+        "endLine": 272,
+        "endChar": 15
+      },
+      "revId": "42cfb67787081a03bdb5907543873596386c0e92",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b9c5efb3_dbfcceb3",
+        "filename": "drm.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 558,
+      "author": {
+        "id": 1149774
+      },
+      "writtenOn": "2018-08-17T16:38:40Z",
+      "side": 1,
+      "message": "nit: !find_crtc_for_connector",
+      "range": {
+        "startLine": 555,
+        "startChar": 0,
+        "endLine": 558,
+        "endChar": 0
+      },
+      "revId": "42cfb67787081a03bdb5907543873596386c0e92",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5276db78_1c5317a3",
+        "filename": "drm.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 586,
+      "author": {
+        "id": 1149774
+      },
+      "writtenOn": "2018-08-17T16:38:40Z",
+      "side": 1,
+      "message": "nit: if (!get_connector_path(",
+      "range": {
+        "startLine": 586,
+        "startChar": 0,
+        "endLine": 586,
+        "endChar": 57
+      },
+      "revId": "42cfb67787081a03bdb5907543873596386c0e92",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "221f7d8a_d134d88b",
+        "filename": "drm.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 607,
+      "author": {
+        "id": 1149774
+      },
+      "writtenOn": "2018-08-17T16:38:40Z",
+      "side": 1,
+      "message": "should this debug info be removed?",
+      "range": {
+        "startLine": 606,
+        "startChar": 0,
+        "endLine": 607,
+        "endChar": 0
+      },
+      "revId": "42cfb67787081a03bdb5907543873596386c0e92",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d4d72021_ee9118d3",
+        "filename": "drm.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 646,
+      "author": {
+        "id": 1149774
+      },
+      "writtenOn": "2018-08-17T16:38:40Z",
+      "side": 1,
+      "message": "is this a boolean statement?  probably drm-\u003eedid \u003d \u003d true; return true would be more canonical",
+      "range": {
+        "startLine": 645,
+        "startChar": 0,
+        "endLine": 646,
+        "endChar": 0
+      },
+      "revId": "42cfb67787081a03bdb5907543873596386c0e92",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c2428bb4_11070a31",
+        "filename": "term.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1008,
+      "author": {
+        "id": 1149774
+      },
+      "writtenOn": "2018-08-17T16:38:40Z",
+      "side": 1,
+      "message": "are these debug comments intended to be merged?",
+      "range": {
+        "startLine": 1007,
+        "startChar": 0,
+        "endLine": 1008,
+        "endChar": 0
+      },
+      "revId": "42cfb67787081a03bdb5907543873596386c0e92",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": true
+    }
+  ]
+}
