@@ -342,6 +342,38 @@ static int drm_score(drm_t* drm)
 	return score;
 }
 
+static void gamma_linear(uint16_t *table, int size)
+{
+	int i;
+	for (i = 0; i < size; i++) {
+		float v = (float)(i) / (float)(size - 1);
+		v *= 65535.0f;
+		table[i] = (uint16_t)v;
+	}
+}
+
+static int set_gamma(drm_t* drm)
+{
+	int ret;
+	uint16_t *r, *g, *b;
+
+	r = calloc(drm->crtc->gamma_size, sizeof(*r));
+	g = calloc(drm->crtc->gamma_size, sizeof(*g));
+	b = calloc(drm->crtc->gamma_size, sizeof(*b));
+
+	gamma_linear(r, drm->crtc->gamma_size);
+	gamma_linear(g, drm->crtc->gamma_size);
+	gamma_linear(b, drm->crtc->gamma_size);
+	ret = drmModeCrtcSetGamma(drm->fd, drm->crtc->crtc_id,
+	                          drm->crtc->gamma_size, r, g, b);
+
+	free(r);
+	free(g);
+	free(b);
+
+	return ret;
+}
+
 /*
  * Scan and find best DRM object to display frecon on.
  * This object should be created with DRM master, and we will keep master till
@@ -551,6 +583,13 @@ int32_t drm_setmode(drm_t* drm, uint32_t fb_id)
 
 	if (ret) {
 		LOG(ERROR, "Unable to set crtc: %m");
+		return ret;
+	}
+
+	/* Make sure we're not using an old userspace app's gamma table. */
+	ret = set_gamma(drm);
+	if (ret) {
+		LOG(ERROR, "Unable to set gamma: %m");
 		return ret;
 	}
 
