@@ -369,8 +369,8 @@ int main(int argc, char* argv[])
 	unlink(FRECON_PID_FILE);
 
 	/* Don't leave zombies behind when children are killed. */
-	sa.sa_flags = SA_NOCLDWAIT;
-	sa.sa_handler = SIG_DFL;
+	sa.sa_flags = 0;
+	sa.sa_handler = SIG_IGN;
 	sigemptyset(&sa.sa_mask);
 	sigaction(SIGCHLD, &sa, NULL);
 
