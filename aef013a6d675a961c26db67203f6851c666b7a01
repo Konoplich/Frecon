@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a0bf375d_573b73b3",
+        "filename": "drm.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 1000313
+      },
+      "writtenOn": "2018-09-26T03:51:33Z",
+      "side": 1,
+      "message": "nit: no curly braces for 1-line blocks",
+      "revId": "aef013a6d675a961c26db67203f6851c666b7a01",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": true
+    }
+  ]
+}
