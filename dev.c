@@ -61,7 +61,11 @@ static bool dev_is_pointer_device(struct udev_device* dev)
 		"ID_INPUT_TOUCHPAD",
 		"ID_INPUT_TOUCHSCREEN",
 	};
+	const char *keyboard = udev_device_get_property_value(dev, "ID_INPUT_KEYBOARD");
 	unsigned long i;
+
+	if (keyboard && !strcmp(keyboard, "1"))
+		return false;
 
 	for (i = 0; i < ARRAY_SIZE(pointer_device_ids); i++) {
 		const char *value;
