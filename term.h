@@ -63,4 +63,5 @@ void term_background(bool onetry);
 void term_foreground(void);
 void term_suspend_done(void*);
 void term_input_enable(terminal_t* terminal, bool input_enable);
+void term_clear_fb(terminal_t* terminal, uint32_t color);
 #endif

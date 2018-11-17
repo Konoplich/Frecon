@@ -137,6 +137,7 @@ int splash_run(splash_t* splash)
 	/*
 	 * First draw the actual splash screen
 	 */
+	term_clear_fb(terminal, splash->clear);
 	term_set_background(terminal, splash->clear);
 	term_clear(terminal);
 	term_set_current_to(terminal);

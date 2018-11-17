@@ -1024,3 +1024,16 @@ void term_input_enable(terminal_t* terminal, bool input_enable)
 {
 	terminal->input_enable = input_enable;
 }
+
+void term_clear_fb(terminal_t* terminal, uint32_t color)
+{
+	uint32_t* fb_buffer = fb_lock(terminal->fb);
+	if (fb_buffer) {
+		for (unsigned int i = 0;
+		     i < terminal->fb->buffer_properties.size / sizeof(uint32_t);
+		     i++) {
+			fb_buffer[i] = color;
+		}
+		fb_unlock(terminal->fb);
+	}
+}
