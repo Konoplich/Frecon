@@ -57,7 +57,7 @@ static void image_rgb(png_struct* png, png_row_info* row_info, png_byte* data)
 		g = data[i + 1];
 		b = data[i + 2];
 		a = data[i + 3];
-		pixel = (a << 24) | (r << 16) | (g << 8) | b;
+		pixel = (((uint32_t)a) << 24) | (((uint32_t)r) << 16) | (((uint32_t)g) << 8) | b;
 		memcpy(data + i, &pixel, sizeof(pixel));
 	}
 }
