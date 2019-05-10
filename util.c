@@ -209,3 +209,9 @@ bool write_string_to_file(const char *path, const char *s)
 	}
 	return true;
 }
+
+int64_t get_monotonic_time_ms() {
+	struct timespec spec;
+	clock_gettime(CLOCK_MONOTONIC, &spec);
+	return MS_PER_SEC * spec.tv_sec + spec.tv_nsec / NS_PER_MS;
+}
