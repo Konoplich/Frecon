@@ -72,10 +72,8 @@ static bool is_alt_pressed(struct keyboard_state* k)
 	return k->left_alt_state || k->right_alt_state;
 }
 
-static int input_special_key(struct input_key_event* ev)
+static int input_ignore_key(struct input_key_event* ev)
 {
-	terminal_t* terminal;
-
 	uint32_t ignore_keys[] = {
 		BTN_TOUCH, // touchpad events
 		BTN_TOOL_FINGER,
@@ -93,11 +91,17 @@ static int input_special_key(struct input_key_event* ev)
 		BTN_TASK
 	};
 
-	terminal = term_get_current_terminal();
-
 	for (unsigned int i = 0; i < ARRAY_SIZE(ignore_keys); i++)
 		if (ev->code == ignore_keys[i])
 			return 1;
+	return 0;
+}
+
+static int input_special_key(struct input_key_event* ev)
+{
+	terminal_t* terminal;
+
+	terminal = term_get_current_terminal();
 
 	switch (ev->code) {
 	case KEY_LEFTSHIFT:
@@ -439,23 +443,28 @@ void input_dispatch_io(fd_set* read_set, fd_set* exception_set)
 	struct input_key_event* event;
 
 	event = input_get_event(read_set, exception_set);
-	if (event) {
-		if (!input_special_key(event) && event->value) {
-			uint32_t keysym, unicode;
+	if (!event)
+		return;
+	if (!input_ignore_key(event)) {
+		int special;
+		special = input_special_key(event);
+		if (event->value) {
 			// current_terminal can possibly change during
 			// execution of input_special_key
 			terminal = term_get_current_terminal();
 			if (term_is_active(terminal)) {
-				// Only report user activity when the terminal is active
 				dbus_report_user_activity(USER_ACTIVITY_OTHER);
-				input_get_keysym_and_unicode(
-					event, &keysym, &unicode);
-				term_key_event(terminal,
+				if (!special) {
+					uint32_t keysym, unicode;
+					input_get_keysym_and_unicode(
+						event, &keysym, &unicode);
+					term_key_event(terminal,
 						keysym, unicode);
+				}
 			}
 		}
-		input_put_event(event);
 	}
+	input_put_event(event);
 }
 
 #define BITS_PER_LONG (sizeof(long) * 8)
