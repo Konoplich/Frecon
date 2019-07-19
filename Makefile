@@ -4,14 +4,19 @@
 
 include common.mk
 
-DBUS ?= 1
+LITE ?= 0
 
-PC_DEPS = libdrm libudev libpng libtsm
-ifeq ($(DBUS),1)
-PC_DEPS += dbus-1
-CPPFLAGS += -DDBUS=1
-endif
+PC_DEPS = libdrm libpng libtsm
+ifeq ($(LITE),1)
+FRECON_OBJECTS = $(filter-out %_full.o,$(C_OBJECTS))
+CPPFLAGS += -DLITE=1
+TARGET ?= frecon-lite
+else
+FRECON_OBJECTS = $(filter-out %_lite.o,$(C_OBJECTS))
+PC_DEPS += dbus-1 libudev
+CPPFLAGS += -DLITE=0
 TARGET ?= frecon
+endif
 
 PC_CFLAGS := $(shell $(PKG_CONFIG) --cflags $(PC_DEPS))
 PC_LIBS := $(shell $(PKG_CONFIG) --libs $(PC_DEPS))
@@ -27,7 +32,7 @@ $(OUT)glyphs.h: $(SRC)/font_to_c.py $(SRC)/ter-u16n.bdf
 
 font.o.depends: $(OUT)glyphs.h
 
-CC_BINARY($(TARGET)): $(C_OBJECTS)
+CC_BINARY($(TARGET)): $(FRECON_OBJECTS)
 
 all: CC_BINARY($(TARGET))
 
