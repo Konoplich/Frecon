@@ -491,7 +491,11 @@ int main(int argc, char* argv[])
 	 * the time splash_run completes, it is running.
 	 * We really need DBUS now, so we can interact with Chrome.
 	 */
-	dbus_init_wait();
+	ret = dbus_init_wait();
+	if (!ret) {
+		command_flags.enable_vts = false;
+		command_flags.enable_vt1 = true;
+	}
 	/*
 	 * Ask DBUS to call us back so we can quit when login prompt is visible.
 	 */
