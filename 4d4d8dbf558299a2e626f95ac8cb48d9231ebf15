@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "24ccda6d_bc2f3bdb",
+        "filename": "dev_lite.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1150560
+      },
+      "writtenOn": "2019-07-30T21:22:19Z",
+      "side": 1,
+      "message": "I think there can be holes in the input devices when the device is unplugged.\nMaybe it is better to iterate from 0 to max number of event devices? Is there some max minor for event devices?\nThere is this define in kernel\n#define EVDEV_MINORS            32\nI think this is the maximum number of event devices, so lets just try all from 0 to 31.",
+      "revId": "4d4d8dbf558299a2e626f95ac8cb48d9231ebf15",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": true
+    }
+  ]
+}
