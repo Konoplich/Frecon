@@ -16,6 +16,24 @@
       "revId": "4d4d8dbf558299a2e626f95ac8cb48d9231ebf15",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "285b8bef_3a964ba4",
+        "filename": "dev_lite.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1002133
+      },
+      "writtenOn": "2019-07-30T21:32:33Z",
+      "side": 1,
+      "message": "Hmm... okay, how about a mix of the two? Search the first 32 and then keep searching until there\u0027s a hole? That should be pretty fool-proof.",
+      "parentUuid": "24ccda6d_bc2f3bdb",
+      "revId": "4d4d8dbf558299a2e626f95ac8cb48d9231ebf15",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": true
     }
   ]
 }
