@@ -34,6 +34,24 @@
       "revId": "4d4d8dbf558299a2e626f95ac8cb48d9231ebf15",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "35e543b0_3e8462df",
+        "filename": "dev_lite.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1150560
+      },
+      "writtenOn": "2019-08-01T06:02:12Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "285b8bef_3a964ba4",
+      "revId": "4d4d8dbf558299a2e626f95ac8cb48d9231ebf15",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
     }
   ]
 }
