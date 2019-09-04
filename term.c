@@ -37,8 +37,6 @@ struct term {
 	int pid;
 	tsm_age_t age;
 	int char_x, char_y;
-	int pitch;
-	uint32_t* dst_image;
 };
 
 struct _terminal_t {
@@ -122,10 +120,10 @@ static int term_draw_cell(struct tsm_screen* screen, uint32_t id,
 	}
 
 	if (len)
-		font_render(terminal->term->dst_image, posx, posy, terminal->term->pitch, *ch,
+		font_render(terminal->fb, posx, posy, *ch,
 					front_color, back_color);
 	else
-		font_fillchar(terminal->term->dst_image, posx, posy, terminal->term->pitch,
+		font_fillchar(terminal->fb, posx, posy,
 						front_color, back_color);
 
 	return 0;
@@ -133,10 +131,7 @@ static int term_draw_cell(struct tsm_screen* screen, uint32_t id,
 
 static void term_redraw(terminal_t* terminal)
 {
-	uint32_t* fb_buffer;
-	fb_buffer = fb_lock(terminal->fb);
-	if (fb_buffer != NULL) {
-		terminal->term->dst_image = fb_buffer;
+	if (fb_lock(terminal->fb)) {
 		terminal->term->age =
 			tsm_screen_draw(terminal->term->screen, term_draw_cell, terminal);
 		fb_unlock(terminal->fb);
@@ -238,9 +233,8 @@ static void term_esc_draw_box(terminal_t* terminal, char* params)
 	int32_t offx, offy;
 	bool use_offset = false;
 	uint32_t scale = 1;
-	uint32_t* buffer;
+	fb_stepper_t s;
 	int32_t startx, starty;
-	uint32_t pitch4;
 
 	for (tok = strtok(params, ";"); tok; tok = strtok(NULL, ";")) {
 		if (strncmp("color=", tok, 6) == 0) {
@@ -277,8 +271,7 @@ static void term_esc_draw_box(terminal_t* terminal, char* params)
 	offx *= scale;
 	offy *= scale;
 
-	buffer = fb_lock(terminal->fb);
-	if (buffer == NULL)
+	if (!fb_lock(terminal->fb))
 		goto done;
 
 	if (use_offset && use_location) {
@@ -299,29 +292,14 @@ static void term_esc_draw_box(terminal_t* terminal, char* params)
 		starty += offy;
 	}
 
-	pitch4 = fb_getpitch(terminal->fb) / 4;
-
-	/* Completely outside buffer, do nothing */
-	if (startx + w <= 0 || startx >= fb_getwidth(terminal->fb))
+	if (!fb_stepper_init(&s, terminal->fb, startx, starty, w, h))
 		goto done_fb;
-	if (starty + h <= 0 || starty >= fb_getheight(terminal->fb))
-		goto done_fb;
-	/* Make sure we are inside buffer. */
-	if (startx < 0)
-		startx = 0;
-	if (w > (uint32_t)(fb_getwidth(terminal->fb) - startx))
-		w = fb_getwidth(terminal->fb) - startx;
-	if (starty < 0)
-		starty = 0;
-	if (h > (uint32_t)(fb_getheight(terminal->fb) - starty))
-		h = fb_getheight(terminal->fb) - starty;
 
-	for (uint32_t y = 0; y < h; y++) {
-		uint32_t *o = buffer + (starty + y) * pitch4
-			    + startx;
-		for (uint32_t x = 0; x < w; x++)
-			o[x] = color;
-	}
+	do {
+		do {
+		} while (fb_stepper_step_x(&s, color));
+	} while (fb_stepper_step_y(&s));
+
 done_fb:
 	fb_unlock(terminal->fb);
 done:
@@ -421,7 +399,6 @@ static int term_resize(terminal_t* term, int scaling)
 
 	term->term->char_x = fb_getwidth(term->fb) / char_width;
 	term->term->char_y = fb_getheight(term->fb) / char_height;
-	term->term->pitch = fb_getpitch(term->fb);
 
 	status = tsm_screen_resize(term->term->screen,
 				   term->term->char_x, term->term->char_y);
