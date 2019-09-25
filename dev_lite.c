@@ -31,7 +31,7 @@ int dev_init(void)
 			else
 				continue;
 		}
-		input_add(path);
+		input_add(path, 1 /* default keyboard layout id */);
 	}
 
 	return 0;

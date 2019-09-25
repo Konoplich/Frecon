@@ -24,11 +24,13 @@
 struct input_key_event {
 	uint16_t code;
 	unsigned char value;
+	int keyboard_layout_id;
 };
 
 struct input_dev {
 	int fd;
 	char* path;
+	int layout_id;
 };
 
 struct keyboard_state {
@@ -69,6 +71,39 @@ static bool is_control_pressed(struct keyboard_state* k)
 static bool is_alt_pressed(struct keyboard_state* k)
 {
 	return k->left_alt_state || k->right_alt_state;
+}
+
+static uint16_t input_action_key_to_fn_key(const struct input_key_event* ev)
+{
+	/* Some devices, such as sarien, emit action key codes by default for the
+	 * top-row keys. Mapping these action key codes to Fn key codes is a
+	 * convenience. For instance, it allows switching to VT2 terminal with
+	 * ctrl+alt+f2 rather than ctrl+alt+Fn+f2.
+	 */
+	struct {
+		uint32_t action_code;
+		uint32_t fn_code;
+	} layout3_action_to_fn[] = {
+		{ KEY_BACK, KEY_F1},
+		{ KEY_REFRESH, KEY_F2},
+		{ KEY_ZOOM, KEY_F3},
+		{ KEY_SCALE, KEY_F4},
+		{ KEY_BRIGHTNESSDOWN, KEY_F5},
+		{ KEY_BRIGHTNESSUP, KEY_F6},
+		{ KEY_MUTE, KEY_F7},
+		{ KEY_VOLUMEDOWN, KEY_F8},
+		{ KEY_VOLUMEUP, KEY_F9},
+		{ KEY_SWITCHVIDEOMODE, KEY_F12},
+	};
+
+	if (ev->keyboard_layout_id == 3) {
+		for (unsigned i = 0; i < ARRAY_SIZE(layout3_action_to_fn); i++) {
+			if (layout3_action_to_fn[i].action_code == ev->code) {
+				return layout3_action_to_fn[i].fn_code;
+			}
+		}
+	}
+	return ev->code;
 }
 
 static int input_special_key(struct input_key_event* ev)
@@ -195,8 +230,9 @@ static int input_special_key(struct input_key_event* ev)
 		if (is_shift_pressed(&input.kbd_state))
 			return 1;
 
-		if ((ev->code >= KEY_F1) && (ev->code < KEY_F1 + term_num_terminals)) {
-			term_switch_to(ev->code - KEY_F1);
+		uint16_t code = input_action_key_to_fn_key(ev);
+		if ((code >= KEY_F1) && (code < KEY_F1 + term_num_terminals)) {
+			term_switch_to(code - KEY_F1);
 		}
 
 		return 1;
@@ -274,7 +310,7 @@ static void input_get_keysym_and_unicode(struct input_key_event* event,
 	*unicode = *keysym;
 }
 
-int input_add(const char* devname)
+int input_add(const char* devname, int layout_id)
 {
 	int ret = 0, fd = -1;
 
@@ -318,6 +354,7 @@ int input_add(const char* devname)
 	input.devs = newdevs;
 	input.devs[input.ndevs].fd = fd;
 	input.devs[input.ndevs].path = strdup(devname);
+	input.devs[input.ndevs].layout_id = layout_id;
 	if (!input.devs[input.ndevs].path) {
 		ret = -ENOMEM;
 		goto closefd;
@@ -416,6 +453,7 @@ struct input_key_event* input_get_event(fd_set* read_set,
 				    malloc(sizeof (*event));
 				event->code = ev.code;
 				event->value = ev.value;
+				event->keyboard_layout_id = input.devs[u].layout_id;
 				return event;
 			} else if (ev.type == EV_SW && ev.code == SW_LID) {
 				/* TODO(dbehr), abstract this in input_key_event if we ever parse more than one */
@@ -500,4 +538,3 @@ int input_check_lid_state(void)
 	}
 	return -ENODEV;
 }
-
