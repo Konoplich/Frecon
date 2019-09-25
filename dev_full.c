@@ -27,6 +27,18 @@ static bool dev_is_keyboard_device(struct udev_device* dev)
 	return false;
 }
 
+static uint8_t get_keyboard_layout_id(struct udev_device* dev)
+{
+	const char *layout =
+      udev_device_get_property_value(dev, "CROS_KEYBOARD_TOP_ROW_LAYOUT");
+	if (layout) {
+		return atoi(layout);
+  }
+
+	return 1;
+}
+
+
 static void dev_add_existing_input_devs(void)
 {
 	struct udev_enumerate* udev_enum;
@@ -41,7 +53,7 @@ static void dev_add_existing_input_devs(void)
 		syspath = udev_list_entry_get_name(deventry);
 		dev = udev_device_new_from_syspath(udev, syspath);
 		if (dev_is_keyboard_device(dev))
-			input_add(udev_device_get_devnode(dev));
+			input_add(udev_device_get_devnode(dev), get_keyboard_layout_id(dev));
 		udev_device_unref(dev);
 	}
 	udev_enumerate_unref(udev_enum);
@@ -108,7 +120,7 @@ void dev_dispatch_io(fd_set* read_set, fd_set* exception_set)
 			if (!strcmp("input", udev_device_get_subsystem(dev))) {
 				if (!strcmp("add", udev_device_get_action(dev))) {
 					if (dev_is_keyboard_device(dev))
-						input_add(udev_device_get_devnode(dev));
+						input_add(udev_device_get_devnode(dev), get_keyboard_layout_id(dev));
 				} else if (!strcmp("remove", udev_device_get_action(dev))) {
 					input_remove(udev_device_get_devnode(dev));
 				}
