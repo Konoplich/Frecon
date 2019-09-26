@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "5d809412_db00900c",
+        "filename": "drm.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 1150560
+      },
+      "writtenOn": "2019-09-26T00:32:41Z",
+      "side": 1,
+      "message": "yes, but not before.",
+      "parentUuid": "81b93a1a_51901236",
+      "revId": "d0c8f73327f9ab7039cccce5945e10778d26b21e",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "17cdb7ef_5a40f5b9",
         "filename": "fb.c",
         "patchSetId": 3
@@ -33,6 +51,24 @@
       "revId": "d0c8f73327f9ab7039cccce5945e10778d26b21e",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7c456da0_9301efd8",
+        "filename": "fb.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 370,
+      "author": {
+        "id": 1150560
+      },
+      "writtenOn": "2019-09-26T00:32:41Z",
+      "side": 1,
+      "message": "still no.",
+      "parentUuid": "17cdb7ef_5a40f5b9",
+      "revId": "d0c8f73327f9ab7039cccce5945e10778d26b21e",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
     },
     {
       "key": {
@@ -59,6 +95,30 @@
     },
     {
       "key": {
+        "uuid": "8c52e765_f2f3fc15",
+        "filename": "fb.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1150560
+      },
+      "writtenOn": "2019-09-26T00:32:41Z",
+      "side": 1,
+      "message": "spelling police ;-)",
+      "parentUuid": "b98ae04d_f5761936",
+      "range": {
+        "startLine": 55,
+        "startChar": 79,
+        "endLine": 55,
+        "endChar": 84
+      },
+      "revId": "d0c8f73327f9ab7039cccce5945e10778d26b21e",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a917a605_e73182cd",
         "filename": "fb.h",
         "patchSetId": 3
@@ -73,6 +133,24 @@
       "revId": "d0c8f73327f9ab7039cccce5945e10778d26b21e",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "04c76b2d_17ac5548",
+        "filename": "fb.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1150560
+      },
+      "writtenOn": "2019-09-26T00:32:41Z",
+      "side": 1,
+      "message": "no, i think this is more readable. 4 could be even better.",
+      "parentUuid": "a917a605_e73182cd",
+      "revId": "d0c8f73327f9ab7039cccce5945e10778d26b21e",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
     },
     {
       "key": {
@@ -93,6 +171,24 @@
     },
     {
       "key": {
+        "uuid": "31f3bdde_21f5cd9d",
+        "filename": "fb.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1150560
+      },
+      "writtenOn": "2019-09-26T00:32:41Z",
+      "side": 1,
+      "message": "i guess it will look more matrixy as 2 lines.",
+      "parentUuid": "e112fa81_ccd2c2a0",
+      "revId": "d0c8f73327f9ab7039cccce5945e10778d26b21e",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ba3b7bb2_1cc7751c",
         "filename": "font.c",
         "patchSetId": 3
@@ -107,6 +203,24 @@
       "revId": "d0c8f73327f9ab7039cccce5945e10778d26b21e",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8d4ef6a4_de4a1bea",
+        "filename": "font.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1150560
+      },
+      "writtenOn": "2019-09-26T00:32:41Z",
+      "side": 1,
+      "message": "yes. we always draw fonts on the screen.",
+      "parentUuid": "ba3b7bb2_1cc7751c",
+      "revId": "d0c8f73327f9ab7039cccce5945e10778d26b21e",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
     },
     {
       "key": {
@@ -127,6 +241,24 @@
     },
     {
       "key": {
+        "uuid": "7cb97ada_0f5783d1",
+        "filename": "font.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1150560
+      },
+      "writtenOn": "2019-09-26T00:32:41Z",
+      "side": 1,
+      "message": "i doubt it will help much, it is one call for say 8x16 pixels. and frecon in general is not designed to be super high performance.",
+      "parentUuid": "b65ff2f5_e6ac290b",
+      "revId": "d0c8f73327f9ab7039cccce5945e10778d26b21e",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1fc3b674_2d0ab675",
         "filename": "font.c",
         "patchSetId": 3
@@ -141,6 +273,24 @@
       "revId": "d0c8f73327f9ab7039cccce5945e10778d26b21e",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "aa983ef6_1fdeea4c",
+        "filename": "font.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 1150560
+      },
+      "writtenOn": "2019-09-26T00:32:41Z",
+      "side": 1,
+      "message": "it would have to be negated and i\u0027d rather keep all the use cases look the same.",
+      "parentUuid": "1fc3b674_2d0ab675",
+      "revId": "d0c8f73327f9ab7039cccce5945e10778d26b21e",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
     },
     {
       "key": {
