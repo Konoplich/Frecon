@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fc2a6503_67266029",
+        "filename": "input.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1113814
+      },
+      "writtenOn": "2019-09-30T18:04:01Z",
+      "side": 1,
+      "message": "We need to come up with a generic way of mapping action keys back to positions instead of proliferation of the \"layout\" attribute throughout codebase.",
+      "revId": "97ac5a9c6a4e6d4a45c7a71f7f084b0aa9a13907",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2de83ac3_6b11256d",
+        "filename": "input.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 1113814
+      },
+      "writtenOn": "2019-09-30T18:04:01Z",
+      "side": 1,
+      "message": "Brightness on VT does not work properly either. It not only affects Wilco, Eve is also messed up.",
+      "revId": "97ac5a9c6a4e6d4a45c7a71f7f084b0aa9a13907",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": true
+    }
+  ]
+}
