@@ -16,6 +16,24 @@
       "revId": "68a01f8373cc5af84f24b66867105666aa97425e",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "691a0cfa_ac49487a",
+        "filename": "input.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1150560
+      },
+      "writtenOn": "2020-03-21T01:40:14Z",
+      "side": 1,
+      "message": "Rajat suggested this in the bug\nKEY_BACK: Do the same thing as what it does currently on KEY_F1 (Switch to chrome).\nKEY_REFRESH: Do same thing as KEY_F2 (switch to terminal 1)\nKEY_ZOOM: Do the same thing as KEY_F3 (switch to terminal 2)\nKEY_SCALE: Do the same thing as KEY_F4 (switch to terminal 3)\nKEY_SELECTIVE_SNAPSHOT: Do the same thing as KEY_F5 (switch to terminal 4)\nwe do not need terminal 4, the keys do not have to be consecutive, just unique and always present on all keyboards.",
+      "parentUuid": "7591233b_003486a4",
+      "revId": "68a01f8373cc5af84f24b66867105666aa97425e",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": true
     }
   ]
 }
