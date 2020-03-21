@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7591233b_003486a4",
+        "filename": "input.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1113814
+      },
+      "writtenOn": "2020-03-21T00:35:01Z",
+      "side": 1,
+      "message": "KEY_FULL_SCREEN please. But I do not think that the order is fixed :( I think we still have keyboards with KEY_FORWARD.",
+      "revId": "68a01f8373cc5af84f24b66867105666aa97425e",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": true
+    }
+  ]
+}
