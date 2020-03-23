@@ -34,6 +34,24 @@
       "revId": "68a01f8373cc5af84f24b66867105666aa97425e",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5ef46a9d_a31fa026",
+        "filename": "input.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1150214
+      },
+      "writtenOn": "2020-03-23T05:59:34Z",
+      "side": 1,
+      "message": "\u003e Rajat suggested this in the bug\n\u003e KEY_BACK: Do the same thing as what it does currently on KEY_F1 (Switch to chrome).\n\u003e KEY_REFRESH: Do same thing as KEY_F2 (switch to terminal 1)\n\u003e KEY_ZOOM: Do the same thing as KEY_F3 (switch to terminal 2)\n\nKEY_FULL_SCREEN is the same as KEY_ZOOM.\n\n#define KEY_FULL_SCREEN\t\t0x174\t/* AC View Toggle */\n#define KEY_ZOOM\t\tKEY_FULL_SCREEN\n\nI\u0027m also going to change to KEY_FULL_SCREEN everywhere, so might be good to change to KEY_FULL_SCREEN here also. \n \n\n\u003e KEY_SCALE: Do the same thing as KEY_F4 (switch to terminal 3)\n\u003e KEY_SELECTIVE_SNAPSHOT: Do the same thing as KEY_F5 (switch to terminal 4)\n\u003e we do not need terminal 4, the keys do not have to be consecutive, just unique and always present on all keyboards.\n\nAgree.",
+      "parentUuid": "691a0cfa_ac49487a",
+      "revId": "68a01f8373cc5af84f24b66867105666aa97425e",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": true
     }
   ]
 }
