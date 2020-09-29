@@ -425,7 +425,6 @@ drm_t* drm_scan(void)
 	drm_t *best_drm = NULL;
 
 	for (i = 0; i < DRM_MAX_MINOR; i++) {
-		uint64_t atomic = 0;
 		drm_t* drm = calloc(1, sizeof(drm_t));
 
 		if (!drm)
@@ -455,14 +454,10 @@ try_open_again:
 		/* Set universal planes cap if possible. Ignore any errors. */
 		drmSetClientCap(drm->fd, DRM_CLIENT_CAP_UNIVERSAL_PLANES, 1);
 
-		ret = drmGetCap(drm->fd, DRM_CLIENT_CAP_ATOMIC, &atomic);
-		if (!ret && atomic) {
+		/* Try to set atomic, to detect if it is supported: */
+		ret = drmSetClientCap(drm->fd, DRM_CLIENT_CAP_ATOMIC, 1);
+		if (!ret) {
 			drm->atomic = true;
-			ret = drmSetClientCap(drm->fd, DRM_CLIENT_CAP_ATOMIC, 1);
-			if (ret < 0) {
-				LOG(ERROR, "Failed to set atomic cap.");
-				drm->atomic = false;
-			}
 		}
 
 		drm->resources = drmModeGetResources(drm->fd);
