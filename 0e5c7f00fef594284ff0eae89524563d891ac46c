@@ -33,6 +33,23 @@
       "revId": "0e5c7f00fef594284ff0eae89524563d891ac46c",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a7eeb0ab_d5613742",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000107
+      },
+      "writtenOn": "2020-10-01T22:56:11Z",
+      "side": 1,
+      "message": "Waiting for marcheu\u0027s response to IM, but might as well start through the CQ in case someone objects to the idea of chumping this revert.",
+      "revId": "0e5c7f00fef594284ff0eae89524563d891ac46c",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
     }
   ]
 }
