@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee9e70c0_60f79e7f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000107
+      },
+      "writtenOn": "2020-10-01T22:41:40Z",
+      "side": 1,
+      "message": "Since this is a pure revert and no other changes have landed recently, chumping.  This is totally breaking things in some cases.",
+      "revId": "0e5c7f00fef594284ff0eae89524563d891ac46c",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    }
+  ]
+}
