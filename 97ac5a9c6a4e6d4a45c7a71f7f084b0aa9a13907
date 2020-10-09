@@ -1,6 +1,24 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e870d755_215b9fe6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1150560
+      },
+      "writtenOn": "2020-10-09T10:22:30Z",
+      "side": 1,
+      "message": "Aww. This is not what we want to do.\nIs sarien a Vivaldi keyboard? If so we do respond to action keys.\nIf not, then yes, we do respond to f-keys, and if you want fkey and it has fn button it has to be pressed. Seems to be correct behavior for it.\nDoes it generate action keys for brightness? If so frecon responds to action keys now?\n",
+      "revId": "97ac5a9c6a4e6d4a45c7a71f7f084b0aa9a13907",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": true,
       "key": {
         "uuid": "fc2a6503_67266029",
         "filename": "input.c",
@@ -14,10 +32,10 @@
       "side": 1,
       "message": "We need to come up with a generic way of mapping action keys back to positions instead of proliferation of the \"layout\" attribute throughout codebase.",
       "revId": "97ac5a9c6a4e6d4a45c7a71f7f084b0aa9a13907",
-      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
-      "unresolved": true
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "05273a58_60e75d64",
         "filename": "input.c",
@@ -32,10 +50,10 @@
       "message": "Is there a doc or a bug tracking this work? When will it be completed?",
       "parentUuid": "fc2a6503_67266029",
       "revId": "97ac5a9c6a4e6d4a45c7a71f7f084b0aa9a13907",
-      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
-      "unresolved": true
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "2de83ac3_6b11256d",
         "filename": "input.c",
@@ -49,8 +67,7 @@
       "side": 1,
       "message": "Brightness on VT does not work properly either. It not only affects Wilco, Eve is also messed up.",
       "revId": "97ac5a9c6a4e6d4a45c7a71f7f084b0aa9a13907",
-      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
-      "unresolved": true
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
     }
   ]
 }
