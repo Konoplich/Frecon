@@ -101,6 +101,7 @@ COLOR ?= 1
 VERBOSE ?= 0
 MODE ?= opt
 CXXEXCEPTIONS ?= 0
+RUN_TESTS ?= 1
 ARCH ?= $(shell uname -m)
 
 # Put objects in a separate tree based on makefile locations
@@ -121,6 +122,16 @@ override OUT := $(realpath $(OUT))/
 # SRC is not meant to be set by the end user, but during make call relocation.
 # $(PWD) != $(CURDIR) all the time.
 export SRC ?= $(CURDIR)
+
+# If BASE_VER is not set, read the libchrome revision number from
+# common-mk/BASE_VER file.
+BASE_VER_PATH := $(SYSROOT)/usr/share/libchrome/BASE_VER
+ifeq (,$(wildcard $(BASE_VER_PATH)))
+BASE_VER := $(shell cat $(BASE_VER_PATH))
+$(info Using BASE_VER=$(BASE_VER))
+else
+$(info Libchrome is not installed. No BASE_VER will be provided.)
+endif
 
 # Re-start in the $(OUT) directory if we're not there.
 # We may be invoked using -C or bare and we need to ensure behavior
@@ -258,13 +269,13 @@ $(eval $(call override_var,STRIP,strip))
 RMDIR ?= rmdir
 ECHO = /bin/echo -e
 
-ifeq ($(lastword $(subst /, ,$(CC))),clang)
+ifeq ($(filter clang,$(subst -, ,$(notdir $(CC)))),clang)
 CDRIVER = clang
 else
 CDRIVER = gcc
 endif
 
-ifeq ($(lastword $(subst /, ,$(CXX))),clang++)
+ifeq ($(filter clang++,$(subst -, ,$(notdir $(CXX)))),clang++)
 CXXDRIVER = clang
 else
 CXXDRIVER = gcc
@@ -310,11 +321,17 @@ endif
 #  CXXFLAGS := $(filter-out badflag,$(CXXFLAGS)) # Filter out a value
 # The same goes for CFLAGS.
 COMMON_CFLAGS-gcc := -fvisibility=internal -ggdb3 -Wa,--noexecstack
-COMMON_CFLAGS-clang := -fvisibility=hidden -ggdb
-COMMON_CFLAGS := -Wall -Werror -fno-strict-aliasing $(SSP_CFLAGS) -O1 -Wformat=2
-CXXFLAGS += $(COMMON_CFLAGS) $(COMMON_CFLAGS-$(CXXDRIVER))
-CFLAGS += $(COMMON_CFLAGS) $(COMMON_CFLAGS-$(CDRIVER))
-CPPFLAGS += -D_FORTIFY_SOURCE=2
+COMMON_CFLAGS-clang := -fvisibility=hidden -ggdb -Wimplicit-fallthrough
+COMMON_CFLAGS := -Wall -Wunused -Wno-unused-parameter -Wunreachable-code \
+  -Wbool-operation -Wstring-compare -Wstring-plus-int  -Wxor-used-as-pow \
+  -Wint-in-bool-context -Werror -Wformat=2 -fno-strict-aliasing \
+  $(SSP_CFLAGS) -O1
+CXXFLAGS += $(COMMON_CFLAGS) $(COMMON_CFLAGS-$(CXXDRIVER)) -std=gnu++17
+CFLAGS += $(COMMON_CFLAGS) $(COMMON_CFLAGS-$(CDRIVER)) -std=gnu11
+# We undefine _FORTIFY_SOURCE because some distros enable it by default in
+# their toolchains.  This makes the compiler issue warnings about redefines
+# and our -Werror usage breaks it all.
+CPPFLAGS += -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=2
 
 # Enable large file support.
 CPPFLAGS += -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -D_LARGEFILE64_SOURCE
@@ -513,8 +530,11 @@ CC_STATIC_LIBARY(%):
 	$(error Typo alert! LIBARY != LIBRARY)
 
 
-TEST(%): % qemu_chroot_install
+TEST(%): %
 	$(call TEST_implementation)
+ifneq ($(RUN_TESTS),0)
+TEST(%): qemu_chroot_install
+endif
 .PHONY: TEST
 
 # multiple targets with a wildcard need to share an directory.
@@ -580,13 +600,12 @@ $(1): %.o: %.pic.o %.pie.o
 	$$(QUIET)touch "$$@"
 endef
 
+# Wrap all the deps in $$(wildcard) so a missing header won't cause weirdness.
+# First we remove newlines and \, then wrap it.
 define OBJECT_PATTERN_implementation
   @$(ECHO) "$(1)		$(subst $(SRC)/,,$<) -> $(2).o"
   $(call auto_mkdir,$@)
   $(QUIET)$($(1)) -c -MD -MF $(2).d $(3) -o $(2).o $<
-  $(QUIET)# Wrap all the deps in $$(wildcard) so a missing header
-  $(QUIET)# won't cause weirdness.  First we remove newlines and \,
-  $(QUIET)# then wrap it.
   $(QUIET)sed -i -e :j -e '$$!N;s|\\\s*\n| |;tj' \
     -e 's|^\(.*\s*:\s*\)\(.*\)$$|\1 $$\(wildcard \2\)|' $(2).d
 endef
@@ -725,7 +744,9 @@ ifeq ($(MODE),profiling)
 		fi
 	@$(ECHO) "COVERAGE [$(COLOR_YELLOW)FINISHED$(COLOR_RESET)]"
 endif
-.PHONY: tests
+# Standard name everyone else uses.
+check: tests
+.PHONY: check tests
 
 qemu_chroot_install:
 ifeq ($(USE_QEMU),1)
@@ -798,12 +819,17 @@ ifeq ($(VALGRIND),1)
   VALGRIND_CMD = /usr/bin/valgrind --tool=memcheck $(VALGRIND_ARGS) --
 endif
 
+ifneq ($(RUN_TESTS),0)
 define TEST_implementation
   $(QUIET)$(call TEST_setup)
   $(QUIET)$(call TEST_run)
   $(QUIET)$(call TEST_teardown)
   $(QUIET)exit $$(cat $(OUT)$(TARGET_OR_MEMBER).status.test)
 endef
+else
+define TEST_implementation
+endef
+endif
 
 define TEST_setup
   @$(ECHO) -n "TEST		$(TARGET_OR_MEMBER) "
