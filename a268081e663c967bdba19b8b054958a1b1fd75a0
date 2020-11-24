@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e065c5fc_a94e3b9c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1380689
+      },
+      "writtenOn": "2020-11-24T03:42:35Z",
+      "side": 1,
+      "message": "adding Jesse for further oversight on possible impact. Also adding Cindy for visibility since this will impact M87. ",
+      "revId": "a268081e663c967bdba19b8b054958a1b1fd75a0",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d9cec4c7_3a93e20c",
+        "filename": "main.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 1380689
+      },
+      "writtenOn": "2020-11-24T03:42:35Z",
+      "side": 1,
+      "message": "Do we need to contain this to the Zork program specifically? We saw the same problem in other Zork boards, but this seems broader. Sam - can you comment on how we might contain it? I know how in coreboot, but not here.",
+      "revId": "a268081e663c967bdba19b8b054958a1b1fd75a0",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    }
+  ]
+}
