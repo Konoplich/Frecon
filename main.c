@@ -260,6 +260,25 @@ bool set_drm_master_relax(void)
 static void main_on_login_prompt_visible(void)
 {
 	if (command_flags.daemon && !command_flags.enable_vts) {
+#ifdef NO_EXIT
+		/*
+		 * TODO(b/172945032) Remove special-casing once the GPU hang on
+		 * resume root cause if frecon exits after Chrome is ready is
+		 * found.
+		 *
+		 * In the meantime, release all resources except the DRM file
+		 * and sleep forever.
+		 */
+		LOG(INFO, "Chrome started, our work is done, sleeping forever.");
+		input_close();
+		dev_close();
+		dbus_destroy();
+		if (command_flags.daemon)
+			unlink(FRECON_PID_FILE);
+		while (true)
+			sleep(UINT_MAX);
+#endif
+
 		LOG(INFO, "Chrome started, our work is done, exiting.");
 		exit(EXIT_SUCCESS);
 	} else {
