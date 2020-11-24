@@ -261,7 +261,7 @@ static void main_on_login_prompt_visible(void)
 {
 	if (command_flags.daemon && !command_flags.enable_vts) {
 		LOG(INFO, "Chrome started, our work is done, exiting.");
-		exit(EXIT_SUCCESS);
+//		exit(EXIT_SUCCESS);
 	} else {
 		if (command_flags.enable_vt1)
 			LOG(WARNING, "VT1 enabled and Chrome is active!");
