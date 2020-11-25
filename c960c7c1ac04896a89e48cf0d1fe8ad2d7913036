@@ -16,6 +16,24 @@
       "message": "This needs to be fixed in the kernel.",
       "revId": "c960c7c1ac04896a89e48cf0d1fe8ad2d7913036",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4c5cb535_931e18a6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1454622
+      },
+      "writtenOn": "2020-11-25T22:01:04Z",
+      "side": 1,
+      "message": "Dear Dominik, \n\nThis is a shot solution. Because this issue so urgent for my project. At the same time AMD team is working on this and give final solution later. Please rollback -2.  Many thanks!",
+      "parentUuid": "9596813d_076e77b5",
+      "revId": "c960c7c1ac04896a89e48cf0d1fe8ad2d7913036",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
     }
   ]
 }
