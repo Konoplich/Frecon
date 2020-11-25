@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9596813d_076e77b5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1150560
+      },
+      "writtenOn": "2020-11-25T20:01:16Z",
+      "side": 1,
+      "message": "This needs to be fixed in the kernel.",
+      "revId": "c960c7c1ac04896a89e48cf0d1fe8ad2d7913036",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    }
+  ]
+}
