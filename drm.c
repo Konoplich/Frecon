@@ -783,6 +783,41 @@ error_mode:
 }
 #undef CHECK
 
+static int remove_gamma_properties(drm_t* drm, uint32_t crtc_id) {
+	drmModeObjectPropertiesPtr crtc_props = NULL;
+
+	crtc_props = drmModeObjectGetProperties(drm->fd,
+						crtc_id,
+						DRM_MODE_OBJECT_CRTC);
+	if (!crtc_props) {
+		LOG(ERROR, "Could not query properties for crtc %d %m.", crtc_id);
+		return -ENOENT;
+	}
+
+	for (uint32_t i = 0; i < crtc_props->count_props; i++) {
+		drmModePropertyPtr prop;
+		prop = drmModeGetProperty(drm->fd, crtc_props->props[i]);
+		if (!prop)
+			continue;
+
+		// Remove the GAMMA_LUT and DEGAMMA_LUT properties.
+		if (!strcmp(prop->name, "GAMMA_LUT") ||
+		    !strcmp(prop->name, "DEGAMMA_LUT")) {
+			// Ignore the return in case it is not supported.
+			if (drmModeObjectSetProperty(drm->fd, crtc_id,
+						     DRM_MODE_OBJECT_CRTC,
+						     crtc_props->props[i],
+						     0)) {
+				LOG(ERROR, "Unable to remove %s from crtc:%d %m", prop->name, crtc_id);
+			}
+		}
+		drmModeFreeProperty(prop);
+	}
+	drmModeFreeObjectProperties(crtc_props);
+	return 0;
+}
+
+
 int32_t drm_setmode(drm_t* drm, uint32_t fb_id)
 {
 	int conn;
@@ -831,6 +866,10 @@ int32_t drm_setmode(drm_t* drm, uint32_t fb_id)
 
 			if (ret)
 				LOG(ERROR, "Unable to hide cursor on crtc:%d %m.", console_crtc_id);
+
+			ret = remove_gamma_properties(drm, console_crtc_id);
+			if (ret)
+				LOG(ERROR, "Unable to remove gamma LUT properties from crtc:%d %m.", console_crtc_id);
 
 			drm_disable_non_primary_planes(drm, console_crtc_id);
 
