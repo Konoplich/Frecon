@@ -133,7 +133,7 @@ bool dbus_init()
 	new_dbus->conn = dbus_bus_get(DBUS_BUS_SYSTEM, &err);
 	if (dbus_error_is_set(&err)) {
 		if (!dbus_connect_fail) {
-			LOG(ERROR, "Cannot get DBUS connection");
+			LOG(DEBUG, "Cannot get DBUS connection");
 			dbus_connect_fail = true;
 			dbus_connect_fail_time = get_monotonic_time_ms();
 		}
@@ -143,7 +143,7 @@ bool dbus_init()
 
 	if (dbus_connect_fail) {
 		int64_t t = get_monotonic_time_ms() - dbus_connect_fail_time;
-		LOG(INFO, "DBUS connected after %.1f seconds", (float)t / 1000.0f);
+		LOG(DEBUG, "DBUS connected after %.1f seconds", (float)t / 1000.0f);
 	}
 
 	result = dbus_bus_request_name(new_dbus->conn, kFreconDbusInterface,
