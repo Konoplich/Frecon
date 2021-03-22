@@ -32,8 +32,21 @@ static inline int64_t get_monotonic_time_ms() {
 	return MS_PER_SEC * spec.tv_sec + spec.tv_nsec / NS_PER_MS;
 }
 
-#define LOG(severity, fmt, ...) (fprintf(stderr, "<%i>frecon[%d]: " fmt "\n", \
-                                         severity, getpid(), ##__VA_ARGS__))
+#define ERROR                 (LOG_ERR)
+#define WARNING               (LOG_WARNING)
+#define INFO                  (LOG_INFO)
+#define DEBUG                 (LOG_DEBUG)
+
+/* Don't print debug messages by default. */
+#ifndef LOG_LEVEL
+#define LOG_LEVEL             (LOG_DEBUG-1)
+#endif
+
+#define LOG(severity, fmt, ...) do { \
+		if (severity <= LOG_LEVEL) \
+			fprintf(stderr, "<%i>frecon[%d]: " fmt "\n", \
+				severity, getpid(), ##__VA_ARGS__); \
+	} while (0)
 
 void daemonize(bool wait_child);
 void daemon_exit_code(char code);
@@ -46,9 +59,5 @@ void parse_image_option(char* optionstr, char** name, char** val);
 /* make sure stdio file descriptors are somewhat sane */
 void fix_stdio(void);
 bool write_string_to_file(const char *path, const char *s);
-
-#define ERROR                 (LOG_ERR)
-#define WARNING               (LOG_WARNING)
-#define INFO                  (LOG_INFO)
 
 #endif
