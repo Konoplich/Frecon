@@ -299,8 +299,13 @@ void fb_unlock(fb_t* fb)
 		};
 		munmap(fb->lock.map, fb->buffer_properties.size);
 		ret = drmModeDirtyFB(fb->drm->fd, fb->fb_id, &clip_rect, 1);
-		if (ret && errno != ENOSYS)
-			LOG(ERROR, "drmModeDirtyFB failed: %m");
+		if (ret) {
+			int loglevel = ERROR;
+			/* Do not print "normal" errors by default. */
+			if (errno == ENOSYS || errno == EACCES)
+				loglevel = DEBUG;
+			LOG(loglevel, "drmModeDirtyFB failed: %d %m", errno);
+		}
 	}
 }
 
