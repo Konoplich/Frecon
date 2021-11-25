@@ -13,8 +13,8 @@
 
 #include "fb.h"
 
-#define HIRES_THRESHOLD_HR 1920
-#define HIRES_THRESHOLD_VR 1920
+#define HIRES_THRESHOLD_HR 2048
+#define HIRES_THRESHOLD_VR 2048
 #define MAX_SCALE_FACTOR 100
 
 typedef struct _image_t image_t;
