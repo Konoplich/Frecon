@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "560082ed_7b4b2b39",
+        "filename": "image.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1273086
+      },
+      "writtenOn": "2021-11-28T21:59:31Z",
+      "side": 1,
+      "message": "All settings of FRECON_SCALING_FACTOR need to have this \"magic\" number.",
+      "range": {
+        "startLine": 16,
+        "startChar": 6,
+        "endLine": 16,
+        "endChar": 26
+      },
+      "revId": "f6e1d372b65695728b485f8cf895fec2b595a43a",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    }
+  ]
+}
