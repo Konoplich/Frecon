@@ -22,6 +22,30 @@
       },
       "revId": "f6e1d372b65695728b485f8cf895fec2b595a43a",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2d3a04eb_20741d14",
+        "filename": "image.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1150560
+      },
+      "writtenOn": "2021-11-29T19:01:19Z",
+      "side": 1,
+      "message": "We consider anything over 1920x1080 hires. This changes the logic so you would have to verify it against all the devices we ship to make sure it does not break them.\nSo I\u0027d rather not change it here.",
+      "parentUuid": "560082ed_7b4b2b39",
+      "range": {
+        "startLine": 16,
+        "startChar": 6,
+        "endLine": 16,
+        "endChar": 26
+      },
+      "revId": "f6e1d372b65695728b485f8cf895fec2b595a43a",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
     }
   ]
 }
