@@ -183,8 +183,8 @@ int image_show(image_t* image, fb_t* fb)
 		startx = image->location_x;
 		starty = image->location_y;
 	} else {
-		startx = (fb_getwidth(fb) - w)/2;
-		starty = (fb_getheight(fb) - h)/2;
+		startx = (fb_getwidth(fb) - (int32_t)w)/2;
+		starty = (fb_getheight(fb) - (int32_t)h)/2;
 	}
 
 	if (image->use_offset) {
