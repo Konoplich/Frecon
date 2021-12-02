@@ -46,6 +46,30 @@
       },
       "revId": "f6e1d372b65695728b485f8cf895fec2b595a43a",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa1ef4e8_441a0e31",
+        "filename": "image.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1273086
+      },
+      "writtenOn": "2021-12-02T03:15:29Z",
+      "side": 1,
+      "message": "In the interest of evaluating this possibility, I reviewed the components listed here:\nhttps://chromeos.google.com/partner/dlm/avl/component?componentType\u003d11\n\nProjected impact if we increase this threshold from 1920 to 2000 appears to be minimal.\n\nHorizontal Resolution - Count\n1920 - Many\n1980 - 1\n2000 - 1 (Wormdingler)\n2160 - 1\n2256 - 6\n2400 - 3\n2560 - 4\n3000 - 1\n3840 - 1\n\nI suspect all of the displays between 1980 and 2560 may run into this issue.",
+      "parentUuid": "2d3a04eb_20741d14",
+      "range": {
+        "startLine": 16,
+        "startChar": 6,
+        "endLine": 16,
+        "endChar": 26
+      },
+      "revId": "f6e1d372b65695728b485f8cf895fec2b595a43a",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
     }
   ]
 }
