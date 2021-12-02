@@ -94,6 +94,30 @@
       },
       "revId": "f6e1d372b65695728b485f8cf895fec2b595a43a",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "30bf7b88_b77a1cbe",
+        "filename": "image.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1273086
+      },
+      "writtenOn": "2021-12-02T23:10:30Z",
+      "side": 1,
+      "message": "The 1980 part: (https://chromeos.google.com/partner/dlm/avl/component/1403)\n\nThis part does not seem to show up in the HWID database for any boards.  That might just mean they did not the the CID transition on it. I assume that this device would have the same issue that we are having, unless it is really a 1920 part and there is a typo in the DLM entry.\n\nNote:  \nThe DLM page above has a popup that states: \nQualification approval will be blocked as this component does not have a data sheet uploaded. Please add data sheet.\n\nI am not sure why the Component Status is listed as VERIFIED instead of UNQUALIFIED.  The only other options on Component Status are DEPRECATED and DUPLICATED.\n\nTHe Wormdingler part:\nhttps://chromeos.google.com/partner/dlm/avl/component/4211\n\nThis part does show up in the HWID database by CID.  The SARIEN board showed up in this list because the Qualification ID matched my search.\n\nmoragues@moragues-cloud:~/chromeos/main/src/platform/chromeos-hwid/v3$ grep display_panel.*4211 *\nSARIEN:      display_panel: display_panel_2476_4211\nSARIEN:      display_panel_2476_4211:\ngrep: testdata: Is a directory\nWORMDINGLER:      display_panel: display_panel_4211_8811\nWORMDINGLER:      display_panel_4211_8811:",
+      "parentUuid": "3510a5bf_e188694b",
+      "range": {
+        "startLine": 16,
+        "startChar": 6,
+        "endLine": 16,
+        "endChar": 26
+      },
+      "revId": "f6e1d372b65695728b485f8cf895fec2b595a43a",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
     }
   ]
 }
