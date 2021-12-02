@@ -70,6 +70,30 @@
       },
       "revId": "f6e1d372b65695728b485f8cf895fec2b595a43a",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3510a5bf_e188694b",
+        "filename": "image.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1150560
+      },
+      "writtenOn": "2021-12-02T05:39:34Z",
+      "side": 1,
+      "message": "What is the project that uses 1980? I would imagine they have hit this problem too?\nIt looks like the image that is scaled up is 1024x530, so it should fit with 2x scale in 2048, we may want to set the threshold at 2048 then?",
+      "parentUuid": "fa1ef4e8_441a0e31",
+      "range": {
+        "startLine": 16,
+        "startChar": 6,
+        "endLine": 16,
+        "endChar": 26
+      },
+      "revId": "f6e1d372b65695728b485f8cf895fec2b595a43a",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
     }
   ]
 }
