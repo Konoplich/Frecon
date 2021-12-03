@@ -118,6 +118,30 @@
       },
       "revId": "f6e1d372b65695728b485f8cf895fec2b595a43a",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "be369216_c170a740",
+        "filename": "image.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1273086
+      },
+      "writtenOn": "2021-12-03T00:22:36Z",
+      "side": 1,
+      "message": "The 1980 display was qualified on Stonyridge platform.\nI am not sure how to turn that into a code name.\n\n2048 would make sense as a threshold.  I was trying to figure out what the resolution of the full image was.",
+      "parentUuid": "30bf7b88_b77a1cbe",
+      "range": {
+        "startLine": 16,
+        "startChar": 6,
+        "endLine": 16,
+        "endChar": 26
+      },
+      "revId": "f6e1d372b65695728b485f8cf895fec2b595a43a",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
     }
   ]
 }
