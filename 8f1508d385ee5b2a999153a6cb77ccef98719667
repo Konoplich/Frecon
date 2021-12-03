@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "45bde0e1_e1a0cfd8",
+        "filename": "image.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1273086
+      },
+      "writtenOn": "2021-12-03T01:12:02Z",
+      "side": 1,
+      "message": "Is this value correct, or should it be lower?  Maybe 1060?",
+      "range": {
+        "startLine": 17,
+        "startChar": 27,
+        "endLine": 17,
+        "endChar": 31
+      },
+      "revId": "8f1508d385ee5b2a999153a6cb77ccef98719667",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    }
+  ]
+}
