@@ -18,6 +18,23 @@
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2b254309_4b50c73f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1150560
+      },
+      "writtenOn": "2021-12-04T06:11:44Z",
+      "side": 1,
+      "message": "It looks OK, but should we remove [TEST] tag?",
+      "revId": "8f1508d385ee5b2a999153a6cb77ccef98719667",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "45bde0e1_e1a0cfd8",
