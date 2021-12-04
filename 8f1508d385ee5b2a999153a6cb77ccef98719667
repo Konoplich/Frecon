@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f0395239_c4d3fa6f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1273086
+      },
+      "writtenOn": "2021-12-04T01:55:20Z",
+      "side": 1,
+      "message": "Verified that truncation fixed.  Verified that Boot Splash and power Splash screen appeared as expected and that the spinner was running on the powerwash screen. ",
+      "revId": "8f1508d385ee5b2a999153a6cb77ccef98719667",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "45bde0e1_e1a0cfd8",
@@ -38,6 +55,30 @@
       "side": 1,
       "message": "We should leave both the same, the VR is effectively used for portrait displays.",
       "parentUuid": "45bde0e1_e1a0cfd8",
+      "range": {
+        "startLine": 17,
+        "startChar": 27,
+        "endLine": 17,
+        "endChar": 31
+      },
+      "revId": "8f1508d385ee5b2a999153a6cb77ccef98719667",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7b9d604b_1248a46d",
+        "filename": "image.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1273086
+      },
+      "writtenOn": "2021-12-04T01:55:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "18c93da3_ce7107af",
       "range": {
         "startLine": 17,
         "startChar": 27,
