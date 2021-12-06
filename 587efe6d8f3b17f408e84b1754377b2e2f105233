@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "afaac2e4_2b278c17",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1438397
+      },
+      "writtenOn": "2021-12-06T02:04:50Z",
+      "side": 1,
+      "message": "Hi Bob, Merge approved for M97. https://partnerissuetracker.corp.google.com/issues/205262466#comment34",
+      "revId": "587efe6d8f3b17f408e84b1754377b2e2f105233",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    }
+  ]
+}
