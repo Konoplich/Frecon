@@ -16,6 +16,23 @@
       "message": "Please follow the Merge-Request protocol for the R97 branch.\nhttps://chromium.googlesource.com/chromiumos/docs/+/HEAD/work_on_branch.md",
       "revId": "4590b45a12f3b4d27abee862c55e1fd553a5bf4c",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc3b0262_3497548e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1273086
+      },
+      "writtenOn": "2021-12-06T04:39:41Z",
+      "side": 1,
+      "message": "Merge-Approval received.  https://b.corp.google.com/issues/205262466#comment34",
+      "revId": "4590b45a12f3b4d27abee862c55e1fd553a5bf4c",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
     }
   ]
 }
