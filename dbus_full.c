@@ -133,7 +133,7 @@ bool dbus_init()
 	new_dbus->conn = dbus_bus_get(DBUS_BUS_SYSTEM, &err);
 	if (dbus_error_is_set(&err)) {
 		if (!dbus_connect_fail) {
-			LOG(DEBUG, "Cannot get DBUS connection");
+			LOG(DEBUG, "Cannot get DBUS connection: %s", err.message);
 			dbus_connect_fail = true;
 			dbus_connect_fail_time = get_monotonic_time_ms();
 		}
@@ -148,9 +148,8 @@ bool dbus_init()
 
 	result = dbus_bus_request_name(new_dbus->conn, kFreconDbusInterface,
 			DBUS_NAME_FLAG_DO_NOT_QUEUE, &err);
-
 	if (result <= 0) {
-		LOG(ERROR, "Unable to get name for server");
+		LOG(ERROR, "Unable to get name for server: %s", err.message);
 	}
 
 	stat = dbus_connection_register_object_path(new_dbus->conn,
