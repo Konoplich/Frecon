@@ -130,6 +130,17 @@ printf "\033]input:on\a" > /run/frecon/vt0
 printf "\033]input:off\a" > /run/frecon/vt1
 ```
 
+## SwitchVT escape code
+
+An escape code that can be used to switch currently active terminal.
+`switchvt:termnum`
+
+* where termnum is an integer from 0 to num-vts-1
+
+Example:
+```sh
+printf "\033]switchvt:1\a" > /run/frecon/current
+```
 
 ## Files
 
@@ -141,3 +152,7 @@ Frecon creates the following files and links in `/run/frecon` directory:
 - for every VT it creates, a link from `/run/frecon/vt%u` to `/dev/pts/X`
   where `%u` is terminal number from 0 to num-vts - 1 so the user can determine
   which VT uses which pts since pts number assignment is not deterministic.
+
+- /run/frecon/current is a symlink to currently active terminal 
+  (/run/frecon/vtX). It can be used to discover which terminal is currently
+  active or to write text to currently active terminal.

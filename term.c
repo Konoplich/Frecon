@@ -179,7 +179,7 @@ static void term_esc_show_image(terminal_t* terminal, char* params)
 
 	image = image_create();
 	if (!image) {
-		LOG(ERROR, "Out of memory when creating an image.\n");
+		LOG(ERROR, "Out of memory when creating an image.");
 		return;
 	}
 	for (tok = strtok(params, ";"); tok; tok = strtok(NULL, ";")) {
@@ -188,21 +188,21 @@ static void term_esc_show_image(terminal_t* terminal, char* params)
 		} else if (strncmp("location=", tok, 9) == 0) {
 			uint32_t x, y;
 			if (sscanf(tok + 9, "%u,%u", &x, &y) != 2) {
-				LOG(ERROR, "Error parsing image location.\n");
+				LOG(ERROR, "Error parsing image location.");
 				goto done;
 			}
 			image_set_location(image, x, y);
 		} else if (strncmp("offset=", tok, 7) == 0) {
 			int32_t x, y;
 			if (sscanf(tok + 7, "%d,%d", &x, &y) != 2) {
-				LOG(ERROR, "Error parsing image offset.\n");
+				LOG(ERROR, "Error parsing image offset.");
 				goto done;
 			}
 			image_set_offset(image, x, y);
 		} else if (strncmp("scale=", tok, 6) == 0) {
 			uint32_t s;
 			if (sscanf(tok + 6, "%u", &s) != 1) {
-				LOG(ERROR, "Error parsing image scale.\n");
+				LOG(ERROR, "Error parsing image scale.");
 				goto done;
 			}
 			if (s == 0)
@@ -241,24 +241,24 @@ static void term_esc_draw_box(terminal_t* terminal, char* params)
 			color = strtoul(tok + 6, NULL, 0);
 		} else if (strncmp("size=", tok, 5) == 0) {
 			if (sscanf(tok + 5, "%u,%u", &w, &h) != 2) {
-				LOG(ERROR, "Error parsing box size.\n");
+				LOG(ERROR, "Error parsing box size.");
 				goto done;
 			}
 		} else if (strncmp("location=", tok, 9) == 0) {
 			if (sscanf(tok + 9, "%u,%u", &locx, &locy) != 2) {
-				LOG(ERROR, "Error parsing box location.\n");
+				LOG(ERROR, "Error parsing box location.");
 				goto done;
 			}
 			use_location = true;
 		} else if (strncmp("offset=", tok, 7) == 0) {
 			if (sscanf(tok + 7, "%d,%d", &offx, &offy) != 2) {
-				LOG(ERROR, "Error parsing box offset.\n");
+				LOG(ERROR, "Error parsing box offset.");
 				goto done;
 			}
 			use_offset = true;
 		} else if (strncmp("scale=", tok, 6) == 0) {
 			if (sscanf(tok + 6, "%u", &scale) != 1) {
-				LOG(ERROR, "Error parsing box scale.\n");
+				LOG(ERROR, "Error parsing box scale.");
 				goto done;
 			}
 			if (scale == 0)
@@ -317,7 +317,15 @@ static void term_esc_input(terminal_t* terminal, char* params)
 		 strcasecmp(params, "false") == 0)
 		term_input_enable(terminal, false);
 	else
-		LOG(ERROR, "Invalid parameter for input escape.\n");
+		LOG(ERROR, "Invalid parameter for input escape.");
+}
+
+static void term_esc_switchvt(terminal_t* terminal, char* params)
+{
+	uint32_t vt = (uint32_t)strtoul(params, NULL, 0);
+	if (vt >= term_num_terminals || vt >= TERM_MAX_TERMINALS)
+		LOG(ERROR, "Invalid parameter for switchvt escape.");
+	term_switch_to(vt);
 }
 
 /*
@@ -347,7 +355,7 @@ static void term_osc_cb(struct tsm_vte *vte, const uint32_t *osc_string,
 
 	osc = malloc(osc_len + 1);
 	if (!osc) {
-		LOG(WARNING, "Out of memory when processing OSC.\n");
+		LOG(WARNING, "Out of memory when processing OSC.");
 		return;
 	}
 
@@ -361,6 +369,8 @@ static void term_osc_cb(struct tsm_vte *vte, const uint32_t *osc_string,
 		term_esc_draw_box(terminal, osc + 4);
 	else if (strncmp(osc, "input:", 6) == 0)
 		term_esc_input(terminal, osc + 6);
+	else if (strncmp(osc, "switchvt:", 9) == 0)
+		term_esc_switchvt(terminal, osc + 9);
 	else if (is_xterm_osc(osc))
 		; /* Ignore it. */
 	else
@@ -603,6 +613,8 @@ void term_close(terminal_t* term)
 
 	snprintf(path, sizeof(path), FRECON_VT_PATH, term->vt);
 	unlink(path);
+	if (term->vt == term_get_current())
+		unlink(FRECON_CURRENT_VT);
 
 	if (term->fb) {
 		fb_close(term->fb);
@@ -793,15 +805,26 @@ void term_destroy_splash_term(void)
 	term_close(terminal);
 }
 
+void term_update_current_link(void)
+{
+	char path[32];
+	unlink(FRECON_CURRENT_VT);
+	snprintf(path, sizeof(path), FRECON_VT_PATH, current_terminal);
+	if (symlink(path, FRECON_CURRENT_VT) < 0)
+		LOG(ERROR, "set_current: failed to create current symlink.");
+}
+
 void term_set_current(uint32_t t)
 {
 	if (t >= TERM_MAX_TERMINALS)
-		LOG(ERROR, "set_current: larger than array size");
+		LOG(ERROR, "set_current: larger than array size.");
 	else
 	if (t >= term_num_terminals)
-		LOG(ERROR, "set_current: larger than num terminals");
-	else
+		LOG(ERROR, "set_current: larger than num terminals.");
+	else {
 		current_terminal = t;
+		term_update_current_link();
+	}
 }
 
 uint32_t term_get_current(void)

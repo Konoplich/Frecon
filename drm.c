@@ -38,13 +38,13 @@ static int32_t atomic_set_prop(drm_t* drm, drmModeAtomicReqPtr pset, uint32_t id
 		}
 		ret = drmModeAtomicAddProperty(pset, id, prop->prop_id, value);
 		if (ret < 0)
-			LOG(ERROR, "setting atomic property %s failed with %d\n", name, ret);
+			LOG(ERROR, "setting atomic property %s failed with %d.", name, ret);
 		else
 			ret = 0;
 		drmModeFreeProperty(prop);
 		return ret;
 	}
-	LOG(ERROR, "could not find atomic property %s\n", name);
+	LOG(ERROR, "could not find atomic property %s.", name);
 	return -ENOENT;
 }
 
@@ -645,7 +645,7 @@ static int32_t drm_setmode_atomic(drm_t* drm, uint32_t fb_id)
 	if (!console_crtc_id)
 		find_crtc_for_connector(drm, drm->console_connector_id, &console_crtc_id);
 	if (!console_crtc_id) {
-		LOG(ERROR, "Could not get console crtc for connector:%d in modeset.\n", drm->console_connector_id);
+		LOG(ERROR, "Could not get console crtc for connector:%d in modeset.", drm->console_connector_id);
 		return -ENOENT;
 	}
 
@@ -809,7 +809,7 @@ int32_t drm_setmode(drm_t* drm, uint32_t fb_id)
 				find_crtc_for_connector(drm, connector_id, &console_crtc_id);
 
 				if (!console_crtc_id) {
-					LOG(ERROR, "Could not get console crtc for connector:%d in modeset.\n", drm->console_connector_id);
+					LOG(ERROR, "Could not get console crtc for connector:%d in modeset.", drm->console_connector_id);
 					return -ENOENT;
 				}
 			}
