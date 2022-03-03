@@ -15,6 +15,7 @@
 #define TERM_FIRST_STD_VT     1
 
 #define FRECON_VT_PATH FRECON_RUN_DIR "/vt%u"
+#define FRECON_CURRENT_VT FRECON_RUN_DIR "/current"
 
 
 /* Maximum length of buffer than can be passed to /dev/kmsg as defined in kernel
@@ -55,6 +56,7 @@ terminal_t* term_get_terminal(int num);
 void term_set_terminal(int num, terminal_t* terminal);
 int term_create_splash_term(int pts_fd);
 void term_destroy_splash_term(void);
+void term_update_current_link(void);
 void term_set_current(uint32_t t);
 uint32_t term_get_current(void);
 terminal_t *term_get_current_terminal(void);
