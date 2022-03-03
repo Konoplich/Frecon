@@ -366,6 +366,9 @@ int main(int argc, char* argv[])
 	/* And PID file. */
 	unlink(FRECON_PID_FILE);
 
+	/* And current terminal. */
+	unlink(FRECON_CURRENT_VT);
+
 	if (command_flags.daemon) {
 		int status;
 
@@ -524,6 +527,7 @@ main_done:
 	drm_close();
 	if (command_flags.daemon)
 		unlink(FRECON_PID_FILE);
+	unlink(FRECON_CURRENT_VT);
 
 	return ret;
 }
