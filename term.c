@@ -320,6 +320,16 @@ static void term_esc_input(terminal_t* terminal, char* params)
 		LOG(ERROR, "Invalid parameter for input escape.\n");
 }
 
+static void term_esc_switchvt(terminal_t* terminal, char* params)
+{
+	uint32_t vt = (uint32_t)strtoul(params, NULL, 0);
+	if (vt >= term_num_terminals || vt >= TERM_MAX_TERMINALS) {
+		LOG(ERROR, "Invalid parameter for switchvt escape.");
+		return;
+	}
+	term_switch_to(vt);
+}
+
 /*
  * Assume all one or two digit sequences followed by ; are xterm OSC escapes.
  */
@@ -361,6 +371,8 @@ static void term_osc_cb(struct tsm_vte *vte, const uint32_t *osc_string,
 		term_esc_draw_box(terminal, osc + 4);
 	else if (strncmp(osc, "input:", 6) == 0)
 		term_esc_input(terminal, osc + 6);
+	else if (strncmp(osc, "switchvt:", 9) == 0)
+		term_esc_switchvt(terminal, osc + 9);
 	else if (is_xterm_osc(osc))
 		; /* Ignore it. */
 	else
@@ -603,6 +615,8 @@ void term_close(terminal_t* term)
 
 	snprintf(path, sizeof(path), FRECON_VT_PATH, term->vt);
 	unlink(path);
+	if (term->vt == term_get_current())
+		unlink(FRECON_CURRENT_VT);
 
 	if (term->fb) {
 		fb_close(term->fb);
@@ -793,6 +807,18 @@ void term_destroy_splash_term(void)
 	term_close(terminal);
 }
 
+void term_update_current_link(void)
+{
+	char path[32];
+	unlink(FRECON_CURRENT_VT);
+	if (TERM_SPLASH_TERMINAL != current_terminal ||
+	    command_flags.enable_vt1) {
+		snprintf(path, sizeof(path), FRECON_VT_PATH, current_terminal);
+		if (symlink(path, FRECON_CURRENT_VT) < 0)
+			LOG(ERROR, "set_current: failed to create current symlink.");
+	}
+}
+
 void term_set_current(uint32_t t)
 {
 	if (t >= TERM_MAX_TERMINALS)
@@ -800,8 +826,10 @@ void term_set_current(uint32_t t)
 	else
 	if (t >= term_num_terminals)
 		LOG(ERROR, "set_current: larger than num terminals");
-	else
+	else {
 		current_terminal = t;
+		term_update_current_link();
+	}
 }
 
 uint32_t term_get_current(void)

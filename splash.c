@@ -140,6 +140,7 @@ int splash_run(splash_t* splash)
 	term_set_background(terminal, splash->clear);
 	term_clear(terminal);
 	term_set_current_to(terminal);
+	term_update_current_link();
 
 	last_show_ms = -1;
 	loop_count = (splash->loop_start >= 0 && splash->loop_start < splash->num_images) ? splash->loop_count : 1;
