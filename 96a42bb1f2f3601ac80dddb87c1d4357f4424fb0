@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "575a7644_803c2c60",
+        "filename": "drm.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 648,
+      "author": {
+        "id": 1000768
+      },
+      "writtenOn": "2022-03-05T18:19:59Z",
+      "side": 0,
+      "message": "these unrelated changes add a lot of noise to the CL.  especially when there\u0027s more of this than actual content that this CL is for.",
+      "revId": "96a42bb1f2f3601ac80dddb87c1d4357f4424fb0",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    }
+  ]
+}

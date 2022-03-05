@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c1fcf6e8_f12a6478",
+        "filename": "README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1000768
+      },
+      "writtenOn": "2022-03-05T18:19:59Z",
+      "side": 1,
+      "message": "OSC\u0027s really should stick to numbers, but it looks like frecon already deviates, so guess adding more to the pile isn\u0027t a big deal",
+      "revId": "93a8faa5b5eeb36d7506657cdc2ae193d808945f",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "252644b2_206e70b4",
+        "filename": "README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1000768
+      },
+      "writtenOn": "2022-03-05T18:19:59Z",
+      "side": 1,
+      "message": "no trailing whitespace",
+      "revId": "93a8faa5b5eeb36d7506657cdc2ae193d808945f",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fdc4b0a5_b1e04e82",
+        "filename": "README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1000768
+      },
+      "writtenOn": "2022-03-05T18:19:59Z",
+      "side": 1,
+      "message": "missing newline at end of file",
+      "revId": "93a8faa5b5eeb36d7506657cdc2ae193d808945f",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1012f04f_a1aec6fc",
+        "filename": "term.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 326,
+      "author": {
+        "id": 1000768
+      },
+      "writtenOn": "2022-03-05T18:19:59Z",
+      "side": 1,
+      "message": "seems like only the first check is needed ?",
+      "revId": "93a8faa5b5eeb36d7506657cdc2ae193d808945f",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d27110b3_3ae1bc1e",
+        "filename": "term.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 327,
+      "author": {
+        "id": 1000768
+      },
+      "writtenOn": "2022-03-05T18:19:59Z",
+      "side": 1,
+      "message": "this shows an error, but then falls thru to calling term_switch_to anyways.  shouldn\u0027t this return ?",
+      "revId": "93a8faa5b5eeb36d7506657cdc2ae193d808945f",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    }
+  ]
+}
