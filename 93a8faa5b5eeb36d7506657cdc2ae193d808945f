@@ -3,6 +3,23 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "f7678c58_93b1db53",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1197299
+      },
+      "writtenOn": "2022-03-14T22:05:02Z",
+      "side": 1,
+      "message": "Thanks!",
+      "revId": "93a8faa5b5eeb36d7506657cdc2ae193d808945f",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "c1fcf6e8_f12a6478",
         "filename": "README.md",
         "patchSetId": 1
@@ -54,6 +71,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "116a8adc_f6a889c4",
+        "filename": "splash.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1197299
+      },
+      "writtenOn": "2022-03-14T22:05:02Z",
+      "side": 1,
+      "message": "Can we call term_set_current inside term_set_current_to so that we don\u0027t have to add update function to every call site？",
+      "range": {
+        "startLine": 143,
+        "startChar": 1,
+        "endLine": 143,
+        "endChar": 25
+      },
+      "revId": "93a8faa5b5eeb36d7506657cdc2ae193d808945f",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1012f04f_a1aec6fc",
         "filename": "term.c",
         "patchSetId": 1
@@ -82,6 +122,52 @@
       "writtenOn": "2022-03-05T18:19:59Z",
       "side": 1,
       "message": "this shows an error, but then falls thru to calling term_switch_to anyways.  shouldn\u0027t this return ?",
+      "revId": "93a8faa5b5eeb36d7506657cdc2ae193d808945f",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b0bf1b8b_09e1239b",
+        "filename": "term.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 785,
+      "author": {
+        "id": 1197299
+      },
+      "writtenOn": "2022-03-14T22:05:02Z",
+      "side": 1,
+      "message": "delete.",
+      "range": {
+        "startLine": 785,
+        "startChar": 0,
+        "endLine": 785,
+        "endChar": 1
+      },
+      "revId": "93a8faa5b5eeb36d7506657cdc2ae193d808945f",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8b4d4e01_baeb153d",
+        "filename": "term.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 851,
+      "author": {
+        "id": 1197299
+      },
+      "writtenOn": "2022-03-14T22:05:02Z",
+      "side": 1,
+      "message": "Call term_update_current_link here to update the value to 0?",
+      "range": {
+        "startLine": 851,
+        "startChar": 2,
+        "endLine": 851,
+        "endChar": 23
+      },
       "revId": "93a8faa5b5eeb36d7506657cdc2ae193d808945f",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
     }
