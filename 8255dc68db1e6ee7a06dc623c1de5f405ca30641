@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "286d9d1a_ed4848c6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1531147
+      },
+      "writtenOn": "2022-04-06T16:16:28Z",
+      "side": 1,
+      "message": "Stéphane and Dominik could you review please?",
+      "revId": "8255dc68db1e6ee7a06dc623c1de5f405ca30641",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    }
+  ]
+}
