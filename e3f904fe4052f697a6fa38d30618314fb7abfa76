@@ -16,6 +16,24 @@
       "message": "This intends to mimic the behavior in the atomic case at line 681.",
       "revId": "e3f904fe4052f697a6fa38d30618314fb7abfa76",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6151f45b_38285dc3",
+        "filename": "drm.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 807,
+      "author": {
+        "id": 1490127
+      },
+      "writtenOn": "2022-06-02T23:12:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "42c6f66c_478f59da",
+      "revId": "e3f904fe4052f697a6fa38d30618314fb7abfa76",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
     }
   ]
 }
