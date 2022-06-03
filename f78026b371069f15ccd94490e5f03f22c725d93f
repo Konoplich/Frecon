@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3eefeab4_7adf53c8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1150560
+      },
+      "writtenOn": "2022-06-03T18:42:45Z",
+      "side": 1,
+      "message": "Looks great.\nI am also surprised we still have devices without atomic ;-)",
+      "revId": "f78026b371069f15ccd94490e5f03f22c725d93f",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    }
+  ]
+}
