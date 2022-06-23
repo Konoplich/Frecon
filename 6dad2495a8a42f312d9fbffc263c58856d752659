@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4b692bd2_c912f1a0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1490127
+      },
+      "writtenOn": "2022-06-23T00:39:29Z",
+      "side": 1,
+      "message": "Please review this cherry-pick of crrev/c/2984279 into M103. The patch applies cleanly without conflicts.\n\nSee approval request https://issuetracker.google.com/191915400#comment22",
+      "revId": "6dad2495a8a42f312d9fbffc263c58856d752659",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    }
+  ]
+}
