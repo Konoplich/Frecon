@@ -34,6 +34,24 @@
       "parentUuid": "9061ec7f_a165d27e",
       "revId": "17131f2c51c2ce1fbebeac5531aad568752b4bb5",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "23a7d568_4fa31caf",
+        "filename": "term.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 787,
+      "author": {
+        "id": 1436607
+      },
+      "writtenOn": "2022-08-30T11:32:50Z",
+      "side": 1,
+      "message": "Got it wrong, you should mean that there is no need for blank lines here. Will remove this, thanks",
+      "parentUuid": "47ec928b_43f78b26",
+      "revId": "17131f2c51c2ce1fbebeac5531aad568752b4bb5",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
     }
   ]
 }
