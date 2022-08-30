@@ -16,6 +16,24 @@
       "message": "no need for this.",
       "revId": "17131f2c51c2ce1fbebeac5531aad568752b4bb5",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "47ec928b_43f78b26",
+        "filename": "term.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 787,
+      "author": {
+        "id": 1436607
+      },
+      "writtenOn": "2022-08-30T11:24:51Z",
+      "side": 1,
+      "message": "Accidentally deleted the trailing tab automatically by the VS code extension.\nDo you think we should leave the trailing tab here?",
+      "parentUuid": "9061ec7f_a165d27e",
+      "revId": "17131f2c51c2ce1fbebeac5531aad568752b4bb5",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
     }
   ]
 }
