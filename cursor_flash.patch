@@ -1,0 +1,23 @@
+diff --git a/term.c b/term.c
+index 2bbdc26..e137a6d 100644
+--- a/term.c
++++ b/term.c
+@@ -757,7 +757,8 @@ void term_write_message(terminal_t* terminal, char* message)
+ 
+ static void term_hide_cursor(terminal_t* terminal)
+ {
+-	term_write_message(terminal, "\033[?25l");
++	//term_write_message(terminal, "\033[?25l");
++	tsm_screen_set_flags(terminal->term->screen, TSM_SCREEN_HIDE_CURSOR);
+ }
+ 
+ __attribute__ ((unused))
+@@ -784,7 +785,7 @@ void term_set_terminal(int num, terminal_t* terminal)
+ int term_create_splash_term(int pts_fd)
+ {
+ 	terminal_t* terminal = term_init(TERM_SPLASH_TERMINAL, pts_fd);
+-	
++
+ 	if (!terminal) {
+ 		LOG(ERROR, "Could not create splash term.");
+ 		return -1;
