@@ -455,7 +455,11 @@ try_open_again:
 		/* Set universal planes cap if possible. Ignore any errors. */
 		drmSetClientCap(drm->fd, DRM_CLIENT_CAP_UNIVERSAL_PLANES, 1);
 
-		ret = drmGetCap(drm->fd, DRM_CLIENT_CAP_ATOMIC, &atomic);
+		/*
+		 * The kernel returns an error for DRM_CAP_DUMB_BUFFER, if atomic mode setting
+		 * isn't supported.
+		 */
+		ret = drmGetCap(drm->fd, DRM_CAP_DUMB_BUFFER, &atomic);
 		if (!ret && atomic) {
 			drm->atomic = true;
 			ret = drmSetClientCap(drm->fd, DRM_CLIENT_CAP_ATOMIC, 1);
