@@ -10,9 +10,31 @@
 
 #include <stdbool.h>
 #include <stdio.h>
-#include <edid_utils.h>
 #include <xf86drm.h>
 #include <xf86drmMode.h>
+
+#define EDID_SIZE 0x80
+
+// 18 byte DTD structure
+#define DTD_PCLK_LO 0
+#define DTD_PCLK_HI 1
+#define DTD_HA_LO 2
+#define DTD_HBL_LO 3
+#define DTD_HABL_HI 4
+#define DTD_VA_LO 5
+#define DTD_VBL_LO 6
+#define DTD_VABL_HI 7
+#define DTD_HSO_LO 8
+#define DTD_HSW_LO 9
+#define DTD_VSX_LO 10
+#define DTD_HVSX_HI 11
+#define DTD_HSIZE_LO 12
+#define DTD_VSIZE_LO 13
+#define DTD_HVSIZE_HI 14
+#define DTD_HBORDER 15
+#define DTD_VBORDER 16
+#define DTD_FLAGS 17
+#define DTD_SIZE 18
 
 typedef struct _drm_t {
 	int refcount;
