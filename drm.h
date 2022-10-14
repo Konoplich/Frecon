@@ -10,9 +10,10 @@
 
 #include <stdbool.h>
 #include <stdio.h>
-#include <edid_utils.h>
 #include <xf86drm.h>
 #include <xf86drmMode.h>
+
+#define EDID_SIZE 0x80
 
 typedef struct _drm_t {
 	int refcount;
