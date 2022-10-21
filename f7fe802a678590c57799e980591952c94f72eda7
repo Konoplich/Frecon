@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4a0ba447_03a86db2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1150560
+      },
+      "writtenOn": "2022-10-21T01:11:58Z",
+      "side": 1,
+      "message": "LGTM. I wonder if we have any other public header with EDID enums and consts that we could switch to.",
+      "revId": "f7fe802a678590c57799e980591952c94f72eda7",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    }
+  ]
+}
