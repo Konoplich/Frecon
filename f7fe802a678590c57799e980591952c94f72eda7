@@ -16,6 +16,24 @@
       "message": "LGTM. I wonder if we have any other public header with EDID enums and consts that we could switch to.",
       "revId": "f7fe802a678590c57799e980591952c94f72eda7",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3c0f0fd6_774bb93e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1512777
+      },
+      "writtenOn": "2022-10-21T02:13:26Z",
+      "side": 1,
+      "message": "I just found edid_utils was originated from chrontel and then moved to cras:\nhttps://chromium.googlesource.com/chromiumos/third_party/chrontel/+/d6f5c612f9de3b6650f361fc0d5ba469aaceabcd, so the cras one is the source of truth (I thought it was a vendored copy of another package).\n\nDo you know if the chrontel package is still used? I don\u0027t find it being referenced by an ebuild.\n\nIf there are multiple packages depending on edid_utils, maybe it makes sense to continue to expose it from cras. On the other hand, it seems frecon and cras only use a tiny subset of edid_utils.",
+      "parentUuid": "4a0ba447_03a86db2",
+      "revId": "f7fe802a678590c57799e980591952c94f72eda7",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
     }
   ]
 }
