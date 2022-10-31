@@ -33,6 +33,24 @@
       "message": "https://chromium-review.googlesource.com/c/chromiumos/platform/frecon/+/2437508",
       "revId": "8432e94cf4bd7f0232705043d119e1537958ef2b",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "db2eb504_d37a81d1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1363554
+      },
+      "writtenOn": "2022-10-31T16:00:46Z",
+      "side": 1,
+      "message": "So, trying to remember the history here.. at the time my CL was reverted because switching to atomic was exposing an ozone bug (b/169889131).  The original motivation to fix the atomic check was b/162464529.  I filed https://bugs.chromium.org/p/chromium/issues/detail?id\u003d1134664 for the ozone bug (although maybe that should be migrated to b/)\n\ntl;dr: No idea if the ozone bug is still there, if so either this CL or mine would bring back the issue.  But checking for error on drmSetClientCap(ATOMIC) is the correct way to detect atomic support.",
+      "parentUuid": "b1f1e100_8a9bb596",
+      "revId": "8432e94cf4bd7f0232705043d119e1537958ef2b",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
     }
   ]
 }
