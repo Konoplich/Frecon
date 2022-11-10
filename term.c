@@ -792,7 +792,9 @@ int term_create_splash_term(int pts_fd)
 
 	// Hide the cursor on the splash screen
 	term_hide_cursor(terminal);
-	term_input_enable(terminal, false);
+	if (!command_flags.enable_vt1) {
+		term_input_enable(terminal, false);
+	}
 	return 0;
 }
 
