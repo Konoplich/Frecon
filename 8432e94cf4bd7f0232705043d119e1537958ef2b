@@ -51,6 +51,24 @@
       "parentUuid": "b1f1e100_8a9bb596",
       "revId": "8432e94cf4bd7f0232705043d119e1537958ef2b",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d6f90b87_bb271a27",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1150560
+      },
+      "writtenOn": "2022-11-24T04:38:10Z",
+      "side": 1,
+      "message": "Yeah, I think we should bring back your old change.",
+      "parentUuid": "db2eb504_d37a81d1",
+      "revId": "8432e94cf4bd7f0232705043d119e1537958ef2b",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
     }
   ]
 }
