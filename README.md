@@ -156,3 +156,18 @@ Frecon creates the following files and links in `/run/frecon` directory:
 - /run/frecon/current is a symlink to currently active terminal
   (/run/frecon/vtX). It can be used to discover which terminal is currently
   active or to write text to currently active terminal.
+
+
+## Example Usage
+
+For the sake of an example let's assume you wish to switch between vt1 -> vt0(normal screen) -> vt1
+we can do so using the following steps:
+
+1. start off by linking /run/frecon/current to /run/frecon/vt1
+2. use exit code to actually switch to vt1 i.e. 'printf "\\033]switchvt:1\\a" > /run/frecon/current'
+3. switch to vt0 now by using the following command  'printf "\\033]switchvt:0\\a" > /run/frecon/current'
+4. repeat steps 1 and 2 since switching to vt0 breaks the link
+
+NOTE: If a valid link already exists for /run/frecon/current you do not need to create the link
+as would be the case if we were to switch between vt1 -> vt2 etc. However if the link is invalid
+you will have to delete it and recreating it before using escape codes to switch.
