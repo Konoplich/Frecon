@@ -484,6 +484,17 @@ static void term_clear_border(terminal_t* terminal)
 	fb_unlock(terminal->fb);
 }
 
+static void term_hide_cursor(terminal_t* terminal)
+{
+	tsm_screen_set_flags(terminal->term->screen, TSM_SCREEN_HIDE_CURSOR);
+}
+
+__attribute__ ((unused))
+static void term_show_cursor(terminal_t* terminal)
+{
+	term_write_message(terminal, "\033[?25h");
+}
+
 terminal_t* term_init(unsigned vt, int pts_fd)
 {
 	const int scrollback_size = 200;
@@ -587,6 +598,9 @@ terminal_t* term_init(unsigned vt, int pts_fd)
 		term_close(new_terminal);
 		return NULL;
 	}
+
+	if (!interactive)
+		term_hide_cursor(new_terminal);
 
 	return new_terminal;
 }
@@ -753,17 +767,6 @@ void term_write_message(terminal_t* terminal, char* message)
 		fputs(message, fp);
 		fclose(fp);
 	}
-}
-
-static void term_hide_cursor(terminal_t* terminal)
-{
-	tsm_screen_set_flags(terminal->term->screen, TSM_SCREEN_HIDE_CURSOR);
-}
-
-__attribute__ ((unused))
-static void term_show_cursor(terminal_t* terminal)
-{
-	term_write_message(terminal, "\033[?25h");
 }
 
 fb_t* term_getfb(terminal_t* terminal)
