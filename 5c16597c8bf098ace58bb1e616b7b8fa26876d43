@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3a4dbea8_ee8c6ebf",
+        "filename": "term.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 602,
+      "author": {
+        "id": 1330845
+      },
+      "writtenOn": "2023-01-11T05:38:43Z",
+      "side": 1,
+      "message": "meant to remove this?",
+      "range": {
+        "startLine": 602,
+        "startChar": 0,
+        "endLine": 602,
+        "endChar": 14
+      },
+      "revId": "5c16597c8bf098ace58bb1e616b7b8fa26876d43",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    }
+  ]
+}
