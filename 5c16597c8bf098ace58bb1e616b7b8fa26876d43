@@ -22,6 +22,30 @@
       },
       "revId": "5c16597c8bf098ace58bb1e616b7b8fa26876d43",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8d4659e5_56ac27b5",
+        "filename": "term.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 602,
+      "author": {
+        "id": 1297197
+      },
+      "writtenOn": "2023-01-11T18:11:22Z",
+      "side": 1,
+      "message": "Yes, this will be reverted.\n\nCQ is failing for this CL and I\u0027m trying to see if CQ will pass with a no-op change.   Based on the current results (CQ still failing with this no-op version), CQ is itself is broken and the CL doesn\u0027t seem to have anything to do with it.",
+      "parentUuid": "3a4dbea8_ee8c6ebf",
+      "range": {
+        "startLine": 602,
+        "startChar": 0,
+        "endLine": 602,
+        "endChar": 14
+      },
+      "revId": "5c16597c8bf098ace58bb1e616b7b8fa26876d43",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
     }
   ]
 }
