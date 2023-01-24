@@ -373,7 +373,10 @@ int main(int argc, char* argv[])
 		int status;
 
 		daemonize(command_flags.pre_create_vts);
-		status = mkdir(FRECON_RUN_DIR, S_IRWXU);
+		/* Give other groups/users access to the directory.
+		 * This is necessary for chargesplash to kill/restart frecon, change pty,
+		 * etc. */
+		status = mkdir(FRECON_RUN_DIR, 0777);
 		if (status == 0 || (status < 0 && errno == EEXIST)) {
 			char pids[32];
 
