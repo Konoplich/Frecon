@@ -16,6 +16,24 @@
       "message": "there is another term_hide_cursor in term_create_splash_term\nalso, you can consider whether input should be enabled or disabled here as well. see term_input_enable in term_create_splash_term.",
       "revId": "98f6245a3f073e0ba9c06d2f18d187ff3ba34784",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1b31a883_1b89dec5",
+        "filename": "term.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 603,
+      "author": {
+        "id": 1297197
+      },
+      "writtenOn": "2023-01-25T22:40:31Z",
+      "side": 1,
+      "message": "I pulled those calls out of `term_create_splash_term()` and moved them here too. It seems to be working correctly playing with it, but let me know what you think.",
+      "parentUuid": "f6adc844_18c56c94",
+      "revId": "98f6245a3f073e0ba9c06d2f18d187ff3ba34784",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
     }
   ]
 }
