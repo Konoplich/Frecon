@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "62d8a6ef_7e117dff",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1150560
+      },
+      "writtenOn": "2023-01-25T02:25:04Z",
+      "side": 1,
+      "message": "Tim, could you please address my comment about cursor being already hidden in splash screen and possibly remove it from there and migrate it to this new location.\nAlso please consider disabling input for all non-interactive terminals by default.",
+      "revId": "e614dd40527882c78d71d769cc2f0cc1b222501f",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    }
+  ]
+}
