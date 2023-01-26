@@ -34,6 +34,24 @@
       "parentUuid": "393e296f_ac7b2215",
       "revId": "30822492ee7bcf605876b14f076fec3b67aceb2d",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b47c8892_8557b4d3",
+        "filename": "main.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 379,
+      "author": {
+        "id": 1297197
+      },
+      "writtenOn": "2023-01-26T00:17:13Z",
+      "side": 1,
+      "message": "I tested pulling in those patches and adding the `chargesplash` user to the `frecon` group, and everything seems to be working well.\n\nI\u0027m fine with either approach, though I\u0027d lean toward using the `tty` group if it makes sense, since there does seem to be some overlap there.",
+      "parentUuid": "9c206afd_b57674ba",
+      "revId": "30822492ee7bcf605876b14f076fec3b67aceb2d",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
     }
   ]
 }
