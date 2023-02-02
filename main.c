@@ -373,7 +373,7 @@ int main(int argc, char* argv[])
 		int status;
 
 		daemonize(command_flags.pre_create_vts);
-		status = mkdir(FRECON_RUN_DIR, S_IRWXU);
+		status = mkdir(FRECON_RUN_DIR, S_IRWXU | S_IRWXG);
 		if (status == 0 || (status < 0 && errno == EEXIST)) {
 			char pids[32];
 
