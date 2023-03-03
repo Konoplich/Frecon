@@ -3,3 +3,6 @@
 
 /frecon
 /glyphs.h
+
+# Clion IDE
+.idea/
