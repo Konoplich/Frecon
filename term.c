@@ -484,17 +484,6 @@ static void term_clear_border(terminal_t* terminal)
 	fb_unlock(terminal->fb);
 }
 
-static void term_hide_cursor(terminal_t* terminal)
-{
-	tsm_screen_set_flags(terminal->term->screen, TSM_SCREEN_HIDE_CURSOR);
-}
-
-__attribute__ ((unused))
-static void term_show_cursor(terminal_t* terminal)
-{
-	term_write_message(terminal, "\033[?25h");
-}
-
 terminal_t* term_init(unsigned vt, int pts_fd)
 {
 	const int scrollback_size = 200;
@@ -597,11 +586,6 @@ terminal_t* term_init(unsigned vt, int pts_fd)
 		LOG(ERROR, "Failed to resize VT%u.", vt);
 		term_close(new_terminal);
 		return NULL;
-	}
-
-	if (!interactive) {
-		term_hide_cursor(new_terminal);
-		term_input_enable(new_terminal, false);
 	}
 
 	return new_terminal;
@@ -771,6 +755,17 @@ void term_write_message(terminal_t* terminal, char* message)
 	}
 }
 
+static void term_hide_cursor(terminal_t* terminal)
+{
+	tsm_screen_set_flags(terminal->term->screen, TSM_SCREEN_HIDE_CURSOR);
+}
+
+__attribute__ ((unused))
+static void term_show_cursor(terminal_t* terminal)
+{
+	term_write_message(terminal, "\033[?25h");
+}
+
 fb_t* term_getfb(terminal_t* terminal)
 {
 	return terminal->fb;
@@ -795,6 +790,11 @@ int term_create_splash_term(int pts_fd)
 	}
 	term_set_terminal(TERM_SPLASH_TERMINAL, terminal);
 
+	// Hide the cursor on the splash screen
+	term_hide_cursor(terminal);
+	if (!command_flags.enable_vt1) {
+		term_input_enable(terminal, false);
+	}
 	return 0;
 }
 
