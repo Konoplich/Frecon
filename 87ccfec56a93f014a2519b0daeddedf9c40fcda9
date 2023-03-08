@@ -16,6 +16,24 @@
       "message": "Is a bug filed to create test coverage where it\u0027s missing?",
       "revId": "87ccfec56a93f014a2519b0daeddedf9c40fcda9",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "23bebcac_fd973f12",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1136349
+      },
+      "writtenOn": "2023-03-08T01:49:53Z",
+      "side": 1,
+      "message": "This is a good question.  Because the symptom is \"input is disabled\", I\u0027m not sure if there\u0027s anyway to test it end to end except using manual test.\n\nIf you have unittest in frecon, then maybe we can add a test case that the arguments:\n```\n--enable-vt1 --daemon --no-login --enable-vts \\\n    --pre-create-vts --num-vts\u003d8 --enable-gfx\n```\nWon\u0027t make frecon disable input.  (These are the arguments factory installer is using.\n\nOr, if frecon can have a utility / option that prints out the final interactive mode, then we can run a test in factory installer side to call frecon and check if the mode is enable.",
+      "parentUuid": "91048691_3f7a8913",
+      "revId": "87ccfec56a93f014a2519b0daeddedf9c40fcda9",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
     }
   ]
 }
