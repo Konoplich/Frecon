@@ -117,7 +117,7 @@ printf "\033]box:color=0xFFFFFFFF;size=100,100\a" > /dev/pts/1
 
 An escape code can be used to enable/disable keyboard input processing on
 a terminal. The setting is stored per terminal and applies to input "within"
-terminal. Swithing between terminals, scrolling, backlight control etc remains
+terminal. Switching between terminals, scrolling, backlight control etc remains
 operational.
 
 `input:onoff`
