@@ -16,6 +16,23 @@
       "message": "PTAL",
       "revId": "f35b71df618847d814b736d4ee4717162d507855",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "71a73b43_143726c7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1150560
+      },
+      "writtenOn": "2023-03-29T21:52:35Z",
+      "side": 1,
+      "message": "Have you heard of VSCode and cros-ide ? ;-)\nhttps://marketplace.visualstudio.com/items?itemName\u003dGoogle.cros-ide",
+      "revId": "f35b71df618847d814b736d4ee4717162d507855",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
     }
   ]
 }
