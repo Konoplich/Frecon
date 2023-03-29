@@ -33,6 +33,24 @@
       "message": "Have you heard of VSCode and cros-ide ? ;-)\nhttps://marketplace.visualstudio.com/items?itemName\u003dGoogle.cros-ide",
       "revId": "f35b71df618847d814b736d4ee4717162d507855",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c2131b3d_bf67b679",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1297197
+      },
+      "writtenOn": "2023-03-29T22:05:28Z",
+      "side": 1,
+      "message": "Yup. I use it to generate the `compile_commands.json`, which I open with CLion.\n\nVSCode is ok, but I like CLion\u0027s interface a lot better. I think CLion is a lot better at stuff like finding usages, call chains, git integration, etc.\n\nOf course, it\u0027s all comes down to personal preference.",
+      "parentUuid": "71a73b43_143726c7",
+      "revId": "f35b71df618847d814b736d4ee4717162d507855",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
     }
   ]
 }
