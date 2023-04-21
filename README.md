@@ -48,10 +48,12 @@ repeats forever.  Looping has to be enabled using `--loop-start`.
 	Specify default time (in milliseconds) between frames of loop animation.
 * `--loop-offset=x,y`
 	Specify default offset to centered image in loop.
-* `--no-login`
+* `--no-login<=terminal_number>`
 	When additional terminals are enabled do not display login prompt on
 them. Can be used by scripts to display debugging information and logs on
-additional terminals.
+additional terminals. The `terminal_number` parameter is optional, and will
+disable login on only that terminal. If `terminal_number` is not specified,
+login is disabled on all terminals.
 * `--num-vts=N`
 	Specify number of enabled VTs. The default is 4, the maximum is 12.
 * `--offset=x,y`

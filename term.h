@@ -27,6 +27,7 @@ extern unsigned int term_num_terminals;
 
 typedef struct _terminal_t terminal_t;
 
+void term_set_no_login_terminal(unsigned new_terminal_num);
 void term_set_num_terminals(unsigned new_num);
 terminal_t* term_init(unsigned vt, int pts_fd);
 void term_close(terminal_t* terminal);

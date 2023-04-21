@@ -65,7 +65,7 @@ static const struct option command_options[] = {
 	{ "loop-interval", required_argument, NULL, FLAG_LOOP_INTERVAL },
 	{ "loop-offset", required_argument, NULL, FLAG_LOOP_OFFSET },
 	{ "num-vts", required_argument, NULL, FLAG_NUM_VTS },
-	{ "no-login", no_argument, NULL, FLAG_NO_LOGIN },
+	{ "no-login", optional_argument, NULL, FLAG_NO_LOGIN },
 	{ "offset", required_argument, NULL, FLAG_OFFSET },
 	{ "print-resolution", no_argument, NULL, FLAG_PRINT_RESOLUTION },
 	{ "pre-create-vts", no_argument, NULL, FLAG_PRE_CREATE_VTS },
@@ -332,7 +332,14 @@ int main(int argc, char* argv[])
 				break;
 
 			case FLAG_NO_LOGIN:
-				command_flags.no_login = true;
+                if (optarg) {
+                  term_set_no_login_terminal(strtoul(optarg, NULL, 0));
+                } else {
+                  // No argument given, so disable login for all terminals.
+                  for (int i = 0; i < TERM_MAX_TERMINALS; ++i) {
+                    term_set_no_login_terminal(i);
+                  }
+                }
 				break;
 
 			case FLAG_NUM_VTS:
@@ -513,7 +520,7 @@ int main(int argc, char* argv[])
 		else
 			term_background(true);
 	} else {
-		/* Create and switch to first term in interactve mode. */
+		/* Create and switch to first term in interactive mode. */
 		set_drm_master_relax();
 		term_switch_to(command_flags.enable_vt1 ? TERM_SPLASH_TERMINAL : 1);
 	}
