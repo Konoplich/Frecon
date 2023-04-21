@@ -57,12 +57,12 @@ additional terminals.
 * `--offset=x,y`
 	Specify absolute location of the splash image on screen.
 * `--pre-create-vts`
-	Normally VTs are create on demand the the user switches to a VT.
+	Normally VTs are created on demand when the user switches to a VT.
 In some cases it may be necessary to pre-create them at startup, for instance
-to write a log or debug output for them while they are not active so it can be
-examined later. This option allows for that. This option also ensures daemon
-parent waits for daemon child to finish initalization so consoles are created
-by the time daemon parent exits.
+to write a log or debug output for them while they are not active, so it can be
+examined later. This option allows for that. This option also ensures the daemon
+parent waits for each daemon child to finish initialization so consoles are
+created by the time the daemon parent exits.
 * `--print-resolution`
 	Print detected screen resolution and exit. Deprecated.
 * `--scale=N`
@@ -71,17 +71,17 @@ integer number. Default scale is 1. 0 has a special meaning - using scale 1
 for screens with horizontal resolution lower and equal than 1920 and 2
 otherwise.  Scale affects image/box size and offset.
 * `--splash-only`
-	Exit immediately after finishing splash animation. Otherwise frecon
+	Exit immediately after finishing splash animation. Otherwise, frecon
 will wait for DBUS signal (LoginScreenVisible) from Chrome before exiting
 when extra terminals are not enabled.
 * `--image=/path/to/image.png`
 * `--image-hires=/path/to/image.png`
 or any image file name specified after options
 	Add image to splash screen animation. `--image` and `--image-hires` are
-added conditionally depending whether horizontal or vertical screen resolution
-is above 1920. This allows frecon to make runtime decision which set of images
-to use instead running frecon first with `--print-resolution` option and making
-this decision in a script that invokes frecon.
+added conditionally depending on whether horizontal or vertical screen
+resolution is above 1920. This allows frecon to make runtime decision which set
+of images to use instead running frecon first with `--print-resolution` option
+and making this decision in a script that invokes frecon.
 Free form image file name in the command line are added unconditionally.
 
 ## Imaging escape codes
@@ -117,7 +117,7 @@ printf "\033]box:color=0xFFFFFFFF;size=100,100\a" > /dev/pts/1
 
 An escape code can be used to enable/disable keyboard input processing on
 a terminal. The setting is stored per terminal and applies to input "within"
-terminal. Switching between terminals, scrolling, backlight control etc remains
+terminal. Switching between terminals, scrolling, backlight control etc. remains
 operational.
 
 `input:onoff`
@@ -168,6 +168,7 @@ we can do so using the following steps:
 3. switch to vt0 now by using the following command  'printf "\\033]switchvt:0\\a" > /run/frecon/current'
 4. repeat steps 1 and 2 since switching to vt0 breaks the link
 
-NOTE: If a valid link already exists for /run/frecon/current you do not need to create the link
-as would be the case if we were to switch between vt1 -> vt2 etc. However if the link is invalid
-you will have to delete it and recreating it before using escape codes to switch.
+NOTE: If a valid link already exists for /run/frecon/current you do not need to
+create the link as would be the case if we were to switch between vt1 -> vt2
+etc. However, if the link is invalid you will have to delete it and recreating
+it before using escape codes to switch.

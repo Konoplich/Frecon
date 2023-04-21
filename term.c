@@ -698,14 +698,6 @@ bool term_is_valid(terminal_t* terminal)
 	return ((terminal != NULL) && (terminal->term != NULL));
 }
 
-int term_fd(terminal_t* terminal)
-{
-	if (term_is_valid(terminal))
-		return terminal->term->pty_bridge;
-	else
-		return -1;
-}
-
 void term_dispatch_io(terminal_t* terminal, fd_set* read_set)
 {
 	if (term_is_valid(terminal))
@@ -868,7 +860,7 @@ void term_set_current_to(terminal_t* terminal)
 	LOG(ERROR, "set_current_to: terminal not in array");
 }
 
-int term_switch_to(unsigned int vt)
+void term_switch_to(unsigned int vt)
 {
 	terminal_t *terminal;
 	if (vt == term_get_current()) {
@@ -876,12 +868,15 @@ int term_switch_to(unsigned int vt)
 		if (term_is_valid(terminal)) {
 			if (!term_is_active(terminal))
 				term_activate(terminal);
-			return vt;
+            return;
 		}
 	}
 
-	if (vt >= term_num_terminals)
-		return -EINVAL;
+	if (vt >= term_num_terminals) {
+      LOG(ERROR, "Invalid terminal number: vt = %u, term_num_terminals = %u",
+          vt, term_num_terminals);
+      return;
+    }
 
 	terminal = term_get_current_terminal();
 	if (term_is_active(terminal))
@@ -893,7 +888,7 @@ int term_switch_to(unsigned int vt)
 		term_set_current(vt);
 		/* Splash term is already gone, returning to Chrome. */
 		term_background(false);
-		return vt;
+		return;
 	}
 
 	term_foreground();
@@ -906,14 +901,12 @@ int term_switch_to(unsigned int vt)
 		terminal = term_get_current_terminal();
 		if (!term_is_valid(terminal)) {
 			LOG(ERROR, "Term init failed VT%u.", vt);
-			return -1;
+			return;
 		}
 		term_activate(terminal);
 	} else {
 		term_activate(terminal);
 	}
-
-	return vt;
 }
 
 void term_monitor_hotplug(void)

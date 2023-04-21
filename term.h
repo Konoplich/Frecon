@@ -30,7 +30,6 @@ typedef struct _terminal_t terminal_t;
 void term_set_num_terminals(unsigned new_num);
 terminal_t* term_init(unsigned vt, int pts_fd);
 void term_close(terminal_t* terminal);
-void term_close(terminal_t* terminal);
 void term_key_event(terminal_t* terminal, uint32_t keysym, int32_t unicode);
 bool term_is_child_done(terminal_t* terminal);
 
@@ -40,7 +39,6 @@ void term_line_up(terminal_t* terminal);
 void term_line_down(terminal_t* terminal);
 
 bool term_is_valid(terminal_t* terminal);
-int term_fd(terminal_t* terminal);
 void term_dispatch_io(terminal_t* terminal, fd_set* read_set);
 bool term_exception(terminal_t*, fd_set* exception_set);
 bool term_is_active(terminal_t*);
@@ -62,7 +60,7 @@ uint32_t term_get_current(void);
 terminal_t *term_get_current_terminal(void);
 void term_set_current_terminal(terminal_t* terminal);
 void term_set_current_to(terminal_t* terminal);
-int term_switch_to(unsigned int vt);
+void term_switch_to(unsigned int vt);
 void term_monitor_hotplug(void);
 void term_redrm(terminal_t* terminal);
 void term_clear(terminal_t* terminal);

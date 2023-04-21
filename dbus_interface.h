@@ -50,4 +50,4 @@ static const char kReleaseOwnership[] = "ReleaseOwnership";
 static const char kFreconDbusInterface[] = "org.chromium.frecon";
 static const char kFreconDbusPath[] = "/org/chromium/frecon";
 
-#endif // FRECON_DBUS_API_H_
+#endif // DBUS_INTERFACE_H_
