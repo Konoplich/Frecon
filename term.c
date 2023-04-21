@@ -28,6 +28,9 @@
 unsigned int term_num_terminals = 4;
 static terminal_t* terminals[TERM_MAX_TERMINALS];
 static uint32_t current_terminal = 0;
+// List of terminals with login disabled.
+// Login is enabled by default, until |--no-login| is used.
+static int no_login_terminals[TERM_MAX_TERMINALS] = { false };
 
 struct term {
 	struct tsm_screen* screen;
@@ -429,6 +432,11 @@ static int term_resize(terminal_t* term, int scaling)
 	return 0;
 }
 
+void term_set_no_login_terminal(unsigned new_terminal_num)
+{
+	no_login_terminals[new_terminal_num] = true;
+}
+
 void term_set_num_terminals(unsigned new_num)
 {
 	if (new_num < 1)
@@ -441,7 +449,7 @@ void term_set_num_terminals(unsigned new_num)
 
 static bool term_is_interactive(unsigned int vt)
 {
-	if (command_flags.no_login)
+	if (no_login_terminals[vt])
 		return false;
 
 	if (vt == TERM_SPLASH_TERMINAL)
