@@ -26,6 +26,8 @@
 #include "term.h"
 #include "util.h"
 
+#define  DBUS_WAIT_DELAY_US  50000
+
 #define  FLAG_CLEAR                        'c'
 #define  FLAG_DAEMON                       'd'
 #define  FLAG_ENABLE_OSC                   'G'
@@ -145,6 +147,17 @@ static void parse_offset(char* param, int32_t* x, int32_t* y)
 		*y = strtol(token, NULL, 0);
 }
 
+static void main_on_login_prompt_visible(void)
+{
+	if (command_flags.daemon && !command_flags.enable_vts) {
+		LOG(INFO, "Chrome started, our work is done, exiting.");
+		exit(EXIT_SUCCESS);
+	} else {
+		if (command_flags.enable_vt1)
+			LOG(WARNING, "VT1 enabled and Chrome is active!");
+	}
+}
+
 int main_process_events(uint32_t usec)
 {
 	terminal_t* terminal;
@@ -218,12 +231,49 @@ int main_process_events(uint32_t usec)
 	return 0;
 }
 
+uint32_t get_process_events_timeout()
+{
+	uint32_t usec = 0;
+
+	if (!dbus_is_initialized()) {
+		/*
+		 * The DBUS service launches later than the boot-splash service, and
+		 * as a result, when splash_run starts DBUS is not yet up. Keep
+		 * trying to initialize it while we're waiting.
+		 */
+		if (dbus_init()) {
+			LOG(INFO, "DBUS initialized.");
+			/*
+			 * Ask DBUS to call us back so we can quit when login prompt is
+			 * visible.
+			 */
+			dbus_set_login_prompt_visible_callback(
+				main_on_login_prompt_visible);
+			/*
+			 * Ask DBUS to notify us when suspend has finished so monitors
+			 * can be reprobed in case they changed during suspend.
+			 */
+			dbus_set_suspend_done_callback(term_suspend_done, NULL);
+		} else {
+			/*
+			 * Wait a bit for DBus to come up, so we don't flood the system
+			 * with requests.
+			 */
+			usec = DBUS_WAIT_DELAY_US;
+		}
+	}
+
+	return usec;
+}
+
 int main_loop(void)
 {
 	int status;
 
 	while (1) {
-		status = main_process_events(0);
+		uint32_t usec = get_process_events_timeout();
+
+		status = main_process_events(usec);
 		if (status != 0) {
 			LOG(ERROR, "Input process returned %d.", status);
 			break;
@@ -255,17 +305,6 @@ bool set_drm_master_relax(void)
 		return false;
 	}
 	return true;
-}
-
-static void main_on_login_prompt_visible(void)
-{
-	if (command_flags.daemon && !command_flags.enable_vts) {
-		LOG(INFO, "Chrome started, our work is done, exiting.");
-		exit(EXIT_SUCCESS);
-	} else {
-		if (command_flags.enable_vt1)
-			LOG(WARNING, "VT1 enabled and Chrome is active!");
-	}
 }
 
 static void legacy_print_resolution(int argc, char* argv[])
@@ -494,23 +533,6 @@ int main(int argc, char* argv[])
 
 	if (command_flags.splash_only)
 		goto main_done;
-
-	/*
-	 * The DBUS service launches later than the boot-splash service, and
-	 * as a result, when splash_run starts DBUS is not yet up, but, by
-	 * the time splash_run completes, it is running.
-	 * We really need DBUS now, so we can interact with Chrome.
-	 */
-	dbus_init_wait();
-	/*
-	 * Ask DBUS to call us back so we can quit when login prompt is visible.
-	 */
-	dbus_set_login_prompt_visible_callback(main_on_login_prompt_visible);
-	/*
-	 * Ask DBUS to notify us when suspend has finished so monitors can be reprobed
-	 * in case they changed during suspend.
-	 */
-	dbus_set_suspend_done_callback(term_suspend_done, NULL);
 
 	if (command_flags.daemon) {
 		if (command_flags.enable_vts)
