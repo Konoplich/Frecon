@@ -12,11 +12,6 @@ bool dbus_init()
 	return true;
 }
 
-bool dbus_init_wait()
-{
-	return true;
-}
-
 void dbus_destroy(void)
 {
 }
