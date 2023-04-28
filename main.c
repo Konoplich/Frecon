@@ -48,7 +48,7 @@
 #define  FLAG_PRINT_RESOLUTION             'p'
 #define  FLAG_SCALE                        'S'
 #define  FLAG_SPLASH_ONLY                  's'
-#define  FLAG_WAIT_CHILD                   'w'
+#define  FLAG_WAIT_DROP_MASTER             'W'
 
 static const struct option command_options[] = {
 	{ "clear", required_argument, NULL, FLAG_CLEAR },
@@ -73,6 +73,7 @@ static const struct option command_options[] = {
 	{ "pre-create-vts", no_argument, NULL, FLAG_PRE_CREATE_VTS },
 	{ "scale", required_argument, NULL, FLAG_SCALE },
 	{ "splash-only", no_argument, NULL, FLAG_SPLASH_ONLY },
+	{ "wait-drop-master", no_argument, NULL, FLAG_WAIT_DROP_MASTER },
 	{ NULL, 0, NULL, 0 }
 };
 static const char * const command_help[] = {
@@ -98,6 +99,7 @@ static const char * const command_help[] = {
 	"Create all VTs immediately instead of on-demand.",
 	"Default scale for splash screen images.",
 	"Exit immediately after finishing splash animation.",
+	"Wait to drop DRM master until the escape code is received.",
 };
 
 static void usage(int status)
@@ -386,6 +388,10 @@ int main(int argc, char* argv[])
 				command_flags.splash_only = true;
 				break;
 
+			case FLAG_WAIT_DROP_MASTER:
+				command_flags.wait_drop_master = true;
+				break;
+
 			case FLAG_HELP:
 				usage(0);
 				break;
@@ -532,7 +538,7 @@ int main(int argc, char* argv[])
 			set_drm_master_relax();
 		if (command_flags.enable_vt1)
 			term_switch_to(TERM_SPLASH_TERMINAL);
-		else
+		else if (!command_flags.wait_drop_master)
 			term_background(true);
 	} else {
 		/* Create and switch to first term in interactve mode. */

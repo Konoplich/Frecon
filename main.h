@@ -21,6 +21,7 @@ typedef struct {
 	bool    enable_osc;
 	bool    no_login;
 	bool    pre_create_vts;
+	bool    wait_drop_master;
 } commandflags_t;
 
 extern commandflags_t command_flags;
