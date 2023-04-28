@@ -15,9 +15,7 @@
 #include "term.h"
 #include "util.h"
 
-#define DBUS_WAIT_DELAY_US             (50000)
 #define DBUS_DEFAULT_DELAY             3000
-#define DBUS_INIT_TIMEOUT_MS           (60*1000)
 
 typedef struct _dbus_t dbus_t;
 
@@ -181,21 +179,6 @@ bool dbus_init()
 	dbus_connection_set_exit_on_disconnect(new_dbus->conn, FALSE);
 
 	dbus = new_dbus;
-	return true;
-}
-
-bool dbus_init_wait()
-{
-	while (!dbus_is_initialized()) {
-		if (!dbus_init()) {
-			int64_t t = get_monotonic_time_ms() - dbus_first_init_time;
-			if (t >= DBUS_INIT_TIMEOUT_MS) {
-				LOG(ERROR, "DBUS init failed after a timeout of %u sec", DBUS_INIT_TIMEOUT_MS/1000);
-				return false;
-			}
-		}
-		usleep(DBUS_WAIT_DELAY_US);
-	}
 	return true;
 }
 
