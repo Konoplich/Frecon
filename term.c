@@ -333,6 +333,11 @@ static void term_esc_switchvt(terminal_t* terminal, char* params)
 	term_switch_to(vt);
 }
 
+static void term_esc_drmdropmaster(terminal_t* terminal, char* params)
+{
+    drm_dropmaster(NULL);
+}
+
 /*
  * Assume all one or two digit sequences followed by ; are xterm OSC escapes.
  */
@@ -376,6 +381,8 @@ static void term_osc_cb(struct tsm_vte *vte, const uint32_t *osc_string,
 		term_esc_input(terminal, osc + 6);
 	else if (strncmp(osc, "switchvt:", 9) == 0)
 		term_esc_switchvt(terminal, osc + 9);
+	else if (strncmp(osc, "drmdropmaster", 13) == 0)
+		term_esc_drmdropmaster(terminal, osc + 13);
 	else if (is_xterm_osc(osc))
 		; /* Ignore it. */
 	else
@@ -895,7 +902,7 @@ void term_switch_to(unsigned int vt)
 	    && !command_flags.enable_vt1) {
 		term_set_current(vt);
 		/* Splash term is already gone, returning to Chrome. */
-		term_background(false);
+		term_background(true);
 		return;
 	}
 
