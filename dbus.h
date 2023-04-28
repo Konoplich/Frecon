@@ -13,7 +13,6 @@
 #include <stdio.h>
 
 bool dbus_init();
-bool dbus_init_wait();
 void dbus_destroy(void);
 void dbus_add_fds(fd_set* read_set, fd_set* exception_set, int *maxfd);
 void dbus_dispatch_io(void);
