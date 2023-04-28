@@ -83,6 +83,9 @@ is above 1920. This allows frecon to make runtime decision which set of images
 to use instead running frecon first with `--print-resolution` option and making
 this decision in a script that invokes frecon.
 Free form image file name in the command line are added unconditionally.
+* `--wait-drop-master`
+    Wait to call drmDropMaster until prompted by the caller with the escape
+code: `drmdropmaster:`.
 
 ## Imaging escape codes
 
@@ -168,6 +171,12 @@ we can do so using the following steps:
 3. switch to vt0 now by using the following command  'printf "\\033]switchvt:0\\a" > /run/frecon/current'
 4. repeat steps 1 and 2 since switching to vt0 breaks the link
 
-NOTE: If a valid link already exists for /run/frecon/current you do not need to create the link
-as would be the case if we were to switch between vt1 -> vt2 etc. However if the link is invalid
-you will have to delete it and recreating it before using escape codes to switch.
+## DRM Drop Master
+
+An escape code can be used to tell frecon to drop DRM master. This is useful
+when `frecon` is invoked with `--wait-drop-master`.
+
+Example:
+```sh
+printf "\033]drmdropmaster\a" > /run/frecon/current
+```
