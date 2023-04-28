@@ -1005,6 +1005,13 @@ void term_background(bool onetry)
 		return;
 	in_background = true;
 	drm_dropmaster(NULL);
+
+	if (!dbus_is_initialized()) {
+		LOG(INFO, "Unable to send display ownership DBus message to "
+                	"Chrome DisplayService: DBus not initialized");
+		return;
+	}
+
 	while (!dbus_take_display_ownership() && retry--) {
 		if (onetry)
 			break;
