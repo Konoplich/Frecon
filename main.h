@@ -20,6 +20,7 @@ typedef struct {
 	bool    splash_only;
 	bool    enable_osc;
 	bool    pre_create_vts;
+	bool    wait_drop_master;
 } commandflags_t;
 
 extern commandflags_t command_flags;
