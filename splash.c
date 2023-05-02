@@ -134,6 +134,15 @@ int splash_run(splash_t* splash)
 	if (!terminal)
 		return -ENOENT;
 
+    /* Update the bootstat metrics once the first image is shown */
+    errno = 0;
+    status = system("/usr/sbin/bootstat splash-screen-visible");
+    if (status) {
+      LOG(ERROR, "Failed to execute 'bootstat splash-screen-visible': "
+                 "status = %d, errno = %d (%s)",
+          status, errno, strerror(errno));
+    }
+
 	/*
 	 * First draw the actual splash screen
 	 */
