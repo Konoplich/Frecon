@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c6ef4029_4bc93c8f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1150560
+      },
+      "writtenOn": "2023-05-04T08:21:22Z",
+      "side": 1,
+      "message": "I am not sure that keeping master is the best way of making Chrome wait for frecon to finish.\nBut as far as frecon is concerned, it is fine ;-)",
+      "revId": "b6b17194353362f75904bc17a6f327fc7246be21",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    }
+  ]
+}
