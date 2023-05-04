@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2240e2b8_f8949bc1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1150560
+      },
+      "writtenOn": "2023-05-04T08:28:17Z",
+      "side": 1,
+      "message": "The change in itself looks fine.\nI am just a little concerned about how it is supposed to be used?\nDoes chargesplash actually need login on any terminal?",
+      "revId": "88e63880b507f21ebc00e3ace4ff2094751a5b69",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    }
+  ]
+}
