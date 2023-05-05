@@ -16,6 +16,24 @@
       "message": "The change in itself looks fine.\nI am just a little concerned about how it is supposed to be used?\nDoes chargesplash actually need login on any terminal?",
       "revId": "88e63880b507f21ebc00e3ace4ff2094751a5b69",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cc6bddf1_4150e459",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1297197
+      },
+      "writtenOn": "2023-05-05T15:30:34Z",
+      "side": 1,
+      "message": "This is what I\u0027m seeing without this change:\n\nhttps://photos.app.goo.gl/A3JWtwWu7r4R23q29\n\nChargesplash itself doesn\u0027t need login on any terminals, but we do need it on VT2 once chargesplash has completed (when enabled).\n\nIs there a better approach to handle that?",
+      "parentUuid": "2240e2b8_f8949bc1",
+      "revId": "88e63880b507f21ebc00e3ace4ff2094751a5b69",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
     }
   ]
 }
