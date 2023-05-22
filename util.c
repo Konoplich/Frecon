@@ -194,7 +194,7 @@ bool write_string_to_file(const char *path, const char *s)
 	size_t towrite;
 	ssize_t written;
 
-	fd = open(path, O_CREAT | O_WRONLY | O_TRUNC, S_IRUSR | S_IWUSR);
+	fd = open(path, O_CREAT | O_WRONLY | O_TRUNC, S_IRUSR | S_IWUSR | S_IRGRP);
 	if (!fd)
 		return false;
 
