@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4bfaef89_c78bac99",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1297197
+      },
+      "writtenOn": "2023-05-22T20:46:50Z",
+      "side": 1,
+      "message": "I couldn\u0027t find a clean or consistent way to get the device resolution from anywhere like `cros_config` or via kernel commands, so I went with this version. Let me know if you think there\u0027s anything better to try out though.",
+      "revId": "23efde95d20cbd2c8d554de02611a63f2b43edf9",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    }
+  ]
+}
