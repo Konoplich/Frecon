@@ -416,6 +416,8 @@ int main(int argc, char* argv[])
 	}
 	/* And PID file. */
 	unlink(FRECON_PID_FILE);
+	/* And hi-res file. */
+	unlink(FRECON_HI_RES_FILE);
 
 	/* And current terminal. */
 	unlink(FRECON_CURRENT_VT);
@@ -451,6 +453,16 @@ int main(int argc, char* argv[])
 	if (splash == NULL) {
 		LOG(ERROR, "Splash init failed.");
 		return EXIT_FAILURE;
+	} else {
+		int status;
+
+		status = mkdir(FRECON_RUN_DIR, S_IRWXU | S_IRWXG);
+		if (status == 0 || (status < 0 && errno == EEXIST)) {
+			char hires[32];
+
+			sprintf(hires, "%u", splash_is_hires(splash));
+			write_string_to_file(FRECON_HI_RES_FILE, hires);
+		}
 	}
 
 	if (command_flags.pre_create_vts) {
@@ -564,7 +576,8 @@ main_done:
 	drm_close();
 	if (command_flags.daemon)
 		unlink(FRECON_PID_FILE);
-	unlink(FRECON_CURRENT_VT);
+	unlink(FRECON_HI_RES_FILE);
+        unlink(FRECON_CURRENT_VT);
 
 	return ret;
 }
