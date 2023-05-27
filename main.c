@@ -131,6 +131,7 @@ static void usage(int status)
 
 commandflags_t command_flags = { 0 };
 
+/*
 static void parse_offset(char* param, int32_t* x, int32_t* y)
 {
 	char* token;
@@ -144,6 +145,7 @@ static void parse_offset(char* param, int32_t* x, int32_t* y)
 	if (token)
 		*y = strtol(token, NULL, 0);
 }
+*/
 
 int main_process_events(uint32_t usec)
 {
@@ -268,6 +270,7 @@ static void main_on_login_prompt_visible(void)
 	}
 }
 
+/*
 static void legacy_print_resolution(int argc, char* argv[])
 {
 	int c;
@@ -290,6 +293,7 @@ static void legacy_print_resolution(int argc, char* argv[])
 		}
 	}
 }
+*/
 
 int main(int argc, char* argv[])
 {
@@ -297,11 +301,13 @@ int main(int argc, char* argv[])
 	int c;
 	int pts_fd;
 	unsigned vt;
+/*
 	int32_t x, y;
 	splash_t* splash;
 	drm_t* drm;
 
 	legacy_print_resolution(argc, argv);
+*/
 
 	fix_stdio();
 	pts_fd =  posix_openpt(O_RDWR | O_NOCTTY | O_CLOEXEC | O_NONBLOCK);
@@ -394,6 +400,7 @@ int main(int argc, char* argv[])
 		return EXIT_FAILURE;
 	}
 
+/*
 	drm_set(drm = drm_scan());
 
 	splash = splash_init(pts_fd);
@@ -401,6 +408,7 @@ int main(int argc, char* argv[])
 		LOG(ERROR, "Splash init failed.");
 		return EXIT_FAILURE;
 	}
+*/
 
 	if (command_flags.pre_create_vts) {
 		for (unsigned vt = command_flags.enable_vt1 ? TERM_SPLASH_TERMINAL : 1;
@@ -417,6 +425,7 @@ int main(int argc, char* argv[])
 		daemon_exit_code(EXIT_SUCCESS);
 
 	/* These flags can be only processed after splash object has been created. */
+/*
 	optind = 1;
 	for (;;) {
 		c = getopt_long(argc, argv, "", command_options, NULL);
@@ -487,6 +496,7 @@ int main(int argc, char* argv[])
 
 	if (command_flags.splash_only)
 		goto main_done;
+*/
 
 	/*
 	 * The DBUS service launches later than the boot-splash service, and
@@ -520,7 +530,9 @@ int main(int argc, char* argv[])
 
 	ret = main_loop();
 
+/*
 main_done:
+*/
 	input_close();
 	dev_close();
 	dbus_destroy();
