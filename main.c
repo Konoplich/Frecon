@@ -500,10 +500,12 @@ int main(int argc, char* argv[])
 	if (command_flags.daemon && command_flags.pre_create_vts)
 		daemon_exit_code(EXIT_SUCCESS);
 
-	ret = display_splash_screen(argc, argv);
-	if (ret) {
-		LOG(ERROR, "Splash screen error.");
-		return EXIT_FAILURE;
+	if (!command_flags.no_splash) {
+		ret = display_splash_screen(argc, argv);
+		if (ret) {
+			LOG(ERROR, "Splash screen error.");
+			return EXIT_FAILURE;
+		}
 	}
 
 	if (command_flags.splash_only)
