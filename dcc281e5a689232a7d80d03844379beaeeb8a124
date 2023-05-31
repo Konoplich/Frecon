@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "67884f98_ccd9e959",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1297197
+      },
+      "writtenOn": "2023-05-31T16:00:11Z",
+      "side": 1,
+      "message": "Assuming everyone is still ok with this approach, can I get an owner CR+2 on this CL?",
+      "revId": "dcc281e5a689232a7d80d03844379beaeeb8a124",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    }
+  ]
+}
