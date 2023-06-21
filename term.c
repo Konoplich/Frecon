@@ -332,7 +332,7 @@ static void term_esc_switchvt(terminal_t* terminal, char* params)
 
 static void term_esc_drmdropmaster(terminal_t* terminal, char* params)
 {
-	drm_dropmaster(NULL);
+	term_background(true);
 }
 
 /*
