@@ -894,11 +894,13 @@ int term_switch_to(unsigned int vt)
 	if (term_is_active(terminal))
 		term_deactivate(terminal);
 
+	/* Always background the splash terminal, so Chrome can become DRM
+	 * master. */
 	if (vt == TERM_SPLASH_TERMINAL
-	    && !term_get_terminal(TERM_SPLASH_TERMINAL)
 	    && !command_flags.enable_vt1) {
 		term_set_current(vt);
-		/* Splash term is already gone, returning to Chrome. */
+                /* Returning to Chrome. Splash screen animation may be still
+                 * running in background. */
 		term_background(true);
 		return vt;
 	}
