@@ -565,7 +565,8 @@ int main(int argc, char* argv[])
 	if (command_flags.daemon && command_flags.pre_create_vts)
 		daemon_exit_code(EXIT_SUCCESS);
 
-	display_splash_screen(argc, argv, drm);
+	if (!command_flags.no_splash)
+		display_splash_screen(argc, argv, drm);
 
 	if (command_flags.splash_only)
 		goto main_done;
