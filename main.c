@@ -316,6 +316,104 @@ bool set_drm_master_relax(void)
 	return true;
 }
 
+static void display_splash_screen(int argc, char* argv[], drm_t* drm)
+{
+	int ret;
+	int c;
+	int pts_fd;
+	int32_t x, y;
+
+	pts_fd = posix_openpt(O_RDWR | O_NOCTTY | O_CLOEXEC | O_NONBLOCK);
+
+	splash = splash_init(pts_fd);
+	if (splash == NULL) {
+		LOG(ERROR, "Splash init failed.");
+		exit(EXIT_FAILURE);
+	} else {
+		int status;
+
+		status = mkdir(FRECON_RUN_DIR, S_IRWXU | S_IRWXG);
+		if (status == 0 || (status < 0 && errno == EEXIST)) {
+			char hires[32];
+
+			sprintf(hires, "%u", splash_is_hires(splash));
+			write_string_to_file(FRECON_HI_RES_FILE, hires);
+		}
+	}
+
+	/* These flags can be only processed after splash object has been created. */
+	optind = 1;
+	for (;;) {
+		c = getopt_long(argc, argv, "", command_options, NULL);
+
+		if (c == -1)
+			break;
+
+		switch (c) {
+			case FLAG_CLEAR:
+				splash_set_clear(splash, strtoul(optarg, NULL, 0));
+				break;
+
+			case FLAG_FRAME_INTERVAL:
+				splash_set_default_duration(splash, strtoul(optarg, NULL, 0));
+				break;
+
+			case FLAG_IMAGE:
+				if (!splash_is_hires(splash))
+					splash_add_image(splash, optarg);
+				break;
+
+			case FLAG_IMAGE_HIRES:
+				if (splash_is_hires(splash))
+					splash_add_image(splash, optarg);
+				break;
+
+			case FLAG_LOOP_COUNT:
+				splash_set_loop_count(splash, strtoul(optarg, NULL, 0));
+				break;
+
+			case FLAG_LOOP_START:
+				splash_set_loop_start(splash, strtoul(optarg, NULL, 0));
+				break;
+
+			case FLAG_LOOP_INTERVAL:
+				splash_set_loop_duration(splash, strtoul(optarg, NULL, 0));
+				break;
+
+			case FLAG_LOOP_OFFSET:
+				parse_offset(optarg, &x, &y);
+				splash_set_loop_offset(splash, x, y);
+				break;
+
+			case FLAG_OFFSET:
+				parse_offset(optarg, &x, &y);
+				splash_set_offset(splash, x, y);
+				break;
+
+			case FLAG_SCALE:
+				splash_set_scale(splash, strtoul(optarg, NULL, 0));
+				break;
+		}
+	}
+
+	for (int i = optind; i < argc; i++)
+		splash_add_image(splash, argv[i]);
+
+	if (drm && splash_num_images(splash) > 0) {
+		ret = splash_run(splash);
+		if (ret) {
+			LOG(ERROR, "Splash_run failed: %d.", ret);
+			if (!command_flags.daemon)
+				exit(EXIT_FAILURE);
+		}
+	}
+
+	if (!command_flags.daemon) {
+		splash_destroy(splash);
+		splash = NULL;
+	}
+}
+
 static void legacy_print_resolution(int argc, char* argv[])
 {
 	int c;
@@ -343,15 +441,12 @@ int main(int argc, char* argv[])
 {
 	int ret;
 	int c;
-	int pts_fd;
 	unsigned vt;
-	int32_t x, y;
 	drm_t* drm;
 
 	legacy_print_resolution(argc, argv);
 
 	fix_stdio();
-	pts_fd =  posix_openpt(O_RDWR | O_NOCTTY | O_CLOEXEC | O_NONBLOCK);
 
 	optind = 1;
 	opterr = 1;
@@ -449,22 +544,6 @@ int main(int argc, char* argv[])
 
 	drm_set(drm = drm_scan());
 
-	splash = splash_init(pts_fd);
-	if (splash == NULL) {
-		LOG(ERROR, "Splash init failed.");
-		return EXIT_FAILURE;
-	} else {
-		int status;
-
-		status = mkdir(FRECON_RUN_DIR, S_IRWXU | S_IRWXG);
-		if (status == 0 || (status < 0 && errno == EEXIST)) {
-			char hires[32];
-
-			sprintf(hires, "%u", splash_is_hires(splash));
-			write_string_to_file(FRECON_HI_RES_FILE, hires);
-		}
-	}
-
 	if (command_flags.pre_create_vts) {
 		for (unsigned vt = command_flags.enable_vt1 ? TERM_SPLASH_TERMINAL : 1;
 		     vt < (command_flags.enable_vts ? term_num_terminals : 1); vt++) {
@@ -479,77 +558,7 @@ int main(int argc, char* argv[])
 	if (command_flags.daemon && command_flags.pre_create_vts)
 		daemon_exit_code(EXIT_SUCCESS);
 
-	/* These flags can be only processed after splash object has been created. */
-	optind = 1;
-	for (;;) {
-		c = getopt_long(argc, argv, "", command_options, NULL);
-
-		if (c == -1)
-			break;
-
-		switch (c) {
-			case FLAG_CLEAR:
-				splash_set_clear(splash, strtoul(optarg, NULL, 0));
-				break;
-
-			case FLAG_FRAME_INTERVAL:
-				splash_set_default_duration(splash, strtoul(optarg, NULL, 0));
-				break;
-
-			case FLAG_IMAGE:
-				if (!splash_is_hires(splash))
-					splash_add_image(splash, optarg);
-				break;
-
-			case FLAG_IMAGE_HIRES:
-				if (splash_is_hires(splash))
-					splash_add_image(splash, optarg);
-				break;
-
-			case FLAG_LOOP_COUNT:
-				splash_set_loop_count(splash, strtoul(optarg, NULL, 0));
-				break;
-
-			case FLAG_LOOP_START:
-				splash_set_loop_start(splash, strtoul(optarg, NULL, 0));
-				break;
-
-			case FLAG_LOOP_INTERVAL:
-				splash_set_loop_duration(splash, strtoul(optarg, NULL, 0));
-				break;
-
-			case FLAG_LOOP_OFFSET:
-				parse_offset(optarg, &x, &y);
-				splash_set_loop_offset(splash, x, y);
-				break;
-
-			case FLAG_OFFSET:
-				parse_offset(optarg, &x, &y);
-				splash_set_offset(splash, x, y);
-				break;
-
-			case FLAG_SCALE:
-				splash_set_scale(splash, strtoul(optarg, NULL, 0));
-				break;
-		}
-	}
-
-	for (int i = optind; i < argc; i++)
-		splash_add_image(splash, argv[i]);
-
-	if (drm && splash_num_images(splash) > 0) {
-		ret = splash_run(splash);
-		if (ret) {
-			LOG(ERROR, "Splash_run failed: %d.", ret);
-			if (!command_flags.daemon)
-				return EXIT_FAILURE;
-		}
-	}
-
-	if (!command_flags.daemon) {
-		splash_destroy(splash);
-		splash = NULL;
-	}
+	display_splash_screen(argc, argv, drm);
 
 	if (command_flags.splash_only)
 		goto main_done;
