@@ -36,6 +36,24 @@
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "c0cdab37_032f9ecb",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1302705
+      },
+      "writtenOn": "2023-07-09T03:51:20Z",
+      "side": 1,
+      "message": "I reproduced this issue on 3 MTK platforms (Cherry, Corsola, Geralt), and another one reported by my colleague but I forgot the project name.\n\nI\u0027ll verify CL:4673614 on workdays.",
+      "parentUuid": "daf06501_65b7ff6e",
+      "revId": "807ecc1bd7c2f8cfc28fd1cac6fdd0ffb3ee4b99",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "75293dc5_9d462cdf",
