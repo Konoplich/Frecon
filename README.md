@@ -74,6 +74,9 @@ otherwise.  Scale affects image/box size and offset.
 	Exit immediately after finishing splash animation. Otherwise frecon
 will wait for DBUS signal (LoginScreenVisible) from Chrome before exiting
 when extra terminals are not enabled.
+* `--no-splash`
+    Do not show a splash animation. In some devices, splash screen is shown
+at firmware level. In those situations, do not display a splash animation.
 * `--image=/path/to/image.png`
 * `--image-hires=/path/to/image.png`
 or any image file name specified after options

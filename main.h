@@ -19,6 +19,7 @@ typedef struct {
 	bool    enable_vts;
 	bool    enable_vt1;
 	bool    splash_only;
+	bool    no_splash;
 	bool    enable_osc;
 	bool    no_login;
 	bool    pre_create_vts;

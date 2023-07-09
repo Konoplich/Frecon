@@ -49,6 +49,7 @@ splash_t* splash;
 #define  FLAG_OFFSET                       'O'
 #define  FLAG_PRE_CREATE_VTS               'P'
 #define  FLAG_PRINT_RESOLUTION             'p'
+#define  FLAG_NO_SPLASH                    'q'
 #define  FLAG_SCALE                        'S'
 #define  FLAG_SPLASH_ONLY                  's'
 #define  FLAG_WAIT_DROP_MASTER             'W'
@@ -76,6 +77,7 @@ static const struct option command_options[] = {
 	{ "pre-create-vts", no_argument, NULL, FLAG_PRE_CREATE_VTS },
 	{ "scale", required_argument, NULL, FLAG_SCALE },
 	{ "splash-only", no_argument, NULL, FLAG_SPLASH_ONLY },
+	{ "no-splash", no_argument, NULL, FLAG_NO_SPLASH },
 	{ "wait-drop-master", no_argument, NULL, FLAG_WAIT_DROP_MASTER },
 	{ NULL, 0, NULL, 0 }
 };
@@ -102,6 +104,7 @@ static const char * const command_help[] = {
 	"Create all VTs immediately instead of on-demand.",
 	"Default scale for splash screen images.",
 	"Exit immediately after finishing splash animation.",
+	"Do not show a splash animation.",
 	"Wait to drop DRM master until the escape code is received.",
 };
 
@@ -487,6 +490,10 @@ int main(int argc, char* argv[])
 
 			case FLAG_SPLASH_ONLY:
 				command_flags.splash_only = true;
+				break;
+
+			case FLAG_NO_SPLASH:
+				command_flags.no_splash = true;
 				break;
 
 			case FLAG_WAIT_DROP_MASTER:
