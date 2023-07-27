@@ -33,6 +33,24 @@
       "message": "PTAL\n\nThis CL was approved from M116:\nhttps://buganizer.corp.google.com/issues/289755386#comment21",
       "revId": "429f2c5c2cb66852d6732eea734f240c8216bd77",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bcba3312_7ba2e8ad",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1297197
+      },
+      "writtenOn": "2023-07-27T17:24:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "477f666b_19cebac4",
+      "revId": "429f2c5c2cb66852d6732eea734f240c8216bd77",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
     }
   ]
 }
