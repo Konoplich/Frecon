@@ -16,6 +16,23 @@
       "message": "I\u0027ve requested merge approval in b/289755386, so this CP will need to wait on that before landing.",
       "revId": "429f2c5c2cb66852d6732eea734f240c8216bd77",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "86e28c04_e92924d0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1297197
+      },
+      "writtenOn": "2023-07-27T17:24:43Z",
+      "side": 1,
+      "message": "PTAL\n\nThis CL was approved from M116:\nhttps://buganizer.corp.google.com/issues/289755386#comment21",
+      "revId": "429f2c5c2cb66852d6732eea734f240c8216bd77",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
     }
   ]
 }
