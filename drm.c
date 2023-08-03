@@ -437,7 +437,7 @@ try_open_again:
 			drm_fini(drm);
 			continue;
 		}
-		drm->fd = open(dev_name, O_RDWR, 0);
+		drm->fd = open(dev_name, O_RDWR | O_CLOEXEC, 0);
 		free(dev_name);
 		if (drm->fd < 0) {
 			drm_fini(drm);
