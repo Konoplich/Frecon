@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6a0b2363_389d2082",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1303279
+      },
+      "writtenOn": "2023-08-08T23:37:21Z",
+      "side": 1,
+      "message": "From looking at the git history for src/third_party/chromiumos-overlay/sys-apps/frecon I think this ebuild will automatically be uprevd once this commit lands.  Please correct me if that\u0027s wrong.",
+      "revId": "60076827db45f992e625d997c4edd488c61352de",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    }
+  ]
+}
