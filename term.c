@@ -1009,10 +1009,17 @@ void term_zoom(bool zoom_in)
  */
 void term_background(bool onetry)
 {
+        terminal_t* terminal = term_get_current_terminal();
 	int retry = onetry ? 1 : 5;
 	if (in_background)
 		return;
 	in_background = true;
+
+        /* The terminal also needs to be deactivated so it doesn't consume key
+         * presses. */
+	if (term_is_active(terminal))
+		term_deactivate(terminal);
+
 	drm_dropmaster(NULL);
 
 	if (!dbus_is_initialized()) {

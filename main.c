@@ -28,6 +28,9 @@
 
 #define  DBUS_WAIT_DELAY_US  50000
 
+/* Splash screen */
+splash_t* splash;
+
 #define  FLAG_CLEAR                        'c'
 #define  FLAG_DAEMON                       'd'
 #define  FLAG_ENABLE_OSC                   'G'
@@ -155,6 +158,10 @@ static void main_on_login_prompt_visible(void)
 		LOG(INFO, "Chrome started, our work is done, exiting.");
 		exit(EXIT_SUCCESS);
 	} else {
+		if (splash) {
+			splash_destroy(splash);
+			splash = NULL;
+		}
 		if (command_flags.enable_vt1)
 			LOG(WARNING, "VT1 enabled and Chrome is active!");
 	}
@@ -339,7 +346,6 @@ int main(int argc, char* argv[])
 	int pts_fd;
 	unsigned vt;
 	int32_t x, y;
-	splash_t* splash;
 	drm_t* drm;
 
 	legacy_print_resolution(argc, argv);
@@ -540,7 +546,10 @@ int main(int argc, char* argv[])
 		}
 	}
 
-	splash_destroy(splash);
+	if (!command_flags.daemon) {
+		splash_destroy(splash);
+		splash = NULL;
+	}
 
 	if (command_flags.splash_only)
 		goto main_done;
