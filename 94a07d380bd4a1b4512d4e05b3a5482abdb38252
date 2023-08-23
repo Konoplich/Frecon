@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0c8f9d9d_ab4a275b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1297197
+      },
+      "writtenOn": "2023-08-23T18:36:09Z",
+      "side": 1,
+      "message": "PTAL\n\nPS1 -\u003e PS2 shows the changes required to fix the CL:\nhttps://chromium-review.googlesource.com/c/chromiumos/platform/frecon/+/4802507/1..2",
+      "revId": "94a07d380bd4a1b4512d4e05b3a5482abdb38252",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    }
+  ]
+}
