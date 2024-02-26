@@ -635,7 +635,7 @@ static int32_t drm_setmode_atomic(drm_t* drm, uint32_t fb_id)
 	drmModeObjectPropertiesPtr conn_props = NULL;
 	drmModePlaneResPtr plane_resources;
 	drmModeAtomicReqPtr pset = NULL;
-	uint32_t mode_id = 0;
+	uint32_t mode_id = 0, ctm_id = 0;
 
 	plane_resources = drmModeGetPlaneResources(drm->fd);
 	if (!plane_resources)
@@ -669,6 +669,14 @@ static int32_t drm_setmode_atomic(drm_t* drm, uint32_t fb_id)
 		}
 
 		if (crtc_id == console_crtc_id) {
+			static const uint64_t l = (1ull << 32);
+			static const struct drm_color_ctm identity_matrix = {
+				.matrix = {
+					l, 0, 0,
+					0, l, 0,
+					0, 0, l,
+				}
+			};
 			CHECK(drmModeCreatePropertyBlob(drm->fd, &drm->console_mode_info,
 							sizeof(drm->console_mode_info),
 							&mode_id));
@@ -677,7 +685,8 @@ static int32_t drm_setmode_atomic(drm_t* drm, uint32_t fb_id)
 			CHECK(atomic_set_prop(drm, pset, crtc_id, crtc_props, "ACTIVE", 1));
 			/* Reset color matrix to identity and gamma/degamma LUTs to pass through,
 			 * ignore errors in case they are not supported. */
-			atomic_set_prop(drm, pset, crtc_id, crtc_props, "CTM", 0);
+			drmModeCreatePropertyBlob(drm->fd, &identity_matrix, sizeof(identity_matrix), &ctm_id);
+			atomic_set_prop(drm, pset, crtc_id, crtc_props, "CTM", ctm_id);
 			atomic_set_prop(drm, pset, crtc_id, crtc_props, "DEGAMMA_LUT", 0);
 			atomic_set_prop(drm, pset, crtc_id, crtc_props, "GAMMA_LUT", 0);
 		} else {
@@ -765,6 +774,9 @@ static int32_t drm_setmode_atomic(drm_t* drm, uint32_t fb_id)
 error_mode:
 	if (mode_id)
 		drmModeDestroyPropertyBlob(drm->fd, mode_id);
+
+	if (ctm_id)
+		drmModeDestroyPropertyBlob(drm->fd, ctm_id);
 
 	if (plane_resources)
 		drmModeFreePlaneResources(plane_resources);
