@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a484b87c_e0627b03",
+        "filename": "drm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 672,
+      "author": {
+        "id": 1150560
+      },
+      "writtenOn": "2024-02-27T23:00:58Z",
+      "side": 1,
+      "message": "dastardly!\nI will allow it.",
+      "revId": "a473a1c34466a497edd8e36e11d829c1bd76dc42",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    }
+  ]
+}
